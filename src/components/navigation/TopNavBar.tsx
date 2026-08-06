@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import {
   Flame,
   Search,
-  Sparkles,
   Bell,
   Sun,
   Moon,
@@ -32,7 +31,6 @@ interface TopNavBarProps {
   onRoleChange: (role: RoleType) => void;
   isDark: boolean;
   onToggleTheme: () => void;
-  onOpenAi: () => void;
   onOpenCommand: () => void;
 }
 
@@ -54,7 +52,6 @@ export function TopNavBar({
   onRoleChange,
   isDark,
   onToggleTheme,
-  onOpenAi,
   onOpenCommand,
 }: TopNavBarProps) {
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
@@ -149,18 +146,7 @@ export function TopNavBar({
             <span>Search (⌘K)</span>
           </button>
 
-          {/* AI Assistant Trigger */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onOpenAi}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs shadow-sm transition"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Surge AI</span>
-          </motion.button>
 
-          {/* Notifications Trigger */}
           <div className="relative">
             <button
               onClick={() => setNotifDrawerOpen(!notifDrawerOpen)}

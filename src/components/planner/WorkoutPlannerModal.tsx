@@ -11,9 +11,7 @@ import {
   Plus,
   Trash2,
   CheckCircle2,
-  Sparkles,
   Check,
-  Wand2,
   ChevronLeft,
   ChevronRight,
   Filter,
@@ -34,29 +32,25 @@ interface PlannedExerciseItem {
 }
 
 const PAGE_SIZE = 24;
-
 const CATEGORIES = ["All", "Chest", "Back", "Legs", "Shoulders", "Arms", "Core", "Cardio"] as const;
 const EQUIPMENT_TYPES = ["All", "Barbell", "Dumbbell", "Cable", "Machine", "Bodyweight", "Kettlebell"] as const;
 
 export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: WorkoutPlannerModalProps) {
-  const [plannerMode, setPlannerMode] = useState<"manual" | "automated">("manual");
   const [routineTitle, setRoutineTitle] = useState("My Custom Workout Routine");
-  const [aiPresetGoal, setAiPresetGoal] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedEquipment, setSelectedEquipment] = useState<string>("All");
   const [currentPage, setCurrentPage] = useState(0);
   const [plannedExercises, setPlannedExercises] = useState<PlannedExerciseItem[]>([]);
   const [isSaving, setIsSaving] = useState(false);
-  const [isAiGenerating, setIsAiGenerating] = useState(false);
 
-  // Filtered + Paginated exercises
   const filteredExercises = useMemo(() => {
     return EXERCISE_DATABASE.filter((ex) => {
       const matchesCat = selectedCategory === "All" || ex.category === selectedCategory;
       const matchesEquip = selectedEquipment === "All" || ex.equipment === selectedEquipment;
-      const matchesSearch = ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        ex.targetMuscles.some(m => m.toLowerCase().includes(searchQuery.toLowerCase()));
+      const matchesSearch =
+        ex.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ex.targetMuscles.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesCat && matchesEquip && matchesSearch;
     });
   }, [selectedCategory, selectedEquipment, searchQuery]);
@@ -75,62 +69,29 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
     setCurrentPage(0);
   }, []);
 
-  const handleAutoGenerateAi = (preset: string) => {
-    setIsAiGenerating(true);
-    setAiPresetGoal(preset);
-    setTimeout(() => {
-      if (preset === "Push/Pull/Legs") {
-        setRoutineTitle("AI 4-Day Push/Pull/Legs Hypertrophy");
-        setPlannedExercises([
-          { exercise: EXERCISE_DATABASE[1], sets: 4, reps: "8-10", targetWeightKg: 36, restSeconds: 90 },
-          { exercise: EXERCISE_DATABASE[0], sets: 4, reps: "6-8", targetWeightKg: 120, restSeconds: 120 },
-          { exercise: EXERCISE_DATABASE[2], sets: 3, reps: "10-12", targetWeightKg: 75, restSeconds: 60 },
-          { exercise: EXERCISE_DATABASE[5], sets: 3, reps: "10-12", targetWeightKg: 28, restSeconds: 60 },
-          { exercise: EXERCISE_DATABASE[6], sets: 4, reps: "12", targetWeightKg: 20, restSeconds: 60 },
-        ]);
-      } else if (preset === "Powerlifting Peak") {
-        setRoutineTitle("AI Powerlifting 1RM Peak Block");
-        setPlannedExercises([
-          { exercise: EXERCISE_DATABASE[0], sets: 5, reps: "3", targetWeightKg: 140, restSeconds: 180 },
-          { exercise: EXERCISE_DATABASE[4], sets: 5, reps: "3", targetWeightKg: 170, restSeconds: 180 },
-          { exercise: EXERCISE_DATABASE[9], sets: 5, reps: "3", targetWeightKg: 105, restSeconds: 180 },
-          { exercise: EXERCISE_DATABASE[13], sets: 4, reps: "5", targetWeightKg: 90, restSeconds: 150 },
-        ]);
-      } else if (preset === "HIIT Circuit") {
-        setRoutineTitle("AI Metabolic Fat Loss HIIT Circuit");
-        setPlannedExercises([
-          { exercise: EXERCISE_DATABASE[14], sets: 4, reps: "20", targetWeightKg: 0, restSeconds: 30 },
-          { exercise: EXERCISE_DATABASE[7], sets: 4, reps: "15", targetWeightKg: 0, restSeconds: 30 },
-          { exercise: EXERCISE_DATABASE[8], sets: 4, reps: "15", targetWeightKg: 10, restSeconds: 30 },
-          { exercise: EXERCISE_DATABASE[17], sets: 4, reps: "12", targetWeightKg: 20, restSeconds: 30 },
-        ]);
-      } else {
-        setRoutineTitle("AI Full-Body Strength Builder");
-        setPlannedExercises([
-          { exercise: EXERCISE_DATABASE[0], sets: 3, reps: "8", targetWeightKg: 100, restSeconds: 120 },
-          { exercise: EXERCISE_DATABASE[9], sets: 3, reps: "8", targetWeightKg: 80, restSeconds: 120 },
-          { exercise: EXERCISE_DATABASE[14], sets: 3, reps: "8", targetWeightKg: 0, restSeconds: 90 },
-          { exercise: EXERCISE_DATABASE[19], sets: 3, reps: "10", targetWeightKg: 15, restSeconds: 90 },
-        ]);
-      }
-      setIsAiGenerating(false);
-    }, 600);
-  };
-
-  const addExercise = useCallback((ex: ExerciseItem) => {
-    if (plannedExercises.some((p) => p.exercise.id === ex.id)) return;
-    setPlannedExercises((prev) => [...prev, { exercise: ex, sets: 3, reps: "10", targetWeightKg: 20, restSeconds: 60 }]);
-  }, [plannedExercises]);
+  const addExercise = useCallback(
+    (ex: ExerciseItem) => {
+      if (plannedExercises.some((p) => p.exercise.id === ex.id)) return;
+      setPlannedExercises((prev) => [
+        ...prev,
+        { exercise: ex, sets: 3, reps: "10", targetWeightKg: 20, restSeconds: 60 },
+      ]);
+    },
+    [plannedExercises]
+  );
 
   const removeExercise = useCallback((id: string) => {
     setPlannedExercises((prev) => prev.filter((p) => p.exercise.id !== id));
   }, []);
 
-  const updateExercise = useCallback((id: string, field: keyof PlannedExerciseItem, value: number | string) => {
-    setPlannedExercises((prev) =>
-      prev.map((p) => (p.exercise.id === id ? { ...p, [field]: value } : p))
-    );
-  }, []);
+  const updateExercise = useCallback(
+    (id: string, field: keyof PlannedExerciseItem, value: number | string) => {
+      setPlannedExercises((prev) =>
+        prev.map((p) => (p.exercise.id === id ? { ...p, [field]: value } : p))
+      );
+    },
+    []
+  );
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -174,29 +135,12 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                 <Dumbbell className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-extrabold text-white text-base sm:text-lg leading-none">
+                <span className="font-extrabold text-white text-base sm:text-lg leading-none">
                   Workout Planner
-                </h2>
+                </span>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   {EXERCISE_COUNT.toLocaleString()} exercises with animated GIFs
                 </p>
-              </div>
-
-              {/* Mode Toggle */}
-              <div className="hidden sm:flex items-center bg-white/5 border border-white/10 rounded-xl p-1 gap-1">
-                <button
-                  onClick={() => setPlannerMode("manual")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${plannerMode === "manual" ? "bg-white text-slate-900 shadow" : "text-slate-400 hover:text-white"}`}
-                >
-                  Manual
-                </button>
-                <button
-                  onClick={() => setPlannerMode("automated")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 ${plannerMode === "automated" ? "bg-white text-slate-900 shadow" : "text-slate-400 hover:text-white"}`}
-                >
-                  <Sparkles className="w-3 h-3" />
-                  AI Auto
-                </button>
               </div>
 
               <button
@@ -212,30 +156,7 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
               </button>
             </div>
 
-            {/* ── AI PRESETS BAR ── */}
-            {plannerMode === "automated" && (
-              <div className="shrink-0 px-5 py-3 border-b border-white/10 bg-white/[0.02] flex flex-col sm:flex-row sm:items-center gap-3">
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <Wand2 className="w-3.5 h-3.5" />
-                  <span>AI Preset:</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {["Push/Pull/Legs", "Powerlifting Peak", "HIIT Circuit", "Full Body Strength"].map((p) => (
-                    <button
-                      key={p}
-                      onClick={() => handleAutoGenerateAi(p)}
-                      disabled={isAiGenerating}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition ${aiPresetGoal === p ? "bg-white text-slate-900 border-white" : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"}`}
-                    >
-                      ⚡ {p}
-                    </button>
-                  ))}
-                </div>
-                {isAiGenerating && <span className="text-xs text-slate-400 animate-pulse">Generating…</span>}
-              </div>
-            )}
-
-            {/* ── MAIN BODY: left=library, right=routine ── */}
+            {/* ── MAIN BODY ── */}
             <div className="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden">
 
               {/* ── LEFT: EXERCISE LIBRARY ── */}
@@ -257,19 +178,27 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                       <button
                         key={cat}
                         onClick={() => handleFilterChange("category", cat)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition border ${selectedCategory === cat ? "bg-white text-slate-900 border-white" : "bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10"}`}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition border ${
+                          selectedCategory === cat
+                            ? "bg-white text-slate-900 border-white"
+                            : "bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10"
+                        }`}
                       >
                         {cat}
                       </button>
                     ))}
                   </div>
-                  <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-                    <Filter className="w-3.5 h-3.5 text-slate-500 shrink-0 mt-1.5" />
+                  <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none items-center">
+                    <Filter className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                     {EQUIPMENT_TYPES.map((eq) => (
                       <button
                         key={eq}
                         onClick={() => handleFilterChange("equipment", eq)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition border ${selectedEquipment === eq ? "bg-white/20 text-white border-white/30" : "bg-transparent border-white/10 text-slate-500 hover:text-white"}`}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition border ${
+                          selectedEquipment === eq
+                            ? "bg-white/20 text-white border-white/30"
+                            : "bg-transparent border-white/10 text-slate-500 hover:text-white"
+                        }`}
                       >
                         {eq}
                       </button>
@@ -281,7 +210,7 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                   </div>
                 </div>
 
-                {/* GIF Grid — paginated for performance */}
+                {/* GIF Grid */}
                 <div className="flex-1 overflow-y-auto p-4">
                   <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
                     {pageExercises.map((ex) => {
@@ -289,10 +218,13 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                       return (
                         <div
                           key={ex.id}
-                          className={`rounded-2xl border overflow-hidden flex flex-col transition cursor-pointer group ${isAdded ? "border-emerald-500/40 bg-emerald-500/5" : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/5"}`}
                           onClick={() => addExercise(ex)}
+                          className={`rounded-2xl border overflow-hidden flex flex-col transition cursor-pointer ${
+                            isAdded
+                              ? "border-emerald-500/40 bg-emerald-500/5"
+                              : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/5"
+                          }`}
                         >
-                          {/* GIF */}
                           <div className="aspect-[4/3] bg-black/50 relative overflow-hidden">
                             <img
                               src={ex.gifUrl}
@@ -309,12 +241,29 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                               {ex.equipment}
                             </span>
                           </div>
-                          {/* Info */}
                           <div className="p-2.5">
                             <h4 className="text-xs font-bold text-white leading-tight line-clamp-2">{ex.name}</h4>
-                            <p className="text-[10px] text-slate-500 mt-0.5 truncate">{ex.targetMuscles.slice(0, 2).join(" · ")}</p>
-                            <div className="mt-1.5 flex items-center gap-1">
-                              <span className={`text-[9px] font-mono-data px-1.5 py-0.5 rounded-full ${ex.category === "Chest" ? "bg-orange-500/20 text-orange-300" : ex.category === "Back" ? "bg-blue-500/20 text-blue-300" : ex.category === "Legs" ? "bg-green-500/20 text-green-300" : ex.category === "Shoulders" ? "bg-purple-500/20 text-purple-300" : ex.category === "Arms" ? "bg-yellow-500/20 text-yellow-300" : ex.category === "Core" ? "bg-red-500/20 text-red-300" : "bg-slate-500/20 text-slate-300"}`}>
+                            <p className="text-[10px] text-slate-500 mt-0.5 truncate">
+                              {ex.targetMuscles.slice(0, 2).join(" · ")}
+                            </p>
+                            <div className="mt-1.5">
+                              <span
+                                className={`text-[9px] font-mono-data px-1.5 py-0.5 rounded-full ${
+                                  ex.category === "Chest"
+                                    ? "bg-orange-500/20 text-orange-300"
+                                    : ex.category === "Back"
+                                    ? "bg-blue-500/20 text-blue-300"
+                                    : ex.category === "Legs"
+                                    ? "bg-green-500/20 text-green-300"
+                                    : ex.category === "Shoulders"
+                                    ? "bg-purple-500/20 text-purple-300"
+                                    : ex.category === "Arms"
+                                    ? "bg-yellow-500/20 text-yellow-300"
+                                    : ex.category === "Core"
+                                    ? "bg-red-500/20 text-red-300"
+                                    : "bg-slate-500/20 text-slate-300"
+                                }`}
+                              >
                                 {ex.category}
                               </span>
                             </div>
@@ -352,7 +301,9 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
               {/* ── RIGHT: ROUTINE BUILDER ── */}
               <div className="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col">
                 <div className="shrink-0 p-4 border-b border-white/10">
-                  <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1.5">Routine Name</label>
+                  <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1.5">
+                    Routine Name
+                  </label>
                   <input
                     type="text"
                     value={routineTitle}
@@ -366,7 +317,7 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                     <div className="flex flex-col items-center justify-center h-48 text-center">
                       <Dumbbell className="w-8 h-8 text-slate-700 mb-3" />
                       <p className="text-sm text-slate-600 font-medium">No exercises added yet</p>
-                      <p className="text-xs text-slate-700 mt-1">Click any exercise to add it</p>
+                      <p className="text-xs text-slate-700 mt-1">Click any exercise on the left to add it</p>
                     </div>
                   ) : (
                     plannedExercises.map((item, idx) => (
@@ -376,7 +327,10 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                             {idx + 1}
                           </span>
                           <p className="text-xs font-bold text-white flex-1 leading-tight">{item.exercise.name}</p>
-                          <button onClick={() => removeExercise(item.exercise.id)} className="text-slate-600 hover:text-red-400 transition shrink-0">
+                          <button
+                            onClick={() => removeExercise(item.exercise.id)}
+                            className="text-slate-600 hover:text-red-400 transition shrink-0"
+                          >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
@@ -385,9 +339,12 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                             <label className="text-[9px] text-slate-600 block mb-0.5">Sets</label>
                             <input
                               type="number"
-                              min={1} max={10}
+                              min={1}
+                              max={10}
                               value={item.sets}
-                              onChange={(e) => updateExercise(item.exercise.id, "sets", Number(e.target.value))}
+                              onChange={(e) =>
+                                updateExercise(item.exercise.id, "sets", Number(e.target.value))
+                              }
                               className="w-full bg-white/5 border border-white/10 rounded-lg p-1.5 text-xs text-white text-center focus:outline-none"
                             />
                           </div>
@@ -406,7 +363,9 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                               type="number"
                               min={0}
                               value={item.targetWeightKg}
-                              onChange={(e) => updateExercise(item.exercise.id, "targetWeightKg", Number(e.target.value))}
+                              onChange={(e) =>
+                                updateExercise(item.exercise.id, "targetWeightKg", Number(e.target.value))
+                              }
                               className="w-full bg-white/5 border border-white/10 rounded-lg p-1.5 text-xs text-white text-center focus:outline-none"
                             />
                           </div>
@@ -420,7 +379,9 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                   <div className="shrink-0 p-4 border-t border-white/10 bg-white/[0.02]">
                     <div className="grid grid-cols-2 gap-2 text-xs font-mono-data text-slate-500 mb-3">
                       <span>{plannedExercises.length} exercises</span>
-                      <span className="text-right">{plannedExercises.reduce((a, i) => a + i.sets, 0)} total sets</span>
+                      <span className="text-right">
+                        {plannedExercises.reduce((a, i) => a + i.sets, 0)} total sets
+                      </span>
                     </div>
                     <button
                       onClick={handleSave}

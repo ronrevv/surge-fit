@@ -12,7 +12,7 @@ import {
   TrendingUp,
   BarChart3,
   Calendar,
-  Sparkles,
+
   CreditCard,
   Wrench,
   DollarSign,
@@ -42,7 +42,7 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "analytics", label: "Platform Analytics", icon: <BarChart3 className="w-4 h-4" /> },
     { id: "gym_chains", label: "Onboard Gym Chains", icon: <Building2 className="w-4 h-4" />, badge: "12 Pending" },
     { id: "subscriptions", label: "Subscriptions & Billing", icon: <CreditCard className="w-4 h-4" /> },
-    { id: "ai_monitoring", label: "AI Usage Monitoring", icon: <Sparkles className="w-4 h-4" /> },
+
     { id: "users", label: "User Management", icon: <Users className="w-4 h-4" /> },
     { id: "audit_logs", label: "Audit Logs", icon: <ShieldCheck className="w-4 h-4" /> },
     { id: "settings", label: "Platform Settings", icon: <Settings className="w-4 h-4" /> },
@@ -84,7 +84,7 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "progress", label: "Progress Tracking", icon: <TrendingUp className="w-4 h-4" /> },
     { id: "calendar", label: "Booking Calendar", icon: <Calendar className="w-4 h-4" /> },
     { id: "chat", label: "Client Chat", icon: <MessageSquare className="w-4 h-4" />, badge: "4 New" },
-    { id: "ai_copilot", label: "AI Generator", icon: <Sparkles className="w-4 h-4" /> },
+
   ],
   independent_trainer: [
     { id: "dashboard", label: "CRM Dashboard", icon: <LayoutDashboard className="w-4 h-4" /> },
@@ -93,7 +93,7 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "payments", label: "Stripe Billing", icon: <CreditCard className="w-4 h-4" />, badge: "$14.8k MRR" },
     { id: "calendar", label: "Session Calendar", icon: <Calendar className="w-4 h-4" /> },
     { id: "chat", label: "Messaging", icon: <MessageSquare className="w-4 h-4" /> },
-    { id: "ai_assistant", label: "AI Copilot", icon: <Sparkles className="w-4 h-4" /> },
+
   ],
   trainee: [
     { id: "dashboard", label: "Daily Pulse", icon: <Flame className="w-4 h-4 text-slate-700 dark:text-slate-200" /> },
@@ -103,7 +103,7 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "biometrics", label: "Body Measurements", icon: <Heart className="w-4 h-4" /> },
     { id: "challenges", label: "Leaderboards", icon: <Trophy className="w-4 h-4" /> },
     { id: "trainer_chat", label: "Trainer Chat", icon: <MessageSquare className="w-4 h-4" /> },
-    { id: "ai_coach", label: "AI Coach", icon: <Sparkles className="w-4 h-4" /> },
+
   ],
 };
 

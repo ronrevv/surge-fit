@@ -5,7 +5,7 @@ import { AuthView } from "@/components/auth/AuthView";
 import { OnboardingView } from "@/components/auth/OnboardingView";
 import { TopNavBar, RoleType } from "@/components/navigation/TopNavBar";
 import { SidebarNav, ROLE_NAVIGATION } from "@/components/navigation/SidebarNav";
-import { SurgeAiDrawer } from "@/components/ai/SurgeAiDrawer";
+
 import { CommandPalette } from "@/components/navigation/CommandPalette";
 import { OnboardChainModal } from "@/components/modals/OnboardChainModal";
 
@@ -34,7 +34,6 @@ export default function SurgeFitApp() {
   const [currentUserEmail, setCurrentUserEmail] = useState<string>("athlete@surgefit.com");
   const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [isDark, setIsDark] = useState(true);
-  const [aiOpen, setAiOpen] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
   const [chainModalOpen, setChainModalOpen] = useState(false);
 
@@ -83,7 +82,6 @@ export default function SurgeFitApp() {
         onRoleChange={handleRoleChange}
         isDark={isDark}
         onToggleTheme={() => setIsDark(!isDark)}
-        onOpenAi={() => setAiOpen(true)}
         onOpenCommand={() => setCommandOpen(true)}
       />
 
@@ -108,14 +106,7 @@ export default function SurgeFitApp() {
         </div>
       </main>
 
-      {/* Global AI Copilot Drawer */}
-      <SurgeAiDrawer
-        isOpen={aiOpen}
-        onClose={() => setAiOpen(false)}
-        currentRole={currentRole}
-      />
 
-      {/* Global Command Palette Modal */}
       <CommandPalette
         isOpen={commandOpen}
         onClose={() => setCommandOpen(false)}

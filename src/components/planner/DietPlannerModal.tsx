@@ -3,13 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DIET_TEMPLATES, MealItem } from "@/lib/data/exercises";
-import {
-  X,
-  Apple,
-  Sparkles,
-  Check,
-  Wand2,
-} from "lucide-react";
+import { X, Apple, Check } from "lucide-react";
 
 interface DietPlannerModalProps {
   isOpen: boolean;
@@ -18,55 +12,38 @@ interface DietPlannerModalProps {
 }
 
 export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerModalProps) {
-  const [plannerMode, setPlannerMode] = useState<"manual" | "automated">("automated");
   const [planTitle, setPlanTitle] = useState("High-Protein Muscle Hypertrophy Plan");
-  const [aiPresetDiet, setAiPresetDiet] = useState<string>("High-Protein Hypertrophy");
   const [targetCalories, setTargetCalories] = useState(2600);
   const [targetProtein, setTargetProtein] = useState(180);
   const [targetCarbs, setTargetCarbs] = useState(250);
   const [targetFat, setTargetFat] = useState(70);
   const [selectedMeals, setSelectedMeals] = useState<MealItem[]>(DIET_TEMPLATES);
-  const [isAiGenerating, setIsAiGenerating] = useState(false);
 
   const totalCalories = selectedMeals.reduce((acc, m) => acc + m.calories, 0);
   const totalProtein = selectedMeals.reduce((acc, m) => acc + m.proteinGrams, 0);
+  const totalCarbs = selectedMeals.reduce((acc, m) => acc + m.carbsGrams, 0);
+  const totalFat = selectedMeals.reduce((acc, m) => acc + m.fatGrams, 0);
 
-  const handleAutoGenerateAiDiet = (preset: string) => {
-    setIsAiGenerating(true);
-    setAiPresetDiet(preset);
-    setTimeout(() => {
-      if (preset === "High-Protein Hypertrophy") {
-        setPlanTitle("AI High-Protein Hypertrophy Split");
-        setTargetCalories(2800);
-        setTargetProtein(200);
-        setTargetCarbs(290);
-        setTargetFat(75);
-        setSelectedMeals([DIET_TEMPLATES[0], DIET_TEMPLATES[1], DIET_TEMPLATES[2], DIET_TEMPLATES[3]]);
-      } else if (preset === "Ketogenic Fat Loss") {
-        setPlanTitle("AI Ketogenic Fat Loss Split");
-        setTargetCalories(2100);
-        setTargetProtein(160);
-        setTargetCarbs(35);
-        setTargetFat(125);
-        setSelectedMeals([
-          { id: "k1", name: "Avocado & Scrambled Eggs", mealType: "Breakfast", calories: 520, proteinGrams: 35, carbsGrams: 8, fatGrams: 38, ingredients: ["3 Eggs", "1 Whole Avocado", "20g Butter"] },
-          { id: "k2", name: "Salmon & Asparagus Bowl", mealType: "Dinner", calories: 680, proteinGrams: 52, carbsGrams: 10, fatGrams: 48, ingredients: ["220g Atlantic Salmon", "Asparagus", "Olive Oil"] },
-        ]);
-      } else {
-        setPlanTitle("AI Low-FODMAP Performance Split");
-        setTargetCalories(2400);
-        setTargetProtein(170);
-        setTargetCarbs(260);
-        setTargetFat(65);
-        setSelectedMeals([DIET_TEMPLATES[1], DIET_TEMPLATES[3]]);
-      }
-      setIsAiGenerating(false);
-    }, 500);
+  const toggleMeal = (meal: MealItem) => {
+    setSelectedMeals((prev) =>
+      prev.some((m) => m.id === meal.id)
+        ? prev.filter((m) => m.id !== meal.id)
+        : [...prev, meal]
+    );
   };
 
-  const handleSavePlan = () => {
+  const handleSave = () => {
     if (onPlanSaved) onPlanSaved(planTitle);
     onClose();
+  };
+
+  const macroBar = (current: number, target: number, color: string) => {
+    const pct = Math.min(100, Math.round((current / target) * 100));
+    return (
+      <div className="w-full bg-white/5 rounded-full h-1.5 mt-1">
+        <div className={`h-1.5 rounded-full transition-all ${color}`} style={{ width: `${pct}%` }} />
+      </div>
+    );
   };
 
   return (
@@ -78,106 +55,57 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/70 backdrop-blur-md z-50"
+            className="fixed inset-0 bg-black/75 backdrop-blur-lg z-50"
           />
 
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-            className="fixed inset-4 sm:inset-8 lg:inset-12 bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl z-50 flex flex-col overflow-hidden shadow-2xl text-white"
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-2 sm:inset-4 lg:inset-8 bg-[#0f0f13] border border-white/10 rounded-3xl z-50 flex flex-col overflow-hidden shadow-2xl text-white"
           >
             {/* Header */}
-            <div className="p-4 sm:p-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-white text-slate-900 flex items-center justify-center font-bold shadow-md">
-                  <Apple className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="font-display font-extrabold text-lg sm:text-2xl text-white">
-                    Macro Nutrition & Diet Planner
-                  </h2>
-                  <p className="text-xs text-slate-400">
-                    Switch between Manual Custom Target Sliders & Automated Gemini 3.6 AI Generation.
-                  </p>
-                </div>
+            <div className="shrink-0 px-5 py-4 border-b border-white/10 flex items-center gap-3 bg-white/[0.03]">
+              <div className="w-9 h-9 rounded-xl bg-white text-slate-900 flex items-center justify-center shadow">
+                <Apple className="w-5 h-5" />
               </div>
-
-              <div className="flex items-center gap-2">
-                <div className="p-1 rounded-2xl bg-white/10 border border-white/10 flex gap-1">
-                  <button
-                    onClick={() => setPlannerMode("manual")}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
-                      plannerMode === "manual" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    Manual Custom
-                  </button>
-                  <button
-                    onClick={() => setPlannerMode("automated")}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                      plannerMode === "automated" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>⚡ Automated AI</span>
-                  </button>
-                </div>
-
-                <button
-                  onClick={handleSavePlan}
-                  className="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm shadow-md transition flex items-center gap-2"
-                >
-                  <Check className="w-4 h-4" />
-                  <span>Save Diet Plan</span>
-                </button>
-                <button
-                  onClick={onClose}
-                  className="p-2.5 rounded-xl surge-card text-slate-400 hover:text-white transition"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+              <div className="flex-1 min-w-0">
+                <span className="font-extrabold text-white text-base sm:text-lg">Diet & Macro Planner</span>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Set your daily macro targets and build your meal plan manually.
+                </p>
               </div>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-900 text-xs font-extrabold transition flex items-center gap-1.5 shrink-0"
+              >
+                <Check className="w-3.5 h-3.5" />
+                Save Plan
+              </button>
+              <button onClick={onClose} className="p-2 rounded-xl text-slate-500 hover:text-white transition">
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* AUTOMATED AI PRESETS BAR */}
-            {plannerMode === "automated" && (
-              <div className="p-4 border-b border-white/10 bg-white/[0.02] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <Wand2 className="w-4 h-4 text-white" />
-                  <span className="text-xs font-mono-data text-slate-300">Select AI Preset Macro Split:</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "High-Protein Hypertrophy",
-                    "Ketogenic Fat Loss",
-                    "Low-FODMAP Performance",
-                  ].map((preset) => (
-                    <button
-                      key={preset}
-                      onClick={() => handleAutoGenerateAiDiet(preset)}
-                      disabled={isAiGenerating}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition border ${
-                        aiPresetDiet === preset
-                          ? "bg-white text-slate-900 border-white shadow-sm"
-                          : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                      }`}
-                    >
-                      ⚡ {preset}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Body */}
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden p-4 sm:p-6 gap-6">
-              {/* Left Column: Target Sliders & Macro Compliance (5 Cols) */}
-              <div className="lg:col-span-5 space-y-4 overflow-y-auto">
+            <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+              {/* Left: Targets + Compliance */}
+              <div className="lg:col-span-5 p-5 overflow-y-auto border-b lg:border-b-0 lg:border-r border-white/10 space-y-5">
+                {/* Plan Title */}
+                <div>
+                  <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1.5">Plan Name</label>
+                  <input
+                    type="text"
+                    value={planTitle}
+                    onChange={(e) => setPlanTitle(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-sm font-bold text-white focus:outline-none"
+                  />
+                </div>
+
+                {/* Macro Sliders */}
                 <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
-                  <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider">
-                    Target Macro Distribution
-                  </h3>
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">Target Macro Targets</h3>
 
                   <div>
                     <div className="flex justify-between text-xs font-mono-data mb-1">
@@ -185,10 +113,7 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
                       <span className="font-bold text-white">{targetCalories} kcal</span>
                     </div>
                     <input
-                      type="range"
-                      min={1500}
-                      max={4000}
-                      step={50}
+                      type="range" min={1200} max={5000} step={50}
                       value={targetCalories}
                       onChange={(e) => setTargetCalories(Number(e.target.value))}
                       className="w-full accent-white"
@@ -197,61 +122,106 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
 
                   <div>
                     <div className="flex justify-between text-xs font-mono-data mb-1">
-                      <span className="text-slate-400">Protein Target</span>
-                      <span className="font-bold text-white">{targetProtein}g ({Math.round(((targetProtein * 4) / targetCalories) * 100)}%)</span>
+                      <span className="text-slate-400">Protein</span>
+                      <span className="font-bold text-white">{targetProtein}g</span>
                     </div>
                     <input
-                      type="range"
-                      min={100}
-                      max={300}
-                      step={5}
+                      type="range" min={50} max={400} step={5}
                       value={targetProtein}
                       onChange={(e) => setTargetProtein(Number(e.target.value))}
                       className="w-full accent-white"
                     />
                   </div>
+
+                  <div>
+                    <div className="flex justify-between text-xs font-mono-data mb-1">
+                      <span className="text-slate-400">Carbohydrates</span>
+                      <span className="font-bold text-white">{targetCarbs}g</span>
+                    </div>
+                    <input
+                      type="range" min={20} max={600} step={5}
+                      value={targetCarbs}
+                      onChange={(e) => setTargetCarbs(Number(e.target.value))}
+                      className="w-full accent-white"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-xs font-mono-data mb-1">
+                      <span className="text-slate-400">Fat</span>
+                      <span className="font-bold text-white">{targetFat}g</span>
+                    </div>
+                    <input
+                      type="range" min={20} max={300} step={5}
+                      value={targetFat}
+                      onChange={(e) => setTargetFat(Number(e.target.value))}
+                      className="w-full accent-white"
+                    />
+                  </div>
                 </div>
 
-                {/* Macro Compliance Stats */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs">
-                    <span className="text-slate-400 font-mono-data uppercase text-[10px]">Logged Calories</span>
-                    <p className="font-display font-bold text-xl text-white mt-1">
-                      {totalCalories} <span className="text-xs font-normal text-slate-400">/ {targetCalories}</span>
-                    </p>
-                  </div>
+                {/* Compliance Summary */}
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">Daily Compliance</h3>
 
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs">
-                    <span className="text-slate-400 font-mono-data uppercase text-[10px]">Logged Protein</span>
-                    <p className="font-display font-bold text-xl text-white mt-1">
-                      {totalProtein}g <span className="text-xs font-normal text-slate-400">/ {targetProtein}g</span>
-                    </p>
-                  </div>
+                  {[
+                    { label: "Calories", current: totalCalories, target: targetCalories, unit: "kcal", color: "bg-white" },
+                    { label: "Protein", current: totalProtein, target: targetProtein, unit: "g", color: "bg-blue-400" },
+                    { label: "Carbs", current: totalCarbs, target: targetCarbs, unit: "g", color: "bg-orange-400" },
+                    { label: "Fat", current: totalFat, target: targetFat, unit: "g", color: "bg-yellow-400" },
+                  ].map((m) => (
+                    <div key={m.label}>
+                      <div className="flex justify-between text-xs font-mono-data">
+                        <span className="text-slate-400">{m.label}</span>
+                        <span className="text-white font-bold">{m.current}{m.unit} <span className="text-slate-500">/ {m.target}{m.unit}</span></span>
+                      </div>
+                      {macroBar(m.current, m.target, m.color)}
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Right Column: Meal Distribution List (7 Cols) */}
-              <div className="lg:col-span-7 overflow-y-auto space-y-3">
-                <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider">
-                  Daily Meal Distribution ({selectedMeals.length} Meals)
+              {/* Right: Meal Library */}
+              <div className="lg:col-span-7 p-5 overflow-y-auto space-y-3">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+                  Meal Library — Select Your Meals ({selectedMeals.length} selected)
                 </h3>
 
-                {selectedMeals.map((m, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between text-xs sm:text-sm">
-                    <div>
-                      <span className="text-[10px] font-mono-data px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300 uppercase">
-                        {m.mealType}
-                      </span>
-                      <h4 className="font-bold text-white mt-1 text-sm">{m.name}</h4>
-                      <p className="text-slate-400 text-xs mt-0.5">{m.ingredients.join(" • ")}</p>
+                {DIET_TEMPLATES.map((meal) => {
+                  const isSelected = selectedMeals.some((m) => m.id === meal.id);
+                  return (
+                    <div
+                      key={meal.id}
+                      onClick={() => toggleMeal(meal)}
+                      className={`p-4 rounded-2xl border cursor-pointer transition ${
+                        isSelected
+                          ? "bg-white/10 border-white/30"
+                          : "bg-white/[0.03] border-white/10 hover:border-white/20 hover:bg-white/5"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] font-mono-data px-2 py-0.5 rounded-full bg-white/10 text-slate-400 uppercase">
+                              {meal.mealType}
+                            </span>
+                            {isSelected && (
+                              <span className="text-[10px] font-bold text-emerald-400">✓ Selected</span>
+                            )}
+                          </div>
+                          <h4 className="font-bold text-white text-sm">{meal.name}</h4>
+                          <p className="text-slate-500 text-[11px] mt-1">{meal.ingredients.join(" · ")}</p>
+                        </div>
+                        <div className="text-right font-mono-data shrink-0">
+                          <span className="font-bold text-white text-sm block">{meal.calories} kcal</span>
+                          <span className="text-[10px] text-slate-500">
+                            {meal.proteinGrams}g P | {meal.carbsGrams}g C | {meal.fatGrams}g F
+                          </span>
+                        </div>
+                      </div>
                     </div>
-
-                    <div className="text-right font-mono-data shrink-0 ml-4">
-                      <span className="font-bold text-white text-sm block">{m.calories} kcal</span>
-                      <span className="text-xs text-slate-400">{m.proteinGrams}g P | {m.carbsGrams}g C | {m.fatGrams}g F</span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </motion.div>
