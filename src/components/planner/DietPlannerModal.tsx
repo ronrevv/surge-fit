@@ -8,7 +8,7 @@ import { X, Apple, Check } from "lucide-react";
 interface DietPlannerModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onPlanSaved?: (planTitle: string) => void;
+  onPlanSaved?: (plan: { title: string; meals: MealItem[] }) => void;
 }
 
 export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerModalProps) {
@@ -33,7 +33,7 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
   };
 
   const handleSave = () => {
-    if (onPlanSaved) onPlanSaved(planTitle);
+    if (onPlanSaved) onPlanSaved({ title: planTitle, meals: selectedMeals });
     onClose();
   };
 
