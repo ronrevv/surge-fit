@@ -28,8 +28,10 @@ import {
 } from "lucide-react";
 
 export default function SurgeFitApp() {
-  const [appState, setAppState] = useState<"auth" | "onboarding" | "app">("app");
+  // Auth Protected State Machine
+  const [appState, setAppState] = useState<"auth" | "onboarding" | "app">("auth");
   const [currentRole, setCurrentRole] = useState<RoleType>("trainee");
+  const [currentUserEmail, setCurrentUserEmail] = useState<string>("athlete@surgefit.com");
   const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [isDark, setIsDark] = useState(true);
   const [aiOpen, setAiOpen] = useState(false);
@@ -50,17 +52,20 @@ export default function SurgeFitApp() {
     }
   }, [isDark]);
 
+  // Auth Guard 1: Sign In Screen
   if (appState === "auth") {
     return (
       <AuthView
-        onLoginSuccess={(role) => {
+        onLoginSuccess={(role, email) => {
           if (role) setCurrentRole(role as RoleType);
+          if (email) setCurrentUserEmail(email);
           setAppState("onboarding");
         }}
       />
     );
   }
 
+  // Auth Guard 2: 3-Step Setup Assistant
   if (appState === "onboarding") {
     return (
       <OnboardingView
@@ -69,6 +74,7 @@ export default function SurgeFitApp() {
     );
   }
 
+  // Protected Route Workspace execution area
   return (
     <div className="min-h-screen flex flex-col transition-colors duration-300 pb-24 w-full">
       {/* Sticky Top Navigation Bar */}
@@ -131,7 +137,7 @@ export default function SurgeFitApp() {
           <button
             onClick={() => setAppState("auth")}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900 dark:hover:text-white transition"
-            title="Return to Auth Login"
+            title="Sign Out & Lock Workspace"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign Out</span>
