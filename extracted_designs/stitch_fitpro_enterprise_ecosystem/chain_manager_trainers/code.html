@@ -1,0 +1,349 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed":"#ffdbd1","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","on-error-container":"#93000a","surface-tint":"#004dea","primary":"#0041c8","on-error":"#ffffff","secondary-container":"#6063ee","inverse-surface":"#2f3133","surface-container-highest":"#e2e2e5","on-secondary-fixed":"#07006c","outline":"#737688","surface-dim":"#dadadc","on-tertiary":"#ffffff","tertiary-container":"#c13301","on-tertiary-fixed":"#3b0900","error":"#ba1a1a","surface-bright":"#f9f9fc","on-tertiary-container":"#ffe1d9","inverse-primary":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-container":"#eeeef0","on-primary":"#ffffff","surface-container-high":"#e8e8ea","on-primary-container":"#e3e6ff","on-secondary-container":"#fffbff","surface":"#f9f9fc","on-primary-fixed":"#001551","outline-variant":"#c3c5d9","primary-fixed-dim":"#b6c4ff","primary-fixed":"#dce1ff","tertiary-fixed-dim":"#ffb5a0","surface-container-low":"#f3f3f6","tertiary":"#972500","secondary-fixed":"#e1e0ff","primary-container":"#0055ff","error-container":"#ffdad6","background":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","on-background":"#1a1c1e","surface-variant":"#e2e2e5","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed-variant":"#0039b3","inverse-on-surface":"#f0f0f3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","gutter":"24px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px"},"fontFamily":{"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"],"body-md":["Inter"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/70 backdrop-blur-2xl z-50 flex flex-col border-r border-outline-variant/20 shadow-xl shadow-primary/5"><div class="px-gutter pt-8 mb-8"><div class="flex items-center gap-3 bg-surface-container-highest/50 p-3 rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-highest transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><h2 class="font-headline-lg text-sm text-on-surface truncate">FitPro Global</h2><p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Chain Manager</p></div><span class="material-symbols-outlined text-on-surface-variant text-sm">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3">hub</span>Branches</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branch-managers" href="#"><span class="material-symbols-outlined mr-3">badge</span>Branch Managers</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3">exercise</span>Trainers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3">groups</span>Members</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">description</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3">analytics</span>Analytics</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></nav><div class="px-6 py-6 border-t border-outline-variant/10"><div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container-low/50"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex-1 min-w-0"><p class="text-sm font-medium text-on-surface truncate">Alex Sterling</p><p class="font-label-sm text-[10px] text-on-surface-variant">Chain Admin</p></div><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></div></div></aside><div class="pl-72 min-h-screen flex flex-col"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-gutter flex items-center justify-between border-b border-outline-variant/10"><div class="flex items-center gap-4 bg-surface-container-low/80 px-4 py-2 rounded-full border border-white/20 text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-all max-w-md w-full"><span class="material-symbols-outlined text-xl">search</span><span class="flex-1 text-sm">Search everywhere...</span><div class="flex items-center gap-1 font-label-sm text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md border border-outline-variant/30 text-on-surface-variant"><span>⌘</span><span>K</span></div></div><div class="flex items-center gap-6"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">notifications</span><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">help</span></div><div class="w-px h-6 bg-outline-variant/30"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 pt-16 bg-surface/30"><div class="flex flex-col w-full">
+<div class="px-gutter pt-8 pb-12 w-full max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex items-end justify-between mb-margin-desktop">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2 tracking-tight">Trainer Hub</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage your global network of fitness professionals, oversee new applications, and balance staffing across branches via drag-and-drop transfers.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-surface-container-low text-primary font-label-sm text-label-sm rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+          Export Roster
+        </button>
+<button class="px-6 py-3 bg-primary text-on-primary font-label-sm text-label-sm rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+          Add Trainer
+        </button>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="grid grid-cols-4 gap-6 mb-margin-desktop">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Total Trainers</p>
+<div class="flex items-end gap-3">
+<h3 class="font-display-lg text-[40px] leading-none text-on-surface font-bold">1,248</h3>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> +12%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-tertiary-container/5 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Pending Approvals</p>
+<div class="flex items-end gap-3">
+<h3 class="font-display-lg text-[40px] leading-none text-on-surface font-bold">34</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center">Requires action</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-secondary-container/5 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Active Transfers</p>
+<div class="flex items-end gap-3">
+<h3 class="font-display-lg text-[40px] leading-none text-on-surface font-bold">12</h3>
+<span class="font-label-sm text-label-sm text-secondary flex items-center">In progress</span>
+</div>
+</div>
+<div class="bg-primary p-6 rounded-2xl shadow-lg shadow-primary/10 relative overflow-hidden group flex flex-col justify-between">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
+<p class="font-label-sm text-label-sm text-on-primary/80 uppercase tracking-wider relative z-10">Staffing Health</p>
+<div class="relative z-10">
+<div class="flex justify-between items-end mb-2">
+<span class="font-display-lg text-[32px] leading-none text-on-primary font-bold">92%</span>
+<span class="font-label-sm text-label-sm text-on-primary">Optimal</span>
+</div>
+<div class="w-full h-1.5 bg-on-primary/20 rounded-full overflow-hidden">
+<div class="w-[92%] h-full bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area: Split View -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Transfers & Staffing -->
+<div class="col-span-8 flex flex-col gap-8">
+<!-- Transfer Hub -->
+<div class="bg-surface/80 backdrop-blur-xl rounded-3xl p-8 relative overflow-hidden border-t border-l border-white/40 shadow-xl shadow-primary/5">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Staff Transfer Hub</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Drag and drop trainers between branches to optimize coverage.</p>
+</div>
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live Sync Enabled</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 relative">
+<!-- Center Transfer Arrow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center z-10 shadow-sm border border-white/50">
+<span class="material-symbols-outlined text-on-surface-variant">swap_horiz</span>
+</div>
+<!-- Branch A -->
+<div class="bg-surface-container-lowest/50 rounded-2xl p-6 relative" id="branch-a" ondragover="allowDrop(event)" ondrop="drop(event)">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Downtown LA</h3>
+<p class="font-label-sm text-label-sm text-error mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">warning</span> Understaffed (8/12)</p>
+</div>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<div class="space-y-3 min-h-[300px]">
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform border border-surface-variant/50" draggable="true" id="t-1" ondragstart="drag(event)">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a fit female personal trainer in a clean, high-end gym environment, azure and soft blue lighting, minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCynnmUAyWL7N90xQWnn47ZNxjRTguNXrY66VWNJ9c68OrVWdwr3diNUgpz_OItNbqMKHUlvkmUYs2sLnR__9yAdqghtcy5ODBt-b2Pf083cPWtWSAfwDEnu1EMMSsbwuuPUiHfvk6p3AXO9vmODbcliQ7EgbdMrzQ7h8y9-gx408Ud34bF-nh23Zhd8aoLlu6ftFefzhjBjoLEeapdM-F8G6tDODTzx2kjlmNRth9eBffsScFcpmc4"/>
+<div>
+<p class="font-body-md text-[15px] font-medium text-on-surface">Sarah Jenkins</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Senior HIIT Specialist</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform border border-surface-variant/50" draggable="true" id="t-2" ondragstart="drag(event)">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a strong male fitness instructor looking confident, serene atmospheric clarity style, soft light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByki3j6y_WCAehpra-Cpegd0J12w7qn8xBVig7SVUEPsMJgTJPo6ioAhA6dCWDTa2QC508B3Om1-kzwqAH8u2XON-i2vYADKsz9CwVLBDQ2JF8dr2nKLDo67xD1Yep1IusA149BnxxgHUw1BY94vHVneEK0zB9xFe6g0-ZFUzO_NsrIKyBFGyVkJlO8vfBH8YOQMuEFbTwIGdHk-EZaB2HmAyFqdVWXL1chBbkXUOqkdZscv7Ok1cg"/>
+<div>
+<p class="font-body-md text-[15px] font-medium text-on-surface">Marcus Thorne</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Strength &amp; Conditioning</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+</div>
+</div>
+</div>
+<!-- Branch B -->
+<div class="bg-primary/5 rounded-2xl p-6 relative border border-primary/10" id="branch-b" ondragover="allowDrop(event)" ondrop="drop(event)">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">West Hollywood</h3>
+<p class="font-label-sm text-label-sm text-primary mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">check_circle</span> Overstaffed (18/15)</p>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-primary-container text-on-primary-container rounded font-label-sm text-[10px]">Surplus</span>
+</div>
+</div>
+<div class="space-y-3 min-h-[300px]">
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform border border-surface-variant/50" draggable="true" id="t-3" ondragstart="drag(event)">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-headline-lg-mobile text-sm">EL</div>
+<div>
+<p class="font-body-md text-[15px] font-medium text-on-surface">Elena Rostova</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Yoga Instructor</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform border border-surface-variant/50" draggable="true" id="t-4" ondragstart="drag(event)">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Close up portrait of a male personal trainer, calm expression, light blue and white background, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXrDVLsxSzdjWDOoZvWZiJGZ0thxs4CpY5Oo3h3ltLFnItL1vLm50Uq8gQ4u8IkkHHnv7m7BmGNUaOqftcbitpUwZNu9WLH3wFQYVyc56lpbXIsLoYOt7HfxHGE5oFh8bzxWp-ssnVw5Pa40oOJUny76ynjqNJVIdDlmgy6WADN4YSzr8xQMwYwem8_dAshFDEjg3tLuBlaDzstVpdVKfdB2U5DTaUeY8lDlGl4d_cfuVtWxX947Pw"/>
+<div>
+<p class="font-body-md text-[15px] font-medium text-on-surface">David Kim</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Rehab Specialist</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform border border-surface-variant/50" draggable="true" id="t-5" ondragstart="drag(event)">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface font-headline-lg-mobile text-sm">AJ</div>
+<div>
+<p class="font-body-md text-[15px] font-medium text-on-surface">Alicia Jones</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Pilates</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filtered Roster View -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface">Global Roster</h2>
+<div class="flex gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-9 pr-4 py-2 bg-surface rounded-lg font-body-md text-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/50 w-64 border border-outline-variant/30" placeholder="Search trainers..." type="text"/>
+</div>
+<button class="px-4 py-2 bg-surface text-on-surface font-label-sm text-label-sm rounded-lg border border-outline-variant/30 flex items-center gap-2 hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+              </button>
+</div>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-body-md text-sm border-collapse">
+<thead>
+<tr class="border-b border-surface-variant/50">
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Trainer</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Specialty</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Branch</th>
+<th class="py-4 px-4 font-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Status</th>
+<th class="py-4 px-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="space-y-2">
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-[10px]">MR</div>
+<span class="font-medium text-on-surface">Michael Ross</span>
+</div>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">CrossFit</td>
+<td class="py-3 px-4 text-on-surface-variant">Downtown LA</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-secondary-container/20 text-secondary font-label-sm text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Fitness trainer portrait, confident smile, clean soft atmospheric lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBymXxIMRK_a2gLn_6NYjpm0pXDpomK4KTs7nIBI5sfjXoLgdxpX5IMigNP75s1OzBEltXAp_MUmgfk-yjrEc-oTMiQmMvEKw-h43sJWbayG9HgUcZPF_ckVTkSKVFLG340LVgF9V79DWAiU1u-uMBnZMvqCITrF3hQWxtDWSg7HEegIQH-4QYTFitT4QhiJcniAmGgkGrUNI_Xz0uoNgeBznup5lezoKRYCrsCeTl5ISy7ogzs0P-C"/>
+<span class="font-medium text-on-surface">Jessica Wei</span>
+</div>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Yoga / Mobility</td>
+<td class="py-3 px-4 text-on-surface-variant">West Hollywood</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-secondary-container/20 text-secondary font-label-sm text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Active
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-label-sm text-[10px]">TB</div>
+<span class="font-medium text-on-surface">Tom Baker</span>
+</div>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Powerlifting</td>
+<td class="py-3 px-4 text-on-surface-variant">Santa Monica</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> On Leave
+                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 flex justify-center">
+<button class="text-primary font-label-sm text-sm hover:underline">View all 1,248 trainers</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Pending Approvals & Insights -->
+<div class="col-span-4 flex flex-col gap-8">
+<!-- Pending Approvals Queue -->
+<div class="bg-surface-container-highest/30 p-6 rounded-3xl border border-surface-variant">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg-mobile text-xl text-on-surface">Pending Approvals</h3>
+<span class="bg-tertiary-container text-on-tertiary px-2 py-0.5 rounded-full font-label-sm text-[10px]">3 New</span>
+</div>
+<div class="space-y-4">
+<!-- Approval Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-sm border-l-4 border-tertiary transition-transform hover:-translate-y-1">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Headshot of a hopeful new fitness applicant, casual professional attire, clean bright background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4EM-5uhyKQqp0IlTdawcI9rj0ccihniTVWuNnx9ppRrAwKlBoc2mnjYW8hlc9hJnnou_8mtsCw0jxs4DJOOBNnE9n9G1KzKW_wc217DKFn-vVewjwwNrFDWbnZizQsZT3tO1AT2NX31c6zwX6bmZRG05ng34PZMNeraYU8DryY__yhurxoxjVqI8B7mzBcaZ5rr21uIiQB0dSInHnH695Y8VX6VrDvRurtAy-yi8xxhJAa-B4bQhk"/>
+</div>
+<div>
+<h4 class="font-body-md text-[15px] font-medium text-on-surface">Olivia Grant</h4>
+<p class="font-label-sm text-[10px] text-on-surface-variant">Applied: 2 hours ago</p>
+</div>
+</div>
+</div>
+<div class="mb-4">
+<span class="inline-block px-2 py-1 bg-surface text-on-surface-variant text-[10px] font-label-sm rounded mr-1">Spin</span>
+<span class="inline-block px-2 py-1 bg-surface text-on-surface-variant text-[10px] font-label-sm rounded">HIIT</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary text-on-primary font-label-sm text-[11px] rounded-lg hover:bg-primary/90 transition-colors">Approve</button>
+<button class="flex-1 py-2 bg-surface text-on-surface font-label-sm text-[11px] rounded-lg border border-outline-variant/30 hover:bg-surface-container-low transition-colors">Review</button>
+</div>
+</div>
+<!-- Approval Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-2xl shadow-sm border-l-4 border-surface-variant transition-transform hover:-translate-y-1">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm">
+                     JP
+                  </div>
+<div>
+<h4 class="font-body-md text-[15px] font-medium text-on-surface">James Powell</h4>
+<p class="font-label-sm text-[10px] text-on-surface-variant">Applied: 1 day ago</p>
+</div>
+</div>
+</div>
+<div class="mb-4">
+<span class="inline-block px-2 py-1 bg-surface text-on-surface-variant text-[10px] font-label-sm rounded">Boxing</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary text-on-primary font-label-sm text-[11px] rounded-lg hover:bg-primary/90 transition-colors">Approve</button>
+<button class="flex-1 py-2 bg-surface text-on-surface font-label-sm text-[11px] rounded-lg border border-outline-variant/30 hover:bg-surface-container-low transition-colors">Review</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-3 text-on-surface-variant font-label-sm text-xs hover:text-on-surface transition-colors">View all 34 pending</button>
+</div>
+<!-- Geographic Distribution (Map Placeholder) -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-sm relative overflow-hidden">
+<h3 class="font-headline-lg-mobile text-lg text-on-surface mb-1">Coverage Map</h3>
+<p class="font-label-sm text-[11px] text-on-surface-variant mb-4">Trainer distribution across regions</p>
+<div class="w-full h-48 rounded-xl bg-surface-variant/50 border border-outline-variant/20 relative" data-location="Los Angeles, CA" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBw6xQAUriEEDfBWzJ642Z4l29gCApVqLx23WCpUS6fFLOonRjZpxHpyNnMiqIjVI1Cekd7IhQwAtHtlYTUE3n8g-VJcsEvnjAm4j4z4sLWFoid0A57D2Z9lb8-anwQGLXYgNBQq3WgtZxYWqj90SO6Ov0iG2Kci1ICm2X1Q3R1ny1PwNigoyk91850G8-XSevFRQRXZlAE2wAyuUeYL3FhD3ORWGp4Voq9-sUdF02kf-qewr6YDsuc')">
+<!-- Simulated map markers overlay -->
+<div class="absolute top-1/4 left-1/4 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(0,65,200,0.5)]"></div>
+<div class="absolute top-1/2 left-2/3 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(0,65,200,0.5)]"></div>
+<div class="absolute bottom-1/3 left-1/2 w-4 h-4 bg-tertiary rounded-full shadow-[0_0_10px_rgba(151,37,0,0.5)] animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var draggedElement = document.getElementById(data);
+    
+    // Ensure we drop into the container's inner list, not inside another card
+    var target = ev.target;
+    while(target && !target.classList.contains('space-y-3')) {
+        if(target.id === 'branch-a' || target.id === 'branch-b') {
+            target = target.querySelector('.space-y-3');
+            break;
+        }
+        target = target.parentElement;
+    }
+    
+    if(target && target.classList.contains('space-y-3')) {
+        target.appendChild(draggedElement);
+        // Optional: Trigger a tiny visual pulse on the dropped element
+        draggedElement.style.transform = 'scale(1.02)';
+        setTimeout(() => draggedElement.style.transform = 'none', 150);
+    }
+  }
+</script></main></div></body></html>

@@ -1,0 +1,198 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed":"#ffdbd1","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","on-error-container":"#93000a","surface-tint":"#004dea","primary":"#0041c8","on-error":"#ffffff","secondary-container":"#6063ee","inverse-surface":"#2f3133","surface-container-highest":"#e2e2e5","on-secondary-fixed":"#07006c","outline":"#737688","surface-dim":"#dadadc","on-tertiary":"#ffffff","tertiary-container":"#c13301","on-tertiary-fixed":"#3b0900","error":"#ba1a1a","surface-bright":"#f9f9fc","on-tertiary-container":"#ffe1d9","inverse-primary":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-container":"#eeeef0","on-primary":"#ffffff","surface-container-high":"#e8e8ea","on-primary-container":"#e3e6ff","on-secondary-container":"#fffbff","surface":"#f9f9fc","on-primary-fixed":"#001551","outline-variant":"#c3c5d9","primary-fixed-dim":"#b6c4ff","primary-fixed":"#dce1ff","tertiary-fixed-dim":"#ffb5a0","surface-container-low":"#f3f3f6","tertiary":"#972500","secondary-fixed":"#e1e0ff","primary-container":"#0055ff","error-container":"#ffdad6","background":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","on-background":"#1a1c1e","surface-variant":"#e2e2e5","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed-variant":"#0039b3","inverse-on-surface":"#f0f0f3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","gutter":"24px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px"},"fontFamily":{"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"],"body-md":["Inter"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/70 backdrop-blur-2xl z-50 flex flex-col border-r border-outline-variant/20 shadow-xl shadow-primary/5"><div class="px-gutter pt-8 mb-8"><div class="flex items-center gap-3 bg-surface-container-highest/50 p-3 rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-highest transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><h2 class="font-headline-lg text-sm text-on-surface truncate">FitPro Global</h2><p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Chain Manager</p></div><span class="material-symbols-outlined text-on-surface-variant text-sm">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3">hub</span>Branches</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branch-managers" href="#"><span class="material-symbols-outlined mr-3">badge</span>Branch Managers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3">exercise</span>Trainers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3">groups</span>Members</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">description</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3">analytics</span>Analytics</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></nav><div class="px-6 py-6 border-t border-outline-variant/10"><div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container-low/50"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex-1 min-w-0"><p class="text-sm font-medium text-on-surface truncate">Alex Sterling</p><p class="font-label-sm text-[10px] text-on-surface-variant">Chain Admin</p></div><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></div></div></aside><div class="pl-72 min-h-screen flex flex-col"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-gutter flex items-center justify-between border-b border-outline-variant/10"><div class="flex items-center gap-4 bg-surface-container-low/80 px-4 py-2 rounded-full border border-white/20 text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-all max-w-md w-full"><span class="material-symbols-outlined text-xl">search</span><span class="flex-1 text-sm">Search everywhere...</span><div class="flex items-center gap-1 font-label-sm text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md border border-outline-variant/30 text-on-surface-variant"><span>⌘</span><span>K</span></div></div><div class="flex items-center gap-6"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">notifications</span><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">help</span></div><div class="w-px h-6 bg-outline-variant/30"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 pt-16 bg-surface/30"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<!-- Ambient Background Elements -->
+<div class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none z-0"></div>
+<div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[100px] translate-y-1/3 translate-x-1/3 pointer-events-none z-0"></div>
+<div class="relative z-10 w-full max-w-container-max mx-auto px-gutter py-margin-desktop flex flex-col gap-12">
+<!-- Header Section -->
+<div class="flex items-end justify-between w-full">
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest flex items-center gap-2">
+<span class="w-8 h-[1px] bg-primary/30"></span> Cross-Branch Intelligence
+                </span>
+<h1 class="font-display-lg text-display-lg text-on-background">Report Engine.</h1>
+</div>
+<div class="flex gap-4">
+<button class="h-12 px-6 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-highest transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                    Recent Exports
+                </button>
+</div>
+</div>
+<!-- Main Configuration Grid -->
+<div class="grid grid-cols-12 gap-6 w-full">
+<!-- Left Column: Report Configuration -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Quick Presets -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-[24px] p-8 shadow-sm relative overflow-hidden border-t border-l border-white/40">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Intelligence Presets</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant px-3 py-1 bg-surface-container-high rounded-full">Automated Sequences</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Preset 1 -->
+<div class="group relative p-6 bg-surface-container-low rounded-2xl cursor-pointer hover:bg-primary/5 transition-all duration-300 overflow-hidden isolate">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+<span class="material-symbols-outlined text-primary mb-4 text-[28px] group-hover:scale-110 transition-transform">account_balance</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Financial Summary</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Monthly revenue aggregation across all active branches with YoY comparison.</p>
+<div class="mt-4 flex items-center gap-2 text-primary font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+<span>Select Template</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Preset 2 -->
+<div class="group relative p-6 bg-surface-container-low rounded-2xl cursor-pointer hover:bg-secondary/5 transition-all duration-300 overflow-hidden isolate">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+<span class="material-symbols-outlined text-secondary mb-4 text-[28px] group-hover:scale-110 transition-transform">group_work</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Staffing Efficiency</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Trainer utilization rates and overhead cost analysis per facility.</p>
+<div class="mt-4 flex items-center gap-2 text-secondary font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+<span>Select Template</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Preset 3 -->
+<div class="group relative p-6 bg-surface-container-low rounded-2xl cursor-pointer hover:bg-tertiary/5 transition-all duration-300 overflow-hidden isolate">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+<span class="material-symbols-outlined text-tertiary mb-4 text-[28px] group-hover:scale-110 transition-transform">model_training</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Member Audit</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Retention metrics, churn prediction alerts, and demographic shifts.</p>
+<div class="mt-4 flex items-center gap-2 text-tertiary font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+<span>Select Template</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Custom Builder -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-[24px] p-8 shadow-sm border-t border-l border-white/40 flex-1">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Custom Parameter Build</h2>
+<div class="flex flex-col gap-8">
+<!-- Data Scope -->
+<div class="flex flex-col gap-4">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">1. Data Scope</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative bg-surface-container-lowest p-4 rounded-xl border-t border-l border-white/60 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md transition-shadow">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">All Branches</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Global aggregation</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[16px]">check</span>
+</div>
+</div>
+<div class="relative bg-surface-container-lowest p-4 rounded-xl border-t border-l border-white/60 shadow-sm flex items-center justify-between cursor-pointer hover:shadow-md transition-shadow opacity-70">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Select Regions</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Targeted specific facilities</span>
+</div>
+<div class="w-6 h-6 rounded-full border border-outline-variant"></div>
+</div>
+</div>
+</div>
+<!-- Date Range -->
+<div class="flex flex-col gap-4">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">2. Temporal Range</label>
+<div class="flex bg-surface-container-low rounded-xl p-1 w-fit">
+<button class="px-6 py-2 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-on-surface shadow-sm">Last 30 Days</button>
+<button class="px-6 py-2 rounded-lg font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high/50 transition-colors">QTD</button>
+<button class="px-6 py-2 rounded-lg font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high/50 transition-colors">YTD</button>
+<button class="px-6 py-2 rounded-lg font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high/50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> Custom
+                                </button>
+</div>
+</div>
+<!-- Metrics Selection -->
+<div class="flex flex-col gap-4">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">3. Included Metrics</label>
+<div class="flex flex-wrap gap-3">
+<div class="px-4 py-2 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm flex items-center gap-2 cursor-pointer border border-primary/20">
+<span class="material-symbols-outlined text-[16px]">payments</span> Revenue Streams
+                                 </div>
+<div class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">groups</span> Attendance Data
+                                 </div>
+<div class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-2 cursor-pointer hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span> Equipment Usage
+                                 </div>
+<div class="px-4 py-2 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm flex items-center gap-2 cursor-pointer border border-primary/20">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> Churn Rate
+                                 </div>
+<div class="px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm flex items-center gap-2 cursor-pointer hover:bg-surface-container-low transition-colors border-dashed">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Metric
+                                 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Output & Preview -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Output Format -->
+<div class="bg-primary text-on-primary rounded-[24px] p-8 shadow-xl shadow-primary/20 relative overflow-hidden isolate">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 -z-10"></div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mb-6">Generate Export</h3>
+<div class="flex flex-col gap-3 mb-8">
+<label class="flex items-center gap-4 p-4 rounded-xl bg-white/10 cursor-pointer border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm">
+<input checked="" class="w-5 h-5 accent-white" name="format" type="radio"/>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">Live Dashboard</span>
+<span class="font-label-sm text-label-sm opacity-80">Interactive, shareable link</span>
+</div>
+<span class="material-symbols-outlined ml-auto opacity-70">link</span>
+</label>
+<label class="flex items-center gap-4 p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors border border-transparent hover:border-white/10">
+<input class="w-5 h-5 accent-white" name="format" type="radio"/>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">PDF Document</span>
+<span class="font-label-sm text-label-sm opacity-80">Print-ready executive summary</span>
+</div>
+<span class="material-symbols-outlined ml-auto opacity-70">picture_as_pdf</span>
+</label>
+<label class="flex items-center gap-4 p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors border border-transparent hover:border-white/10">
+<input class="w-5 h-5 accent-white" name="format" type="radio"/>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">CSV Raw Data</span>
+<span class="font-label-sm text-label-sm opacity-80">For external analysis tools</span>
+</div>
+<span class="material-symbols-outlined ml-auto opacity-70">csv</span>
+</label>
+</div>
+<button class="w-full h-14 rounded-xl bg-white text-primary font-body-md text-body-md font-semibold shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">magic_button</span> Compile Report
+                    </button>
+<p class="text-center font-label-sm text-[10px] mt-4 opacity-70">Est. generation time: ~12 seconds</p>
+</div>
+<!-- Mini Preview / Abstract Viz -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 shadow-sm border-t border-l border-white/60 flex-1 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Live Structure Preview</h4>
+<span class="material-symbols-outlined text-outline-variant text-[16px]">visibility</span>
+</div>
+<!-- Abstract representation of the report structure -->
+<div class="flex flex-col gap-3 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+<!-- Header block -->
+<div class="w-3/4 h-8 bg-surface-container-high rounded-lg mb-2"></div>
+<!-- Grid blocks -->
+<div class="grid grid-cols-2 gap-3 mb-2">
+<div class="h-24 bg-primary/10 rounded-xl border border-primary/20 flex flex-col justify-between p-3">
+<div class="w-8 h-2 bg-primary/40 rounded-full"></div>
+<div class="w-full h-8 bg-primary/20 rounded-md"></div>
+</div>
+<div class="h-24 bg-secondary/10 rounded-xl border border-secondary/20 flex flex-col justify-between p-3">
+<div class="w-8 h-2 bg-secondary/40 rounded-full"></div>
+<div class="w-3/4 h-8 bg-secondary/20 rounded-md"></div>
+</div>
+</div>
+<!-- List block -->
+<div class="w-full h-4 bg-surface-container-high rounded-sm"></div>
+<div class="w-full h-4 bg-surface-container-high rounded-sm"></div>
+<div class="w-5/6 h-4 bg-surface-container-high rounded-sm"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-surface-container-lowest to-transparent pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

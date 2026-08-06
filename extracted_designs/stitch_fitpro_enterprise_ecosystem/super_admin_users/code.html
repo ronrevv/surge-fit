@@ -1,0 +1,268 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;background:radial-gradient(at top left, #f9f9fc, #e1e0ff);min-height:100vh;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-fixed":"#ffdbd1","inverse-primary":"#b6c4ff","on-secondary-fixed":"#001551","on-error":"#ffffff","error":"#ba1a1a","inverse-surface":"#2f3133","outline":"#737688","tertiary-container":"#c13301","primary":"#0041c8","on-surface-variant":"#434656","surface-container-highest":"#e2e2e5","surface":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","on-primary-fixed-variant":"#0039b3","secondary":"#4648d4","surface-container-lowest":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-fixed":"#3b0900","primary-fixed-dim":"#b6c4ff","surface-tint":"#004dea","surface-container-low":"#f3f3f6","on-tertiary-container":"#ffe1d9","on-surface":"#1a1c1e","tertiary-fixed-dim":"#ffb5a0","on-secondary":"#ffffff","secondary-fixed":"#e1e0ff","surface-variant":"#e2e2e5","on-tertiary":"#ffffff","on-background":"#1a1c1e","error-container":"#ffdad6","surface-bright":"#f9f9fc","tertiary":"#972500","on-primary-container":"#e3e6ff","inverse-on-surface":"#f0f0f3","on-secondary-container":"#fffbff","on-error-container":"#93000a","outline-variant":"#c3c5d9","on-primary":"#ffffff","surface-dim":"#dadadc","primary-container":"#0055ff","on-secondary-fixed-variant":"#2f2ebe","on-tertiary-fixed-variant":"#872100","surface-container-high":"#e8e8ea","secondary-container":"#6063ee","background":"#f9f9fc","on-primary-fixed":"#001551","surface-container":"#eeeef0"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin-mobile":"16px",gutter:"24px","margin-desktop":"48px",unit:"8px","container-max":"1280px"},fontFamily:{"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"]},fontSize:{"headline-lg-mobile":["24px",{lineHeight:"32px",fontWeight:"700"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"800"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-sm":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="font-body-md text-on-background"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/70 backdrop-blur-xl border-r border-outline-variant/20 z-50 flex flex-col"><div class="h-16 flex items-center px-gutter gap-unit"><div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">shield_person</span></div><span class="font-headline-lg-mobile text-on-surface tracking-tight uppercase text-sm">Mission Control</span></div><nav class="flex-1 px-unit py-gutter space-y-1" data-active-classes="bg-secondary/10 text-primary font-semibold shadow-[0_0_15px_rgba(0,85,255,0.05)] border-r-4 border-primary"><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="dashboard" href="#">Dashboard</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="gym-chains" href="#">Gym Chains</a><a aria-current="page" class="flex items-center px-gutter py-unit rounded-lg transition-all group bg-secondary/10 text-primary font-semibold shadow-[0_0_15px_rgba(0,85,255,0.05)] border-r-4 border-primary" data-path="users" href="#">Users</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="subscriptions" href="#">Subscriptions</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="analytics" href="#">Analytics</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="ai-usage" href="#">AI Usage</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="settings" href="#">Settings</a></nav><div class="p-gutter border-t border-outline-variant/10"><div class="flex items-center gap-unit bg-surface-container-low p-unit rounded-xl"><div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center font-label-sm text-on-secondary-fixed">SA</div><div class="flex flex-col"><span class="text-[12px] font-semibold text-on-surface leading-tight">Super Admin</span><span class="text-[10px] text-on-surface-variant uppercase tracking-widest">Verified</span></div></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/30 backdrop-blur-md z-40 border-b border-white/20 flex items-center justify-between px-margin-desktop"><div class="flex items-center gap-gutter"><div class="flex items-center gap-unit text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">search</span><span class="text-sm opacity-60">Search enterprise records...</span></div></div><div class="flex items-center gap-gutter"><div class="relative"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span><span class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary rounded-full"></span></div><button class="text-on-surface-variant"><span class="material-symbols-outlined">grid_view</span></button></div></header><main class="pt-16 px-margin-desktop py-gutter"><div class="flex flex-col w-full relative group">
+<!-- Ambient background element -->
+<div class="absolute -top-32 -right-32 w-96 h-96 bg-primary opacity-5 blur-[120px] rounded-full pointer-events-none transition-transform duration-[10s] ease-in-out group-hover:scale-150"></div>
+<div class="absolute top-1/2 -left-32 w-64 h-64 bg-secondary opacity-5 blur-[100px] rounded-full pointer-events-none"></div>
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-margin-desktop relative z-10">
+<div class="flex flex-col">
+<!-- Decorative overline -->
+<div class="flex items-center gap-2 mb-2 text-primary font-label-sm uppercase tracking-widest">
+<span class="w-8 h-px bg-primary/30 block"></span>
+                Platform Administration
+            </div>
+<h1 class="font-display-lg text-display-lg text-on-surface">User Directory</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-4 opacity-80">
+                Manage all platform participants across permission tiers. Monitor activity status, adjust roles, and enforce security protocols globally.
+            </p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-full bg-surface-container-highest/50 backdrop-blur text-on-surface font-label-sm uppercase tracking-wider flex items-center gap-2 hover:bg-surface-container-highest transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                Export CSV
+            </button>
+<button class="px-6 py-3 rounded-full bg-primary text-on-primary font-label-sm uppercase tracking-wider flex items-center gap-2 hover:bg-primary/90 transition-transform hover:-translate-y-0.5 shadow-md shadow-primary/20 relative overflow-hidden group/btn">
+<div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                Invite User
+            </button>
+</div>
+</div>
+<!-- Filter & Metric Bar (Bento-ish) -->
+<div class="grid grid-cols-12 gap-gutter mb-margin-desktop relative z-10">
+<!-- Metrics Cards -->
+<div class="col-span-12 md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface/70 backdrop-blur-xl p-6 rounded-2xl shadow-sm border border-white/20 relative overflow-hidden flex flex-col justify-between h-full group/card">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary/20 group-hover/card:bg-primary transition-colors"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Total Active Users</span>
+<span class="material-symbols-outlined text-primary/40">groups</span>
+</div>
+<div>
+<div class="font-display-lg text-[48px] leading-tight text-on-surface font-extrabold tracking-tighter">14,289</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="flex items-center text-primary font-label-sm bg-primary/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span> +12%
+                        </span>
+<span class="font-label-sm text-on-surface-variant opacity-60">vs last month</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-8 bg-surface/70 backdrop-blur-xl p-2 rounded-2xl shadow-sm border border-white/20 flex flex-col justify-center">
+<!-- Filter Controls -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest/50 rounded-xl mb-2">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+<input class="w-full bg-transparent font-body-md text-on-surface placeholder:text-on-surface-variant/40 pl-12 pr-4 py-3 outline-none focus:bg-white/50 transition-colors rounded-lg border-b border-transparent focus:border-primary/30" placeholder="Search by name, email, or ID..." type="text"/>
+</div>
+<div class="w-px h-8 bg-outline-variant/20 mx-4"></div>
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider text-[10px]">Role:</span>
+<select class="bg-transparent font-label-sm text-on-surface outline-none cursor-pointer appearance-none pr-6 relative z-10">
+<option>All Roles</option>
+<option>Super Admin</option>
+<option>Owner</option>
+<option>Trainer</option>
+<option>Trainee</option>
+</select>
+<span class="material-symbols-outlined absolute right-8 text-on-surface-variant/50 pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Role Distribution Sparkline -->
+<div class="px-6 py-2 flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant opacity-60 uppercase tracking-widest text-[10px]">Distribution</span>
+<div class="flex gap-1 h-3 w-full max-w-md rounded-full overflow-hidden opacity-80">
+<div class="bg-primary h-full w-[2%]" title="Super Admins: 2%"></div>
+<div class="bg-secondary h-full w-[8%]" title="Owners: 8%"></div>
+<div class="bg-tertiary h-full w-[25%]" title="Trainers: 25%"></div>
+<div class="bg-outline-variant h-full w-[65%]" title="Trainees: 65%"></div>
+</div>
+<div class="flex gap-4 ml-6">
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="font-label-sm text-[10px] text-on-surface-variant">Admin</span></div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-[10px] text-on-surface-variant">Owner</span></div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="font-label-sm text-[10px] text-on-surface-variant">Trainer</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Data Table Area -->
+<div class="bg-surface/80 backdrop-blur-2xl rounded-[32px] shadow-lg border border-white/30 overflow-hidden relative z-10">
+<!-- Table Header (Custom designed, no standard borders) -->
+<div class="grid grid-cols-12 gap-4 px-8 py-6 bg-surface-container-lowest/40 font-label-sm uppercase tracking-widest text-on-surface-variant opacity-70 text-[11px]">
+<div class="col-span-4 md:col-span-3">User Profile</div>
+<div class="col-span-3 hidden md:block">Contact Info</div>
+<div class="col-span-2">Role &amp; Access</div>
+<div class="col-span-2">Status</div>
+<div class="col-span-2 text-right">Actions</div>
+</div>
+<!-- Table Rows -->
+<div class="flex flex-col">
+<!-- Row 1 (Super Admin) -->
+<div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-white/40 transition-colors group relative">
+<!-- Hover indicator -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-primary group-hover:h-1/2 transition-all duration-300 rounded-r"></div>
+<div class="col-span-4 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-white shadow-sm overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up professional headshot of a confident woman in her 30s with short dark hair, wearing a navy blue blazer. Bright, airy, soft lighting, minimal white background, high-end corporate portrait style. Azure and alabaster color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_OP07sGIg9QE9jVXPbIzwW403RnnUaejxlEwtBRNhG47B4hiwAdadFgJdTDf2ufKqILZWlFErMhCaP-XWnF_ivAdQb_iVOoJN0JHibJKdvK77I3acP_AmU4hy27uXguTkld9GET5xW30cYFp_Hi-Mmp-L4-htoy5yqQk2FuQaD1PeDVKkAH5hoXotsmN2o2PeQDzsEDgPx-Z3zcPDTZ8MltoBQO7M8bljUaFaRHYs-Mm3vTzKFr4h"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-lg-mobile text-[16px] text-on-surface truncate group-hover:text-primary transition-colors">Sarah Jenkins</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] tracking-wider truncate">ID: USR-9942</span>
+</div>
+</div>
+<div class="col-span-3 hidden md:flex flex-col min-w-0">
+<span class="font-body-md text-[14px] text-on-surface truncate">sarah.j@platform.core</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] truncate">+1 (555) 019-2834</span>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-primary/10 text-primary font-label-sm text-[10px] uppercase tracking-widest border border-primary/10">
+<span class="material-symbols-outlined text-[12px] mr-1">security</span> Admin
+                    </span>
+</div>
+<div class="col-span-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<span class="font-label-sm text-on-surface text-[11px] uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-primary transition-colors tooltip-trigger" data-tooltip="Edit Permissions">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-primary transition-colors tooltip-trigger" data-tooltip="More Actions">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Subtle separator -->
+<div class="h-px w-[calc(100%-4rem)] mx-auto bg-gradient-to-r from-transparent via-outline-variant/10 to-transparent"></div>
+<!-- Row 2 (Owner) -->
+<div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-white/40 transition-colors group relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-secondary group-hover:h-1/2 transition-all duration-300 rounded-r"></div>
+<div class="col-span-4 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-white shadow-sm overflow-hidden relative flex-shrink-0">
+<div class="w-full h-full flex items-center justify-center bg-secondary-fixed text-on-secondary-fixed font-headline-lg-mobile text-[16px]">MR</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-lg-mobile text-[16px] text-on-surface truncate group-hover:text-secondary transition-colors">Marcus Reed</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] tracking-wider truncate">ID: USR-8122</span>
+</div>
+</div>
+<div class="col-span-3 hidden md:flex flex-col min-w-0">
+<span class="font-body-md text-[14px] text-on-surface truncate">m.reed@elevatefitness.com</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] truncate">Elevate Fitness Chain</span>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-secondary/10 text-secondary font-label-sm text-[10px] uppercase tracking-widest border border-secondary/10">
+<span class="material-symbols-outlined text-[12px] mr-1">storefront</span> Owner
+                    </span>
+</div>
+<div class="col-span-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<span class="font-label-sm text-on-surface text-[11px] uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-secondary transition-colors tooltip-trigger">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-secondary transition-colors tooltip-trigger">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Subtle separator -->
+<div class="h-px w-[calc(100%-4rem)] mx-auto bg-gradient-to-r from-transparent via-outline-variant/10 to-transparent"></div>
+<!-- Row 3 (Banned Trainer) -->
+<div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-error/5 transition-colors group relative bg-surface-container-low/30 grayscale-[0.2]">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-error group-hover:h-1/2 transition-all duration-300 rounded-r"></div>
+<div class="col-span-4 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-white shadow-sm overflow-hidden relative flex-shrink-0 opacity-70">
+<img class="w-full h-full object-cover" data-alt="Headshot of a rugged athletic man in his 40s wearing a grey t-shirt. Pale, slightly desaturated lighting, minimalist white background. Azure and alabaster color palette context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0TrhsSRUJ0cV5rB3nfl_JPSFSGeyFxO2UoBEcjmtXtBuyORYZP_FAHFzhibhzhZVbnhVZON_3VJyvOBxnq_Ed7ea17fZ8VUrDzai9HtznBDDVKXqv_Wn6hrwsrHrfU4FrBaZpniO0WU12aDl9X9WOW_unsLoTe7rK4T7Oe9J4YMKiUgMyddxzikDOwDKPb6YH0yCwFk0HN2ph6sUGIPH9IG0TJXRWFbNPITimq2yF9IPLyeqbM3h1"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-lg-mobile text-[16px] text-on-surface/70 line-through decoration-error/50 truncate">David Vance</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] tracking-wider truncate">ID: USR-4419</span>
+</div>
+</div>
+<div class="col-span-3 hidden md:flex flex-col min-w-0 opacity-70">
+<span class="font-body-md text-[14px] text-on-surface truncate">d.vance_trainer@gmail.com</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] truncate">Last Login: Oct 12, 2023</span>
+</div>
+<div class="col-span-2 opacity-70">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-tertiary/10 text-tertiary font-label-sm text-[10px] uppercase tracking-widest border border-tertiary/10">
+<span class="material-symbols-outlined text-[12px] mr-1">fitness_center</span> Trainer
+                    </span>
+</div>
+<div class="col-span-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_rgba(186,26,26,0.5)]"></div>
+<span class="font-label-sm text-error text-[11px] uppercase tracking-wider">Suspended</span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-3 h-8 rounded-full bg-error/10 text-error font-label-sm text-[10px] uppercase tracking-wider border border-error/20 hover:bg-error hover:text-on-error transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock_open</span> Unban
+                    </button>
+</div>
+</div>
+<!-- Subtle separator -->
+<div class="h-px w-[calc(100%-4rem)] mx-auto bg-gradient-to-r from-transparent via-outline-variant/10 to-transparent"></div>
+<!-- Row 4 (Trainee) -->
+<div class="grid grid-cols-12 gap-4 px-8 py-6 items-center hover:bg-white/40 transition-colors group relative">
+<div class="col-span-4 md:col-span-3 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-white shadow-sm overflow-hidden relative flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Candid portrait of a young woman in her 20s smiling, wearing activewear. Soft natural light, minimalist atmospheric light blue gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT42JwAzHCW5K_zcJTQpH9-_bRGnAjHFs2oTF3jBaOTqmh0QsvnVmKVUCWXycBi76b8W48EbMDcRkdHJmN2cZM_vJcxXo9w0I9uDoePZ-bD3QdgygVRXXMxrtuIXR3AEsT84HIGQPdRSwVY42FFV3UWoQ7pRRq_7_GeEe-UBT3zJNjekeJDNAr1JqWU6EzadcyVamuypYfs00BHDRJRNKJVL2ERcdO9rbmrMxO62FVhhluNWsnOZ4r"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-lg-mobile text-[16px] text-on-surface truncate">Chloe Bennett</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] tracking-wider truncate">ID: USR-1029</span>
+</div>
+</div>
+<div class="col-span-3 hidden md:flex flex-col min-w-0">
+<span class="font-body-md text-[14px] text-on-surface truncate">chloe.b99@example.com</span>
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[10px] truncate">Assigned: D. Vance</span>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-outline-variant/20 text-on-surface-variant font-label-sm text-[10px] uppercase tracking-widest border border-outline-variant/20">
+<span class="material-symbols-outlined text-[12px] mr-1">directions_run</span> Trainee
+                    </span>
+</div>
+<div class="col-span-2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<span class="font-label-sm text-on-surface text-[11px] uppercase tracking-wider">Active</span>
+</div>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-primary transition-colors tooltip-trigger">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white text-on-surface shadow-sm flex items-center justify-center hover:text-primary transition-colors tooltip-trigger">
+<span class="material-symbols-outlined text-[16px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="px-8 py-4 bg-surface-container-lowest/50 border-t border-white/20 flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant opacity-60 text-[11px]">Showing 1-4 of 14,289</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-transparent text-on-surface-variant opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-primary text-on-primary font-label-sm text-[12px] shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-transparent text-on-surface-variant hover:bg-white/50 font-label-sm text-[12px] transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-transparent text-on-surface-variant hover:bg-white/50 font-label-sm text-[12px] transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-on-surface-variant opacity-50">...</span>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center bg-white/50 text-on-surface hover:bg-white transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

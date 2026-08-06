@@ -1,0 +1,237 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;background:radial-gradient(at top left, #f9f9fc, #e1e0ff);min-height:100vh;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-fixed":"#ffdbd1","inverse-primary":"#b6c4ff","on-secondary-fixed":"#001551","on-error":"#ffffff","error":"#ba1a1a","inverse-surface":"#2f3133","outline":"#737688","tertiary-container":"#c13301","primary":"#0041c8","on-surface-variant":"#434656","surface-container-highest":"#e2e2e5","surface":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","on-primary-fixed-variant":"#0039b3","secondary":"#4648d4","surface-container-lowest":"#ffffff","primary-fixed":"#dce1ff","on-tertiary-fixed":"#3b0900","primary-fixed-dim":"#b6c4ff","surface-tint":"#004dea","surface-container-low":"#f3f3f6","on-tertiary-container":"#ffe1d9","on-surface":"#1a1c1e","tertiary-fixed-dim":"#ffb5a0","on-secondary":"#ffffff","secondary-fixed":"#e1e0ff","surface-variant":"#e2e2e5","on-tertiary":"#ffffff","on-background":"#1a1c1e","error-container":"#ffdad6","surface-bright":"#f9f9fc","tertiary":"#972500","on-primary-container":"#e3e6ff","inverse-on-surface":"#f0f0f3","on-secondary-container":"#fffbff","on-error-container":"#93000a","outline-variant":"#c3c5d9","on-primary":"#ffffff","surface-dim":"#dadadc","primary-container":"#0055ff","on-secondary-fixed-variant":"#2f2ebe","on-tertiary-fixed-variant":"#872100","surface-container-high":"#e8e8ea","secondary-container":"#6063ee","background":"#f9f9fc","on-primary-fixed":"#001551","surface-container":"#eeeef0"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin-mobile":"16px",gutter:"24px","margin-desktop":"48px",unit:"8px","container-max":"1280px"},fontFamily:{"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"]},fontSize:{"headline-lg-mobile":["24px",{lineHeight:"32px",fontWeight:"700"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"800"}],"body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-sm":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="font-body-md text-on-background"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/70 backdrop-blur-xl border-r border-outline-variant/20 z-50 flex flex-col"><div class="h-16 flex items-center px-gutter gap-unit"><div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">shield_person</span></div><span class="font-headline-lg-mobile text-on-surface tracking-tight uppercase text-sm">Mission Control</span></div><nav class="flex-1 px-unit py-gutter space-y-1" data-active-classes="bg-secondary/10 text-primary font-semibold shadow-[0_0_15px_rgba(0,85,255,0.05)] border-r-4 border-primary"><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="dashboard" href="#">Dashboard</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="gym-chains" href="#">Gym Chains</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="users" href="#">Users</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="subscriptions" href="#">Subscriptions</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="analytics" href="#">Analytics</a><a class="flex items-center px-gutter py-unit rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="ai-usage" href="#">AI Usage</a><a aria-current="page" class="flex items-center px-gutter py-unit rounded-lg transition-all group bg-secondary/10 text-primary font-semibold shadow-[0_0_15px_rgba(0,85,255,0.05)] border-r-4 border-primary" data-path="settings" href="#">Settings</a></nav><div class="p-gutter border-t border-outline-variant/10"><div class="flex items-center gap-unit bg-surface-container-low p-unit rounded-xl"><div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center font-label-sm text-on-secondary-fixed">SA</div><div class="flex flex-col"><span class="text-[12px] font-semibold text-on-surface leading-tight">Super Admin</span><span class="text-[10px] text-on-surface-variant uppercase tracking-widest">Verified</span></div></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/30 backdrop-blur-md z-40 border-b border-white/20 flex items-center justify-between px-margin-desktop"><div class="flex items-center gap-gutter"><div class="flex items-center gap-unit text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">search</span><span class="text-sm opacity-60">Search enterprise records...</span></div></div><div class="flex items-center gap-gutter"><div class="relative"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span><span class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary rounded-full"></span></div><button class="text-on-surface-variant"><span class="material-symbols-outlined">grid_view</span></button></div></header><main class="pt-16 px-margin-desktop py-gutter"><div class="flex flex-col w-full relative min-h-screen z-0 overflow-hidden">
+<!-- Ambient Background Decor (Animated Gradient Blobs & Geometric Shapes) -->
+<div class="fixed inset-0 pointer-events-none -z-10">
+<div class="absolute top-10 left-10 w-96 h-96 bg-primary/20 rounded-full blur-[120px] mix-blend-multiply opacity-50 animate-pulse"></div>
+<div class="absolute bottom-20 right-10 w-[500px] h-[500px] bg-secondary-fixed/50 rounded-full blur-[150px] mix-blend-multiply opacity-40" style="animation: float 20s infinite ease-in-out;"></div>
+</div>
+<style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+  </style>
+<!-- Page Header -->
+<div class="mb-margin-desktop mt-gutter">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-gutter">
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-[0.1em] mb-unit">Mission Control / Directory</p>
+<h1 class="font-display-lg text-display-lg text-on-surface">Organizations</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-unit">Manage global gym chains, independent studios, and wellness centers. Oversee onboarding, status, and compliance across the network.</p>
+</div>
+<div class="flex items-center gap-unit">
+<button class="h-12 px-gutter bg-surface-container-highest/50 hover:bg-surface-container-highest backdrop-blur-md text-on-surface font-label-sm text-label-sm rounded-xl transition-all shadow-sm flex items-center gap-unit group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+<span class="material-symbols-outlined text-[18px]">download</span> Export Report
+        </button>
+<button class="h-12 px-gutter bg-primary text-on-primary font-label-sm text-label-sm rounded-xl transition-all shadow-[0_8px_24px_rgba(0,65,200,0.25)] hover:shadow-[0_12px_32px_rgba(0,65,200,0.35)] hover:-translate-y-0.5 flex items-center gap-unit relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+<span class="material-symbols-outlined text-[18px]">add</span> Register New
+        </button>
+</div>
+</div>
+</div>
+<style>
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+  </style>
+<!-- High-Level Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-margin-desktop">
+<!-- Total Active -->
+<div class="bg-surface/70 backdrop-blur-[20px] p-gutter rounded-[24px] shadow-lg border-t border-l border-white/20 relative overflow-hidden group transition-transform hover:-translate-y-1">
+<div class="absolute top-0 right-0 p-unit opacity-10">
+<svg class="text-primary" fill="currentColor" height="100" viewbox="0 0 100 100" width="100"><path d="M0 100V0l50 50 50-50v100H0z"></path></svg>
+</div>
+<div class="flex items-center gap-unit mb-margin-mobile">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/50 flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Active</h3>
+</div>
+<div class="flex items-baseline gap-unit">
+<span class="font-display-lg text-display-lg text-on-surface" id="counter-active">0</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%</span>
+</div>
+</div>
+<!-- Pending Review -->
+<div class="bg-surface/70 backdrop-blur-[20px] p-gutter rounded-[24px] shadow-lg border-t border-l border-white/20 relative overflow-hidden group transition-transform hover:-translate-y-1">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-fixed/10 to-transparent pointer-events-none"></div>
+<div class="flex items-center justify-between mb-margin-mobile">
+<div class="flex items-center gap-unit">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/50 flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[20px]">pending_actions</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Pending Review</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+</div>
+<div class="flex items-baseline gap-unit">
+<span class="font-display-lg text-display-lg text-on-surface" id="counter-pending">0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Applications</span>
+</div>
+</div>
+<!-- Suspended -->
+<div class="bg-surface/70 backdrop-blur-[20px] p-gutter rounded-[24px] shadow-lg border-t border-l border-white/20 relative overflow-hidden group transition-transform hover:-translate-y-1">
+<div class="flex items-center gap-unit mb-margin-mobile">
+<div class="w-10 h-10 rounded-full bg-error-container/50 flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Suspended</h3>
+</div>
+<div class="flex items-baseline gap-unit">
+<span class="font-display-lg text-display-lg text-on-surface" id="counter-suspended">0</span>
+<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[14px]">arrow_downward</span> 2%</span>
+</div>
+</div>
+<!-- AI Insights Map Placeholder -->
+<div class="bg-surface/70 backdrop-blur-[20px] rounded-[24px] shadow-lg border-t border-l border-white/20 relative overflow-hidden h-full min-h-[160px] p-0">
+<div class="w-full h-full bg-cover bg-center absolute inset-0 opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" data-location="New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9qr2k_g4IQrspNJwfmInE-tD6GHs_58obT_pmZAIp4kqBCno1u56NGwtdIbmSODjkDQxLfIpAyszEm9ZFitvCUTqcFVix-7KmhYfbU6QLEpkVbmRmfWaSnSAMLS7kCMKR9Vn__hrSMMKyiEU_oOwIMokimiCedVegx22eM95JWcsj3PO0KmCWKtkbeNfKE-TsNdbxk2iT6QUs79AtXIYCpi41eWsobzmF2FTCtKPvGKXMbzgRR9AO')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/30 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-gutter text-inverse-on-surface">
+<h3 class="font-label-sm text-label-sm uppercase mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">public</span> Global Reach</h3>
+<p class="font-body-md text-body-md opacity-80 leading-snug">Highest growth region: North America</p>
+</div>
+</div>
+</div>
+<!-- Counter Animation Script -->
+<script>
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+    
+    // Slight delay for visual effect
+    setTimeout(() => {
+        animateValue("counter-active", 0, 1428, 1500);
+        animateValue("counter-pending", 0, 84, 1000);
+        animateValue("counter-suspended", 0, 12, 800);
+    }, 300);
+  </script>
+<!-- Main Directory Area -->
+<div class="bg-surface/70 backdrop-blur-[20px] rounded-[32px] shadow-xl border-t border-l border-white/20 flex flex-col flex-1 min-h-[600px]">
+<!-- Toolbar / Filters -->
+<div class="p-gutter border-b border-outline-variant/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-gutter">
+<!-- Search -->
+<div class="relative w-full lg:w-96 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/50 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-highest/30 focus:bg-surface-container-highest/80 backdrop-blur-md rounded-xl text-on-surface font-body-md text-body-md outline-none transition-all focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/40" placeholder="Search by name, ID, or location..." type="text"/>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-unit flex-wrap">
+<button class="px-4 h-10 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-md transition-transform hover:scale-105 active:scale-95">All Types</button>
+<button class="px-4 h-10 rounded-full bg-[#E0EFFF] text-primary font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">Gym Chains</button>
+<button class="px-4 h-10 rounded-full bg-[#E0EFFF] text-primary font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">Independent</button>
+<div class="w-px h-6 bg-outline-variant/30 mx-2"></div>
+<button class="flex items-center gap-1 px-4 h-10 rounded-full bg-surface-container-highest/50 text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Status
+            </button>
+</div>
+</div>
+<!-- Data List -->
+<div class="flex-1 overflow-auto p-gutter pb-32">
+<div class="flex flex-col gap-unit">
+<!-- Pending Item (Highlight) -->
+<div class="bg-surface-container-lowest/80 p-6 rounded-[20px] shadow-sm hover:shadow-md transition-all group relative overflow-hidden flex flex-col md:flex-row md:items-center gap-gutter">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex items-center gap-4 flex-1 min-w-0">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center shrink-0 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A modern, high-end boutique fitness studio logo featuring geometric shapes and minimalist typography, bright lighting, premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5BzUH1vRJkFauQ5S99p3YCbRRJZ4Vv-Wyu8d3X3hOKxzHf_IzmzWfWXOVMsEZwKQ0YDCTAjhDiLdYZqMRXQnpEn1_Fh6_OQWu4kj2WwuaUQz8iB7T3nI-nkFvb-deThy9uLvn3XUX4uG-4Qn3spjP1ZSXlTR0RXzovU3G4zaOsr_wRZppOA5Mx72Q1fGtV-IQaix0b29o9IvBgRnwCBAw5FeQU4_V_WoyyhYwqMwwE6TR_mEU4_bw"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Equinox Prime London</h4>
+<span class="px-2 py-1 rounded-md bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[10px] uppercase tracking-wider">Pending Review</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Gym Chain • 14 Locations • Applied 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-gutter shrink-0">
+<div class="hidden lg:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface">Contact</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">sarah.j@equinox.com</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-10 px-4 bg-tertiary-container text-on-tertiary-container rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">Review App</button>
+</div>
+</div>
+</div>
+<!-- Active Item 1 -->
+<div class="bg-surface-container-lowest/40 p-6 rounded-[20px] hover:bg-surface-container-lowest/80 transition-all group flex flex-col md:flex-row md:items-center gap-gutter">
+<div class="flex items-center gap-4 flex-1 min-w-0">
+<div class="w-16 h-16 rounded-2xl bg-primary-fixed/30 flex items-center justify-center text-primary font-headline-lg-mobile text-headline-lg-mobile shrink-0">
+                        FF
+                    </div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Fitness First Global</h4>
+<span class="px-2 py-1 rounded-md bg-primary-fixed/50 text-on-primary-fixed font-label-sm text-[10px] uppercase tracking-wider">Active</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Gym Chain • 342 Locations • Onboarded Jan 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-gutter shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
+<div class="hidden lg:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface">MRR (Est)</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm font-mono">$1.2M</span>
+</div>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Active Item 2 (Independent) -->
+<div class="bg-surface-container-lowest/40 p-6 rounded-[20px] hover:bg-surface-container-lowest/80 transition-all group flex flex-col md:flex-row md:items-center gap-gutter">
+<div class="flex items-center gap-4 flex-1 min-w-0">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-highest flex items-center justify-center shrink-0 overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A gritty, industrial crossfit gym interior with kettlebells and rigs, dramatic lighting, desaturated colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBde3ls6lk-N1-pessaQ-IMr0O3DDs7yliqylLxE54LNEXOmK-1qupkkJ9MA_3xibYG2_67-IGVfnrL_tQeLEP_6-uC6Z_bo6H5Xk75a0DBS-f-XZ5QlXYvAFkMg1a82AVCHDYDc4Dj3tqdUnDPRQQiesT1-vdiD2cSTB2crJFdHjz9qMSdPA4ISGcRDFeVNTDyljPhU5DtSc9iQ_KdUjnp_kGAawSjE4MEopPPXAptJI66IiH5LhQe"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Iron Forge Strength</h4>
+<span class="px-2 py-1 rounded-md bg-primary-fixed/50 text-on-primary-fixed font-label-sm text-[10px] uppercase tracking-wider">Active</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Independent • 1 Location • Onboarded Mar 2024</p>
+</div>
+</div>
+<div class="flex items-center gap-gutter shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
+<div class="hidden lg:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface">MRR (Est)</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm font-mono">$4.5k</span>
+</div>
+<button class="w-10 h-10 rounded-full border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Suspended Item -->
+<div class="bg-surface-container-lowest/20 p-6 rounded-[20px] opacity-75 hover:opacity-100 transition-all group flex flex-col md:flex-row md:items-center gap-gutter border border-error-container/50">
+<div class="flex items-center gap-4 flex-1 min-w-0">
+<div class="w-16 h-16 rounded-2xl bg-error-container/30 flex items-center justify-center text-error font-headline-lg-mobile text-headline-lg-mobile shrink-0">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate line-through decoration-error/50">Core Dynamics</h4>
+<span class="px-2 py-1 rounded-md bg-error-container text-on-error-container font-label-sm text-[10px] uppercase tracking-wider">Suspended</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Gym Chain • Reason: Billing Default</p>
+</div>
+</div>
+<div class="flex items-center gap-gutter shrink-0">
+<button class="h-10 px-4 border border-outline-variant/50 text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-highest transition-colors">View Case</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

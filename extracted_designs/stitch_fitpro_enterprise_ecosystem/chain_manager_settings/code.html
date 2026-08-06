@@ -1,0 +1,183 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed":"#ffdbd1","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","on-error-container":"#93000a","surface-tint":"#004dea","primary":"#0041c8","on-error":"#ffffff","secondary-container":"#6063ee","inverse-surface":"#2f3133","surface-container-highest":"#e2e2e5","on-secondary-fixed":"#07006c","outline":"#737688","surface-dim":"#dadadc","on-tertiary":"#ffffff","tertiary-container":"#c13301","on-tertiary-fixed":"#3b0900","error":"#ba1a1a","surface-bright":"#f9f9fc","on-tertiary-container":"#ffe1d9","inverse-primary":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-container":"#eeeef0","on-primary":"#ffffff","surface-container-high":"#e8e8ea","on-primary-container":"#e3e6ff","on-secondary-container":"#fffbff","surface":"#f9f9fc","on-primary-fixed":"#001551","outline-variant":"#c3c5d9","primary-fixed-dim":"#b6c4ff","primary-fixed":"#dce1ff","tertiary-fixed-dim":"#ffb5a0","surface-container-low":"#f3f3f6","tertiary":"#972500","secondary-fixed":"#e1e0ff","primary-container":"#0055ff","error-container":"#ffdad6","background":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","on-background":"#1a1c1e","surface-variant":"#e2e2e5","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed-variant":"#0039b3","inverse-on-surface":"#f0f0f3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","gutter":"24px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px"},"fontFamily":{"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"],"body-md":["Inter"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/70 backdrop-blur-2xl z-50 flex flex-col border-r border-outline-variant/20 shadow-xl shadow-primary/5"><div class="px-gutter pt-8 mb-8"><div class="flex items-center gap-3 bg-surface-container-highest/50 p-3 rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-highest transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><h2 class="font-headline-lg text-sm text-on-surface truncate">FitPro Global</h2><p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Chain Manager</p></div><span class="material-symbols-outlined text-on-surface-variant text-sm">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3">hub</span>Branches</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branch-managers" href="#"><span class="material-symbols-outlined mr-3">badge</span>Branch Managers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3">exercise</span>Trainers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3">groups</span>Members</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">description</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3">analytics</span>Analytics</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></nav><div class="px-6 py-6 border-t border-outline-variant/10"><div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container-low/50"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex-1 min-w-0"><p class="text-sm font-medium text-on-surface truncate">Alex Sterling</p><p class="font-label-sm text-[10px] text-on-surface-variant">Chain Admin</p></div><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></div></div></aside><div class="pl-72 min-h-screen flex flex-col"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-gutter flex items-center justify-between border-b border-outline-variant/10"><div class="flex items-center gap-4 bg-surface-container-low/80 px-4 py-2 rounded-full border border-white/20 text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-all max-w-md w-full"><span class="material-symbols-outlined text-xl">search</span><span class="flex-1 text-sm">Search everywhere...</span><div class="flex items-center gap-1 font-label-sm text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md border border-outline-variant/30 text-on-surface-variant"><span>⌘</span><span>K</span></div></div><div class="flex items-center gap-6"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">notifications</span><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">help</span></div><div class="w-px h-6 bg-outline-variant/30"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 pt-16 bg-surface/30"><div class="flex flex-col w-full">
+<div class="px-gutter pb-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 mt-8">
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2">System Configuration</p>
+<h1 class="font-display-lg text-display-lg text-on-surface">Chain Settings &amp; Permissions</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-4">Manage global defaults, operational thresholds, and automated alerts across all FitPro branches.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-highest transition-colors shadow-sm">Discard Changes</button>
+<button class="px-6 py-3 rounded-full bg-primary text-on-primary font-label-sm text-label-sm hover:bg-primary/90 transition-colors shadow-md shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+          Save Configuration
+        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Settings Area -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- General Defaults Card -->
+<div class="bg-surface/70 backdrop-blur-md rounded-[2rem] p-8 shadow-xl shadow-on-surface/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-primary-container/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">tune</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface">Global Operational Defaults</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Default Reporting Frequency</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest/50 text-on-surface font-body-md text-body-md px-4 py-3 rounded-xl shadow-sm focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all cursor-pointer">
+<option>Weekly (Mondays)</option>
+<option>Bi-Weekly</option>
+<option>Monthly (1st)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Standard Operating Hours</label>
+<div class="flex gap-2">
+<input class="w-full bg-surface-container-lowest/50 text-on-surface font-body-md text-body-md px-4 py-3 rounded-xl shadow-sm focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all" type="time" value="05:00"/>
+<input class="w-full bg-surface-container-lowest/50 text-on-surface font-body-md text-body-md px-4 py-3 rounded-xl shadow-sm focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all" type="time" value="23:00"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert Thresholds Card -->
+<div class="bg-surface/70 backdrop-blur-md rounded-[2rem] p-8 shadow-xl shadow-on-surface/5">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface">Automated Alerts &amp; Thresholds</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Configure metrics that trigger notifications to chain management.</p>
+</div>
+</div>
+<div class="w-16 h-8 bg-surface-container-highest rounded-full p-1 cursor-pointer transition-colors" id="alerts-toggle" onclick="this.classList.toggle('bg-primary'); this.children[0].classList.toggle('translate-x-8'); this.children[0].classList.toggle('bg-surface-container-lowest'); this.children[0].classList.toggle('bg-on-primary')">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full shadow-sm transform transition-transform"></div>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Threshold Item 1 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-lowest/30 hover:bg-surface-container-lowest/50 transition-colors">
+<div class="flex-1">
+<h3 class="font-body-md text-body-md text-on-surface font-medium">Monthly Member Churn Rate</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Alert when a branch exceeds this cancellation threshold.</p>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-32 accent-error" max="15" min="1" oninput="this.nextElementSibling.textContent = this.value + '%'" type="range" value="5"/>
+<span class="font-label-sm text-label-sm text-error bg-error-container/30 px-3 py-1 rounded-lg w-12 text-center">5%</span>
+</div>
+</div>
+<!-- Threshold Item 2 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-lowest/30 hover:bg-surface-container-lowest/50 transition-colors">
+<div class="flex-1">
+<h3 class="font-body-md text-body-md text-on-surface font-medium">Trainer Utilization Drop</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Alert when booked session hours fall below capacity.</p>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-32 accent-error" max="90" min="40" oninput="this.nextElementSibling.textContent = '&lt; ' + this.value + '%'" type="range" value="65"/>
+<span class="font-label-sm text-label-sm text-error bg-error-container/30 px-3 py-1 rounded-lg w-16 text-center">&lt; 65%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Role Permissions Bento Box -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low rounded-[2rem] p-6 shadow-md shadow-on-surface/5">
+<h3 class="font-headline-lg text-headline-lg-mobile text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+              Branch Manager
+            </h3>
+<ul class="space-y-4">
+<li class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Hire/Fire Trainers</span>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Modify Class Schedule</span>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Change Membership Pricing</span>
+<span class="material-symbols-outlined text-outline-variant">cancel</span>
+</li>
+</ul>
+<button class="mt-6 w-full py-2 rounded-xl text-primary font-label-sm text-label-sm bg-primary/5 hover:bg-primary/10 transition-colors">Edit Permissions</button>
+</div>
+<div class="bg-surface-container-low rounded-[2rem] p-6 shadow-md shadow-on-surface/5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-20 transition-opacity duration-700" data-alt="A macro abstract shot of layered glass blocks in light blue and white tones, soft lighting, depth of field, high-end minimal corporate aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoNvnuJNUpGr_GlN7ZJQEXe5eTsDTVbswczIYWT2mBWZsmos41k0xMv9JWb8HzOTfxcmHmbasxazZKRzyAw5Xo2JswKs63CS2-xChQayv49CKAbshfaGfmJwAe1XcX1vaPZnQzwNOpwlP3r_Z-PQbL7bETknl-k36zq6hYCShaPZ6FtXuRU3ZB2CyDsGOgHD04ivBuqYS-y1kD9rIWHcAfrSU7PQPVAlKf50CnYWWYE6bNd8MXUKH1')"></div>
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg-mobile text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">security</span>
+                Access Logs
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Review system access history, permission changes, and administrative actions across all branches.</p>
+<div class="bg-surface/80 backdrop-blur-sm p-4 rounded-xl flex items-center justify-between">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Last audited</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Today, 09:41 AM</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Area -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<!-- Active Regions Map -->
+<div class="bg-surface/70 backdrop-blur-md rounded-[2rem] p-6 shadow-xl shadow-on-surface/5">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-4">Coverage Map</h3>
+<div class="w-full h-48 bg-cover bg-center rounded-xl shadow-inner mb-4 overflow-hidden relative" data-location="United States" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-display-lg text-display-lg text-primary">24</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Active Regions</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Notification Channels -->
+<div class="bg-surface-container-highest/30 rounded-[2rem] p-6">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-6">Notification Channels</h3>
+<div class="space-y-4">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">mail</span>
+<span class="font-body-md text-body-md text-on-surface">Email Digest</span>
+</div>
+<input checked="" class="w-5 h-5 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">sms</span>
+<span class="font-body-md text-body-md text-on-surface">SMS Critical Alerts</span>
+</div>
+<input checked="" class="w-5 h-5 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">forum</span>
+<span class="font-body-md text-body-md text-on-surface">Slack Integration</span>
+</div>
+<input class="w-5 h-5 accent-primary rounded" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

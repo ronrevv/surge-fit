@@ -1,0 +1,364 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"surface-container-low":"#f3f3f6","on-secondary-container":"#fffbff","on-background":"#1a1c1e","surface-container-highest":"#e2e2e5","primary-fixed":"#dce1ff","inverse-primary":"#b6c4ff","on-primary-container":"#e3e6ff","on-surface-variant":"#434656","on-primary":"#ffffff","surface-dim":"#dadadc","on-tertiary-container":"#ffe1d9","secondary-container":"#6063ee","on-error-container":"#93000a","on-secondary-fixed-variant":"#2f2ebe","surface-container":"#eeeef0","on-tertiary-fixed":"#3b0900","on-secondary":"#ffffff","tertiary-fixed":"#ffdbd1","error-container":"#ffdad6","tertiary":"#972500","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#ffb5a0","secondary-fixed-dim":"#c0c1ff","secondary-fixed":"#e1e0ff","surface-tint":"#004dea","inverse-surface":"#2f3133","on-secondary-fixed":"#07006c","on-error":"#ffffff","outline":"#737688","inverse-on-surface":"#f0f0f3","surface-variant":"#e2e2e5","on-tertiary-fixed-variant":"#872100","tertiary-container":"#c13301","background":"#f9f9fc","on-surface":"#1a1c1e","primary":"#0041c8","surface-container-high":"#e8e8ea","outline-variant":"#c3c5d9","surface":"#f9f9fc","on-primary-fixed-variant":"#0039b3","on-primary-fixed":"#001551","surface-bright":"#f9f9fc","secondary":"#4648d4","primary-container":"#0055ff","error":"#ba1a1a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","margin-desktop":"48px","unit":"8px","gutter":"24px","container-max":"1280px"},"fontFamily":{"headline-lg-mobile":["Manrope"],"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"],"body-md":["Inter"],"display-lg":["Manrope"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-background"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest/80 backdrop-blur-2xl z-50 flex flex-col shadow-[0_1px_24px_rgba(0,65,200,0.03)] border-r border-outline-variant/20"><div class="p-gutter flex items-center gap-3"><img alt="FitPro" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLuLE_qkwB1Wi0lNN7fxCr1wVGB9WyXhARWQOmVXjBiKCimwVg6QGrMYVBRPRn46jx-1KkvDn-7XJ4tOFON7nSCd3FHiBHDMHP5NsH6Xv95IUH4vurNpw6zQ6MhFSxcNdA7ss_yTsgkVit_wjHQ32jclo5DAGs3yZj3CspDZ2q5biDeftZBR_t5AbpWg4X2Yzll0s2YFczkF0JtqDGHmL9IlJWG0xP7y92kX6-Gq_bYAv1WLWireo8WLS6k"/><span class="font-headline-lg text-headline-lg tracking-tight text-primary">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container shadow-sm"><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined">dashboard</span><span class="font-label-sm">DASHBOARD</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="clients" href="#"><span class="material-symbols-outlined">group</span><span class="font-label-sm">CLIENTS</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="programs" href="#"><span class="material-symbols-outlined">fitness_center</span><span class="font-label-sm">PROGRAMS</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined">calendar_today</span><span class="font-label-sm">CALENDAR</span></a><a aria-current="page" class="flex items-center gap-4 px-5 py-3 rounded-xl transition-all group bg-primary-container text-on-primary-container shadow-sm" data-path="messages" href="#"><span class="material-symbols-outlined">chat_bubble</span><span class="font-label-sm">MESSAGES</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="payments" href="#"><span class="material-symbols-outlined">payments</span><span class="font-label-sm">PAYMENTS</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="analytics" href="#"><span class="material-symbols-outlined">monitoring</span><span class="font-label-sm">ANALYTICS</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-coach" href="#"><span class="material-symbols-outlined">smart_toy</span><span class="font-label-sm text-tertiary">AI COACH</span></a><div class="pt-4 mt-4 border-t border-outline-variant/10"><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined">person</span><span class="font-label-sm">PROFILE</span></a><a class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined">settings</span><span class="font-label-sm">SETTINGS</span></a></div></nav></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/80 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-4"></div><div class="flex items-center gap-6"><button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors"><span class="material-symbols-outlined">search</span></button><button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors relative"><span class="material-symbols-outlined">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20"><div class="text-right hidden sm:block"><div class="font-label-sm text-on-surface leading-none">Alex Rivers</div><div class="text-xs text-on-surface-variant">Lead Trainer</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"/></div></div></header><main class="pt-20 min-h-screen bg-background"><div class="flex flex-col w-full h-[calc(100vh-5rem)]">
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar / Inbox List -->
+<aside class="w-96 flex flex-col bg-surface border-r border-outline-variant/20 flex-shrink-0 relative z-10">
+<!-- Header -->
+<div class="p-gutter pb-4 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Messages</h1>
+<button class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+</div>
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-12 pl-10 pr-4 bg-surface-container-low rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search clients..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm whitespace-nowrap">All</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high transition-colors whitespace-nowrap">Unread</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high transition-colors whitespace-nowrap">Check-ins</button>
+</div>
+</div>
+<!-- Chat List -->
+<div class="flex-1 overflow-y-auto px-4 pb-4 space-y-2">
+<!-- Active Item -->
+<button class="w-full flex items-start gap-4 p-4 rounded-2xl bg-primary-container/10 relative text-left group">
+<div class="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a female fitness client in athletic wear, bright natural lighting, soft background blur, conveying health and energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQG87jZQXETc6lKjgjzVoim_PAqQ8axUCL1ZjmBruE8W23lCGN8MHzEz0J2ellvrRYcqKBSrSkvWkxzk-hCy_bXQ2rpyhsupsd7AyQvKZbtHxJQrI1wO-tl-nE5UAdcHJWIiAWAEx72z13kDRqzkDyuDxbcIW8embGWHSvJWjBLt9AX8ZOO2V0R9-98zePHXAJfDn9-SSClGpdnVcndSX1iuvonxRK615cowPvV7edJhr0Hb9hd4po"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Sarah Jenkins</span>
+<span class="font-label-sm text-label-sm text-primary">Just now</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm truncate">Thanks for the updated meal plan! The new macro breakdown makes a lot of sense.</p>
+</div>
+</button>
+<!-- Unread Item -->
+<button class="w-full flex items-start gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors text-left relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-primary rounded-full ml-1.5"></div>
+<div class="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ml-2">
+<div class="w-full h-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-headline-lg-mobile text-headline-lg-mobile">
+                            MD
+                        </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Marcus Davis</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold">10:42 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium text-sm truncate">I felt a slight tweak in my lower back during deadlifts yesterday.</p>
+</div>
+</button>
+<!-- Read Item -->
+<button class="w-full flex items-start gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors text-left">
+<div class="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ml-2">
+<img class="w-full h-full object-cover" data-alt="Casual portrait of a male client outdoors, smiling, wearing a running jacket, slightly desaturated colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSEWWG0NGuKch3piSjZ00saCPH6kCNolXAz5dvgGbZQmscsYahRkHT6Hs7m2lMYBZwEkXO2jmceGiBO4zSD4A7A7ZNRroIIsmAr9pidOjSBHKok8F3r4TB3fEUN-ksoojUI7M3qb2QSx3OlGc8Bv64ToOioXfPolKdQXpZcv1OD7GDYxVPq_8VH5s923a-Gg7Gd5nf_ZYD_Ge32Ohmez1MSoCs4ohyEUfh9ORPsl-JmgIuMBtqxcMm"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">David Chen</span>
+<span class="font-label-sm text-label-sm text-outline">Yesterday</span>
+</div>
+<p class="font-body-md text-body-md text-outline text-sm truncate">Attachment: Week 4 Form Check.mp4</p>
+</div>
+</button>
+<!-- Read Item -->
+<button class="w-full flex items-start gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors text-left">
+<div class="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ml-2">
+<div class="w-full h-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-headline-lg-mobile text-headline-lg-mobile">
+                            EL
+                        </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Emma Lawson</span>
+<span class="font-label-sm text-label-sm text-outline">Mon</span>
+</div>
+<p class="font-body-md text-body-md text-outline text-sm truncate">Got it, see you at 5pm!</p>
+</div>
+</button>
+</div>
+</aside>
+<!-- Main Chat Area -->
+<main class="flex-1 flex flex-col bg-background relative overflow-hidden">
+<!-- Ambient Background Element -->
+<div class="absolute top-1/4 -right-64 w-[600px] h-[600px] bg-primary-fixed/20 rounded-full blur-3xl mix-blend-multiply pointer-events-none"></div>
+<!-- Chat Header -->
+<header class="h-20 px-8 flex items-center justify-between bg-surface/80 backdrop-blur-md border-b border-outline-variant/10 flex-shrink-0 z-20">
+<div class="flex items-center gap-4">
+<div class="relative w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a female fitness client in athletic wear, bright natural lighting, soft background blur, conveying health and energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuvUGD-6-t9WQ7fonfLf6IGGzsJRvt5O0a1eajHLpWrRFnesl36oQu-8oojYp04QGddfpEYEA-CWnrxAQMd46QDvLdnqKODWsHMcDL8ydMTd347JGF1A2jjTk9flXqov_64dktqcxsI6VdkVVEdm26AZeD8UUamBjhYLtoTEc_I_SxmCBUnD9NJICAzZuWYLMMzMkLk_PkHCY_7Tt7GqgxriVNG8eFpgjdEUXWPCuoox4XUjykuADv"/>
+</div>
+<div>
+<h2 class="font-body-md text-body-md font-semibold text-on-surface leading-tight">Sarah Jenkins</h2>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active now • Phase 2: Hypertrophy</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="p-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">call</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30 mx-2"></div>
+<button class="p-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</header>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-8 flex flex-col gap-6 z-10" id="message-container">
+<!-- Date Divider -->
+<div class="flex items-center justify-center gap-4 my-2">
+<div class="h-px w-12 bg-outline-variant/20"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Today</span>
+<div class="h-px w-12 bg-outline-variant/20"></div>
+</div>
+<!-- Trainer Message (Sent) -->
+<div class="flex flex-col items-end gap-1 max-w-[75%] self-end">
+<div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 shadow-sm">
+<p class="font-body-md text-body-md">Hey Sarah, how did the revised leg day routine feel? I swapped out the back squats for hack squats as we discussed.</p>
+</div>
+<span class="font-label-sm text-label-sm text-outline mr-1">09:15 AM</span>
+</div>
+<!-- Trainer Message (Sent) with Attachment -->
+<div class="flex flex-col items-end gap-1 max-w-[75%] self-end">
+<div class="bg-primary/5 border border-primary/20 rounded-2xl rounded-tr-sm p-4 w-72 backdrop-blur-sm">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-error shadow-sm">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="font-body-md text-body-md text-on-surface font-medium truncate">Sarah_Phase2_Nutrition.pdf</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB</div>
+</div>
+</div>
+<button class="w-full py-2 bg-surface text-primary font-label-sm text-label-sm rounded-lg shadow-sm hover:bg-surface-container-low transition-colors">Download Plan</button>
+</div>
+</div>
+<!-- Client Message (Received) -->
+<div class="flex items-end gap-3 max-w-[75%] self-start mt-4">
+<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 mb-5">
+<img class="w-full h-full object-cover" data-alt="Thumbnail size headshot of a female fitness client." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRT7vF0H3ofjAbdDwgZooecLoK38M3mE7riY3kcJE8wAjZnmOLbs0MflL-3rzWvZsBQzNu2I0AEBgOBLnxr_JeyyOR5LvVEVriLcA7zm2CftB0OfYQUl2f-D7HuLbGLLTU-ZOWgMnCoEohvIBejdc_3KCGRiQO2Qu_XDRSXCOGBiwhyxsRwuCwE6_4J1nukVV7uLycLnvLoVlAk1L5jR4YvCuS6Zad_WFkrvr8vdz1J3-LciviJxl0"/>
+</div>
+<div class="flex flex-col items-start gap-1">
+<div class="bg-surface-container border border-outline-variant/20 text-on-surface rounded-2xl rounded-tl-sm px-5 py-3 shadow-sm">
+<p class="font-body-md text-body-md">Much better! No lower back pain at all. I was able to push closer to failure on the last set.</p>
+</div>
+</div>
+</div>
+<!-- Client Message (Received) -->
+<div class="flex items-end gap-3 max-w-[75%] self-start">
+<div class="w-8 h-8 flex-shrink-0 mb-5"></div> <!-- Spacer -->
+<div class="flex flex-col items-start gap-1">
+<div class="bg-surface-container border border-outline-variant/20 text-on-surface rounded-2xl rounded-tl-sm px-5 py-3 shadow-sm">
+<p class="font-body-md text-body-md">Thanks for the updated meal plan too! The new macro breakdown makes a lot of sense.</p>
+</div>
+<span class="font-label-sm text-label-sm text-outline ml-1">Just now</span>
+</div>
+</div>
+<!-- Typing Indicator -->
+<div class="flex items-end gap-3 self-start opacity-50 transition-opacity duration-300" id="typing-indicator" style="display: none;">
+<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Thumbnail size headshot of a female fitness client." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYm8_Crd7uw1_nNo-8kooBipRltdM1MxVdvVuuwGOOnq0uivlOZnoC-gbgWS2VMXWJfB_0bp0vDDFO208_AXc2V3c0sV0wl-u4ymXkRspwIWEz6QymfopmhjrEzyfpRLrFFxJOVNJvR7m3YmZdmDUEJoK83Fw0IlZTcxRG3Usk-IMwIJLA8xrCa-oYt0g8GZFf4UTimYAMjrn33xrd4kuCg-tx8uJAC5wO3IWBs1ghyhW-If9xySKE"/>
+</div>
+<div class="bg-surface-container border border-outline-variant/20 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1">
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce" style="animation-delay: 0.15s;"></div>
+<div class="w-1.5 h-1.5 bg-outline rounded-full animate-bounce" style="animation-delay: 0.3s;"></div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-6 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/10 z-20">
+<div class="bg-surface-container-low rounded-2xl p-2 flex flex-col focus-within:ring-2 focus-within:ring-primary/30 transition-shadow shadow-sm">
+<textarea class="w-full bg-transparent resize-none outline-none font-body-md text-body-md text-on-surface placeholder:text-outline px-3 py-2 min-h-[60px] max-h-[120px] hide-scrollbar" id="message-input" placeholder="Message Sarah..."></textarea>
+<div class="flex items-center justify-between px-2 pt-2 border-t border-outline-variant/10">
+<div class="flex gap-1">
+<button class="w-9 h-9 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors tooltip-trigger" data-tooltip="Attach File">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors tooltip-trigger" data-tooltip="Record Audio">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors tooltip-trigger" data-tooltip="Share Workout">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+</button>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-on-primary hover:bg-primary-fixed-variant transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="send-button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Context Sidebar (Optional/Collapsible info panel) -->
+<aside class="w-72 bg-surface-container-lowest border-l border-outline-variant/20 hidden lg:flex flex-col">
+<div class="p-6 border-b border-outline-variant/10">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-4">Client Details</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">flag</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Current Goal</div>
+<div class="font-body-md text-body-md text-on-surface font-medium">Hypertrophy Phase 2</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">monitor_weight</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Last Check-in</div>
+<div class="font-body-md text-body-md text-on-surface font-medium">68.5 kg (-0.4kg)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Shared Media</h3>
+<button class="font-label-sm text-label-sm text-primary">See All</button>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="aspect-square bg-surface-container rounded-lg overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Client progress photo, back flex, wearing athletic top." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOy-iWJo5Ctrr1puvF7mnyx8DCaJyBvPHYAA49kOdshjt1M0PGhr4-dQvkSHPPDR97lI3BczT8vJEhLi1a7lFeu_1BKSMojqLEs_9LK8T6tUn7VUx-ROtW71VGGkFC10v4lYisKp3LDhZr-0H8Jawkd8r1NU5lqj8wLtSRAl1K_zqP4nPn7IYVOi4-YHMnG6D6YbkrzokoBiIY-QptdTYUQ032d2Jfn739pkFp-Yl1DrMjf0smF9qe"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white">visibility</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg overflow-hidden relative group cursor-pointer">
+<div class="w-full h-full flex flex-col items-center justify-center gap-1 bg-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant">play_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Form Check</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-button');
+        const container = document.getElementById('message-container');
+        const typingIndicator = document.getElementById('typing-indicator');
+        
+        // Auto-resize textarea
+        input.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+            sendBtn.disabled = this.value.trim().length === 0;
+            
+            // Simulate typing indicator appearing after a delay if input is long enough
+            if(this.value.length > 5 && Math.random() > 0.8) {
+                typingIndicator.style.display = 'flex';
+                setTimeout(() => {
+                    typingIndicator.style.opacity = '1';
+                }, 10);
+            } else if (this.value.length === 0) {
+                 typingIndicator.style.opacity = '0';
+                 setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        // Handle Enter to send
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if(!sendBtn.disabled) sendMessage();
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Create message HTML
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            const msgHtml = `
+                <div class="flex flex-col items-end gap-1 max-w-[75%] self-end animate-fade-in-up">
+                    <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-5 py-3 shadow-sm">
+                        <p class="font-body-md text-body-md">${escapeHtml(text)}</p>
+                    </div>
+                    <span class="font-label-sm text-label-sm text-outline mr-1">${timeString}</span>
+                </div>
+            `;
+
+            // Insert before typing indicator or at end
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = msgHtml;
+            container.insertBefore(tempDiv.firstElementChild, typingIndicator);
+
+            // Reset input
+            input.value = '';
+            input.style.height = 'auto';
+            sendBtn.disabled = true;
+            
+            // Scroll to bottom
+            container.scrollTop = container.scrollHeight;
+            
+            // Hide typing indicator immediately
+            typingIndicator.style.opacity = '0';
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+            }, 300);
+        }
+        
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&")
+                 .replace(/</g, "<")
+                 .replace(/>/g, ">")
+                 .replace(/"/g, """)
+                 .replace(/'/g, "'");
+        }
+        
+        // Scroll to bottom initially
+        container.scrollTop = container.scrollHeight;
+    });
+</script>
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in-up {
+        animation: fadeInUp 0.3s ease-out forwards;
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style></main></div></body></html>

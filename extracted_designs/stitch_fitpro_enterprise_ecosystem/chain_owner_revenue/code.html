@@ -1,0 +1,271 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed-dim":"#ffb5a0","surface-variant":"#e2e2e5","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed":"#001551","on-primary":"#ffffff","on-tertiary-fixed-variant":"#872100","surface-container-high":"#e8e8ea","primary-fixed-dim":"#b6c4ff","on-primary-fixed-variant":"#0039b3","surface-bright":"#f9f9fc","secondary-fixed":"#e1e0ff","tertiary-container":"#c13301","surface":"#f9f9fc","background":"#f9f9fc","primary-fixed":"#dce1ff","on-surface":"#1a1c1e","surface-container-low":"#f3f3f6","outline-variant":"#c3c5d9","surface-tint":"#004dea","tertiary-fixed":"#ffdbd1","surface-container-highest":"#e2e2e5","inverse-on-surface":"#f0f0f3","surface-container":"#eeeef0","inverse-surface":"#2f3133","on-error":"#ffffff","tertiary":"#972500","on-tertiary-fixed":"#3b0900","on-secondary-container":"#fffbff","on-error-container":"#93000a","secondary-fixed-dim":"#c0c1ff","on-primary-container":"#e3e6ff","error-container":"#ffdad6","secondary":"#4648d4","on-tertiary":"#ffffff","on-background":"#1a1c1e","on-tertiary-container":"#ffe1d9","on-secondary-fixed":"#07006c","surface-dim":"#dadadc","surface-container-lowest":"#ffffff","secondary-container":"#6063ee","error":"#ba1a1a","primary-container":"#0055ff","on-secondary":"#ffffff","inverse-primary":"#b6c4ff","primary":"#0041c8","outline":"#737688"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px","gutter":"24px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"],"body-md":["Inter"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest/80 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="p-6 mb-4"><div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-high transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><p class="text-xs font-label-sm text-on-surface-variant uppercase">Workspace</p><p class="text-sm font-bold truncate text-on-surface">Titan Gym Group</p></div><span class="material-symbols-outlined text-on-surface-variant">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-bold shadow-[0_4px_12px_rgba(0,85,255,0.1)]"><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">dashboard</span><span class="text-sm font-medium">Dashboard</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">domain</span><span class="text-sm font-medium">Branches</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="managers" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">badge</span><span class="text-sm font-medium">Managers</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">sports_gymnastics</span><span class="text-sm font-medium">Trainers</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">group</span><span class="text-sm font-medium">Members</span></a><div class="my-4 mx-4 border-t border-outline-variant/30"></div><a aria-current="page" class="group flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-bold shadow-[0_4px_12px_rgba(0,85,255,0.1)]" data-path="revenue" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">payments</span><span class="text-sm font-medium">Revenue</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">query_stats</span><span class="text-sm font-medium">Analytics</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="campaigns" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">campaign</span><span class="text-sm font-medium">Campaigns</span></a></nav><div class="p-4 mt-auto"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">settings</span><span class="text-sm font-medium">Settings</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 flex items-center px-margin-desktop justify-between shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex-1 max-w-xl"><div class="relative flex items-center bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-2 group focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all"><span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-3">search</span><input class="bg-transparent border-none outline-none w-full text-sm text-on-surface placeholder:text-outline" placeholder="Search anything..." type="text"/><div class="flex items-center gap-1 ml-2"><kbd class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant/40">⌘</kbd><kbd class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant/40">K</kbd></div></div></div><div class="flex items-center gap-6"><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">notifications</span></button><div class="h-8 w-[1px] bg-outline-variant/30"></div><div class="flex items-center gap-3 cursor-pointer group"><div class="text-right"><p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Julian Archer</p><p class="text-[11px] font-label-sm text-on-surface-variant">Founder &amp; CEO</p></div><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center border-2 border-white shadow-sm"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-margin-desktop py-12">
+<!-- Header Section -->
+<div class="flex flex-col gap-2 mb-12">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-display-lg text-on-surface">Financial Overview</h1>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Live Sync</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Comprehensive revenue analysis across all branches, tracking MRR, payment statuses, and forecasted growth for the fiscal year.
+      </p>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<!-- MRR Card (Spans 2 columns) -->
+<div class="col-span-1 md:col-span-2 bg-surface-container-lowest rounded-2xl p-8 relative overflow-hidden group hover:shadow-xl transition-shadow duration-500">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 group-hover:bg-primary/10 transition-colors duration-700"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div class="flex justify-between items-start mb-8">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Monthly Recurring Revenue</p>
+<h2 class="font-display-lg text-display-lg text-on-surface tracking-tight">$842,500</h2>
+</div>
+<div class="flex items-center gap-1 text-primary bg-primary/10 px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm font-bold">+12.4%</span>
+</div>
+</div>
+<!-- Sparkline SVG -->
+<div class="w-full h-16 mt-auto">
+<svg class="w-full h-full text-primary" preserveaspectratio="none" viewbox="0 0 200 40">
+<path d="M0,35 Q10,25 20,28 T40,20 T60,25 T80,15 T100,10 T120,18 T140,5 T160,12 T180,8 T200,2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="M0,35 Q10,25 20,28 T40,20 T60,25 T80,15 T100,10 T120,18 T140,5 T160,12 T180,8 T200,2 L200,40 L0,40 Z" fill="url(#sparklineGradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="sparklineGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="currentColor"></stop>
+<stop offset="100%" stop-color="currentColor" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<!-- YTD Growth -->
+<div class="bg-primary rounded-2xl p-8 relative overflow-hidden group shadow-md shadow-primary/20">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10 flex flex-col h-full">
+<p class="font-label-sm text-label-sm text-on-primary/80 uppercase mb-4">YTD Growth</p>
+<div class="flex items-end gap-2 mb-2">
+<h2 class="font-headline-lg text-headline-lg text-on-primary">28.5%</h2>
+</div>
+<p class="font-body-md text-body-md text-on-primary/70 text-sm">Versus last year</p>
+<div class="mt-auto pt-6 flex items-center justify-between">
+<span class="text-on-primary font-label-sm text-label-sm">Target: 30%</span>
+<div class="w-1/2 h-1.5 bg-black/20 rounded-full overflow-hidden">
+<div class="h-full bg-white rounded-full w-[95%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Average Rev per Member -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 flex flex-col justify-between group hover:shadow-lg transition-shadow duration-300">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-4">Avg Rev per Member</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">$145.20</h2>
+</div>
+<div class="flex items-center gap-3 mt-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary">+$4.50</span>
+<span class="font-body-md text-[10px] text-on-surface-variant uppercase">This Month</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Chart Section -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 mb-12 shadow-sm relative overflow-hidden">
+<!-- Decorative background blur -->
+<div class="absolute top-0 right-0 w-[500px] h-[300px] bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent rounded-full blur-[80px] pointer-events-none -translate-y-1/2 translate-x-1/4"></div>
+<div class="flex justify-between items-end mb-8 relative z-10">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Revenue Forecast</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Projected vs Actuals (Next 6 Months)</p>
+</div>
+<!-- Segmented Control -->
+<div class="flex bg-surface-container-high p-1 rounded-xl">
+<button class="px-4 py-2 font-label-sm text-label-sm bg-surface-container-lowest text-on-surface rounded-lg shadow-sm">Monthly</button>
+<button class="px-4 py-2 font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">Quarterly</button>
+</div>
+</div>
+<!-- Line Chart Area (Visual Representation) -->
+<div class="w-full h-80 relative z-10 flex items-end pt-8">
+<!-- Y-Axis Labels -->
+<div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] font-label-sm text-on-surface-variant py-4">
+<span>$1.2M</span>
+<span>$900k</span>
+<span>$600k</span>
+<span>$300k</span>
+<span>$0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 ml-12 flex flex-col justify-between py-4 pointer-events-none">
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+<div class="w-full h-[1px] bg-outline-variant/20"></div>
+</div>
+<!-- SVG Chart -->
+<div class="w-full h-full ml-12 relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 300">
+<!-- Actuals Line -->
+<path class="text-primary" d="M0,250 C100,220 200,240 300,180 C400,120 500,150 600,80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+<!-- Area under Actuals -->
+<path d="M0,250 C100,220 200,240 300,180 C400,120 500,150 600,80 L600,300 L0,300 Z" fill="url(#chartGradient)" opacity="0.1"></path>
+<!-- Forecast Line (Dashed) -->
+<path class="text-outline-variant" d="M600,80 C700,40 800,20 800,20" fill="none" stroke="currentColor" stroke-dasharray="8 8" stroke-linecap="round" stroke-width="3"></path>
+<!-- Data Points -->
+<circle class="text-primary" cx="0" cy="250" fill="#f9f9fc" r="6" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="300" cy="180" fill="#f9f9fc" r="6" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="600" cy="80" fill="currentColor" r="8"></circle>
+<circle class="text-outline-variant" cx="800" cy="20" fill="#f9f9fc" r="6" stroke="currentColor" stroke-width="3"></circle>
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop class="text-primary" offset="0%" stop-color="currentColor"></stop>
+<stop class="text-primary" offset="100%" stop-color="currentColor" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<!-- X-Axis Labels -->
+<div class="ml-12 mt-4 flex justify-between font-label-sm text-[10px] text-on-surface-variant uppercase">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span class="text-primary font-bold">Jun</span>
+<span>Jul (F)</span>
+<span>Aug (F)</span>
+</div>
+</div>
+<!-- Bottom Split Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Revenue by Branch List -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 flex flex-col shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Revenue by Branch</h3>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant transition-colors">View All</button>
+</div>
+<div class="flex flex-col gap-6 mt-4">
+<!-- Item 1 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">location_city</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">Downtown Flagship</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">New York, NY</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-on-surface">$245k</p>
+<p class="font-label-sm text-[10px] text-primary">+5.2%</p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">location_city</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">Westside Studio</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Los Angeles, CA</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-on-surface">$182k</p>
+<p class="font-label-sm text-[10px] text-primary">+2.1%</p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-outline-variant/10"></div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">location_city</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">North Park Hub</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Chicago, IL</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md font-bold text-on-surface">$140k</p>
+<p class="font-label-sm text-[10px] text-error">-1.4%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Status Donut & Stats -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 flex flex-col shadow-sm relative overflow-hidden">
+<!-- Abstract decorative circle -->
+<div class="absolute -bottom-16 -right-16 w-64 h-64 border-[40px] border-surface-container-high/30 rounded-full pointer-events-none"></div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-8 relative z-10">Payment Collection</h3>
+<div class="flex items-center gap-8 relative z-10 flex-1">
+<!-- Donut Chart SVG -->
+<div class="relative w-40 h-40 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background track -->
+<circle class="text-surface-container-high" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-width="12"></circle>
+<!-- Collected (Success) segment -->
+<circle class="text-primary" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="20" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Failed segment (small sliver red) -->
+<circle class="transform origin-center" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="230" stroke-linecap="round" stroke-width="12" style="transform: rotate(320deg)"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">92%</span>
+<span class="font-label-sm text-[8px] text-on-surface-variant uppercase tracking-wider">Collected</span>
+</div>
+</div>
+<!-- Status Legend -->
+<div class="flex flex-col gap-6 flex-1">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-body-md text-sm text-on-surface">Successfully Collected</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">$775,100</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container-high"></div>
+<span class="font-body-md text-sm text-on-surface-variant">Pending Processing</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-bold">$42,400</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="font-body-md text-sm text-on-surface-variant">Failed / Retrying</span>
+</div>
+<span class="font-label-sm text-label-sm text-error font-bold">$25,000</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 relative z-10">
+<button class="w-full py-3 bg-surface text-primary border border-outline-variant/30 rounded-xl font-label-sm text-label-sm hover:bg-surface-container transition-colors shadow-sm">
+            Review Failed Transactions
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

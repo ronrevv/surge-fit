@@ -1,0 +1,271 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed":"#ffdbd1","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","on-error-container":"#93000a","surface-tint":"#004dea","primary":"#0041c8","on-error":"#ffffff","secondary-container":"#6063ee","inverse-surface":"#2f3133","surface-container-highest":"#e2e2e5","on-secondary-fixed":"#07006c","outline":"#737688","surface-dim":"#dadadc","on-tertiary":"#ffffff","tertiary-container":"#c13301","on-tertiary-fixed":"#3b0900","error":"#ba1a1a","surface-bright":"#f9f9fc","on-tertiary-container":"#ffe1d9","inverse-primary":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-container":"#eeeef0","on-primary":"#ffffff","surface-container-high":"#e8e8ea","on-primary-container":"#e3e6ff","on-secondary-container":"#fffbff","surface":"#f9f9fc","on-primary-fixed":"#001551","outline-variant":"#c3c5d9","primary-fixed-dim":"#b6c4ff","primary-fixed":"#dce1ff","tertiary-fixed-dim":"#ffb5a0","surface-container-low":"#f3f3f6","tertiary":"#972500","secondary-fixed":"#e1e0ff","primary-container":"#0055ff","error-container":"#ffdad6","background":"#f9f9fc","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","on-background":"#1a1c1e","surface-variant":"#e2e2e5","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed-variant":"#0039b3","inverse-on-surface":"#f0f0f3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","gutter":"24px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px"},"fontFamily":{"label-sm":["JetBrains Mono"],"headline-lg":["Manrope"],"body-md":["Inter"],"headline-lg-mobile":["Manrope"],"display-lg":["Manrope"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/70 backdrop-blur-2xl z-50 flex flex-col border-r border-outline-variant/20 shadow-xl shadow-primary/5"><div class="px-gutter pt-8 mb-8"><div class="flex items-center gap-3 bg-surface-container-highest/50 p-3 rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-highest transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><h2 class="font-headline-lg text-sm text-on-surface truncate">FitPro Global</h2><p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Chain Manager</p></div><span class="material-symbols-outlined text-on-surface-variant text-sm">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3">hub</span>Branches</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-medium shadow-sm shadow-primary/10" data-path="branch-managers" href="#"><span class="material-symbols-outlined mr-3">badge</span>Branch Managers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3">exercise</span>Trainers</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3">groups</span>Members</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">description</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3">analytics</span>Analytics</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></nav><div class="px-6 py-6 border-t border-outline-variant/10"><div class="flex items-center gap-3 p-2 rounded-lg bg-surface-container-low/50"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex-1 min-w-0"><p class="text-sm font-medium text-on-surface truncate">Alex Sterling</p><p class="font-label-sm text-[10px] text-on-surface-variant">Chain Admin</p></div><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></div></div></aside><div class="pl-72 min-h-screen flex flex-col"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 px-gutter flex items-center justify-between border-b border-outline-variant/10"><div class="flex items-center gap-4 bg-surface-container-low/80 px-4 py-2 rounded-full border border-white/20 text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-all max-w-md w-full"><span class="material-symbols-outlined text-xl">search</span><span class="flex-1 text-sm">Search everywhere...</span><div class="flex items-center gap-1 font-label-sm text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md border border-outline-variant/30 text-on-surface-variant"><span>⌘</span><span>K</span></div></div><div class="flex items-center gap-6"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">notifications</span><span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-primary-container/20">help</span></div><div class="w-px h-6 bg-outline-variant/30"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 pt-16 bg-surface/30"><div class="flex flex-col w-full relative">
+<!-- Ambient Background Effect -->
+<div aria-hidden="true" class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] mix-blend-multiply opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[100px] mix-blend-multiply opacity-40 transform -translate-x-1/4 translate-y-1/4"></div>
+</div>
+<div class="relative z-10 p-margin-desktop space-y-gutter container-max mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+<div class="flex flex-col max-w-2xl">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+          Personnel Management
+        </span>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Branch Managers</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg leading-relaxed">
+          Oversee regional leadership. Track performance metrics, manage branch assignments, and onboard new managerial talent across the global network.
+        </p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors shadow-sm shadow-surface-variant/20 backdrop-blur-md">
+<span class="material-symbols-outlined text-xl">download</span>
+<span class="font-label-sm text-label-sm">Export Roster</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-on-primary hover:bg-primary-fixed-variant hover:text-on-primary-fixed-variant transition-colors shadow-lg shadow-primary/20 transform hover:-translate-y-0.5 duration-200" onclick="toggleOnboardingModal()">
+<span class="material-symbols-outlined text-xl">person_add</span>
+<span class="font-label-sm text-label-sm">Invite Manager</span>
+</button>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<div class="col-span-1 md:col-span-2 bg-surface/70 backdrop-blur-xl p-8 rounded-[2rem] shadow-sm shadow-surface-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary opacity-50"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Total Active Managers</p>
+<h3 class="font-display-lg text-[48px] leading-[48px] text-on-surface font-bold tracking-tight">142</h3>
+<p class="font-body-md text-sm text-primary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+              +12% vs last quarter
+            </p>
+</div>
+<div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+</div>
+</div>
+<div class="bg-surface/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-sm shadow-surface-variant/10 flex flex-col justify-between">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Avg Performance Rating</p>
+<div class="flex items-end gap-3 mt-4">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">4.6</h3>
+<span class="font-body-md text-sm text-on-surface-variant mb-1">/ 5.0</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div class="bg-surface/70 backdrop-blur-xl p-6 rounded-[2rem] shadow-sm shadow-surface-variant/10 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">assignment_ind</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase relative z-10">Pending Onboarding</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mt-4 relative z-10">8</h3>
+<button class="text-left font-label-sm text-[10px] text-primary uppercase hover:underline mt-4 relative z-10" onclick="toggleOnboardingModal()">Review Candidates →</button>
+</div>
+</div>
+<!-- Manager Directory Section -->
+<div class="bg-surface/80 backdrop-blur-2xl rounded-[2.5rem] p-8 shadow-xl shadow-surface-variant/20 mb-12">
+<div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+<h2 class="font-headline-lg text-[24px] text-on-surface">Directory</h2>
+<div class="flex gap-3 w-full md:w-auto">
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-11 pr-4 py-3 rounded-full bg-surface-container-low/50 text-on-surface font-body-md text-sm outline-none focus:bg-surface-container-low transition-colors shadow-inner" placeholder="Search managers..." type="text"/>
+</div>
+<button class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Directory Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Manager Card 1 -->
+<div class="bg-surface-container-lowest/60 p-6 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden flex flex-col">
+<div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-high/80 backdrop-blur flex items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+<div class="flex items-start gap-5 mb-6">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-highest overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Professional headshot of a female branch manager in her 30s, warm natural lighting, subtle azure background, corporate yet approachable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvCiEWj5B0GfCH6ZroKDChyVv3BdfUZ--aKgBPw8PjPvguOsW5ZgZHbJXKTqfvCYTK3lnO365kyr287QrIhjozAy6KVvtlRjqcxyFC65DVB2hFKIJYro_Tdpfw7NMxVIzv54WHboJSPhU2-9SOemOATj5HVb0p9UKlcv3FRbsgYyXlp8WYMknqZ4zQt0EdpCUr1-vMeK2pqLkeKcX3G2lUX5WxQ0bx0-qE2-SnrRK6Trvq1dHmsPdH"/>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-1">Sarah Jenkins</h4>
+<p class="font-label-sm text-[11px] text-primary uppercase tracking-wide bg-primary/10 px-2 py-0.5 rounded-md inline-block">Flagship Hub</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> New York, NY
+              </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 flex-grow">
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Tenure</p>
+<p class="font-body-md text-sm text-on-surface font-medium">4 yrs, 2 mos</p>
+</div>
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Rating</p>
+<div class="flex items-center gap-1 text-secondary">
+<span class="font-body-md text-sm font-medium text-on-surface">4.8</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2 mt-auto">
+<button class="flex-1 py-2.5 bg-surface-container-high/50 hover:bg-surface-container-high text-on-surface rounded-xl font-label-sm text-xs transition-colors">Review</button>
+<button class="flex-1 py-2.5 bg-primary/5 hover:bg-primary/10 text-primary rounded-xl font-label-sm text-xs transition-colors">Reassign</button>
+</div>
+</div>
+<!-- Manager Card 2 -->
+<div class="bg-surface-container-lowest/60 p-6 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden flex flex-col">
+<div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-high/80 backdrop-blur flex items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+<div class="flex items-start gap-5 mb-6">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-highest overflow-hidden shrink-0 shadow-sm relative">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Professional headshot of a male branch manager in his 40s, sharp styling, soft studio lighting, soft blue-gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCk1QvvomUYbJvkQhcAS5PzG---_JtVXmyn69CZtDtdGp5pDXMxZr44oRXpFzPVItJEfjMoZb-zNKE0jwRIJJItPIJGbTGTcOnIH5CRv3cbKGAiyqNPsTLimVXnzGE71PoTuKRJbYJXQQ8G_0o2R0hsVx7T7mjXEHFPkpIIUzR8_A8BEOebM6WbGkG6WasQZx3vtGliOQLvVHxWccOWJ-QssKcGHJIsPHureYym046756clhBmK7NY"/>
+<div class="absolute bottom-1 right-1 w-3 h-3 bg-error rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-1">Marcus Thorne</h4>
+<p class="font-label-sm text-[11px] text-on-surface-variant uppercase tracking-wide bg-surface-container-high px-2 py-0.5 rounded-md inline-block">Downtown Metro</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Chicago, IL
+              </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 flex-grow">
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Tenure</p>
+<p class="font-body-md text-sm text-on-surface font-medium">1 yr, 8 mos</p>
+</div>
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Rating</p>
+<div class="flex items-center gap-1 text-outline">
+<span class="font-body-md text-sm font-medium text-on-surface">3.2</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2 mt-auto">
+<button class="flex-1 py-2.5 bg-surface-container-high/50 hover:bg-surface-container-high text-on-surface rounded-xl font-label-sm text-xs transition-colors">Review <span class="w-2 h-2 rounded-full bg-error inline-block ml-1"></span></button>
+<button class="flex-1 py-2.5 bg-primary/5 hover:bg-primary/10 text-primary rounded-xl font-label-sm text-xs transition-colors">Reassign</button>
+</div>
+</div>
+<!-- Manager Card 3 -->
+<div class="bg-surface-container-lowest/60 p-6 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden flex flex-col">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary opacity-70"></div>
+<div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-high/80 backdrop-blur flex items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+<div class="flex items-start gap-5 mb-6">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-highest overflow-hidden shrink-0 shadow-sm flex items-center justify-center text-on-surface-variant font-headline-lg text-2xl">
+              EL
+            </div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-1">Elena Rostova</h4>
+<p class="font-label-sm text-[11px] text-secondary uppercase tracking-wide bg-secondary/10 px-2 py-0.5 rounded-md inline-block">Westside Campus</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Seattle, WA
+              </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 flex-grow">
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Tenure</p>
+<p class="font-body-md text-sm text-on-surface font-medium">6 mos</p>
+</div>
+<div class="bg-surface-container-low/50 rounded-xl p-3">
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Rating</p>
+<div class="flex items-center gap-1 text-surface-variant">
+<span class="font-body-md text-sm font-medium text-on-surface-variant italic">New</span>
+<span class="material-symbols-outlined text-[14px]">star_outline</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2 mt-auto">
+<button class="flex-1 py-2.5 bg-surface-container-high/50 hover:bg-surface-container-high text-on-surface rounded-xl font-label-sm text-xs transition-colors">Review</button>
+<button class="flex-1 py-2.5 bg-primary/5 hover:bg-primary/10 text-primary rounded-xl font-label-sm text-xs transition-colors">Reassign</button>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="font-label-sm text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+          Load More Directory Entries <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Onboarding Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="onboarding-modal">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-sm" onclick="toggleOnboardingModal()"></div>
+<div class="relative w-full max-w-2xl bg-surface-container-lowest rounded-[2rem] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="onboarding-content">
+<div class="h-2 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+<div class="p-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-lg text-2xl text-on-surface">Onboard New Manager</h2>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors" onclick="toggleOnboardingModal()">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">First Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 font-body-md text-sm text-on-surface focus:ring-2 focus:ring-primary/20 outline-none transition-all" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Last Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 font-body-md text-sm text-on-surface focus:ring-2 focus:ring-primary/20 outline-none transition-all" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Professional Email</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 font-body-md text-sm text-on-surface focus:ring-2 focus:ring-primary/20 outline-none transition-all" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Initial Branch Assignment</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 font-body-md text-sm text-on-surface focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select a branch...</option>
+<option>Flagship Hub - New York</option>
+<option>Downtown Metro - Chicago</option>
+<option>Westside Campus - Seattle</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-end gap-3 pt-6 border-t border-surface-container">
+<button class="px-6 py-2.5 rounded-xl font-label-sm text-sm text-on-surface-variant hover:bg-surface-container transition-colors" onclick="toggleOnboardingModal()">Cancel</button>
+<button class="px-6 py-2.5 rounded-xl font-label-sm text-sm bg-primary text-on-primary hover:bg-primary-fixed-variant transition-colors shadow-md shadow-primary/20" onclick="toggleOnboardingModal()">Send Invite</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function toggleOnboardingModal() {
+      const modal = document.getElementById('onboarding-modal');
+      const content = document.getElementById('onboarding-content');
+      
+      if (modal.classList.contains('opacity-0')) {
+        // Open
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
+      } else {
+        // Close
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+      }
+    }
+  </script>
+</div></main></div></body></html>

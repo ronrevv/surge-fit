@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;min-height:100vh;background:linear-gradient(135deg, #f9f9fc 0%, #eef2ff 100%);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","surface-container-high":"#e8e8ea","primary-fixed":"#dce1ff","tertiary-fixed":"#ffdbd1","tertiary":"#972500","background":"#f9f9fc","surface-container":"#eeeef0","primary":"#0041c8","on-surface-variant":"#434656","tertiary-container":"#c13301","tertiary-fixed-dim":"#ffb5a0","inverse-on-surface":"#f0f0f3","secondary-fixed":"#e1e0ff","on-primary-fixed":"#001551","surface-tint":"#004dea","primary-fixed-dim":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-variant":"#e2e2e5","on-error":"#ffffff","inverse-surface":"#2f3133","surface-bright":"#f9f9fc","on-error-container":"#93000a","surface":"#f9f9fc","primary-container":"#0055ff","surface-dim":"#dadadc","on-tertiary-fixed":"#3b0900","on-background":"#1a1c1e","surface-container-lowest":"#ffffff","surface-container-highest":"#e2e2e5","error-container":"#ffdad6","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#0039b3","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","inverse-primary":"#b6c4ff","on-secondary-fixed":"#07006c","on-tertiary-container":"#ffe1d9","on-primary-container":"#e3e6ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","secondary-container":"#6063ee","outline-variant":"#c3c5d9","outline":"#737688","surface-container-low":"#f3f3f6","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","container-max":"1280px","unit":"8px","gutter":"24px","margin-desktop":"48px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface/70 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="px-8 h-20 flex items-center gap-3"><span class="material-symbols-outlined text-primary text-3xl">exercise</span><span class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary shadow-lg shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="my-clients" href="#"><span class="material-symbols-outlined mr-3">group</span>My Clients</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="workout-plans" href="#"><span class="material-symbols-outlined mr-3">fitness_center</span>Workout Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="nutrition-plans" href="#"><span class="material-symbols-outlined mr-3">restaurant_menu</span>Nutrition Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined mr-3">calendar_today</span>Calendar</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="messages" href="#"><span class="material-symbols-outlined mr-3">chat_bubble</span>Messages</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">monitoring</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-coach" href="#"><span class="material-symbols-outlined mr-3">psychology</span>AI Coach</a></nav><div class="px-4 py-6 mt-auto border-t border-outline-variant/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined mr-3">person</span>Profile</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></div></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_0_0_rgba(0,0,0,0.05)]"><div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20 w-96"><span class="material-symbols-outlined text-outline">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-on-surface" placeholder="Search clients or plans..." type="text"></div><div class="flex items-center gap-6"><button class="relative text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30"><div class="text-right hidden lg:block"><div class="text-sm font-bold text-on-surface">Trainer Alex</div><div class="text-[10px] uppercase tracking-widest text-outline">Elite Coach</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"></div></div></header><main class="relative pt-20 w-full min-h-screen px-margin-desktop py-gutter"><div class="flex flex-col w-full relative">
+<div class="absolute top-0 right-0 w-[800px] h-[600px] bg-gradient-to-bl from-primary-fixed/30 to-transparent rounded-bl-full pointer-events-none -z-10 blur-3xl"></div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Sidebar / Navigation -->
+<aside class="w-full lg:w-64 shrink-0 flex flex-col gap-unit">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-margin-mobile">Settings</h1>
+<nav class="flex flex-col relative gap-4"><div class="absolute left-0 top-0 w-1 h-[48px] bg-primary rounded-r-full transition-all duration-300 ease-out z-10" id="active-indicator"></div><button class="tab-btn relative px-4 py-3 text-left font-body-md text-body-md font-medium text-primary bg-primary-fixed/50 rounded-xl transition-colors hover:bg-primary-fixed/30 group flex items-center gap-3" onclick="switchTab(this, 'notifications')"><span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">notifications</span>Notifications</button><button class="tab-btn relative px-4 py-3 text-left font-body-md text-body-md font-medium text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors group flex items-center gap-3" onclick="switchTab(this, 'billing')"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors group-hover:scale-110 transition-transform">payments</span>Billing &amp; Payout</button><button class="tab-btn relative px-4 py-3 text-left font-body-md text-body-md font-medium text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors group flex items-center gap-3" onclick="switchTab(this, 'integrations')"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors group-hover:scale-110 transition-transform">extension</span>Integrations</button><button class="tab-btn relative px-4 py-3 text-left font-body-md text-body-md font-medium text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors group flex items-center gap-3" onclick="switchTab(this, 'permissions')"><span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors group-hover:scale-110 transition-transform">admin_panel_settings</span>Permissions</button></nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 max-w-4xl min-w-0 pb-margin-desktop">
+<!-- Notifications Panel -->
+<div class="panel block animate-fade-in" id="panel-notifications">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface mb-2">Notification Preferences</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Control how and when you receive alerts for client activity, scheduling changes, and system updates.</p>
+</div>
+<div class="space-y-6">
+<!-- Client Messages -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Client Messages</h3>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant mt-1">When clients send direct messages or workout feedback.</p>
+</div>
+<span class="material-symbols-outlined text-primary/40 text-4xl">chat</span>
+</div>
+<div class="flex flex-col gap-6">
+<label class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">notifications_active</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Push Notifications</div>
+<div class="font-body-md text-body-md text-xs text-on-surface-variant">Instant alerts on mobile and desktop</div>
+</div>
+</div>
+<div class="relative w-12 h-6 bg-primary rounded-full shadow-inner cursor-pointer toggle-switch">
+<div class="absolute left-1 top-1 w-4 h-4 bg-on-primary rounded-full transform translate-x-6 transition-transform shadow-sm"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Email Digests</div>
+<div class="font-body-md text-body-md text-xs text-on-surface-variant">Daily summary of unread messages</div>
+</div>
+</div>
+<div class="relative w-12 h-6 bg-surface-container-highest rounded-full shadow-inner cursor-pointer toggle-switch">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transform transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Scheduling Alerts -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Scheduling Alerts</h3>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant mt-1">Session bookings, cancellations, and reschedules.</p>
+</div>
+<span class="material-symbols-outlined text-secondary/40 text-4xl">event</span>
+</div>
+<div class="flex flex-col gap-6">
+<label class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">notifications_active</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Push Notifications</div>
+</div>
+</div>
+<div class="relative w-12 h-6 bg-primary rounded-full shadow-inner cursor-pointer toggle-switch">
+<div class="absolute left-1 top-1 w-4 h-4 bg-on-primary rounded-full transform translate-x-6 transition-transform shadow-sm"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Email Notifications</div>
+</div>
+</div>
+<div class="relative w-12 h-6 bg-primary rounded-full shadow-inner cursor-pointer toggle-switch">
+<div class="absolute left-1 top-1 w-4 h-4 bg-on-primary rounded-full transform translate-x-6 transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+<div class="flex justify-end pt-8 border-t border-outline-variant/20 mt-8">
+<button class="px-6 py-3 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest rounded-xl hover:bg-primary/90 transition-colors shadow-[0_8px_16px_-6px_rgba(0,65,200,0.3)]">Save Preferences</button>
+</div>
+</div>
+</div>
+<!-- Billing Panel -->
+<div class="panel hidden" id="panel-billing">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface mb-2">Billing &amp; Payout</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage your connected Stripe account, payout schedules, and viewing transaction history.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<!-- Current Balance Card -->
+<div class="bg-gradient-to-br from-primary to-surface-tint rounded-2xl p-6 shadow-[0_12px_24px_-8px_rgba(0,65,200,0.4)] text-on-primary relative overflow-hidden group">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors duration-500"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-8">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-white/80">Available Payout</span>
+<span class="material-symbols-outlined text-white/80">account_balance</span>
+</div>
+<div class="font-display-lg text-display-lg font-extrabold mb-1 tracking-tight">$4,250.00</div>
+<div class="font-body-md text-body-md text-white/80">Next payout: Friday, Oct 24</div>
+<button class="mt-8 w-full py-3 bg-white/20 hover:bg-white/30 transition-colors rounded-xl font-label-sm text-label-sm uppercase tracking-widest text-white backdrop-blur-sm">Withdraw Now</button>
+</div>
+</div>
+<!-- Stripe Connection -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-[#635BFF]/10 rounded-xl flex items-center justify-center">
+<svg class="w-6 h-6 text-[#635BFF]" fill="none" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z" fill="currentColor" fill-opacity="0.1"></path><path d="M19.166 12.3333C17.5029 12.3333 16.3327 13.3337 16.3327 14.8341C16.3327 16.1679 17.4196 16.8348 19.2494 17.2516L20.8333 17.6685C21.8337 17.9186 22.2505 18.2521 22.2505 18.8356C22.2505 19.5025 21.667 20.086 20.4165 20.086C19.0826 20.086 18.3324 19.5025 17.9155 18.7523H15.0811C15.5813 20.8363 17.6653 22.5035 20.3332 22.5035C22.2505 22.5035 25.1681 21.4198 25.1681 18.6689C25.1681 17.0017 23.9176 16.3348 21.667 15.8346L20.0831 15.5012C19.166 15.251 18.9159 15.0009 18.9159 14.5841C18.9159 14.0839 19.4161 13.5837 20.3332 13.5837C21.4169 13.5837 22.0838 14.0005 22.4173 14.6674H25.0847C24.7513 12.7499 22.7507 11.2494 20.4165 11.2494V9.16541H19.166V11.2494C19.166 12.3333 19.166 12.3333 19.166 12.3333Z" fill="#635BFF"></path></svg>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface">Stripe Connected</h3>
+</div>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant">Account: acct_1K9p...</p>
+<div class="mt-4 flex flex-col gap-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Payout Schedule</span>
+<span class="font-medium text-on-surface">Weekly (Fri)</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Currency</span>
+<span class="font-medium text-on-surface">USD ($)</span>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-2 border border-outline-variant rounded-xl font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:bg-surface-container transition-colors">Manage Stripe Dashboard</button>
+</div>
+</div>
+<!-- Recent Transactions -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40">
+<h3 class="font-body-md text-body-md font-bold text-on-surface mb-6">Recent Transactions</h3>
+<div class="space-y-4">
+<!-- Tx 1 -->
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary group-hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">arrow_downward</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Payout to Bank ****1234</div>
+<div class="font-body-md text-body-md text-xs text-on-surface-variant">Oct 17, 2023 • 09:30 AM</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-body-md text-body-md font-bold text-on-surface">-$1,850.00</div>
+<div class="font-label-sm text-label-sm text-secondary uppercase tracking-widest text-[10px]">Settled</div>
+</div>
+</div>
+<!-- Tx 2 -->
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">12-Week Premium Program</div>
+<div class="font-body-md text-body-md text-xs text-on-surface-variant">Oct 16, 2023 • Client: Sarah J.</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-body-md text-body-md font-bold text-on-surface">+$450.00</div>
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-widest text-[10px]">Success</div>
+</div>
+</div>
+<!-- Tx 3 -->
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">video_call</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">1-on-1 Virtual Session</div>
+<div class="font-body-md text-body-md text-xs text-on-surface-variant">Oct 15, 2023 • Client: Mike T.</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-body-md text-body-md font-bold text-on-surface">+$85.00</div>
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-widest text-[10px]">Success</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Integrations Panel -->
+<div class="panel hidden" id="panel-integrations">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface mb-2">Connected Apps</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Link external services to sync client biometric data and automate virtual meetings.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Apple Health / HealthKit -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-surface-container-highest rounded-xl flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-error text-2xl">favorite</span>
+</div>
+<div class="px-3 py-1 bg-primary-fixed/30 text-primary rounded-full font-label-sm text-[10px] uppercase tracking-widest">Connected</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface mb-2">Apple Health</h3>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant flex-1 mb-6">Sync daily steps, resting HR, and sleep data for iOS clients automatically.</p>
+<button class="w-full py-2 border border-outline-variant/30 rounded-xl font-label-sm text-label-sm uppercase tracking-widest text-error hover:bg-error/5 transition-colors">Disconnect</button>
+</div>
+<!-- Zoom -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-[#2D8CFF]/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-[#2D8CFF] text-2xl">videocam</span>
+</div>
+<div class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-sm text-[10px] uppercase tracking-widest">Not Connected</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface mb-2">Zoom Meetings</h3>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant flex-1 mb-6">Automatically generate meeting links for 1-on-1 virtual training sessions.</p>
+<button class="w-full py-2 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-sm">Connect Zoom</button>
+</div>
+<!-- Oura Ring -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-6 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-inverse-surface rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-inverse-on-surface text-2xl">trip_origin</span>
+</div>
+<div class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-sm text-[10px] uppercase tracking-widest">Not Connected</div>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-on-surface mb-2">Oura Ring</h3>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant flex-1 mb-6">Import detailed readiness scores and recovery metrics for premium clients.</p>
+<button class="w-full py-2 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-sm">Connect Oura</button>
+</div>
+</div>
+</div>
+<!-- Permissions Panel -->
+<div class="panel hidden" id="panel-permissions">
+<div class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface mb-2">Branch Permissions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Your role and access level within the <strong>Downtown Elite Fitness</strong> organization.</p>
+</div>
+<div class="bg-surface/70 backdrop-blur-xl rounded-2xl p-8 shadow-sm ring-1 ring-white/20 border-l border-t border-white/40 mb-8 relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-secondary-fixed/20 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex items-center gap-6 mb-8">
+<div class="w-20 h-20 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary shadow-lg">
+<span class="material-symbols-outlined text-4xl">local_police</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">Current Role</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-on-surface">Head Coach</h3>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-md text-body-md text-sm text-on-surface">Manage own clients</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-md text-body-md text-sm text-on-surface">View branch analytics</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-md text-body-md text-sm text-on-surface">Create workout templates</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<span class="material-symbols-outlined text-outline">cancel</span>
+<span class="font-body-md text-body-md text-sm text-on-surface-variant line-through opacity-70">Manage billing rates</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-tertiary-fixed/30 border border-tertiary-fixed rounded-2xl flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">info</span>
+<div>
+<h4 class="font-body-md text-body-md font-bold text-tertiary mb-1">Need broader access?</h4>
+<p class="font-body-md text-body-md text-sm text-on-surface-variant">To change your permission level or adjust branch-wide billing rates, please contact the Facility Manager.</p>
+<button class="mt-4 px-4 py-2 bg-tertiary text-on-tertiary rounded-lg font-label-sm text-label-sm uppercase tracking-widest hover:bg-tertiary/90 transition-colors shadow-sm">Contact Manager</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+</style>
+<script>
+    // Simple tab switching logic
+    function switchTab(clickedBtn, panelId) {
+        // Reset all buttons
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('bg-primary-fixed/50', 'text-primary');
+            btn.classList.add('text-on-surface-variant');
+            btn.querySelector('.material-symbols-outlined').classList.remove('text-primary');
+            btn.querySelector('.material-symbols-outlined').classList.add('text-outline');
+        });
+
+        // Set active button
+        clickedBtn.classList.remove('text-on-surface-variant');
+        clickedBtn.classList.add('bg-primary-fixed/50', 'text-primary');
+        clickedBtn.querySelector('.material-symbols-outlined').classList.remove('text-outline');
+        clickedBtn.querySelector('.material-symbols-outlined').classList.add('text-primary');
+
+        // Move indicator
+        const indicator = document.getElementById('active-indicator');
+        indicator.style.top = `${clickedBtn.offsetTop}px`;
+
+        // Hide all panels
+        const panels = document.querySelectorAll('.panel');
+        panels.forEach(panel => {
+            panel.classList.add('hidden');
+            panel.classList.remove('block', 'animate-fade-in');
+        });
+
+        // Show target panel
+        const targetPanel = document.getElementById(`panel-${panelId}`);
+        targetPanel.classList.remove('hidden');
+        targetPanel.classList.add('block', 'animate-fade-in');
+    }
+
+    // Toggle switch logic
+    document.querySelectorAll('.toggle-switch').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent label click from triggering twice
+            const knob = toggle.querySelector('div');
+            if (toggle.classList.contains('bg-primary')) {
+                // Turn off
+                toggle.classList.remove('bg-primary');
+                toggle.classList.add('bg-surface-container-highest');
+                knob.classList.remove('translate-x-6', 'bg-on-primary');
+                knob.classList.add('bg-white');
+            } else {
+                // Turn on
+                toggle.classList.add('bg-primary');
+                toggle.classList.remove('bg-surface-container-highest');
+                knob.classList.add('translate-x-6', 'bg-on-primary');
+                knob.classList.remove('bg-white');
+            }
+        });
+    });
+</script></main></div>
+
+</body></html>

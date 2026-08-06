@@ -1,0 +1,252 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-surface-variant":"#434656","tertiary-fixed-dim":"#ffb5a0","surface-variant":"#e2e2e5","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed":"#001551","on-primary":"#ffffff","on-tertiary-fixed-variant":"#872100","surface-container-high":"#e8e8ea","primary-fixed-dim":"#b6c4ff","on-primary-fixed-variant":"#0039b3","surface-bright":"#f9f9fc","secondary-fixed":"#e1e0ff","tertiary-container":"#c13301","surface":"#f9f9fc","background":"#f9f9fc","primary-fixed":"#dce1ff","on-surface":"#1a1c1e","surface-container-low":"#f3f3f6","outline-variant":"#c3c5d9","surface-tint":"#004dea","tertiary-fixed":"#ffdbd1","surface-container-highest":"#e2e2e5","inverse-on-surface":"#f0f0f3","surface-container":"#eeeef0","inverse-surface":"#2f3133","on-error":"#ffffff","tertiary":"#972500","on-tertiary-fixed":"#3b0900","on-secondary-container":"#fffbff","on-error-container":"#93000a","secondary-fixed-dim":"#c0c1ff","on-primary-container":"#e3e6ff","error-container":"#ffdad6","secondary":"#4648d4","on-tertiary":"#ffffff","on-background":"#1a1c1e","on-tertiary-container":"#ffe1d9","on-secondary-fixed":"#07006c","surface-dim":"#dadadc","surface-container-lowest":"#ffffff","secondary-container":"#6063ee","error":"#ba1a1a","primary-container":"#0055ff","on-secondary":"#ffffff","inverse-primary":"#b6c4ff","primary":"#0041c8","outline":"#737688"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"unit":"8px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"48px","gutter":"24px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"],"body-md":["Inter"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest/80 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="p-6 mb-4"><div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl border border-white/20 cursor-pointer hover:bg-surface-container-high transition-colors"><div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div><div class="flex-1 overflow-hidden"><p class="text-xs font-label-sm text-on-surface-variant uppercase">Workspace</p><p class="text-sm font-bold truncate text-on-surface">Titan Gym Group</p></div><span class="material-symbols-outlined text-on-surface-variant">unfold_more</span></div></div><nav class="flex-1 px-4 space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-bold shadow-[0_4px_12px_rgba(0,85,255,0.1)]"><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">dashboard</span><span class="text-sm font-medium">Dashboard</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="branches" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">domain</span><span class="text-sm font-medium">Branches</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="managers" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">badge</span><span class="text-sm font-medium">Managers</span></a><a aria-current="page" class="group flex items-center px-4 py-3 rounded-xl transition-all bg-primary-container text-on-primary-container font-bold shadow-[0_4px_12px_rgba(0,85,255,0.1)]" data-path="trainers" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">sports_gymnastics</span><span class="text-sm font-medium">Trainers</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="members" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">group</span><span class="text-sm font-medium">Members</span></a><div class="my-4 mx-4 border-t border-outline-variant/30"></div><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="revenue" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">payments</span><span class="text-sm font-medium">Revenue</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="analytics" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">query_stats</span><span class="text-sm font-medium">Analytics</span></a><a class="group flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="campaigns" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">campaign</span><span class="text-sm font-medium">Campaigns</span></a></nav><div class="p-4 mt-auto"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined mr-3 text-[22px]">settings</span><span class="text-sm font-medium">Settings</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 flex items-center px-margin-desktop justify-between shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex-1 max-w-xl"><div class="relative flex items-center bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-2 group focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all"><span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-3">search</span><input class="bg-transparent border-none outline-none w-full text-sm text-on-surface placeholder:text-outline" placeholder="Search anything..." type="text"/><div class="flex items-center gap-1 ml-2"><kbd class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant/40">⌘</kbd><kbd class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-sm text-on-surface-variant border border-outline-variant/40">K</kbd></div></div></div><div class="flex items-center gap-6"><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">notifications</span></button><div class="h-8 w-[1px] bg-outline-variant/30"></div><div class="flex items-center gap-3 cursor-pointer group"><div class="text-right"><p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Julian Archer</p><p class="text-[11px] font-label-sm text-on-surface-variant">Founder &amp; CEO</p></div><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center border-2 border-white shadow-sm"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header><main class="relative pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Top Stats Ribbon -->
+<div class="px-margin-desktop py-6 mb-8 flex justify-between items-end bg-gradient-to-r from-surface to-surface/40 backdrop-blur-3xl sticky top-0 z-30 shadow-[0_10px_40px_-15px_rgba(0,65,200,0.05)] border-b border-surface-container-high/50">
+<div class="space-y-1">
+<h1 class="font-display-lg text-display-lg text-on-surface">Trainer Intelligence</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Unified analytics for the active roster across all Titan Gym Group locations.</p>
+</div>
+<div class="flex gap-12">
+<div class="flex flex-col gap-1 items-end">
+<span class="font-label-sm text-label-sm text-outline tracking-widest uppercase">Active Trainers</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">142</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> +3 this month</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<span class="font-label-sm text-label-sm text-outline tracking-widest uppercase">Total Capacity utilization</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface">86%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<span class="font-label-sm text-label-sm text-outline tracking-widest uppercase">Avg Retention (90d)</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary">94.2%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop grid grid-cols-12 gap-gutter mb-16">
+<!-- Left Sidebar: Filters & Quick Actions -->
+<div class="col-span-12 xl:col-span-3 flex flex-col gap-8">
+<div class="bg-surface-container/60 backdrop-blur-2xl rounded-2xl p-6 shadow-sm flex flex-col gap-6 relative overflow-hidden">
+<!-- Decorative blurred orb -->
+<div class="absolute -top-12 -left-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Filters</h3>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant transition-colors">Clear All</button>
+</div>
+<div class="space-y-4 relative z-10">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Search</label>
+<div class="relative flex items-center bg-surface border border-outline-variant/30 rounded-xl px-4 py-2 group focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all shadow-sm">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+<input class="bg-transparent border-none outline-none w-full font-body-md text-sm text-on-surface placeholder:text-outline/70" placeholder="Name or ID" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Branch Location</label>
+<div class="relative bg-surface rounded-xl flex items-center justify-between px-4 py-3 shadow-sm cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-body-md text-sm text-on-surface">All Branches (7)</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">arrow_drop_down</span>
+</div>
+</div>
+<div class="space-y-2 pt-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Specialty</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-sm hover:shadow-md transition-shadow">All</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant/20 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">Hypertrophy</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant/20 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">Mobility</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant/20 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">Powerlifting</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant/20 text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">Rehab</button>
+</div>
+</div>
+<div class="space-y-2 pt-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Certification Level</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors group">
+<div class="w-5 h-5 rounded border border-primary bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-sm text-on-surface group-hover:text-primary transition-colors">Master (Level 3+)</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors group">
+<div class="w-5 h-5 rounded border border-primary bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-sm text-on-surface group-hover:text-primary transition-colors">Senior (Level 2)</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors group">
+<div class="w-5 h-5 rounded border border-outline-variant bg-surface flex items-center justify-center">
+</div>
+<span class="font-body-md text-sm text-on-surface group-hover:text-primary transition-colors">Associate (Level 1)</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Promotion Card -->
+<div class="bg-primary-container text-on-primary-container rounded-2xl p-6 shadow-lg shadow-primary/10 relative overflow-hidden flex flex-col gap-4">
+<div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+<span class="material-symbols-outlined text-[32px] mb-2 opacity-80" style="font-variation-settings: 'FILL' 1;">school</span>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile">Q3 Certification Drive</h4>
+<p class="font-body-md text-sm opacity-90">14 trainers are eligible for Senior promotion next month. Review requirements.</p>
+<button class="mt-2 bg-on-primary-container text-primary-container font-label-sm text-label-sm px-4 py-2 rounded-lg self-start hover:bg-white transition-colors">View Eligible</button>
+</div>
+</div>
+<!-- Right Content Area: Roster Grid -->
+<div class="col-span-12 xl:col-span-9 flex flex-col gap-6">
+<!-- Controls Bar -->
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Showing <strong class="text-on-surface">1-12</strong> of 142</span>
+<div class="w-px h-4 bg-outline-variant/40"></div>
+<span class="font-label-sm text-label-sm flex items-center gap-1 cursor-pointer hover:text-on-surface transition-colors">Sorted by Capacity <span class="material-symbols-outlined text-[16px]">arrow_downward</span></span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low rounded-xl p-1 border border-outline-variant/20 shadow-sm">
+<button class="p-2 rounded-lg bg-surface shadow-sm text-primary flex items-center justify-center"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center"><span class="material-symbols-outlined">view_list</span></button>
+</div>
+</div>
+<!-- Bento Grid of Trainers -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Trainer Card 1 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl rounded-2xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t border-l border-white/40 flex flex-col group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden shadow-sm relative">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a fit, smiling male personal trainer in a dark grey athletic polo, bright clean studio lighting, shallow depth of field, blue sky toned background, high end photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXVaCDtW9i7AAHpFouoZyb2Iu9kSWKHeD_tvFOWGptjJdB0N3Ph0LqSrBDgnFzbJuzhxlGZ5XP-2iMxLs2avp1IgD7WT_nEK4at9zsxYIdXmic4uCUv85W6Y66s_-ZU7DXB8iBx8ODerX1pYG839SMxbQdZvVyvgLctnM-PD11McWgAsiMXGgZBd9yyKVFOn6nG795DW_jz-zADF0XzaTEC8mexbYCkFZZYpc9B53thxL28Q3lUgv1"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-[#10b981] rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div class="bg-[#E0EFFF] text-primary-fixed-variant px-2 py-1 rounded-md font-label-sm text-[10px] uppercase tracking-wider shadow-sm">Master</div>
+</div>
+<div class="mb-5">
+<h3 class="font-headline-lg-mobile text-xl text-on-surface font-bold group-hover:text-primary transition-colors">Marcus Thorne</h3>
+<p class="font-body-md text-sm text-on-surface-variant flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Downtown Elite</p>
+</div>
+<div class="space-y-4 mt-auto">
+<!-- Specialty -->
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider mb-1 block">Specialty</span>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-on-surface text-xs rounded-md">Hypertrophy</span>
+<span class="px-2 py-1 bg-surface-container text-on-surface text-xs rounded-md">Nutrition</span>
+</div>
+</div>
+<!-- Metrics -->
+<div class="grid grid-cols-2 gap-4 bg-surface-container-low p-3 rounded-xl border border-outline-variant/10">
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Capacity</span>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full w-[95%]"></div>
+</div>
+<span class="font-label-sm text-xs text-error font-bold">95%</span>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 block">38/40 Clients</span>
+</div>
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Retention</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-lg text-on-surface">98%</span>
+<span class="material-symbols-outlined text-[12px] text-[#10b981]">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trainer Card 2 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl rounded-2xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t border-l border-white/40 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-secondary/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-12 h-12 rounded-full overflow-hidden shadow-sm relative">
+<img class="w-full h-full object-cover" data-alt="A confident female fitness instructor with braided hair, wearing a sleek navy tank top, arms crossed, bright modern gym setting in the background softly out of focus, azure color grading, professional corporate portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjGOGkBXfi2ihf0CF_QVyYZjgzkuBFt_oXzv-v8Ws_hfHRfUjGAEFCOi3JBviR5sMXXaS8lO3-mIb3quq83Kov1RaMb3Uzk04JCJJyg0Mf6Ff9fe3SBzjq0aUa0oro4YIt1JLol3wJPIHyOw6Hev2FdnBexpH7AZTnF2IvWBguws754lCAqWleLOOVl997yTHYPl7AvnmrfVO1qFMyzENzcB8gzNTAKNwKrFlyxk8Nr5vTI4Yzwt_b"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-[#10b981] rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div class="bg-[#E0EFFF] text-primary-fixed-variant px-2 py-1 rounded-md font-label-sm text-[10px] uppercase tracking-wider shadow-sm">Senior</div>
+</div>
+<div class="mb-5 relative z-10">
+<h3 class="font-headline-lg-mobile text-xl text-on-surface font-bold group-hover:text-primary transition-colors">Elena Rodriguez</h3>
+<p class="font-body-md text-sm text-on-surface-variant flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Westside Haven</p>
+</div>
+<div class="space-y-4 mt-auto relative z-10">
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider mb-1 block">Specialty</span>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-on-surface text-xs rounded-md">Mobility</span>
+<span class="px-2 py-1 bg-surface-container text-on-surface text-xs rounded-md">Rehab</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 bg-surface-container-low p-3 rounded-xl border border-outline-variant/10">
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Capacity</span>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[75%]"></div>
+</div>
+<span class="font-label-sm text-xs text-primary font-bold">75%</span>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 block">24/32 Clients</span>
+</div>
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Retention</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-lg text-on-surface">92%</span>
+<span class="material-symbols-outlined text-[12px] text-outline">horizontal_rule</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trainer Card 3 -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl rounded-2xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t border-l border-white/40 flex flex-col group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden shadow-sm relative border border-outline-variant/30 flex items-center justify-center bg-surface-container-low">
+<span class="material-symbols-outlined text-outline">person</span>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-outline rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div class="bg-surface-container-high text-on-surface px-2 py-1 rounded-md font-label-sm text-[10px] uppercase tracking-wider shadow-sm">Associate</div>
+</div>
+<div class="mb-5">
+<h3 class="font-headline-lg-mobile text-xl text-on-surface font-bold group-hover:text-primary transition-colors">David Kim</h3>
+<p class="font-body-md text-sm text-on-surface-variant flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">location_on</span> North Point</p>
+</div>
+<div class="space-y-4 mt-auto">
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider mb-1 block">Specialty</span>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-on-surface text-xs rounded-md">Powerlifting</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 bg-surface-container-low p-3 rounded-xl border border-outline-variant/10">
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Capacity</span>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-[40%]"></div>
+</div>
+<span class="font-label-sm text-xs text-secondary font-bold">40%</span>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 block">8/20 Clients</span>
+</div>
+<div>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-wider block mb-1">Retention</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-lg text-on-surface">88%</span>
+<span class="material-symbols-outlined text-[12px] text-error">trending_down</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-8">
+<button class="bg-surface-container border border-outline-variant/30 px-6 py-3 rounded-xl font-label-sm text-sm text-on-surface hover:bg-surface-container-high transition-colors shadow-sm flex items-center gap-2">Load More Trainers <span class="material-symbols-outlined text-[18px]">refresh</span></button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

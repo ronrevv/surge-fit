@@ -1,0 +1,187 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; background: #f9f9fc; } body { overscroll-behavior: none; -webkit-font-smoothing: antialiased; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; } .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.2); } .bg-azure-gradient { background: linear-gradient(180deg, #f0f4ff 0%, #f9f9fc 100%); min-height: 100vh; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-fixed-variant': '#0039b3', 'inverse-on-surface': '#f0f0f3', 'primary-container': '#0055ff', 'tertiary': '#972500', 'on-primary': '#ffffff', 'surface-bright': '#f9f9fc', 'secondary': '#4648d4', 'on-tertiary-fixed': '#3b0900', 'on-tertiary-container': '#ffe1d9', 'error': '#ba1a1a', 'background': '#f9f9fc', 'tertiary-fixed': '#ffdbd1', 'secondary-fixed': '#e1e0ff', 'on-secondary-container': '#fffbff', 'outline-variant': '#c3c5d9', 'surface-tint': '#004dea', 'inverse-surface': '#2f3133', 'inverse-primary': '#b6c4ff', 'on-tertiary': '#ffffff', 'surface-container-low': '#f3f3f6', 'on-tertiary-fixed-variant': '#872100', 'on-error-container': '#93000a', 'surface-variant': '#e2e2e5', 'surface-dim': '#dadadc', 'primary-fixed': '#dce1ff', 'on-primary-fixed': '#001551', 'secondary-fixed-dim': '#c0c1ff', 'primary-fixed-dim': '#b6c4ff', 'primary': '#0041c8', 'on-secondary': '#ffffff', 'on-surface': '#1a1c1e', 'on-primary-container': '#e3e6ff', 'on-surface-variant': '#434656', 'outline': '#737688', 'surface-container-lowest': '#ffffff', 'surface-container-high': '#e8e8ea', 'on-secondary-fixed-variant': '#2f2ebe', 'on-background': '#1a1c1e', 'surface-container': '#eeeef0', 'on-error': '#ffffff', 'secondary-container': '#6063ee', 'surface-container-highest': '#e2e2e5', 'on-secondary-fixed': '#07006c', 'tertiary-fixed-dim': '#ffb5a0', 'tertiary-container': '#c13301', 'surface': '#f9f9fc', 'error-container': '#ffdad6' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'unit': '8px', 'gutter': '24px', 'container-max': '1280px', 'margin-mobile': '16px', 'margin-desktop': '48px' }, fontFamily: { 'headline-lg-mobile': ['Manrope'], 'headline-lg': ['Manrope'], 'body-md': ['Inter'], 'label-sm': ['JetBrains Mono'], 'display-lg': ['Manrope'] }, fontSize: { 'headline-lg-mobile': ['24px', { 'lineHeight': '32px', 'fontWeight': '700' }], 'headline-lg': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.01em', 'fontWeight': '700' }], 'body-md': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-sm': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.05em', 'fontWeight': '500' }], 'display-lg': ['56px', { 'lineHeight': '64px', 'letterSpacing': '-0.02em', 'fontWeight': '800' }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-azure-gradient font-body-md text-body-md text-on-background"><header class="fixed top-0 inset-x-0 z-50 glass shadow-[0_1px_8px_rgba(0,85,255,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-unit h-unit bg-primary rounded-full"></div><span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Titan Gym</span></div><div class="flex items-center gap-4"><button class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-32"><div class="flex flex-col w-full px-margin-mobile gap-6 relative">
+<!-- Top Banner / Smart Adjust -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-xl shadow-sm mt-4">
+<div class="flex flex-col gap-1 min-w-0 pr-4">
+<h2 class="font-headline-lg-mobile text-[16px] leading-[24px] text-on-surface truncate">Smart Adjust</h2>
+<p class="font-body-md text-label-sm text-on-surface-variant line-clamp-1">AI plan modification</p>
+</div>
+<button aria-pressed="true" class="relative w-12 h-6 bg-primary rounded-full transition-colors flex items-center shrink-0" id="smart-adjust-toggle">
+<span class="absolute left-1 w-4 h-4 bg-on-primary rounded-full transform transition-transform translate-x-6 shadow-sm" id="smart-adjust-knob"></span>
+</button>
+</div>
+<!-- AI Greeting -->
+<div class="flex flex-col items-center justify-center py-6 text-center">
+<div class="relative mb-4">
+<div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center z-10 relative">
+<span class="material-symbols-outlined text-[32px] text-on-primary-container">smart_toy</span>
+</div>
+<div class="absolute inset-0 bg-primary opacity-20 rounded-full blur-xl animate-pulse z-0"></div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Hi, I'm FitPro AI</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-[280px]">Your daily recovery is at 82%. Let's optimize your session.</p>
+</div>
+<!-- Chat Area -->
+<div class="flex flex-col gap-4 pb-24" id="chat-container">
+<!-- AI Message: Recovery -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">smart_toy</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%]">
+<p class="font-body-md text-body-md text-on-surface">Based on your sleep metrics, your lower body is still recovering. I suggest swapping heavy squats for an active recovery flow today.</p>
+<div class="mt-4 bg-surface rounded-lg p-3 flex items-center gap-3 shadow-sm border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container text-[20px]">self_improvement</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-sm text-label-sm text-on-surface truncate">Mobility Flow</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant">20 mins • Active Recovery</p>
+</div>
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-full font-label-sm text-[12px] shadow-sm">Swap</button>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-3 justify-end">
+<div class="bg-primary p-4 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]">
+<p class="font-body-md text-body-md text-on-primary">Sounds good. What about nutrition? I ate a lot of carbs last night.</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">person</span>
+</div>
+</div>
+<!-- AI Message: Nutrition -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">smart_toy</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%]">
+<p class="font-body-md text-body-md text-on-surface">I saw the pasta log! 🍝 Since we're doing active recovery, let's keep macros lean today.</p>
+<p class="font-body-md text-body-md text-on-surface mt-2">Aim for <strong>140g protein</strong> and stick to complex carbs.</p>
+<div class="mt-3 flex gap-2 overflow-x-auto pb-2 snap-x hide-scrollbar">
+<div class="bg-surface p-3 rounded-lg min-w-[120px] snap-center shadow-sm border border-outline-variant/30 flex flex-col items-center justify-center gap-1">
+<span class="material-symbols-outlined text-tertiary">egg_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface">Protein</span>
+<span class="font-headline-lg-mobile text-[16px] text-primary">140g</span>
+</div>
+<div class="bg-surface p-3 rounded-lg min-w-[120px] snap-center shadow-sm border border-outline-variant/30 flex flex-col items-center justify-center gap-1">
+<span class="material-symbols-outlined text-tertiary">grass</span>
+<span class="font-label-sm text-label-sm text-on-surface">Carbs</span>
+<span class="font-headline-lg-mobile text-[16px] text-primary">100g</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Loading Indicator (Hidden initially) -->
+<div class="flex gap-3 hidden" id="typing-indicator">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">smart_toy</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%] flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-bounce"></span>
+<span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+<span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="fixed bottom-20 left-0 right-0 px-margin-mobile z-40">
+<div class="glass rounded-full p-2 flex items-center gap-2 shadow-lg">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<input class="flex-1 bg-transparent border-none outline-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 px-2" id="chat-input" placeholder="Ask FitPro AI..." type="text"/>
+<button class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-on-primary shadow-md hover:bg-primary/90 transition-colors" id="send-btn">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</div>
+</div>
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Smart Adjust Toggle
+    const toggle = document.getElementById('smart-adjust-toggle');
+    const knob = document.getElementById('smart-adjust-knob');
+    let isSmartAdjustOn = true;
+
+    toggle.addEventListener('click', () => {
+      isSmartAdjustOn = !isSmartAdjustOn;
+      toggle.setAttribute('aria-pressed', isSmartAdjustOn);
+      
+      if(isSmartAdjustOn) {
+        toggle.classList.replace('bg-surface-variant', 'bg-primary');
+        knob.classList.add('translate-x-6');
+      } else {
+        toggle.classList.replace('bg-primary', 'bg-surface-variant');
+        knob.classList.remove('translate-x-6');
+      }
+    });
+
+    // Simple Chat Interaction
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const container = document.getElementById('chat-container');
+    const typingIndicator = document.getElementById('typing-indicator');
+
+    const appendUserMessage = (text) => {
+      const msgHTML = `
+        <div class="flex gap-3 justify-end opacity-0 transform translate-y-4 transition-all duration-300" id="msg-${Date.now()}">
+          <div class="bg-primary p-4 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]">
+            <p class="font-body-md text-body-md text-on-primary">${text}</p>
+          </div>
+           <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0 mt-1">
+            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">person</span>
+          </div>
+        </div>
+      `;
+      container.insertBefore(document.createRange().createContextualFragment(msgHTML), typingIndicator);
+      
+      // Animate in
+      setTimeout(() => {
+        const el = container.lastElementChild.previousElementSibling;
+        if(el) {
+          el.classList.remove('opacity-0', 'translate-y-4');
+        }
+      }, 10);
+      
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    };
+
+    const handleSend = () => {
+      const text = input.value.trim();
+      if(!text) return;
+      
+      appendUserMessage(text);
+      input.value = '';
+      
+      // Show typing
+      typingIndicator.classList.remove('hidden');
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+      // Hide typing after delay (simulate AI)
+      setTimeout(() => {
+        typingIndicator.classList.add('hidden');
+      }, 1500);
+    };
+
+    sendBtn.addEventListener('click', handleSend);
+    input.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter') handleSend();
+    });
+  });
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe glass shadow-[0_-1px_8px_rgba(0,85,255,0.04)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-2"><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="home" href="#"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Home</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="workouts" href="#"><span class="material-symbols-outlined">fitness_center</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Train</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-14 h-14 transition-all text-primary font-bold" data-path="ai-coach" href="#"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_12px_rgba(0,85,255,0.2)]"><span class="material-symbols-outlined text-on-primary">smart_toy</span></div></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="nutrition" href="#"><span class="material-symbols-outlined">restaurant</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Eat</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="progress" href="#"><span class="material-symbols-outlined">monitoring</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Stats</span></a></div></nav></body></html>

@@ -1,0 +1,261 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;min-height:100vh;background:linear-gradient(135deg, #f9f9fc 0%, #eef2ff 100%);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","surface-container-high":"#e8e8ea","primary-fixed":"#dce1ff","tertiary-fixed":"#ffdbd1","tertiary":"#972500","background":"#f9f9fc","surface-container":"#eeeef0","primary":"#0041c8","on-surface-variant":"#434656","tertiary-container":"#c13301","tertiary-fixed-dim":"#ffb5a0","inverse-on-surface":"#f0f0f3","secondary-fixed":"#e1e0ff","on-primary-fixed":"#001551","surface-tint":"#004dea","primary-fixed-dim":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-variant":"#e2e2e5","on-error":"#ffffff","inverse-surface":"#2f3133","surface-bright":"#f9f9fc","on-error-container":"#93000a","surface":"#f9f9fc","primary-container":"#0055ff","surface-dim":"#dadadc","on-tertiary-fixed":"#3b0900","on-background":"#1a1c1e","surface-container-lowest":"#ffffff","surface-container-highest":"#e2e2e5","error-container":"#ffdad6","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#0039b3","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","inverse-primary":"#b6c4ff","on-secondary-fixed":"#07006c","on-tertiary-container":"#ffe1d9","on-primary-container":"#e3e6ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","secondary-container":"#6063ee","outline-variant":"#c3c5d9","outline":"#737688","surface-container-low":"#f3f3f6","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","container-max":"1280px","unit":"8px","gutter":"24px","margin-desktop":"48px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface/70 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="px-8 h-20 flex items-center gap-3"><span class="material-symbols-outlined text-primary text-3xl">exercise</span><span class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary shadow-lg shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="my-clients" href="#"><span class="material-symbols-outlined mr-3">group</span>My Clients</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="workout-plans" href="#"><span class="material-symbols-outlined mr-3">fitness_center</span>Workout Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="nutrition-plans" href="#"><span class="material-symbols-outlined mr-3">restaurant_menu</span>Nutrition Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined mr-3">calendar_today</span>Calendar</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="messages" href="#"><span class="material-symbols-outlined mr-3">chat_bubble</span>Messages</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">monitoring</span>Reports</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all group bg-primary text-on-primary shadow-lg shadow-primary/10" data-path="ai-coach" href="#"><span class="material-symbols-outlined mr-3">psychology</span>AI Coach</a></nav><div class="px-4 py-6 mt-auto border-t border-outline-variant/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined mr-3">person</span>Profile</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></div></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_0_0_rgba(0,0,0,0.05)]"><div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20 w-96"><span class="material-symbols-outlined text-outline">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-on-surface" placeholder="Search clients or plans..." type="text"/></div><div class="flex items-center gap-6"><button class="relative text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30"><div class="text-right hidden lg:block"><div class="text-sm font-bold text-on-surface">Trainer Alex</div><div class="text-[10px] uppercase tracking-widest text-outline">Elite Coach</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"/></div></div></header><main class="relative pt-20 w-full min-h-screen px-margin-desktop py-gutter"><div class="flex flex-col w-full h-[calc(100vh-128px)] -mx-margin-desktop px-margin-desktop py-gutter">
+<div class="flex justify-between items-end mb-8 w-full max-w-container-max mx-auto">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">AI Co-Pilot</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-2">Intelligent insights and automated recommendations powered by client telemetry and form analysis.</p>
+</div>
+<div class="hidden lg:flex items-center gap-4">
+<span class="font-label-sm text-label-sm text-surface-tint tracking-widest uppercase flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-surface-tint opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-surface-tint"></span>
+</span>
+                System Active
+            </span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-container-max mx-auto h-full min-h-0">
+<!-- Chat Interface -->
+<div class="lg:col-span-7 flex flex-col h-full bg-surface-container-lowest/70 backdrop-blur-xl rounded-[2rem] shadow-xl shadow-primary/5 overflow-hidden border-t border-l border-white/20">
+<!-- Chat Header -->
+<div class="p-6 bg-gradient-to-r from-primary-fixed/30 to-transparent flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-tint flex items-center justify-center shadow-lg shadow-surface-tint/20">
+<span class="material-symbols-outlined text-on-primary">psychology</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Insight Engine</h2>
+<p class="font-body-md text-sm text-on-surface-variant">Ask questions about client data</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-surface hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col" id="chat-messages">
+<!-- AI Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-surface-tint/10 flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-surface-tint text-sm">psychology</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm text-on-surface shadow-sm">
+<p class="font-body-md text-body-md">Good morning, Alex. I've analyzed overnight recovery data for your active roster. Would you like to review the critical alerts?</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-[85%] self-end">
+<div class="bg-primary p-4 rounded-2xl rounded-tr-sm text-on-primary shadow-md shadow-primary/20">
+<p class="font-body-md text-body-md">Yes, why is Sarah's recovery dipping? She's in a deload week.</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 mt-1">
+<span class="font-label-sm text-on-secondary-fixed">AL</span>
+</div>
+</div>
+<!-- AI Message with embedded data -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-surface-tint/10 flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-surface-tint text-sm">psychology</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm text-on-surface shadow-sm w-full">
+<p class="font-body-md text-body-md mb-4">Sarah's HRV has dropped 15% below baseline over the last 3 days, despite the deload. Sleep architecture shows a 40% reduction in REM sleep.</p>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/20 mb-3">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sarah Jenkins - Recovery Score</span>
+<span class="font-headline-lg-mobile text-error">42/100</span>
+</div>
+<!-- Mini sparkline -->
+<div class="h-8 w-full flex items-end gap-1">
+<div class="w-full bg-secondary-fixed h-full rounded-t-sm"></div>
+<div class="w-full bg-secondary-fixed h-[80%] rounded-t-sm"></div>
+<div class="w-full bg-secondary-fixed h-[90%] rounded-t-sm"></div>
+<div class="w-full bg-secondary-fixed h-[85%] rounded-t-sm"></div>
+<div class="w-full bg-error-container h-[40%] rounded-t-sm"></div>
+<div class="w-full bg-error-container h-[35%] rounded-t-sm"></div>
+<div class="w-full bg-error-container h-[20%] rounded-t-sm"></div>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant italic">Suggestion: Check if she is experiencing unusual external stress or travel. Recommend lowering intensity of tomorrow's session by 20%.</p>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-6 bg-surface/50 backdrop-blur-md border-t border-outline-variant/10">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-highest/50 border border-outline-variant/30 rounded-full py-4 pl-6 pr-14 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all shadow-inner" placeholder="Ask about client data, request program adjustments..." type="text"/>
+<button class="absolute right-2 p-2 bg-primary rounded-full text-on-primary hover:bg-surface-tint transition-colors shadow-md shadow-primary/20">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-3 overflow-x-auto pb-1 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary-fixed/30 text-on-primary-fixed font-label-sm text-label-sm hover:bg-primary-fixed/50 transition-colors">Show HRV trends</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary-fixed/30 text-on-primary-fixed font-label-sm text-label-sm hover:bg-primary-fixed/50 transition-colors">Who needs a deload?</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary-fixed/30 text-on-primary-fixed font-label-sm text-label-sm hover:bg-primary-fixed/50 transition-colors">Generate progress report</button>
+</div>
+</div>
+</div>
+<!-- Side Panels -->
+<div class="lg:col-span-5 flex flex-col gap-8 h-full min-h-0 overflow-y-auto pr-2 hide-scrollbar">
+<!-- Automated Adjustments -->
+<div class="bg-surface-container-lowest/70 backdrop-blur-xl rounded-[2rem] p-6 shadow-xl shadow-primary/5 border-t border-l border-white/20 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/20 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-primary-container/30 transition-all duration-700"></div>
+<div class="flex justify-between items-center mb-6 relative z-10">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Automated Adjustments</h3>
+<span class="px-3 py-1 bg-tertiary-container/10 text-tertiary-container font-label-sm text-label-sm rounded-full">3 Pending</span>
+</div>
+<div class="space-y-4 relative z-10">
+<!-- Adjustment Item 1 -->
+<div class="bg-surface p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/10">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close up portrait of a fit woman with dark hair in athletic wear against a light blue studio background, bright soft lighting, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKdFoXFNmToIKCc1anUipVVwjuECuOn6wG9nXIaEkAKvW4jgjLtgOlh-slDoMto-0EUAgQ4IsOAV3G2OqPAMymo9OGXF97onC98MEiNGu9h6vdszAkdLExVEkiQiCf1Zd4S1lfMU8TQTCPvjCO0fKstNDKsu-BiS3VX7iNnPGmNZmIVVnQWtDpU231z7fylZSiCSjC3Po2FDlDjo2HosCgg6Yny_2izc2ttjAvCVKQC_7mwu7GKyPf"/>
+<span class="font-body-md text-on-surface font-medium">Elena Rodriguez</span>
+</div>
+<span class="font-label-sm text-xs text-outline">Macro Shift</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-3">Continuous glucose monitor shows delayed clearance post-workout. Suggest shifting 30g carbs from dinner to intra-workout.</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-xs hover:bg-surface-tint transition-colors">Apply Tweaks</button>
+<button class="flex-1 py-2 bg-surface-container-high text-on-surface-variant rounded-lg font-label-sm text-xs hover:bg-surface-variant transition-colors">Review</button>
+</div>
+</div>
+<!-- Adjustment Item 2 -->
+<div class="bg-surface p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/10">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Portrait of a muscular man with a beard looking focused, light azure cinematic lighting, hyper realistic 8k." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB31VpP7z90VkUN04ZrEpBvsPiXQiEyjOdLDgoPZcYMwr8MTom9OZ9CnNtIZT6TtYaJ3v4fWWRbxP4PfpbJOtWwB7DUTmppm3eNrlHr4C3lg7I9UNrvE10DrslJ56U6zXW9xWSn2cZoJVlhlbztDidRPCBJjSOf2bJAL7mB88WMMGqRs4cCJw_6MUHVN2D5hXIAly2hEBrcsYT8uKl6Dr80U_WiczsqeJfyuibhVUpcBvrWV4MR--EY"/>
+<span class="font-body-md text-on-surface font-medium">Marcus Chen</span>
+</div>
+<span class="font-label-sm text-xs text-outline">Volume Drop</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-3">Output velocity dropped 12% on main lifts. Suggest reducing total volume by 15% for Phase 3.</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-xs hover:bg-surface-tint transition-colors">Apply Tweaks</button>
+<button class="flex-1 py-2 bg-surface-container-high text-on-surface-variant rounded-lg font-label-sm text-xs hover:bg-surface-variant transition-colors">Review</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Analysis Portal -->
+<div class="bg-surface-container-lowest/70 backdrop-blur-xl rounded-[2rem] p-6 shadow-xl shadow-primary/5 border-t border-l border-white/20 flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Form Analysis</h3>
+<button class="text-primary hover:text-surface-tint transition-colors flex items-center gap-1 font-label-sm text-sm">
+                        Upload Video <span class="material-symbols-outlined text-sm">upload</span>
+</button>
+</div>
+<div class="relative w-full rounded-xl overflow-hidden bg-surface-variant aspect-video mb-4 group cursor-pointer shadow-inner">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A person performing a barbell squat in a clean, brightly lit gym. Wireframe skeletal overlays in neon cyan mapping their joint angles and spine alignment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRdmWBDj3rRJ3T0JuFLwvNNpngHoYOJ7t1nmZzMdZxrKveiORXS9t9HyQxaWrMlG5M2oMqi68sBp4nd4fcqnnAuT0l5a8dcSPhNbtpYjwG1-pQEjp_cs079KFn1JbuhxFlDfxtbrNkSkKH4RlHRudHbuSL_x2BVgZEvRGzcr8pKTQ2VuZ5osOsCj15GvjKol4XYelgGJLOmVP58LiVZXOiQuSpjUkYfGpJoncWN4R-QtV_Dh2ZKXpI"/>
+<!-- Overlay UI simulating AI scan -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent flex flex-col justify-end p-4">
+<div class="flex items-center justify-between">
+<span class="bg-error/90 text-on-error font-label-sm text-xs px-2 py-1 rounded backdrop-blur-sm shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">warning</span> Lumbar Flexion Detected
+                            </span>
+<span class="font-label-sm text-on-surface text-xs bg-surface/80 px-2 py-1 rounded">00:14 / 00:32</span>
+</div>
+</div>
+<!-- Scanning line animation -->
+<div class="absolute top-0 left-0 w-full h-1 bg-surface-tint/50 shadow-[0_0_10px_2px_rgba(0,77,234,0.5)] animate-[scan_3s_ease-in-out_infinite_alternate]"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-lowest/30 backdrop-blur-sm">
+<div class="w-12 h-12 rounded-full bg-surface-tint/90 text-on-primary flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex-1">
+<h4 class="font-label-sm text-label-sm text-on-surface mb-2">AI Diagnostics: Back Squat</h4>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error text-lg mt-0.5">straighten</span>
+<p class="font-body-md text-sm text-on-surface-variant">Spinal alignment deviates &gt;10° at bottom of ROM.</p>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">speed</span>
+<p class="font-body-md text-sm text-on-surface-variant">Eccentric phase is well controlled (3.2s average).</p>
+</li>
+</ul>
+<button class="w-full mt-4 py-2 border border-outline-variant/30 text-on-surface-variant rounded-lg font-label-sm text-sm hover:bg-surface-container transition-colors">Send Feedback to Client</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+    @keyframes scan {
+        0% { top: 0; }
+        100% { top: 100%; }
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+<script>
+    // Simple chat interaction demo
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.querySelector('input[type="text"]');
+        const sendBtn = input.nextElementSibling;
+        const chatMessages = document.getElementById('chat-messages');
+
+        const addMessage = (text, isUser = true) => {
+            if (!text.trim()) return;
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-4 max-w-[85%] ${isUser ? 'self-end' : ''} opacity-0 translate-y-4 transition-all duration-500 ease-out`;
+            
+            if (isUser) {
+                msgDiv.innerHTML = `
+                    <div class="bg-primary p-4 rounded-2xl rounded-tr-sm text-on-primary shadow-md shadow-primary/20">
+                        <p class="font-body-md text-body-md">${text}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="font-label-sm text-on-secondary-fixed">AL</span>
+                    </div>
+                `;
+            } else {
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-surface-tint/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="material-symbols-outlined text-surface-tint text-sm">psychology</span>
+                    </div>
+                    <div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm text-on-surface shadow-sm">
+                        <p class="font-body-md text-body-md">${text}</p>
+                    </div>
+                `;
+            }
+
+            chatMessages.appendChild(msgDiv);
+            
+            // Trigger reflow for animation
+            void msgDiv.offsetWidth;
+            msgDiv.classList.remove('opacity-0', 'translate-y-4');
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+
+        const handleSend = () => {
+            const text = input.value;
+            if (text) {
+                addMessage(text, true);
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    addMessage("Processing your request. Integrating data from recent workouts and biometric trends...", false);
+                }, 1000);
+            }
+        };
+
+        sendBtn.addEventListener('click', handleSend);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+    });
+</script></main></div></body></html>

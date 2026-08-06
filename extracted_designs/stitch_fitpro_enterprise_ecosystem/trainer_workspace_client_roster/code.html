@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;min-height:100vh;background:linear-gradient(135deg, #f9f9fc 0%, #eef2ff 100%);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","surface-container-high":"#e8e8ea","primary-fixed":"#dce1ff","tertiary-fixed":"#ffdbd1","tertiary":"#972500","background":"#f9f9fc","surface-container":"#eeeef0","primary":"#0041c8","on-surface-variant":"#434656","tertiary-container":"#c13301","tertiary-fixed-dim":"#ffb5a0","inverse-on-surface":"#f0f0f3","secondary-fixed":"#e1e0ff","on-primary-fixed":"#001551","surface-tint":"#004dea","primary-fixed-dim":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-variant":"#e2e2e5","on-error":"#ffffff","inverse-surface":"#2f3133","surface-bright":"#f9f9fc","on-error-container":"#93000a","surface":"#f9f9fc","primary-container":"#0055ff","surface-dim":"#dadadc","on-tertiary-fixed":"#3b0900","on-background":"#1a1c1e","surface-container-lowest":"#ffffff","surface-container-highest":"#e2e2e5","error-container":"#ffdad6","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#0039b3","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","inverse-primary":"#b6c4ff","on-secondary-fixed":"#07006c","on-tertiary-container":"#ffe1d9","on-primary-container":"#e3e6ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","secondary-container":"#6063ee","outline-variant":"#c3c5d9","outline":"#737688","surface-container-low":"#f3f3f6","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","container-max":"1280px","unit":"8px","gutter":"24px","margin-desktop":"48px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface/70 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="px-8 h-20 flex items-center gap-3"><span class="material-symbols-outlined text-primary text-3xl">exercise</span><span class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary shadow-lg shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all group bg-primary text-on-primary shadow-lg shadow-primary/10" data-path="my-clients" href="#"><span class="material-symbols-outlined mr-3">group</span>My Clients</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="workout-plans" href="#"><span class="material-symbols-outlined mr-3">fitness_center</span>Workout Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="nutrition-plans" href="#"><span class="material-symbols-outlined mr-3">restaurant_menu</span>Nutrition Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined mr-3">calendar_today</span>Calendar</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="messages" href="#"><span class="material-symbols-outlined mr-3">chat_bubble</span>Messages</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">monitoring</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-coach" href="#"><span class="material-symbols-outlined mr-3">psychology</span>AI Coach</a></nav><div class="px-4 py-6 mt-auto border-t border-outline-variant/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined mr-3">person</span>Profile</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></div></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_0_0_rgba(0,0,0,0.05)]"><div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20 w-96"><span class="material-symbols-outlined text-outline">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-on-surface" placeholder="Search clients or plans..." type="text"></div><div class="flex items-center gap-6"><button class="relative text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30"><div class="text-right hidden lg:block"><div class="text-sm font-bold text-on-surface">Trainer Alex</div><div class="text-[10px] uppercase tracking-widest text-outline">Elite Coach</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"></div></div></header><main class="relative pt-20 w-full min-h-screen px-margin-desktop py-gutter"><div class="flex flex-col w-full">
+<div class="flex justify-between items-center mb-12 relative z-10">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">My Clients</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary block"></span>
+                Managing 42 Active Trainees
+            </p>
+</div>
+<div class="flex gap-4">
+<button class="relative flex items-center gap-2 px-6 py-3 rounded-xl bg-surface/70 backdrop-blur-xl text-on-surface hover:bg-surface transition-all shadow-sm">
+<span class="material-symbols-outlined text-outline">group_add</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Accept Requests</span>
+<span class="absolute -top-2 -right-2 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">3 New</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-surface/70 backdrop-blur-xl text-on-surface hover:bg-surface transition-all shadow-sm">
+<span class="material-symbols-outlined text-outline">download</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Export Data</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary hover:bg-surface-tint transition-all shadow-[0_8px_16px_rgba(0,85,255,0.2)]">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Onboard New</span>
+</button>
+</div>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/30 rounded-full blur-[100px] pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary-fixed/20 rounded-full blur-[120px] pointer-events-none -z-10 -translate-x-1/2 translate-y-1/2"></div>
+<div class="grid grid-cols-12 gap-8 mb-12">
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="flex items-center gap-4 bg-surface/70 backdrop-blur-xl p-2 rounded-2xl shadow-sm self-start">
+<button class="px-6 py-2 rounded-xl bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest shadow-sm">All Clients</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm uppercase tracking-widest">Active</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm uppercase tracking-widest">Onboarding</button>
+<button class="px-6 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-sm text-label-sm uppercase tracking-widest">Offboarding</button>
+</div>
+<!-- Client Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Client Card 1 -->
+<div class="group relative bg-surface/80 backdrop-blur-2xl rounded-[32px] p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-6 overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary/20 group-hover:bg-primary transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Close-up portrait of a fit woman with short dark hair in athletic wear, bright airy lighting, soft blue background, serene expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0aY126iYr1euGP6WAA33H2TMxCNpGLHFkoMG6Q5SSEBc9kj3ipKmLpmg_dzU79qdxcthwOoS_4XkTZiFwcu1L2oOVbgwwJRkQe_ZzQCC0p7Ia7EXu8PICSZkaqbeWlTy0-BkLoKxqoxTD9nvimHhg_kSlFEEt3cFKFXJJP8oIm0HLh76jn12TFUOgoTCMFuW8Ov56I-0oYJDUKTWI-Y85_GJ0fFSBjpRaDTHownuZM_j5y_vFAWGb">
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-[#10b981] border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-bold text-on-surface leading-tight">Sarah Jenkins</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Hypertrophy Phase 2</p>
+</div>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-fixed/50 text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest">Active</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Compliance</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-[24px] font-bold text-on-surface leading-none">94%</span>
+<svg class="w-6 h-6 text-primary mb-0.5" viewBox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="4"></path>
+<path class="text-primary drop-shadow-[0_2px_4px_rgba(0,65,200,0.2)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="94, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1 justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Last Active</span>
+<span class="font-body-md text-on-surface font-medium">2 hours ago</span>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-widest transition-colors">View Plan</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+<!-- Client Card 2 -->
+<div class="group relative bg-surface/80 backdrop-blur-2xl rounded-[32px] p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-6 overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary/20 group-hover:bg-secondary transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm grayscale-[30%]" data-alt="Portrait of a focused man in his 40s in a bright minimalist gym setting, wearing a grey t-shirt, soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKulhZLBojzF3pM_DsMG_SSJGrdajjiakkOhNfutR32P5Kmdf61M_PNu4xZxyD8qGzFdYYLJ5dRXb50iJG0Y1HNavtMto0Y6leYRVybkHmVHcPBbLa4GsSqVXzi_75fRebf6BzYG1FCqL5RwXZZVE6lneYh4fqwV_vA7pUBp6uRvpLSIE8PmF4I4Ag85zrZvmIdUmM5vWUrtbJ637fnRZSdBHd-bI_68HYd-L1XVtzploCYK7zRvm_">
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-[#f59e0b] border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-bold text-on-surface leading-tight">Marcus Thorne</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Fat Loss Kickstart</p>
+</div>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed text-[10px] font-bold uppercase tracking-widest">Onboarding</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Compliance</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-[24px] font-bold text-on-surface leading-none">--</span>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1 justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Next Step</span>
+<span class="font-body-md text-on-surface font-medium truncate">Intake Form</span>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 py-3 rounded-xl bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-widest transition-colors shadow-sm">Review Intake</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors relative">
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+<!-- Client Card 3 -->
+<div class="group relative bg-surface/80 backdrop-blur-2xl rounded-[32px] p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-6 overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error/20 group-hover:bg-error transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Portrait of an athletic young woman outdoors, wearing a white visor and sports top, bright sunlight, blue sky background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkiD0ZjkcaZ4HWSRT6RlG2gJEKykEfCIOQntYTYPKkaUG8eSdDxK53Eki8aLnNxPCC2u7LGQ6cXHHlNZsgcH_-35z6n7YErtIRuQ8k3Kk3zVYSP0_Nrc3SZBeTNXfpqj8ksu0-wry9VVF1CbsXpKkd1DC_XNowcNGZ3xFnJxlVwFrBrPGVa-yy9Ex8w538UWxH1JMejPW2v6g62RQDK098BXaauVQFoM9fJFDOJdBOjXOLvirFgfaD">
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-outline border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-bold text-on-surface leading-tight">Elena Rivera</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Marathon Prep</p>
+</div>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Offboarding</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Final Score</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-[24px] font-bold text-on-surface leading-none">88%</span>
+<svg class="w-6 h-6 text-primary mb-0.5" viewBox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="4"></path>
+<path class="text-primary/70" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1 justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">End Date</span>
+<span class="font-body-md text-on-surface font-medium">Oct 15, 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-2"><button class="flex-1 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest transition-colors">View Summary</button><button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"><span class="material-symbols-outlined">more_vert</span></button></div>
+</div>
+<!-- Client Card 4 -->
+<div class="group relative bg-surface/80 backdrop-blur-2xl rounded-[32px] p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-6 overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary/20 group-hover:bg-tertiary transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Portrait of a muscular man doing a kettlebell swing, motion blur on the kettlebell, moody lighting in an industrial gym." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77_e0XOENRbMKSRYs6O7kr3_FJ7EQsAqiz3eGOiAdWKElYg-KrFWDcaPnFP6Tn3tOXPAfHbCfj_LZKnjH89nKUXsPRchE7_ON3W54x-jy9qzS1eACMEohVDnrBuLORcEepvXtz_WAg87v-xoe2GDBftrefpK8y9BTgx1ZGdQeYyw7aB7v75HE43WVx7bzkb3TC3x31H-rHHXGLyy0zE1ze4AMy7H1P4yhCdY85NBQNIg1EvrVXCbR">
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-[#10b981] border-2 border-surface rounded-full shadow-sm"></span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-bold text-on-surface leading-tight">David Chen</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Strength &amp; Power</p>
+</div>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-fixed/50 text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest">Active</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Compliance</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-[24px] font-bold text-error leading-none">62%</span>
+<svg class="w-6 h-6 text-error mb-0.5" viewBox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="4"></path>
+<path class="text-error drop-shadow-[0_2px_4px_rgba(186,26,26,0.2)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="62, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-low/50 p-4 rounded-2xl flex flex-col gap-1 justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Last Active</span>
+<span class="font-body-md text-on-surface font-medium">4 days ago</span>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 py-3 rounded-xl bg-error-container hover:bg-error-container/80 text-on-error-container font-label-sm text-label-sm uppercase tracking-widest transition-colors">Send Check-in</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-4">
+<button class="px-8 py-3 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors font-label-sm text-label-sm uppercase tracking-widest shadow-sm flex items-center gap-2">
+                    Load More <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-8">
+<!-- Roster Health Widget -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-[32px] p-8 shadow-sm">
+<h3 class="font-headline-lg text-[24px] font-bold text-on-surface mb-6">Roster Health</h3>
+<div class="relative w-full h-48 mb-8 flex items-center justify-center">
+<!-- Conceptual Doughnut Chart -->
+<svg class="w-40 h-40 transform -rotate-90" viewBox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary drop-shadow-[0_4px_8px_rgba(0,65,200,0.3)]" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="50.24" stroke-linecap="round" stroke-width="12"></circle> <!-- 80% -->
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-display-lg text-[40px] text-on-surface font-bold leading-none">80%</span></div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary shadow-sm"></span>
+<span class="font-body-md text-sm text-on-surface-variant">High (&gt;90%)</span>
+</div>
+<span class="font-label-sm text-on-surface font-bold">24</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-fixed-dim shadow-sm"></span>
+<span class="font-body-md text-sm text-on-surface-variant">Medium (70-90%)</span>
+</div>
+<span class="font-label-sm text-on-surface font-bold">12</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error shadow-sm"></span>
+<span class="font-body-md text-sm text-on-surface-variant">At Risk (&lt;70%)</span>
+</div>
+<span class="font-label-sm text-on-surface font-bold">6</span>
+</div>
+</div>
+</div>
+<!-- Recent Activity Mini-Feed -->
+<div class="bg-surface/70 backdrop-blur-xl rounded-[32px] p-8 shadow-sm flex-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg text-[20px] font-bold text-on-surface">Recent Activity</h3>
+<button class="text-primary hover:text-primary-container transition-colors"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="relative pl-6 space-y-8">
+<div class="absolute left-[11px] top-2 bottom-2 w-px bg-outline-variant/30"></div>
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-primary shadow-[0_0_0_4px_rgba(249,249,252,1)]"></div>
+<p class="font-body-md text-sm text-on-surface mb-1"><span class="font-bold">Sarah J.</span> completed Workout: <span class="italic">Lower Body Power</span></p>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest text-on-surface-variant/60">10 mins ago</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-secondary shadow-[0_0_0_4px_rgba(249,249,252,1)]"></div>
+<p class="font-body-md text-sm text-on-surface mb-1"><span class="font-bold">Marcus T.</span> submitted intake form</p>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest text-on-surface-variant/60">1 hr ago</span>
+</div>
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-tertiary shadow-[0_0_0_4px_rgba(249,249,252,1)]"></div>
+<p class="font-body-md text-sm text-on-surface mb-1"><span class="font-bold">David C.</span> logged a meal: <span class="italic">Post-workout Shake</span></p>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest text-on-surface-variant/60">3 hrs ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

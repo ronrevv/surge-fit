@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Light Theme (Minimalist Premium - Linear & Stripe Inspired) */
+    --bg-main: #f8fafc;
+    --bg-gradient: #f8fafc;
+    --surface-card: #ffffff;
+    --surface-card-border: #e2e8f0;
+    --surface-card-hover: #ffffff;
+    
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-subtle: #94a3b8;
+    
+    --accent-primary: #0f172a;
+    --accent-primary-hover: #1e293b;
+    --accent-badge-bg: #f1f5f9;
+    --accent-badge-text: #0f172a;
+    --accent-badge-border: #cbd5e1;
+    
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark {
+    /* Dark Theme (Minimalist Luxury Charcoal) */
+    --bg-main: #090a0f;
+    --bg-gradient: #090a0f;
+    --surface-card: rgba(18, 20, 28, 0.75);
+    --surface-card-border: rgba(255, 255, 255, 0.08);
+    --surface-card-hover: rgba(24, 27, 38, 0.85);
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    
+    --accent-primary: #f8fafc;
+    --accent-primary-hover: #e2e8f0;
+    --accent-badge-bg: rgba(255, 255, 255, 0.08);
+    --accent-badge-text: #f8fafc;
+    --accent-badge-border: rgba(255, 255, 255, 0.12);
+    
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Minimalist Glass Card */
+.surge-card {
+  background: var(--surface-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.surge-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.surge-card-hover:hover {
+  background: var(--surface-card-hover);
+  border-color: var(--accent-badge-border);
+}
+
+.font-display {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.font-mono-data {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}

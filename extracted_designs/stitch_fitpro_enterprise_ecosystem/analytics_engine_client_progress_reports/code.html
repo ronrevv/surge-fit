@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;min-height:100vh;background:linear-gradient(135deg, #f9f9fc 0%, #eef2ff 100%);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","surface-container-high":"#e8e8ea","primary-fixed":"#dce1ff","tertiary-fixed":"#ffdbd1","tertiary":"#972500","background":"#f9f9fc","surface-container":"#eeeef0","primary":"#0041c8","on-surface-variant":"#434656","tertiary-container":"#c13301","tertiary-fixed-dim":"#ffb5a0","inverse-on-surface":"#f0f0f3","secondary-fixed":"#e1e0ff","on-primary-fixed":"#001551","surface-tint":"#004dea","primary-fixed-dim":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-variant":"#e2e2e5","on-error":"#ffffff","inverse-surface":"#2f3133","surface-bright":"#f9f9fc","on-error-container":"#93000a","surface":"#f9f9fc","primary-container":"#0055ff","surface-dim":"#dadadc","on-tertiary-fixed":"#3b0900","on-background":"#1a1c1e","surface-container-lowest":"#ffffff","surface-container-highest":"#e2e2e5","error-container":"#ffdad6","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#0039b3","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","inverse-primary":"#b6c4ff","on-secondary-fixed":"#07006c","on-tertiary-container":"#ffe1d9","on-primary-container":"#e3e6ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","secondary-container":"#6063ee","outline-variant":"#c3c5d9","outline":"#737688","surface-container-low":"#f3f3f6","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","container-max":"1280px","unit":"8px","gutter":"24px","margin-desktop":"48px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface/70 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="px-8 h-20 flex items-center gap-3"><span class="material-symbols-outlined text-primary text-3xl">exercise</span><span class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary shadow-lg shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="my-clients" href="#"><span class="material-symbols-outlined mr-3">group</span>My Clients</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="workout-plans" href="#"><span class="material-symbols-outlined mr-3">fitness_center</span>Workout Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="nutrition-plans" href="#"><span class="material-symbols-outlined mr-3">restaurant_menu</span>Nutrition Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined mr-3">calendar_today</span>Calendar</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="messages" href="#"><span class="material-symbols-outlined mr-3">chat_bubble</span>Messages</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all group bg-primary text-on-primary shadow-lg shadow-primary/10" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">monitoring</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-coach" href="#"><span class="material-symbols-outlined mr-3">psychology</span>AI Coach</a></nav><div class="px-4 py-6 mt-auto border-t border-outline-variant/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined mr-3">person</span>Profile</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></div></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_0_0_rgba(0,0,0,0.05)]"><div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20 w-96"><span class="material-symbols-outlined text-outline">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-on-surface" placeholder="Search clients or plans..." type="text"></div><div class="flex items-center gap-6"><button class="relative text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30"><div class="text-right hidden lg:block"><div class="text-sm font-bold text-on-surface">Trainer Alex</div><div class="text-[10px] uppercase tracking-widest text-outline">Elite Coach</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"></div></div></header><main class="relative pt-20 w-full min-h-screen px-margin-desktop py-gutter"><div class="flex flex-col w-full">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Left Column -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Performance Overview Chart -->
+<div class="bg-surface/70 backdrop-blur-md rounded-xl p-6 shadow-sm border-t border-l border-white/20 relative overflow-hidden flex flex-col">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-transparent pointer-events-none"></div>
+<div class="flex items-center justify-between mb-8 z-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Performance Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Multi-client metric comparison across programs</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container rounded-lg font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-colors">Weight</button>
+<button class="px-4 py-2 bg-primary rounded-lg font-label-sm text-label-sm text-on-primary shadow-[0_4px_12px_rgba(0,85,255,0.2)]">Strength</button>
+<button class="px-4 py-2 bg-surface-container rounded-lg font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-colors">Endurance</button>
+</div>
+</div>
+<div class="flex-1 min-h-[300px] w-full relative z-10">
+<!-- SVG Line Chart Mockup -->
+<svg class="w-full h-full text-outline-variant" preserveAspectRatio="none" viewBox="0 0 800 300">
+<!-- Grid Lines -->
+
+
+
+<line opacity="0.5" stroke="currentColor" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="800" y1="275" y2="275"></line>
+<!-- Axis Labels -->
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="0" y="45">150kg</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="0" y="120">100kg</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="0" y="195">50kg</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="50" y="295">Jan</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="150" y="295">Feb</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="250" y="295">Mar</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="350" y="295">Apr</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="450" y="295">May</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="550" y="295">Jun</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="650" y="295">Jul</text>
+<text fill="currentColor" font-family="JetBrains Mono" font-size="10" opacity="0.7" x="750" y="295">Aug</text>
+<!-- Data Line 1: Primary (Blue) -->
+<path d="M50,250 C100,240 150,220 250,210 C350,200 450,150 550,130 C650,110 700,90 750,70" fill="none" stroke="var(--primary, #0041c8)" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="750" cy="70" fill="var(--primary, #0041c8)" r="4"></circle>
+<!-- Data Line 2: Secondary (Purple/Indigo) -->
+<path d="M50,180 C120,175 180,160 250,170 C320,180 400,140 450,120 C520,90 650,130 750,100" fill="none" stroke="var(--secondary, #4648d4)" stroke-dasharray="6,4" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="750" cy="100" fill="var(--secondary, #4648d4)" r="4"></circle>
+<!-- Data Line 3: Tertiary (Orange/Rust) -->
+<path d="M50,220 C150,225 200,190 300,185 C400,180 500,210 600,190 C700,170 720,160 750,150" fill="none" stroke="var(--tertiary, #972500)" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="750" cy="150" fill="var(--tertiary, #972500)" r="4"></circle>
+</svg>
+</div>
+<div class="flex items-center gap-6 mt-6 pt-6 border-t border-outline-variant/20 z-10">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sarah J. (Deadlift)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Marcus T. (Squat)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Elena R. (Bench)</span>
+</div>
+</div>
+</div>
+<!-- Progress Photo Gallery -->
+<div class="bg-surface/70 backdrop-blur-md rounded-xl p-6 shadow-sm border-t border-l border-white/20">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-lg text-headline-lg-mobile text-on-surface">Client Progress Gallery</h3>
+<div class="relative">
+<select class="appearance-none bg-surface-container px-4 py-2 pr-10 rounded-lg font-label-sm text-label-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20">
+<option>Sarah Jenkins</option>
+<option>Marcus Thorne</option>
+<option>Elena Rodriguez</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4"><div class="relative group cursor-pointer overflow-hidden rounded-xl bg-surface-container aspect-[3/4]"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOy1VoFXfI3qCbyH6CQklIUPXsf1A_Zu_PCInchcU20ATlhO9YfJU4uBVNyf-jECKWA0895t25_pFLflBTEwwBBFOXuYoW23Fgts_SdzBa-tvG8LnfIxmVrvEc684QHOpijQNwSJ4kSRsYxJAMMT1FRMpDz09PkNL-1znZDOmLDjONXCIduR_cfr7vK4B3T8zb8IkPiqf1IF3omAIIJdPj9KKqjvBH0YfWhW8Jgg3Xn-QCAt6h6eeM')"></div><div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div><div class="absolute bottom-4 left-4"><div class="bg-white/20 backdrop-blur-md text-white px-2 py-1 rounded font-label-sm text-[10px] uppercase tracking-wider inline-block mb-1">Baseline</div><p class="font-body-md text-body-md text-white font-medium">Jan 12</p></div></div><div class="relative group cursor-pointer overflow-hidden rounded-xl bg-surface-container aspect-[3/4]"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChjthUD7g_RvjUweprLPcfwu83Cgyl46Y3ugDMaKZXYfG_mCBcjZNV4YS6Bsg6bVftw_meh-9nKMkpaFmaEi8yMGviwxTHptKPAt80z_7s0CrUY0ijv1gDt3m2k3T9esKNw5XWH6UKfWGs7ikx-TEtEw6-Qn52wbItPnZ7k49R4efsNPCw-ulrW0EBeey7IGJQt5sYu8eYNFIiK98M3kbn3C7IvOr1hk-QA56fCCBcNPe8h8tmyjWp')"></div><div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div><div class="absolute bottom-4 left-4"><div class="bg-primary text-on-primary px-2 py-1 rounded font-label-sm text-[10px] uppercase tracking-wider inline-block mb-1">Current</div><p class="font-body-md text-body-md text-white font-medium">Aug 24</p></div><div class="absolute top-4 right-4 bg-primary text-on-primary px-3 py-1.5 rounded-full font-label-sm text-label-sm shadow-md flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">trending_down</span>17 lbs</div></div></div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Generate Report Tool -->
+<div class="bg-primary text-on-primary rounded-xl p-6 shadow-lg shadow-primary/10 relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+<h3 class="font-headline-lg text-headline-lg-mobile mb-2 relative z-10">Generate Report</h3>
+<p class="font-body-md text-body-md text-on-primary/80 mb-6 relative z-10">Export comprehensive 30-day analytics PDF for client review.</p>
+
+<button class="w-full mt-6 py-3 bg-on-primary text-primary font-label-sm text-label-sm rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+          New Export
+        </button>
+</div>
+<!-- Milestone Tracker -->
+<div class="bg-surface/70 backdrop-blur-md rounded-xl p-6 shadow-sm border-t border-l border-white/20 flex-1">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-lg text-headline-lg-mobile text-on-surface">Milestones</h3>
+<span class="material-symbols-outlined text-outline">emoji_events</span>
+</div>
+<div class="space-y-8"><div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-32px] before:w-px before:bg-outline-variant/30 last:before:hidden"><div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-primary border-2 border-surface-container-lowest"></div><div class="font-label-sm text-[10px] text-outline tracking-wider uppercase mb-1">Today, 09:41 AM</div><div class="font-body-md text-body-md text-on-surface font-medium">New PR: Deadlift 315lbs</div><div class="font-body-md text-[13px] text-on-surface-variant mt-1">Marcus hit his 3-month goal block early.</div><div class="mt-2 inline-flex items-center gap-1 bg-[#E0EFFF] text-primary px-2 py-0.5 rounded font-label-sm text-[11px]"><span class="material-symbols-outlined text-[14px]">local_fire_department</span>Streak: 12 Weeks</div></div><div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-32px] before:w-px before:bg-outline-variant/30 last:before:hidden"><div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-tertiary border-2 border-surface-container-lowest"></div><div class="font-label-sm text-[10px] text-outline tracking-wider uppercase mb-1">Yesterday, 14:20 PM</div><div class="font-body-md text-body-md text-on-surface font-medium">Nutrition Habit: 30 Days</div><div class="font-body-md text-[13px] text-on-surface-variant mt-1">Elena logged 100g+ protein for 30 consecutive days.</div></div><div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-32px] before:w-px before:bg-outline-variant/30 last:before:hidden"><div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-secondary border-2 border-surface-container-lowest"></div><div class="font-label-sm text-[10px] text-outline tracking-wider uppercase mb-1">Aug 20, 10:00 AM</div><div class="font-body-md text-body-md text-on-surface font-medium">Sub-20 Min 5K</div><div class="font-body-md text-[13px] text-on-surface-variant mt-1">Sarah shaved 45s off her previous best time.</div><div class="mt-2 inline-flex items-center gap-1 bg-secondary/10 text-secondary px-2 py-0.5 rounded font-label-sm text-[11px]"><span class="material-symbols-outlined text-[14px]">timer</span>Endurance Block</div></div></div>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

@@ -1,0 +1,140 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; background: #f9f9fc; } body { overscroll-behavior: none; -webkit-font-smoothing: antialiased; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; } .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.2); } .bg-azure-gradient { background: linear-gradient(180deg, #f0f4ff 0%, #f9f9fc 100%); min-height: 100vh; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-fixed-variant': '#0039b3', 'inverse-on-surface': '#f0f0f3', 'primary-container': '#0055ff', 'tertiary': '#972500', 'on-primary': '#ffffff', 'surface-bright': '#f9f9fc', 'secondary': '#4648d4', 'on-tertiary-fixed': '#3b0900', 'on-tertiary-container': '#ffe1d9', 'error': '#ba1a1a', 'background': '#f9f9fc', 'tertiary-fixed': '#ffdbd1', 'secondary-fixed': '#e1e0ff', 'on-secondary-container': '#fffbff', 'outline-variant': '#c3c5d9', 'surface-tint': '#004dea', 'inverse-surface': '#2f3133', 'inverse-primary': '#b6c4ff', 'on-tertiary': '#ffffff', 'surface-container-low': '#f3f3f6', 'on-tertiary-fixed-variant': '#872100', 'on-error-container': '#93000a', 'surface-variant': '#e2e2e5', 'surface-dim': '#dadadc', 'primary-fixed': '#dce1ff', 'on-primary-fixed': '#001551', 'secondary-fixed-dim': '#c0c1ff', 'primary-fixed-dim': '#b6c4ff', 'primary': '#0041c8', 'on-secondary': '#ffffff', 'on-surface': '#1a1c1e', 'on-primary-container': '#e3e6ff', 'on-surface-variant': '#434656', 'outline': '#737688', 'surface-container-lowest': '#ffffff', 'surface-container-high': '#e8e8ea', 'on-secondary-fixed-variant': '#2f2ebe', 'on-background': '#1a1c1e', 'surface-container': '#eeeef0', 'on-error': '#ffffff', 'secondary-container': '#6063ee', 'surface-container-highest': '#e2e2e5', 'on-secondary-fixed': '#07006c', 'tertiary-fixed-dim': '#ffb5a0', 'tertiary-container': '#c13301', 'surface': '#f9f9fc', 'error-container': '#ffdad6' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'unit': '8px', 'gutter': '24px', 'container-max': '1280px', 'margin-mobile': '16px', 'margin-desktop': '48px' }, fontFamily: { 'headline-lg-mobile': ['Manrope'], 'headline-lg': ['Manrope'], 'body-md': ['Inter'], 'label-sm': ['JetBrains Mono'], 'display-lg': ['Manrope'] }, fontSize: { 'headline-lg-mobile': ['24px', { 'lineHeight': '32px', 'fontWeight': '700' }], 'headline-lg': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.01em', 'fontWeight': '700' }], 'body-md': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-sm': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.05em', 'fontWeight': '500' }], 'display-lg': ['56px', { 'lineHeight': '64px', 'letterSpacing': '-0.02em', 'fontWeight': '800' }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-azure-gradient font-body-md text-body-md text-on-background"><header class="fixed top-0 inset-x-0 z-50 glass shadow-[0_1px_8px_rgba(0,85,255,0.04)] pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-unit h-unit bg-primary rounded-full"></div><span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Titan Gym</span></div><div class="flex items-center gap-4"><button class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-32"><div class="flex flex-col w-full h-full relative overflow-hidden bg-background">
+<!-- Progress Header -->
+<div class="px-margin-mobile pt-8 pb-4 flex flex-col gap-4 sticky top-0 bg-background/80 glass z-10">
+<div class="flex items-center justify-between">
+<button aria-label="Go back" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Step 1 of 5</span>
+<div class="w-10 h-10"></div> <!-- Spacer for balance -->
+</div>
+<div class="flex gap-2">
+<div class="h-1 flex-1 bg-primary rounded-full relative overflow-hidden">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+<div class="h-1 flex-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<!-- Content -->
+<div class="px-margin-mobile flex-1 flex flex-col pt-8 pb-32">
+<h1 class="font-headline-lg-mobile text-on-background mb-2">What is your primary fitness goal?</h1>
+<p class="font-body-md text-on-surface-variant mb-8">This helps Titan tailor your initial AI-coached program.</p>
+<!-- Selection Grid -->
+<div class="grid grid-cols-1 gap-4" id="goal-selection">
+<!-- Option: Weight Loss -->
+<button class="goal-card relative w-full text-left group overflow-hidden bg-white/70 backdrop-blur-[20px] rounded-xl p-4 shadow-sm border-t border-l border-white/20 transition-all duration-300 focus:outline-none data-[selected=true]:bg-primary-container data-[selected=true]:shadow-[0_8px_24px_rgba(0,85,255,0.15)] data-[selected=true]:border-primary" data-value="weight-loss">
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary group-data-[selected=true]:bg-white group-data-[selected=true]:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitor_weight</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-sm font-bold text-on-surface text-[14px] group-data-[selected=true]:text-on-primary-container">Lean &amp; Tone</h3>
+<p class="font-body-md text-[13px] text-on-surface-variant group-data-[selected=true]:text-on-primary-container/80">Lose body fat and reveal definition.</p>
+</div>
+<div class="w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center group-data-[selected=true]:border-primary group-data-[selected=true]:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 group-data-[selected=true]:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</button>
+<!-- Option: Muscle Gain -->
+<button class="goal-card relative w-full text-left group overflow-hidden bg-white/70 backdrop-blur-[20px] rounded-xl p-4 shadow-sm border-t border-l border-white/20 transition-all duration-300 focus:outline-none data-[selected=true]:bg-primary-container data-[selected=true]:shadow-[0_8px_24px_rgba(0,85,255,0.15)] data-[selected=true]:border-primary" data-value="muscle-gain">
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary group-data-[selected=true]:bg-white group-data-[selected=true]:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-sm font-bold text-on-surface text-[14px] group-data-[selected=true]:text-on-primary-container">Build Muscle</h3>
+<p class="font-body-md text-[13px] text-on-surface-variant group-data-[selected=true]:text-on-primary-container/80">Increase mass and strength.</p>
+</div>
+<div class="w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center group-data-[selected=true]:border-primary group-data-[selected=true]:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 group-data-[selected=true]:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</button>
+<!-- Option: Endurance -->
+<button class="goal-card relative w-full text-left group overflow-hidden bg-white/70 backdrop-blur-[20px] rounded-xl p-4 shadow-sm border-t border-l border-white/20 transition-all duration-300 focus:outline-none data-[selected=true]:bg-primary-container data-[selected=true]:shadow-[0_8px_24px_rgba(0,85,255,0.15)] data-[selected=true]:border-primary" data-value="endurance">
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary group-data-[selected=true]:bg-white group-data-[selected=true]:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_run</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-sm font-bold text-on-surface text-[14px] group-data-[selected=true]:text-on-primary-container">Endurance</h3>
+<p class="font-body-md text-[13px] text-on-surface-variant group-data-[selected=true]:text-on-primary-container/80">Improve stamina and cardio health.</p>
+</div>
+<div class="w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center group-data-[selected=true]:border-primary group-data-[selected=true]:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 group-data-[selected=true]:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</button>
+<!-- Option: Recovery -->
+<button class="goal-card relative w-full text-left group overflow-hidden bg-white/70 backdrop-blur-[20px] rounded-xl p-4 shadow-sm border-t border-l border-white/20 transition-all duration-300 focus:outline-none data-[selected=true]:bg-primary-container data-[selected=true]:shadow-[0_8px_24px_rgba(0,85,255,0.15)] data-[selected=true]:border-primary" data-value="recovery">
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary group-data-[selected=true]:bg-white group-data-[selected=true]:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-sm font-bold text-on-surface text-[14px] group-data-[selected=true]:text-on-primary-container">Mobility &amp; Rehab</h3>
+<p class="font-body-md text-[13px] text-on-surface-variant group-data-[selected=true]:text-on-primary-container/80">Recover from injury or improve flexibility.</p>
+</div>
+<div class="w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center group-data-[selected=true]:border-primary group-data-[selected=true]:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] opacity-0 group-data-[selected=true]:opacity-100 transition-opacity">check</span>
+</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-margin-mobile bg-gradient-to-t from-background via-background to-transparent pb-safe pt-8 z-20 pointer-events-none">
+<div class="pointer-events-auto">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-label-sm font-bold uppercase tracking-widest shadow-[0_4px_12px_rgba(0,65,200,0.3)] transition-all duration-300 disabled:opacity-50 disabled:shadow-none disabled:bg-surface-variant disabled:text-on-surface-variant flex items-center justify-center gap-2" disabled="" id="continue-btn">
+            Continue
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.goal-card');
+    const continueBtn = document.getElementById('continue-btn');
+    let selectedValue = null;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Deselect all
+        cards.forEach(c => c.setAttribute('data-selected', 'false'));
+        
+        // Select clicked
+        card.setAttribute('data-selected', 'true');
+        selectedValue = card.getAttribute('data-value');
+        
+        // Enable button
+        continueBtn.removeAttribute('disabled');
+        
+        // Subtle haptic feedback simulation (visual bump)
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            card.style.transform = 'scale(1)';
+        }, 100);
+      });
+    });
+
+    continueBtn.addEventListener('click', () => {
+        if(!selectedValue) return;
+        // Proceed to next step simulation
+        continueBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+        setTimeout(() => {
+             console.log("Proceeding with goal:", selectedValue);
+        }, 800);
+    });
+  });
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe glass shadow-[0_-1px_8px_rgba(0,85,255,0.04)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-2"><a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-14 h-14 transition-all text-primary font-bold" data-path="home" href="#"><span class="material-symbols-outlined">home</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Home</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="workouts" href="#"><span class="material-symbols-outlined">fitness_center</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Train</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="ai-coach" href="#"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_12px_rgba(0,85,255,0.2)]"><span class="material-symbols-outlined text-on-primary">smart_toy</span></div></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="nutrition" href="#"><span class="material-symbols-outlined">restaurant</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Eat</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant transition-all" data-path="progress" href="#"><span class="material-symbols-outlined">monitoring</span><span class="font-label-sm text-[10px] uppercase tracking-wider">Stats</span></a></div></nav></body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;min-height:100vh;background:linear-gradient(135deg, #f9f9fc 0%, #eef2ff 100%);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","surface-container-high":"#e8e8ea","primary-fixed":"#dce1ff","tertiary-fixed":"#ffdbd1","tertiary":"#972500","background":"#f9f9fc","surface-container":"#eeeef0","primary":"#0041c8","on-surface-variant":"#434656","tertiary-container":"#c13301","tertiary-fixed-dim":"#ffb5a0","inverse-on-surface":"#f0f0f3","secondary-fixed":"#e1e0ff","on-primary-fixed":"#001551","surface-tint":"#004dea","primary-fixed-dim":"#b6c4ff","on-tertiary-fixed-variant":"#872100","surface-variant":"#e2e2e5","on-error":"#ffffff","inverse-surface":"#2f3133","surface-bright":"#f9f9fc","on-error-container":"#93000a","surface":"#f9f9fc","primary-container":"#0055ff","surface-dim":"#dadadc","on-tertiary-fixed":"#3b0900","on-background":"#1a1c1e","surface-container-lowest":"#ffffff","surface-container-highest":"#e2e2e5","error-container":"#ffdad6","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#0039b3","secondary-fixed-dim":"#c0c1ff","secondary":"#4648d4","inverse-primary":"#b6c4ff","on-secondary-fixed":"#07006c","on-tertiary-container":"#ffe1d9","on-primary-container":"#e3e6ff","error":"#ba1a1a","on-tertiary":"#ffffff","on-surface":"#1a1c1e","on-secondary-fixed-variant":"#2f2ebe","secondary-container":"#6063ee","outline-variant":"#c3c5d9","outline":"#737688","surface-container-low":"#f3f3f6","on-secondary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"16px","container-max":"1280px","unit":"8px","gutter":"24px","margin-desktop":"48px"},"fontFamily":{"headline-lg":["Manrope"],"display-lg":["Manrope"],"body-md":["Inter"],"label-sm":["JetBrains Mono"],"headline-lg-mobile":["Manrope"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface/70 backdrop-blur-2xl z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="px-8 h-20 flex items-center gap-3"><span class="material-symbols-outlined text-primary text-3xl">exercise</span><span class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">FitPro</span></div><nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto" data-active-classes="bg-primary text-on-primary shadow-lg shadow-primary/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>Dashboard</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="my-clients" href="#"><span class="material-symbols-outlined mr-3">group</span>My Clients</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="workout-plans" href="#"><span class="material-symbols-outlined mr-3">fitness_center</span>Workout Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="nutrition-plans" href="#"><span class="material-symbols-outlined mr-3">restaurant_menu</span>Nutrition Plans</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="calendar" href="#"><span class="material-symbols-outlined mr-3">calendar_today</span>Calendar</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-xl transition-all group bg-primary text-on-primary shadow-lg shadow-primary/10" data-path="messages" href="#"><span class="material-symbols-outlined mr-3">chat_bubble</span>Messages</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="reports" href="#"><span class="material-symbols-outlined mr-3">monitoring</span>Reports</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="ai-coach" href="#"><span class="material-symbols-outlined mr-3">psychology</span>AI Coach</a></nav><div class="px-4 py-6 mt-auto border-t border-outline-variant/10"><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="profile" href="#"><span class="material-symbols-outlined mr-3">person</span>Profile</a><a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="settings" href="#"><span class="material-symbols-outlined mr-3">settings</span>Settings</a></div></aside><div class="pl-72 w-full"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/70 backdrop-blur-xl z-40 px-margin-desktop flex items-center justify-between shadow-[0_1px_0_0_rgba(0,0,0,0.05)]"><div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20 w-96"><span class="material-symbols-outlined text-outline">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-on-surface" placeholder="Search clients or plans..." type="text"></div><div class="flex items-center gap-6"><button class="relative text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30"><div class="text-right hidden lg:block"><div class="text-sm font-bold text-on-surface">Trainer Alex</div><div class="text-[10px] uppercase tracking-widest text-outline">Elite Coach</div></div><img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/20" src="https://lh3.googleusercontent.com/aida/AP1WRLsIKFVZQd3n1p0jQPvmNNEqRE57ib2qBduECMbOTWiyAPOrxMxCmqckrw8fui_JVUDf9-aFEKvgKxrHLxpJDUVxf-1pyRC8q9bySqIq0G7BwBsCWZp8T82O6Ae0dNF09dOAdKu4SSQhB5qk8I-6TSeVlcWhr4VacJDMjpaDUrQ04S5iMbNdALSw7Wyoym1mc9OrPMgGqrcap7hxhIF1upYnRP_kmZ9MyhRVXMX1x9CU6YgpigezvTIOzFk"></div></div></header><main class="relative pt-20 w-full min-h-screen px-margin-desktop py-gutter"><div class="flex flex-col w-full h-full max-h-[calc(100vh-80px-48px*2)]">
+<div class="flex flex-1 gap-gutter overflow-hidden h-[800px]">
+<!-- Left Sidebar: Client List -->
+<div class="w-80 flex-shrink-0 flex flex-col bg-surface/70 backdrop-blur-2xl rounded-2xl shadow-sm border border-outline-variant/20 overflow-hidden relative">
+<div class="p-6 pb-4 border-b border-outline-variant/20 bg-surface-container-low/50 relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Inbox</h2>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_4px_12px_rgba(0,65,200,0.2)] hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit_square</span>
+</button>
+</div>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface rounded-xl py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]" placeholder="Search messages..." type="text">
+</div>
+</div>
+<!-- Decorative blur blob -->
+<div class="absolute -top-20 -left-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex-1 overflow-y-auto pb-4 custom-scrollbar">
+<!-- Client Chat Item 1 (Active) -->
+<button class="w-full flex items-start gap-4 p-4 hover:bg-surface-container-low/50 transition-colors border-l-4 border-primary bg-surface-container/50 relative group">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-surface" data-alt="A professional headshot of a fit young woman in her 20s, wearing activewear, bright studio lighting, subtle azure and alabaster background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvsjQTqep61IfliYv2x2M7hLNs9_140-7cQUeCPigzZ3Y0IKSEAHX1YSzag5tiwahaIS-mub827aqDmwbskpS7lwkbiLPf4o-eb_gcTd-HsjDlJItwQzN4fjdWRXaSPmCY1Cvmy-ZI3cpGGR7QNlEMgEvMgESzaBVz5No6_M8orY9g5ccxa2iOnpnhgrOjm2bVUJr2Gyh8_R4UNXLbGoYAXHHQDxt9o7TQkJqEJIB6IJWEq3BJlCSl">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<div class="flex-1 min-w-0 text-left">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-sm text-label-sm font-bold text-on-surface truncate pr-2">Sarah Jenkins</h3>
+
+</div>
+<p class="font-body-md text-[13px] text-on-surface-variant truncate pr-4">Can you check my deadlift form? I've attached the video.</p>
+</div>
+<!-- Hover Action -->
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-surface p-1 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-outline hover:text-error transition-colors">delete</span>
+</div>
+</button>
+<!-- Client Chat Item 2 (Unread) -->
+<button class="w-full flex items-start gap-4 p-4 hover:bg-surface-container-low transition-colors border-l-4 border-transparent group relative">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="A portrait of a middle-aged man in a grey athletic shirt, smiling subtly, outdoors with soft natural lighting, depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1hpP2ln77Klw_gKM1tD7rmE7ArDNr7wS67ib_6zVPcdnoPQ6g3gnMNR1xYaYpvDy3DotQsLStyGN2HOYuLNWEA1LnCpcWlQ-jSG-3e-Z_1S7y3p7BQj2P9nbsyC42IzVz0SCfq7QllrKx_BNdZQ6JUjeHRSRuMr1-qmbIzFmTcKLoM9UcOUYLPaXFe06ZgZ-9I0ff5vvBbvTN_K5a7S3fH0O41-_UuJ4ApXqJB6VsSpOXgMs7rPGG">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-surface-dim rounded-full border-2 border-surface"></div>
+</div>
+<div class="flex-1 min-w-0 text-left">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-sm text-label-sm font-bold text-on-surface truncate pr-2">Marcus Chen</h3>
+
+</div>
+<p class="font-body-md text-[13px] text-on-surface font-semibold truncate pr-4">Meals prepped for the week!</p>
+</div>
+
+</button>
+<!-- Client Chat Item 3 -->
+<button class="w-full flex items-start gap-4 p-4 hover:bg-surface-container-low transition-colors border-l-4 border-transparent group">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-headline-lg text-headline-lg-mobile shadow-sm">
+                            EL
+                        </div>
+</div>
+<div class="flex-1 min-w-0 text-left">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-sm text-label-sm text-on-surface truncate pr-2">Elena Rodriguez</h3>
+<span class="font-label-sm text-[10px] text-outline">Tue</span>
+</div>
+<p class="font-body-md text-[13px] text-outline truncate pr-4">Thanks for the updated plan, Alex. Looks solid.</p>
+</div>
+</button>
+<!-- Client Chat Item 4 -->
+<button class="w-full flex items-start gap-4 p-4 hover:bg-surface-container-low transition-colors border-l-4 border-transparent group">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm grayscale-[20%]" data-alt="A young man with glasses, looking thoughtful, indoor gym setting slightly blurred in background, cool azure lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4yjboIuqDrojsMrfr2hyOydvGXB83IO_dWaXuRJonJxYfZeAwHOE6cINj35g6Sa9_tYLm2eWRClx5ZeMoLE-Gy1_USWWCUeK41FHOGSWGVLZUkcQTYZYUG9gDWLfF52tKu4XBOYMUuAFu4XjITNdSszH1uXZ7TDvKL1Etd_nEjNCvG2p-DPeuYP4EMkn_V9EXVcqbi7w_B_BO4wOpDX_zZ76T444fLmCxInPIEFPW7BC90PfuYXON">
+</div>
+<div class="flex-1 min-w-0 text-left">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-sm text-label-sm text-on-surface truncate pr-2">David Kim</h3>
+<span class="font-label-sm text-[10px] text-outline">Mon</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<p class="font-body-md text-[13px] truncate pr-4">Q3_Progress_Report.pdf</p>
+</div>
+</div>
+</button>
+</div>
+</div>
+<!-- Main Chat Window -->
+<div class="flex-1 flex flex-col bg-surface/70 backdrop-blur-2xl rounded-2xl shadow-sm border border-outline-variant/20 overflow-hidden relative">
+<!-- Chat Header -->
+<div class="h-20 px-6 flex items-center justify-between border-b border-outline-variant/20 bg-surface/50 backdrop-blur-md z-10 px-8">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm ring-2 ring-primary/20" data-alt="A professional headshot of a fit young woman in her 20s, wearing activewear, bright studio lighting, subtle azure and alabaster background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAv-Mt6Qg3BRKnvIF_qx7dkn4CYbZUTWm7eOmimpr5SXg5ZqXuRugzYp8yA8CxMIniXrBp2QeHYjGkGz-PiJij3A71FgrCUMFXfrEbffdAljIE00U-705ZR2OTVPQ7X6O9AaufEMPU-E3gzicJlIOU1qkTrHANvHY4NDpMFJ1Xt_1vo97yU8Xk8iVKA26J1sYW6wVkzXM9gclBYOSsroi2IJbZX-0WZgpvmOeRSlMwSDfzwJWNuFQ9">
+<div>
+<h2 class="font-headline-lg text-on-surface leading-tight text-[20px]">Sarah Jenkins</h2>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-[11px] text-on-surface-variant tracking-wider uppercase">Online Now</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container text-primary font-label-sm text-label-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border border-primary/10 shadow-[0_2px_4px_rgba(0,0,0,0.02)]">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span class="hidden sm:inline">Voice</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm shadow-[0_4px_14px_rgba(0,65,200,0.25)] hover:bg-surface-tint hover:-translate-y-0.5 transition-all duration-200">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+<span class="hidden sm:inline">Video Call</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors ml-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-surface/30 to-background/50 relative" id="chat-container">
+<!-- Background decorative element -->
+<div class="absolute inset-0 opacity-30 pointer-events-none flex items-center justify-center">
+<svg fill="none" height="400" viewBox="0 0 400 400" width="400" xmlns="http://www.w3.org/2000/svg">
+<circle class="text-primary-fixed" cx="200" cy="200" r="150" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></circle>
+<circle class="text-secondary-fixed" cx="200" cy="200" r="100" stroke="currentColor" stroke-width="1"></circle>
+</svg>
+</div>
+<!-- Date Divider -->
+<div class="flex items-center justify-center relative z-10">
+<span class="px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/20 font-label-sm text-[10px] text-outline tracking-widest uppercase">Today, Oct 12</span>
+</div>
+<!-- Message (Trainer) -->
+<div class="flex flex-col items-end gap-1 relative z-10 group">
+<div class="max-w-[70%] bg-primary text-on-primary rounded-2xl rounded-tr-sm shadow-[0_4px_12px_rgba(0,65,200,0.15)] relative overflow-hidden p-6">
+<!-- subtle shine effect -->
+<div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+<p class="font-body-md text-[15px] leading-relaxed">Hey Sarah! Great job on hitting those macros yesterday. How's the lower back feeling after the heavy squats?</p>
+</div>
+<div class="flex items-center gap-2 mr-1">
+<span class="font-label-sm text-[10px] text-outline">10:15 AM</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Message (Client) -->
+<div class="flex flex-col items-start gap-1 relative z-10">
+<div class="max-w-[70%] bg-surface-container text-on-surface rounded-2xl rounded-tl-sm shadow-sm border border-outline-variant/10 p-6">
+<p class="font-body-md text-[15px] leading-relaxed">Thanks Alex! The meals were surprisingly easy to prep.</p>
+<p class="font-body-md text-[15px] leading-relaxed mt-2">Back is feeling okay, maybe a little tight. I was actually hoping you could check my deadlift form today? I recorded my last set.</p>
+</div>
+<span class="font-label-sm text-[10px] text-outline ml-1">10:38 AM</span>
+</div>
+<!-- Message (Client - File Attachment) -->
+<div class="flex flex-col items-start gap-1 relative z-10">
+<div class="max-w-[70%] bg-surface-container text-on-surface rounded-2xl rounded-tl-sm p-2 shadow-sm border border-outline-variant/10 p-6">
+<!-- Video Attachment Card -->
+<div class="rounded-xl overflow-hidden bg-background border border-outline-variant/20 group/vid cursor-pointer relative w-80">
+<div class="relative h-36 bg-surface-dim">
+<img class="w-full h-full object-cover opacity-80 group-hover/vid:opacity-100 transition-opacity" data-alt="A still frame from a gym video showing a woman setting up for a barbell deadlift, gym lighting, slightly grainy phone camera quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS9TI2hAz46kk6S_abcRM67GgVOSXqgoCXKUEJIAyd_IbiCrbB_Er3edncK7MfLZQ8R5KWjmlcEoQqpWnSKUbQqhO7PkVTckZSbBJUP9_qxvCKRS7cMKWwC7TKynApgm1_GniWEpPoxPg6eZniUs5caBiTaJpPfJGtMWBmuewU8YQlazWFF3DqP1DxJ7hBotUFexMlfXtKm2i86QWC416x88vQGgmKwE238RELWK5EH-G8oJwu2L17">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-surface/80 backdrop-blur-sm rounded-full flex items-center justify-center text-primary group-hover/vid:scale-110 group-hover/vid:bg-primary group-hover/vid:text-on-primary transition-all shadow-lg">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 bg-on-surface/70 backdrop-blur-md rounded text-on-primary font-label-sm text-[10px]">0:45</div>
+</div>
+
+</div>
+</div>
+<span class="font-label-sm text-[10px] text-outline ml-1">10:42 AM</span>
+</div>
+<!-- Typing Indicator (Animated) -->
+<div class="flex flex-col items-start gap-1 relative z-10" id="typing-indicator">
+<div class="bg-surface-container text-on-surface rounded-2xl rounded-tl-sm py-3 shadow-sm border border-outline-variant/10 flex items-center gap-1.5 w-16 h-10 p-6">
+<div class="w-1.5 h-1.5 rounded-full bg-outline/50 animate-[bounce_1s_infinite_0ms]"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline/50 animate-[bounce_1s_infinite_200ms]"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline/50 animate-[bounce_1s_infinite_400ms]"></div>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<div class="p-4 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 relative z-20">
+<div class="flex items-end gap-3 bg-surface-container-low rounded-2xl border border-outline-variant/30 p-2 shadow-[inset_0_1px_3px_rgba(0,0,0,0.02)] focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20 transition-all">
+<!-- Attachment Menu Button -->
+<div class="relative group/attach">
+<button class="w-10 h-10 rounded-xl flex items-center justify-center text-outline hover:bg-surface-container hover:text-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">add_circle</span>
+</button>
+<!-- Popover Menu -->
+<div class="absolute bottom-full left-0 mb-2 w-48 bg-surface rounded-xl shadow-xl border border-outline-variant/10 p-2 opacity-0 invisible group-hover/attach:opacity-100 group-hover/attach:visible transition-all -translate-y-2 group-hover/attach:translate-y-0">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors text-left">
+<span class="material-symbols-outlined text-[18px]">image</span>
+<span class="font-label-sm text-[12px]">Photo / Video</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors text-left">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="font-label-sm text-[12px]">Document (PDF)</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-primary transition-colors text-left">
+<span class="material-symbols-outlined text-[18px]">fitness_center</span>
+<span class="font-label-sm text-[12px]">Workout Plan</span>
+</button>
+</div>
+</div>
+<textarea class="flex-1 max-h-32 min-h-[40px] bg-transparent border-none outline-none resize-none py-2 font-body-md text-[15px] text-on-surface placeholder:text-outline/60 custom-scrollbar" oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 128) + 'px'" placeholder="Type your message..." rows="1"></textarea>
+<button class="w-10 h-10 rounded-xl flex items-center justify-center text-outline hover:bg-surface-container hover:text-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">sentiment_satisfied</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-[0_2px_8px_rgba(0,65,200,0.25)] hover:bg-surface-tint hover:scale-105 transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-[20px] translate-x-[1px]">send</span>
+</button>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-sm text-[10px] text-outline">Press <kbd class="px-1 py-0.5 rounded bg-surface-container border border-outline-variant/20 font-sans">Enter</kbd> to send, <kbd class="px-1 py-0.5 rounded bg-surface-container border border-outline-variant/20 font-sans">Shift + Enter</kbd> for new line.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+    /* Custom scrollbar for inner areas */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(115, 118, 136, 0.2);
+        border-radius: 20px;
+    }
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(115, 118, 136, 0.4);
+    }
+</style>
+<script>
+    // Simple script to auto-scroll chat to bottom on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatContainer = document.getElementById('chat-container');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    });
+</script></main></div>
+
+</body></html>

@@ -1,0 +1,201 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; background: #f9f9fc; } body { overscroll-behavior: none; -webkit-font-smoothing: antialiased; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); } .bg-azure-gradient { background: linear-gradient(180deg, #f0f4ff 0%, #f9f9fc 100%); min-height: 100vh; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-primary-fixed-variant': '#0039b3', 'inverse-on-surface': '#f0f0f3', 'primary-container': '#0055ff', 'tertiary': '#972500', 'on-primary': '#ffffff', 'surface-bright': '#f9f9fc', 'secondary': '#4648d4', 'on-tertiary-fixed': '#3b0900', 'on-tertiary-container': '#ffe1d9', 'error': '#ba1a1a', 'background': '#f9f9fc', 'tertiary-fixed': '#ffdbd1', 'secondary-fixed': '#e1e0ff', 'on-secondary-container': '#fffbff', 'outline-variant': '#c3c5d9', 'surface-tint': '#004dea', 'inverse-surface': '#2f3133', 'inverse-primary': '#b6c4ff', 'on-tertiary': '#ffffff', 'surface-container-low': '#f3f3f6', 'on-tertiary-fixed-variant': '#872100', 'on-error-container': '#93000a', 'surface-variant': '#e2e2e5', 'surface-dim': '#dadadc', 'primary-fixed': '#dce1ff', 'on-primary-fixed': '#001551', 'secondary-fixed-dim': '#c0c1ff', 'primary-fixed-dim': '#b6c4ff', 'primary': '#0041c8', 'on-secondary': '#ffffff', 'on-surface': '#1a1c1e', 'on-primary-container': '#e3e6ff', 'on-surface-variant': '#434656', 'outline': '#737688', 'surface-container-lowest': '#ffffff', 'surface-container-high': '#e8e8ea', 'on-secondary-fixed-variant': '#2f2ebe', 'on-background': '#1a1c1e', 'surface-container': '#eeeef0', 'on-error': '#ffffff', 'secondary-container': '#6063ee', 'surface-container-highest': '#e2e2e5', 'on-secondary-fixed': '#07006c', 'tertiary-fixed-dim': '#ffb5a0', 'tertiary-container': '#c13301', 'surface': '#f9f9fc', 'error-container': '#ffdad6' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'unit': '8px', 'gutter': '24px', 'container-max': '1280px', 'margin-mobile': '16px', 'margin-desktop': '48px' }, fontFamily: { 'headline-lg-mobile': ['Manrope'], 'headline-lg': ['Manrope'], 'body-md': ['Inter'], 'label-sm': ['JetBrains Mono'], 'display-lg': ['Manrope'] }, fontSize: { 'headline-lg-mobile': ['24px', { 'lineHeight': '32px', 'fontWeight': '700' }], 'headline-lg': ['32px', { 'lineHeight': '40px', 'letterSpacing': '-0.01em', 'fontWeight': '700' }], 'body-md': ['16px', { 'lineHeight': '24px', 'fontWeight': '400' }], 'label-sm': ['12px', { 'lineHeight': '16px', 'letterSpacing': '0.05em', 'fontWeight': '500' }], 'display-lg': ['56px', { 'lineHeight': '64px', 'letterSpacing': '-0.02em', 'fontWeight': '800' }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-azure-gradient font-body-md text-body-md text-on-background"><header class="fixed top-0 inset-x-0 z-50 glass pt-safe"><div class="h-16 px-margin-mobile flex items-center gap-4"><button class="w-11 h-11 flex items-center justify-center text-on-surface hover:bg-white/50 rounded-full transition-colors" onclick="history.back()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button><h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface flex-1 truncate uppercase tracking-tight">Profile</h1><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex flex-col relative w-full pt-16"><div class="flex flex-col w-full relative">
+<!-- Profile Header with Blurred Background -->
+<div class="relative w-full h-[320px] bg-cover bg-center overflow-hidden flex flex-col justify-end pb-8" data-alt="A cinematic, low-light shot inside a high-end luxury gym. Deep azure and royal blue lighting highlights sleek, modern fitness equipment. A subtle mist creates depth, and the mood is intense, focused, and premium. The lighting perfectly matches a serene but powerful aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAa9yFVxVCAHgKgpqFMRDLhoPYtx-6RX_nskk4nLC-yguX5vO505TIsIwyh5o9lqMvwqjq0sdOqy3sTgILNrcPRtb0tFGTCVrUSdIZCEcTPwZEwmN3TCkGHZaG4QKWOFIHD37HC2rQPLFVkFsdUdK1mRSnabWFP_8fwVvj1rIzzyp5vGxRlPwliPY-gUsksV_XBAYdU-EWcrCViYq6EPlKIyawnZ5W_q5VdtSKtUFz0qRC1L1NBlEkm')">
+<!-- Gradient Scrim for Readability -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="relative z-10 px-margin-mobile flex flex-col items-center text-center">
+<!-- Avatar -->
+<div class="relative w-24 h-24 mb-4">
+<div class="w-full h-full rounded-full overflow-hidden glass p-1 shadow-xl">
+<img class="w-full h-full rounded-full object-cover" data-alt="A close-up portrait of a fit, athletic individual in their late 20s. They are wearing a minimalist, high-performance dark blue athletic top. The lighting is soft and flattering, highlighting a determined but calm expression. The background is a soft out-of-focus gym environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA8Q-uKBFjGRR54SUWFEcbKoLKvt7-bgaapBAQ6WDF6gAguDtqSc-4YF-IAIL2AjfGj4wS1fjZLLDh8xqAA9l0fKx85ySWeSTabJjj2m1dbY2_lCGfjp8f8ku6aaS6VVuumSKaNjRlPDxxHgmCr9U_Hx0lndlPkg6wcOiFm1L34-Xu_z4izYZ03QVGBzX8znjHPXDLymUezmax219Ww5xjQNqIjGfhFyih14ORD7-R2IOcfzmyxeBm"/>
+</div>
+<!-- Active Status Badge -->
+<div class="absolute bottom-1 right-1 w-5 h-5 bg-tertiary-container rounded-full border-2 border-background flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[12px] text-on-tertiary-container font-bold" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Bio -->
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-1">Alex Mercer</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">Hyrox Competitor • Minimalist Trainer • Finding calm in the chaos.</p>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="px-margin-mobile flex flex-col gap-gutter pb-safe mt-6">
+<!-- QR Entry Card (Glassmorphism & Interactive) -->
+<button class="w-full relative overflow-hidden rounded-xl bg-primary-container p-6 shadow-lg transform transition-all duration-300 active:scale-95 group text-left" id="qr-entry-btn">
+<!-- Ambient Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary-container/80 uppercase tracking-widest mb-1">Quick Access</span>
+<h3 class="font-headline-lg-mobile text-[20px] font-bold text-on-primary-container leading-tight">Tap for Entry Pass</h3>
+</div>
+<div class="w-14 h-14 bg-on-primary-container rounded-lg shadow-inner flex items-center justify-center p-2 group-hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-primary-container text-4xl">qr_code_scanner</span>
+</div>
+</div>
+</button>
+<!-- Gym Details Bento -->
+<div class="flex flex-col gap-4">
+<h3 class="font-headline-lg-mobile text-[18px] text-on-background mb-2">My Membership</h3>
+<!-- Subscription Status Card -->
+<div class="glass rounded-xl p-5 shadow-sm border-t border-l border-white/20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[24px]">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md font-bold text-on-surface">Pro Tier</span>
+<span class="font-label-sm text-on-surface-variant">Billed Monthly ($89)</span>
+</div>
+</div>
+<span class="px-3 py-1 bg-[#E0EFFF] rounded-full font-label-sm text-primary font-bold">Active</span>
+</div>
+<!-- Gym Location Card -->
+<div class="glass rounded-xl overflow-hidden shadow-sm border-t border-l border-white/20 flex flex-col">
+<!-- Map Visualization -->
+<div class="w-full h-32 bg-cover bg-center relative" data-location="Titan Gym Flagship, San Francisco" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAD2CRyp2aLjMoqfjOaSojeyaphhdTzyJ60O5JMEc_7HOEvr73F7Qhzbokmi3XFsknrAXep-F5gWKPrXODVsoqv8fzIrPpSZ33QCOtJgaSw2Tu3dNAA6SI3x14QnnXhCy7FwgCVFCYem1AW_oAVWswHNqnsMaRkvk5duXA-kHG3UzPlzEydMCPlb2IAKZOJecqlLi6SQeDHFmR9HaAqrnLoYlkELjcbO57upNhMA3hSh3Zo10FqXOR_')">
+<div class="absolute inset-0 bg-primary/10"></div>
+</div>
+<div class="p-5 flex items-center justify-between bg-surface-bright/70 backdrop-blur-md">
+<div class="flex flex-col">
+<span class="font-body-md font-bold text-on-surface">Titan Gym Flagship</span>
+<span class="font-label-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                 1240 Fitness Blvd, SF
+              </span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface text-[20px]">directions</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Settings List -->
+<div class="flex flex-col gap-4 mt-4">
+<h3 class="font-headline-lg-mobile text-[18px] text-on-background mb-2">Settings &amp; Activity</h3>
+<div class="glass rounded-xl flex flex-col overflow-hidden shadow-sm border-t border-l border-white/20">
+<!-- List Item 1 -->
+<button class="flex items-center justify-between p-4 bg-transparent hover:bg-white/40 transition-colors w-full text-left">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="font-body-md text-on-surface">Visit History</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</button>
+<!-- Divider (Soft, Minimal) -->
+<div class="w-full h-[1px] bg-outline-variant/30 ml-16"></div>
+<!-- List Item 2 -->
+<button class="flex items-center justify-between p-4 bg-transparent hover:bg-white/40 transition-colors w-full text-left">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<span class="font-body-md text-on-surface">Payment Methods</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</button>
+<!-- Divider -->
+<div class="w-full h-[1px] bg-outline-variant/30 ml-16"></div>
+<!-- List Item 3 -->
+<button class="flex items-center justify-between p-4 bg-transparent hover:bg-white/40 transition-colors w-full text-left">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<span class="font-body-md text-on-surface">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</button>
+</div>
+<!-- Logout Button (Ghost) -->
+<button class="mt-4 w-full py-4 rounded-xl glass border border-error/20 text-error font-body-md font-bold flex items-center justify-center gap-2 hover:bg-error-container/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+        Sign Out
+      </button>
+</div>
+</div>
+<!-- Hidden QR Modal Structure (Injected via JS for interaction) -->
+<div class="fixed inset-0 z-[100] bg-surface/95 backdrop-blur-xl flex flex-col items-center justify-center px-margin-mobile opacity-0 pointer-events-none transition-opacity duration-300" id="qr-modal">
+<button class="absolute top-safe right-margin-mobile w-12 h-12 mt-4 rounded-full bg-surface-container flex items-center justify-center text-on-surface" id="close-qr-btn">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="w-full max-w-sm bg-white rounded-3xl p-8 shadow-2xl flex flex-col items-center transform translate-y-8 transition-transform duration-500 ease-out" id="qr-card">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Scan to Enter</h2>
+<p class="font-body-md text-on-surface-variant text-center mb-8">Align this code with the scanner at the front desk.</p>
+<!-- Simulated QR Code SVG -->
+<div class="w-64 h-64 bg-surface-container rounded-xl flex items-center justify-center mb-8 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+<svg class="w-48 h-48 text-on-surface" fill="currentColor" viewbox="0 0 24 24">
+<path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-2 3h2v2h-2v-2zm-1-3h2v2h-2v-2zm-2 0h2v2h-2v-2zm0-3h2v2h-2v-2zm0 6h2v2h-2v-2z"></path>
+</svg>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full origin-left" id="qr-progress"></div>
+</div>
+<p class="font-label-sm text-on-surface-variant mt-4 text-center">Refreshes in <span id="qr-timer">30</span>s</p>
+</div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const qrBtn = document.getElementById('qr-entry-btn');
+    const qrModal = document.getElementById('qr-modal');
+    const closeBtn = document.getElementById('close-qr-btn');
+    const qrCard = document.getElementById('qr-card');
+    const timerDisplay = document.getElementById('qr-timer');
+    const progressBar = document.getElementById('qr-progress');
+    let timerInterval;
+
+    function startTimer() {
+      let timeLeft = 30;
+      progressBar.style.transition = 'none';
+      progressBar.style.transform = 'scaleX(1)';
+      
+      // Force reflow
+      void progressBar.offsetWidth;
+      
+      progressBar.style.transition = 'transform 30s linear';
+      progressBar.style.transform = 'scaleX(0)';
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          // In a real app, regenerate QR here. For demo, just restart visual loop.
+          startTimer();
+        }
+      }, 1000);
+    }
+
+    function openModal() {
+      qrModal.classList.remove('opacity-0', 'pointer-events-none');
+      qrModal.classList.add('opacity-100');
+      setTimeout(() => {
+        qrCard.classList.remove('translate-y-8');
+        qrCard.classList.add('translate-y-0');
+      }, 50);
+      startTimer();
+    }
+
+    function closeModal() {
+      qrModal.classList.remove('opacity-100');
+      qrModal.classList.add('opacity-0', 'pointer-events-none');
+      qrCard.classList.remove('translate-y-0');
+      qrCard.classList.add('translate-y-8');
+      clearInterval(timerInterval);
+    }
+
+    qrBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+  });
+</script></main></body></html>
