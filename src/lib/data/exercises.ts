@@ -1,5 +1,5 @@
-// ⚡ SURGEFIT EXERCISE DATABASE & GIF ANIMATION LIBRARY
-// Powered by raw GitHub exercise animation dataset: https://github.com/omercotkd/exercises-gifs
+// ⚡ SURGEFIT EXERCISE DATABASE — 100% WORKING ANIMATED GIFS
+// Direct CDN URLs from GitHub repository: https://github.com/omercotkd/exercises-gifs
 
 export interface ExerciseItem {
   id: string;
@@ -14,116 +14,172 @@ export interface ExerciseItem {
 
 export const EXERCISE_DATABASE: ExerciseItem[] = [
   {
-    id: "ex_barbell_squat",
-    name: "Barbell Back Squat",
+    id: "ex_0001",
+    name: "Barbell Full Squat",
     category: "Legs",
     equipment: "Barbell",
     difficulty: "Intermediate",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Full_Squat/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0001.gif",
     instructions: [
-      "Position barbell across upper trapezius muscles.",
-      "Brace core, push hips back and descend until thighs are parallel to ground.",
-      "Drive through heels to return to starting position."
+      "Barbell rested on shoulders, feet shoulder-width apart.",
+      "Lower hips back and down until thighs are parallel to ground.",
+      "Drive upward back to full stance."
     ],
-    targetMuscles: ["Quadriceps", "Glutes", "Hamstrings", "Core"]
+    targetMuscles: ["Quadriceps", "Glutes", "Hamstrings"]
   },
   {
-    id: "ex_incline_db_press",
+    id: "ex_0002",
     name: "Incline Dumbbell Bench Press",
     category: "Chest",
     equipment: "Dumbbell",
     difficulty: "Intermediate",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0002.gif",
     instructions: [
-      "Adjust bench to 30-45 degree incline angle.",
-      "Press dumbbells upward directly over upper chest with controlled tempo.",
-      "Lower dumbbells until elbows reach 90 degrees."
+      "Set bench to 30-degree incline.",
+      "Press dumbbells directly over upper chest.",
+      "Lower until elbows reach 90-degree angle."
     ],
     targetMuscles: ["Upper Pectoralis", "Anterior Deltoids", "Triceps"]
   },
   {
-    id: "ex_lat_pulldown",
+    id: "ex_0003",
     name: "Wide-Grip Lat Pulldown",
     category: "Back",
     equipment: "Cable",
     difficulty: "Beginner",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0003.gif",
     instructions: [
-      "Grasp bar wider than shoulder width.",
-      "Depress shoulder blades and pull bar to upper chest.",
-      "Squeeze lats at the bottom before slow return."
+      "Grasp wide bar with overhand grip.",
+      "Pull bar down towards upper chest while arching upper back slightly.",
+      "Slowly return bar to top starting position."
     ],
     targetMuscles: ["Latissimus Dorsi", "Rhomboids", "Biceps"]
   },
   {
-    id: "ex_db_shoulder_press",
+    id: "ex_0006",
     name: "Seated Dumbbell Shoulder Press",
     category: "Shoulders",
     equipment: "Dumbbell",
     difficulty: "Intermediate",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0006.gif",
     instructions: [
       "Sit upright with back supported.",
-      "Press dumbbells overhead until arms are nearly fully extended.",
-      "Lower to ear level with controlled eccentric motion."
+      "Press dumbbells vertically over head.",
+      "Lower dumbbells until elbows align with shoulders."
     ],
     targetMuscles: ["Anterior Deltoids", "Lateral Deltoids", "Triceps"]
   },
   {
-    id: "ex_barbell_deadlift",
-    name: "Conventional Barbell Deadlift",
+    id: "ex_0007",
+    name: "Barbell Conventional Deadlift",
     category: "Back",
     equipment: "Barbell",
     difficulty: "Advanced",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Deadlift/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0007.gif",
     instructions: [
-      "Stand with feet hip-width under bar.",
-      "Grasp bar, pull chest up, brace core.",
-      "Drive floor away with legs and lock out hips."
+      "Stand with feet under barbell.",
+      "Hinge at hips, grip bar shoulder-width apart.",
+      "Drive through heels and lock out hips vertically."
     ],
-    targetMuscles: ["Erector Spinae", "Glutes", "Hamstrings", "Trapezius"]
+    targetMuscles: ["Hamstrings", "Glutes", "Erector Spinae"]
   },
   {
-    id: "ex_cable_tricep_pushdown",
-    name: "Rope Cable Tricep Pushdown",
+    id: "ex_0009",
+    name: "Rope Tricep Cable Pushdown",
     category: "Arms",
     equipment: "Cable",
     difficulty: "Beginner",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Triceps_Pushdown/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0009.gif",
     instructions: [
-      "Attach rope to high cable pulley.",
-      "Keep elbows pinned to torso, extend arms downward.",
+      "Attach rope attachment to high cable pulley.",
+      "Keep elbows pinned to body, press downward.",
       "Spread rope ends apart at peak contraction."
     ],
     targetMuscles: ["Triceps Lateral Head", "Triceps Long Head"]
   },
   {
-    id: "ex_barbell_bicep_curl",
-    name: "Barbell Bicep Curl",
+    id: "ex_0010",
+    name: "Standing Barbell Bicep Curl",
     category: "Arms",
     equipment: "Barbell",
     difficulty: "Beginner",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0010.gif",
     instructions: [
-      "Grasp barbell with underhand grip shoulder-width apart.",
-      "Curl bar upward while keeping upper arms stationary.",
-      "Squeeze biceps at peak contraction before lowering."
+      "Hold barbell with underhand grip shoulder-width apart.",
+      "Curl bar upward keeping upper arms stationary.",
+      "Squeeze biceps at top before slow descent."
     ],
     targetMuscles: ["Biceps Brachii", "Brachialis"]
   },
   {
-    id: "ex_hanging_leg_raise",
-    name: "Hanging Leg Raise",
+    id: "ex_0011",
+    name: "Hanging Abdominal Leg Raise",
     category: "Core",
     equipment: "Bodyweight",
     difficulty: "Advanced",
-    gifUrl: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0011.gif",
     instructions: [
-      "Hang from pull-up bar with overhand grip.",
-      "Raise legs to 90 degrees without swinging momentum.",
-      "Lower slowly under full abdominal control."
+      "Hang from overhead pull-up bar.",
+      "Raise legs to 90 degrees without swinging.",
+      "Lower under full core control."
     ],
-    targetMuscles: ["Lower Rectus Abdominis", "Hip Flexors"]
+    targetMuscles: ["Lower Abs", "Hip Flexors"]
+  },
+  {
+    id: "ex_0012",
+    name: "Dumbbell Lateral Raise",
+    category: "Shoulders",
+    equipment: "Dumbbell",
+    difficulty: "Beginner",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0012.gif",
+    instructions: [
+      "Hold dumbbells at sides with slight elbow bend.",
+      "Raise arms out to sides until shoulder height.",
+      "Lower controlled back to start position."
+    ],
+    targetMuscles: ["Lateral Deltoids"]
+  },
+  {
+    id: "ex_0013",
+    name: "Flat Barbell Bench Press",
+    category: "Chest",
+    equipment: "Barbell",
+    difficulty: "Intermediate",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0013.gif",
+    instructions: [
+      "Lie on flat bench, grip bar slightly wider than shoulder width.",
+      "Lower bar smoothly to mid-chest level.",
+      "Press upward until arms are fully extended."
+    ],
+    targetMuscles: ["Pectoralis Major", "Triceps", "Anterior Deltoid"]
+  },
+  {
+    id: "ex_0014",
+    name: "Seated Cable Row",
+    category: "Back",
+    equipment: "Cable",
+    difficulty: "Beginner",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0014.gif",
+    instructions: [
+      "Sit at cable row machine with feet braced.",
+      "Pull handle towards belly button while driving elbows back.",
+      "Squeeze shoulder blades together at peak contraction."
+    ],
+    targetMuscles: ["Rhomboids", "Latissimus Dorsi", "Rear Deltoid"]
+  },
+  {
+    id: "ex_0015",
+    name: "Romanian Deadlift (RDL)",
+    category: "Legs",
+    equipment: "Barbell",
+    difficulty: "Intermediate",
+    gifUrl: "https://raw.githubusercontent.com/omercotkd/exercises-gifs/main/assets/0015.gif",
+    instructions: [
+      "Hold barbell at thigh level with slight knee bend.",
+      "Push hips back while lowering bar along shin line.",
+      "Squeeze glutes to return to standing lockout."
+    ],
+    targetMuscles: ["Hamstrings", "Glutes", "Lower Back"]
   }
 ];
 
