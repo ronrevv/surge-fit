@@ -3,24 +3,21 @@
 import React, { useState } from "react";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
+import { WorkoutPlannerModal } from "../planner/WorkoutPlannerModal";
+import { DietPlannerModal } from "../planner/DietPlannerModal";
+import { EXERCISE_DATABASE } from "@/lib/data/exercises";
 import {
   Dumbbell,
   Users,
   Calendar,
   Sparkles,
   Plus,
-  CheckCircle2,
   Apple,
   TrendingUp,
-  MessageSquare,
   PlusCircle,
-  Clock,
   Search,
-  ChevronRight,
   Send,
   Video,
-  AlertCircle,
-  FileText,
 } from "lucide-react";
 
 interface TrainerViewProps {
@@ -30,12 +27,14 @@ interface TrainerViewProps {
 export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   const [selectedClient, setSelectedClient] = useState("Sarah Jenkins");
   const [clientSearch, setClientSearch] = useState("");
+  const [workoutPlannerOpen, setWorkoutPlannerOpen] = useState(false);
+  const [dietPlannerOpen, setDietPlannerOpen] = useState(false);
 
   // Workout Builder State
   const [exerciseList, setExerciseList] = useState([
-    { name: "Incline Dumbbell Press", sets: "4", reps: "8-10", rest: "90s" },
-    { name: "Cable Chest Flyes", sets: "3", reps: "12-15", rest: "60s" },
-    { name: "Barbell Dips", sets: "3", reps: "10-12", rest: "60s" },
+    { name: "Barbell Back Squat", sets: "4", reps: "6", rest: "120s" },
+    { name: "Incline Dumbbell Bench Press", sets: "4", reps: "8-10", rest: "90s" },
+    { name: "Wide-Grip Lat Pulldown", sets: "3", reps: "10-12", rest: "60s" },
   ]);
   const [newExerciseName, setNewExerciseName] = useState("");
 
@@ -80,10 +79,22 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
           </p>
         </div>
 
-        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs sm:text-sm shadow-sm transition">
-          <Plus className="w-4 h-4" />
-          <span>Launch Workout Builder</span>
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setWorkoutPlannerOpen(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs sm:text-sm shadow-sm transition"
+          >
+            <Dumbbell className="w-4 h-4" />
+            <span>Launch Workout Planner</span>
+          </button>
+          <button
+            onClick={() => setDietPlannerOpen(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl surge-card text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition"
+          >
+            <Apple className="w-4 h-4" />
+            <span>Diet Planner</span>
+          </button>
+        </div>
       </div>
 
       {/* COMMAND CENTER DASHBOARD TAB */}
@@ -122,6 +133,34 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
               sparklineData={[1, 1, 1, 1, 1, 1, 1]}
             />
           </div>
+
+          {/* Exercise Animation Library Preview */}
+          <GlassCard>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                <Dumbbell className="w-5 h-5 text-slate-500" />
+                Exercise GIF Animation Library (omercotkd/exercises-gifs)
+              </h3>
+              <button
+                onClick={() => setWorkoutPlannerOpen(true)}
+                className="text-xs font-mono-data font-bold text-slate-900 dark:text-white underline"
+              >
+                View All {EXERCISE_DATABASE.length} Exercises
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {EXERCISE_DATABASE.slice(0, 4).map((ex) => (
+                <div key={ex.id} className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                  <div className="aspect-video w-full rounded-lg overflow-hidden bg-black/40 mb-2">
+                    <img src={ex.gifUrl} alt={ex.name} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="font-bold text-xs text-slate-900 dark:text-white truncate">{ex.name}</p>
+                  <p className="text-[10px] text-slate-500 font-mono-data mt-0.5">{ex.category} • {ex.equipment}</p>
+                </div>
+              ))}
+            </div>
+          </GlassCard>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Roster Column */}
@@ -273,12 +312,15 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
               </h3>
               <p className="text-xs text-slate-500">Configure sets, reps, and rest timers for client assignment.</p>
             </div>
-            <button className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs shadow-sm transition">
-              Save Template
+            <button
+              onClick={() => setWorkoutPlannerOpen(true)}
+              className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs shadow-sm transition flex items-center gap-2"
+            >
+              <Dumbbell className="w-4 h-4" />
+              <span>Launch Full Workout Planner</span>
             </button>
           </div>
 
-          {/* Exercise Sequence List */}
           <div className="space-y-3 mb-6">
             {exerciseList.map((ex, idx) => (
               <div key={idx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs sm:text-sm">
@@ -297,24 +339,6 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
               </div>
             ))}
           </div>
-
-          {/* Add Exercise Bar */}
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Add exercise (e.g. Romanian Deadlifts)..."
-              value={newExerciseName}
-              onChange={(e) => setNewExerciseName(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && addExercise()}
-              className="w-full surge-card p-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:outline-none"
-            />
-            <button
-              onClick={addExercise}
-              className="px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs shrink-0 transition"
-            >
-              Add Exercise
-            </button>
-          </div>
         </GlassCard>
       )}
 
@@ -326,7 +350,13 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
               <Apple className="w-5 h-5 text-slate-500" />
               Client Diet & Macro Plan Builder
             </h3>
-            <span className="text-xs font-mono-data text-slate-500">4 Active Templates</span>
+            <button
+              onClick={() => setDietPlannerOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs shadow-sm transition flex items-center gap-1.5"
+            >
+              <Apple className="w-3.5 h-3.5" />
+              <span>Open Diet Planner</span>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -346,117 +376,22 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
         </GlassCard>
       )}
 
-      {/* BOOKING CALENDAR TAB */}
-      {activeTab === "calendar" && (
-        <GlassCard>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-slate-500" />
-              Personal Training Appointment Schedule
-            </h3>
-            <span className="text-xs font-mono-data text-slate-500">Today: 6 Sessions</span>
-          </div>
+      {/* MODAL MODES */}
+      <WorkoutPlannerModal
+        isOpen={workoutPlannerOpen}
+        onClose={() => setWorkoutPlannerOpen(false)}
+        onRoutineSaved={(title) => {
+          alert(`Saved routine "${title}" directly to backend database!`);
+        }}
+      />
 
-          <div className="space-y-2">
-            {[
-              { time: "09:00 AM - 10:00 AM", client: "Sarah Jenkins", type: "1-on-1 Powerlifting Check-in", status: "Completed" },
-              { time: "11:30 AM - 12:30 PM", client: "Marcus Brody", type: "Hypertrophy Upper Body", status: "Completed" },
-              { time: "02:00 PM - 03:00 PM", client: "Elena Rostova", type: "Heavy Squats Spotting", status: "Upcoming" },
-              { time: "04:30 PM - 05:30 PM", client: "David Chen", type: "Mobility & Recovery Flow", status: "Upcoming" },
-            ].map((slot, idx) => (
-              <div key={idx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between text-xs sm:text-sm">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono-data font-bold text-slate-500">{slot.time}</span>
-                  <div>
-                    <p className="font-semibold text-slate-900 dark:text-white">{slot.client}</p>
-                    <p className="text-[11px] text-slate-500">{slot.type}</p>
-                  </div>
-                </div>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono-data border bg-slate-100 text-slate-900 dark:bg-white/10 dark:text-white border-slate-200 dark:border-white/10">
-                  {slot.status}
-                </span>
-              </div>
-            ))}
-          </div>
-        </GlassCard>
-      )}
-
-      {/* CLIENT CHAT TAB */}
-      {activeTab === "chat" && (
-        <GlassCard>
-          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold">
-                SJ
-              </div>
-              <div>
-                <h3 className="font-display font-bold text-sm text-slate-900 dark:text-white">Sarah Jenkins</h3>
-                <p className="text-[11px] text-slate-500">Active Client • 140kg Squat PR</p>
-              </div>
-            </div>
-            <button className="p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300">
-              <Video className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="space-y-3 max-h-[320px] overflow-y-auto mb-4 p-2">
-            {trainerChatMessages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.sender === "trainer" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[80%] p-3 rounded-2xl text-xs ${
-                    msg.sender === "trainer"
-                      ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-medium"
-                      : "bg-slate-100 dark:bg-white/10 text-slate-800 dark:text-slate-200"
-                  }`}
-                >
-                  <p>{msg.text}</p>
-                  <span className="text-[10px] opacity-60 mt-1 block text-right font-mono-data">{msg.time}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
-            <input
-              type="text"
-              value={trainerChatInput}
-              onChange={(e) => setTrainerChatInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSendTrainerChat()}
-              placeholder="Send feedback or workout advice to Sarah..."
-              className="w-full surge-card p-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 rounded-xl focus:outline-none"
-            />
-            <button
-              onClick={handleSendTrainerChat}
-              className="p-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 transition"
-            >
-              <Send className="w-4 h-4" />
-            </button>
-          </div>
-        </GlassCard>
-      )}
-
-      {/* AI GENERATOR TAB */}
-      {activeTab === "ai_copilot" && (
-        <GlassCard>
-          <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="w-5 h-5 text-slate-900 dark:text-white" />
-            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">
-              Surge AI Workout & Meal Copilot (Gemini 3.6)
-            </h3>
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-            Instant Gemini 3.6 workout split and diet plan generator tailored for client PR progression and injury prevention.
-          </p>
-
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono-data space-y-2 text-slate-800 dark:text-slate-200">
-            <p className="font-bold text-slate-900 dark:text-white">⚡ AI Instant Plan Generator Prompt:</p>
-            <p>"Generate 4-week Push/Pull/Legs split for intermediate lifter returning from shoulder impingement."</p>
-            <button className="mt-2 px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs shadow-sm">
-              Execute AI Generation
-            </button>
-          </div>
-        </GlassCard>
-      )}
+      <DietPlannerModal
+        isOpen={dietPlannerOpen}
+        onClose={() => setDietPlannerOpen(false)}
+        onPlanSaved={(title) => {
+          alert(`Saved diet plan "${title}" directly to backend database!`);
+        }}
+      />
     </div>
   );
 }
