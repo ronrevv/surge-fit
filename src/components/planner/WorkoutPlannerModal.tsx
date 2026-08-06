@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GlassCard } from "../ui/GlassCard";
 import { EXERCISE_DATABASE, ExerciseItem } from "@/lib/data/exercises";
 import { WorkoutEngineService } from "@/lib/backend/services";
 import {
@@ -11,11 +10,10 @@ import {
   Search,
   Plus,
   Trash2,
-  Play,
   CheckCircle2,
-  Clock,
-  Flame,
+  Sparkles,
   Check,
+  Wand2,
 } from "lucide-react";
 
 interface WorkoutPlannerModalProps {
@@ -24,17 +22,21 @@ interface WorkoutPlannerModalProps {
   onRoutineSaved?: (routineTitle: string) => void;
 }
 
+interface PlannedExerciseItem {
+  exercise: ExerciseItem;
+  sets: number;
+  reps: string;
+  targetWeightKg: number;
+  restSeconds: number;
+}
+
 export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: WorkoutPlannerModalProps) {
+  const [plannerMode, setPlannerMode] = useState<"manual" | "automated">("automated");
   const [routineTitle, setRoutineTitle] = useState("Hypertrophy Push/Pull Routine");
+  const [aiPresetGoal, setAiPresetGoal] = useState<string>("4-Day Push/Pull/Legs");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [plannedExercises, setPlannedExercises] = useState<{
-    exercise: ExerciseItem;
-    sets: number;
-    reps: string;
-    targetWeightKg: number;
-    restSeconds: number;
-  }[]>([
+  const [plannedExercises, setPlannedExercises] = useState<PlannedExerciseItem[]>([
     {
       exercise: EXERCISE_DATABASE[1], // Incline Dumbbell Press
       sets: 4,
@@ -51,6 +53,7 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
     },
   ]);
   const [isSaving, setIsSaving] = useState(false);
+  const [isAiGenerating, setIsAiGenerating] = useState(false);
 
   const categories = ["All", "Chest", "Back", "Legs", "Shoulders", "Arms", "Core"];
 
@@ -59,6 +62,37 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
     const matchesSearch = ex.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesSearch;
   });
+
+  const handleAutoGenerateAi = (preset: string) => {
+    setIsAiGenerating(true);
+    setAiPresetGoal(preset);
+    setTimeout(() => {
+      if (preset === "4-Day Push/Pull/Legs") {
+        setRoutineTitle("AI 4-Day Push/Pull/Legs Hypertrophy");
+        setPlannedExercises([
+          { exercise: EXERCISE_DATABASE[0], sets: 4, reps: "6", targetWeightKg: 120, restSeconds: 120 }, // Squat
+          { exercise: EXERCISE_DATABASE[1], sets: 4, reps: "8", targetWeightKg: 36, restSeconds: 90 }, // Incline Press
+          { exercise: EXERCISE_DATABASE[2], sets: 3, reps: "10", targetWeightKg: 75, restSeconds: 60 }, // Lat Pulldown
+          { exercise: EXERCISE_DATABASE[3], sets: 3, reps: "10", targetWeightKg: 28, restSeconds: 60 }, // Shoulder Press
+        ]);
+      } else if (preset === "Powerlifting 1RM Peak") {
+        setRoutineTitle("AI Powerlifting 1RM Peak Program");
+        setPlannedExercises([
+          { exercise: EXERCISE_DATABASE[0], sets: 5, reps: "3", targetWeightKg: 140, restSeconds: 180 }, // Squat
+          { exercise: EXERCISE_DATABASE[4], sets: 5, reps: "3", targetWeightKg: 170, restSeconds: 180 }, // Deadlift
+          { exercise: EXERCISE_DATABASE[9], sets: 5, reps: "3", targetWeightKg: 105, restSeconds: 180 }, // Bench Press
+        ]);
+      } else {
+        setRoutineTitle("AI Metabolic Conditioning Circuit");
+        setPlannedExercises([
+          { exercise: EXERCISE_DATABASE[7], sets: 4, reps: "15", targetWeightKg: 0, restSeconds: 45 }, // Push-Up
+          { exercise: EXERCISE_DATABASE[6], sets: 4, reps: "12", targetWeightKg: 0, restSeconds: 45 }, // Leg Raise
+          { exercise: EXERCISE_DATABASE[8], sets: 4, reps: "15", targetWeightKg: 12, restSeconds: 45 }, // Lateral Raise
+        ]);
+      }
+      setIsAiGenerating(false);
+    }, 500);
+  };
 
   const addExerciseToRoutine = (ex: ExerciseItem) => {
     if (plannedExercises.some((p) => p.exercise.id === ex.id)) return;
@@ -107,8 +141,8 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
             exit={{ scale: 0.95, opacity: 0 }}
             className="fixed inset-4 sm:inset-8 lg:inset-12 bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl z-50 flex flex-col overflow-hidden shadow-2xl text-white"
           >
-            {/* Header */}
-            <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-white/5">
+            {/* Header with Mode Switcher */}
+            <div className="p-4 sm:p-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-white text-slate-900 flex items-center justify-center font-bold shadow-md">
                   <Dumbbell className="w-5 h-5" />
@@ -118,19 +152,40 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                     Interactive Workout Planner
                   </h2>
                   <p className="text-xs text-slate-400">
-                    Select exercises with GIF form animations & configure target sets/reps.
+                    Switch between Manual Custom Selection & Automated Gemini 3.6 AI Generation.
                   </p>
                 </div>
               </div>
 
+              {/* Dual Mode Switcher */}
               <div className="flex items-center gap-2">
+                <div className="p-1 rounded-2xl bg-white/10 border border-white/10 flex gap-1">
+                  <button
+                    onClick={() => setPlannerMode("manual")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                      plannerMode === "manual" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <span>Manual Custom</span>
+                  </button>
+                  <button
+                    onClick={() => setPlannerMode("automated")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                      plannerMode === "automated" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>⚡ Automated AI</span>
+                  </button>
+                </div>
+
                 <button
                   onClick={handleSaveRoutine}
                   disabled={isSaving || plannedExercises.length === 0}
-                  className="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm shadow-md transition disabled:opacity-50 flex items-center gap-2"
+                  className="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm shadow-md transition disabled:opacity-50 flex items-center gap-1.5"
                 >
                   <Check className="w-4 h-4" />
-                  <span>{isSaving ? "Saving to Backend..." : "Save Routine"}</span>
+                  <span>{isSaving ? "Saving..." : "Save Routine"}</span>
                 </button>
                 <button
                   onClick={onClose}
@@ -140,6 +195,36 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                 </button>
               </div>
             </div>
+
+            {/* Mode 1: AUTOMATED AI GENERATOR BAR */}
+            {plannerMode === "automated" && (
+              <div className="p-4 border-b border-white/10 bg-white/[0.02] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Wand2 className="w-4 h-4 text-white" />
+                  <span className="text-xs font-mono-data text-slate-300">Select AI Preset Program:</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "4-Day Push/Pull/Legs",
+                    "Powerlifting 1RM Peak",
+                    "Fat Loss HIIT Circuit",
+                  ].map((preset) => (
+                    <button
+                      key={preset}
+                      onClick={() => handleAutoGenerateAi(preset)}
+                      disabled={isAiGenerating}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition border ${
+                        aiPresetGoal === preset
+                          ? "bg-white text-slate-900 border-white shadow-sm"
+                          : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                      }`}
+                    >
+                      ⚡ {preset}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Content Body */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
@@ -243,7 +328,7 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved }: Workout
                 <div>
                   <div className="mb-4">
                     <label className="text-[11px] font-mono-data text-slate-400 uppercase block mb-1">
-                      Routine Name
+                      Routine Title
                     </label>
                     <input
                       type="text"

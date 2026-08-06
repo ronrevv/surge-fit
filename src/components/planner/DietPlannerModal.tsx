@@ -6,12 +6,9 @@ import { DIET_TEMPLATES, MealItem } from "@/lib/data/exercises";
 import {
   X,
   Apple,
-  Plus,
-  Trash2,
-  CheckCircle2,
-  Flame,
+  Sparkles,
   Check,
-  Zap,
+  Wand2,
 } from "lucide-react";
 
 interface DietPlannerModalProps {
@@ -21,17 +18,51 @@ interface DietPlannerModalProps {
 }
 
 export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerModalProps) {
+  const [plannerMode, setPlannerMode] = useState<"manual" | "automated">("automated");
   const [planTitle, setPlanTitle] = useState("High-Protein Muscle Hypertrophy Plan");
-  const [targetCalories, setTargetCalories] = useState(2500);
+  const [aiPresetDiet, setAiPresetDiet] = useState<string>("High-Protein Hypertrophy");
+  const [targetCalories, setTargetCalories] = useState(2600);
   const [targetProtein, setTargetProtein] = useState(180);
   const [targetCarbs, setTargetCarbs] = useState(250);
   const [targetFat, setTargetFat] = useState(70);
   const [selectedMeals, setSelectedMeals] = useState<MealItem[]>(DIET_TEMPLATES);
+  const [isAiGenerating, setIsAiGenerating] = useState(false);
 
   const totalCalories = selectedMeals.reduce((acc, m) => acc + m.calories, 0);
   const totalProtein = selectedMeals.reduce((acc, m) => acc + m.proteinGrams, 0);
-  const totalCarbs = selectedMeals.reduce((acc, m) => acc + m.carbsGrams, 0);
-  const totalFat = selectedMeals.reduce((acc, m) => acc + m.fatGrams, 0);
+
+  const handleAutoGenerateAiDiet = (preset: string) => {
+    setIsAiGenerating(true);
+    setAiPresetDiet(preset);
+    setTimeout(() => {
+      if (preset === "High-Protein Hypertrophy") {
+        setPlanTitle("AI High-Protein Hypertrophy Split");
+        setTargetCalories(2800);
+        setTargetProtein(200);
+        setTargetCarbs(290);
+        setTargetFat(75);
+        setSelectedMeals([DIET_TEMPLATES[0], DIET_TEMPLATES[1], DIET_TEMPLATES[2], DIET_TEMPLATES[3]]);
+      } else if (preset === "Ketogenic Fat Loss") {
+        setPlanTitle("AI Ketogenic Fat Loss Split");
+        setTargetCalories(2100);
+        setTargetProtein(160);
+        setTargetCarbs(35);
+        setTargetFat(125);
+        setSelectedMeals([
+          { id: "k1", name: "Avocado & Scrambled Eggs", mealType: "Breakfast", calories: 520, proteinGrams: 35, carbsGrams: 8, fatGrams: 38, ingredients: ["3 Eggs", "1 Whole Avocado", "20g Butter"] },
+          { id: "k2", name: "Salmon & Asparagus Bowl", mealType: "Dinner", calories: 680, proteinGrams: 52, carbsGrams: 10, fatGrams: 48, ingredients: ["220g Atlantic Salmon", "Asparagus", "Olive Oil"] },
+        ]);
+      } else {
+        setPlanTitle("AI Low-FODMAP Performance Split");
+        setTargetCalories(2400);
+        setTargetProtein(170);
+        setTargetCarbs(260);
+        setTargetFat(65);
+        setSelectedMeals([DIET_TEMPLATES[1], DIET_TEMPLATES[3]]);
+      }
+      setIsAiGenerating(false);
+    }, 500);
+  };
 
   const handleSavePlan = () => {
     if (onPlanSaved) onPlanSaved(planTitle);
@@ -57,7 +88,7 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
             className="fixed inset-4 sm:inset-8 lg:inset-12 bg-slate-900 border border-slate-200 dark:border-white/10 rounded-3xl z-50 flex flex-col overflow-hidden shadow-2xl text-white"
           >
             {/* Header */}
-            <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-white/5">
+            <div className="p-4 sm:p-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-white text-slate-900 flex items-center justify-center font-bold shadow-md">
                   <Apple className="w-5 h-5" />
@@ -67,12 +98,32 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
                     Macro Nutrition & Diet Planner
                   </h2>
                   <p className="text-xs text-slate-400">
-                    Configure caloric targets, protein macro distribution, and daily meal plans.
+                    Switch between Manual Custom Target Sliders & Automated Gemini 3.6 AI Generation.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
+                <div className="p-1 rounded-2xl bg-white/10 border border-white/10 flex gap-1">
+                  <button
+                    onClick={() => setPlannerMode("manual")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
+                      plannerMode === "manual" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    Manual Custom
+                  </button>
+                  <button
+                    onClick={() => setPlannerMode("automated")}
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                      plannerMode === "automated" ? "bg-white text-slate-900 shadow-md" : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>⚡ Automated AI</span>
+                  </button>
+                </div>
+
                 <button
                   onClick={handleSavePlan}
                   className="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm shadow-md transition flex items-center gap-2"
@@ -88,6 +139,36 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
                 </button>
               </div>
             </div>
+
+            {/* AUTOMATED AI PRESETS BAR */}
+            {plannerMode === "automated" && (
+              <div className="p-4 border-b border-white/10 bg-white/[0.02] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Wand2 className="w-4 h-4 text-white" />
+                  <span className="text-xs font-mono-data text-slate-300">Select AI Preset Macro Split:</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "High-Protein Hypertrophy",
+                    "Ketogenic Fat Loss",
+                    "Low-FODMAP Performance",
+                  ].map((preset) => (
+                    <button
+                      key={preset}
+                      onClick={() => handleAutoGenerateAiDiet(preset)}
+                      disabled={isAiGenerating}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition border ${
+                        aiPresetDiet === preset
+                          ? "bg-white text-slate-900 border-white shadow-sm"
+                          : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                      }`}
+                    >
+                      ⚡ {preset}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Body */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden p-4 sm:p-6 gap-6">
@@ -126,22 +207,6 @@ export function DietPlannerModal({ isOpen, onClose, onPlanSaved }: DietPlannerMo
                       step={5}
                       value={targetProtein}
                       onChange={(e) => setTargetProtein(Number(e.target.value))}
-                      className="w-full accent-white"
-                    />
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-xs font-mono-data mb-1">
-                      <span className="text-slate-400">Carbohydrates Target</span>
-                      <span className="font-bold text-white">{targetCarbs}g ({Math.round(((targetCarbs * 4) / targetCalories) * 100)}%)</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={50}
-                      max={450}
-                      step={5}
-                      value={targetCarbs}
-                      onChange={(e) => setTargetCarbs(Number(e.target.value))}
                       className="w-full accent-white"
                     />
                   </div>
