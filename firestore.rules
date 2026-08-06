@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function: verify user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function: verify user matches target document UID
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId);
+    }
+    
+    // Organizations collection (Gym Chains & Independents)
+    match /organizations/{orgId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.token.role in ['super_admin', 'chain_owner'];
+    }
+    
+    // Workout Routines collection
+    match /workout_routines/{routineId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.token.role in ['super_admin', 'chain_owner', 'trainer', 'independent_trainer'];
+    }
+    
+    // Turnstile Check-ins collection
+    match /checkins/{checkinId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && request.auth.token.role in ['super_admin', 'branch_manager'];
+    }
+  }
+}
