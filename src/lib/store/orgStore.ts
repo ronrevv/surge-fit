@@ -364,21 +364,36 @@ class OrgStore {
   }
 
   /**
-   * Called from page.tsx whenever the role switcher changes.
-   * Auto-resolves chain/branch/trainer IDs from the store so views
-   * always show real, linked data.
+   * Called from page.tsx whenever the role switcher or PersonaPickerModal changes.
+   * Auto-resolves or explicitly targets chain/branch/trainer IDs from the store
+   * so multi-tenant hierarchy supports multiple gym chains, branch managers, trainers, and trainees cleanly.
    */
-  setSession(role: RoleType) {
+  setSession(role: RoleType, targetEntityId?: string) {
     switch (role) {
       case "super_admin":
         this.session = { role, name: "Super Admin" };
         break;
       case "chain_owner": {
-        // Find the first chain where we have a chain_owner user, OR just pick first chain
-        const ownerUser = this.users.find((u) => u.role === "chain_owner");
-        const chain = ownerUser
-          ? this.chains.find((c) => c.id === ownerUser.organizationId)
-          : this.chains[0];
+        let chain: GymChain | undefined;
+        let ownerUser: AppUser | undefined;
+
+        if (targetEntityId) {
+          chain = this.chains.find((c) => c.id === targetEntityId);
+          if (!chain) {
+            ownerUser = this.users.find((u) => u.id === targetEntityId);
+            if (ownerUser) chain = this.chains.find((c) => c.id === ownerUser?.organizationId);
+          } else {
+            ownerUser = this.users.find((u) => u.organizationId === chain?.id && u.role === "chain_owner");
+          }
+        }
+
+        if (!chain) {
+          ownerUser = this.users.find((u) => u.role === "chain_owner");
+          chain = ownerUser
+            ? this.chains.find((c) => c.id === ownerUser?.organizationId)
+            : this.chains[0];
+        }
+
         this.session = {
           role,
           userId: ownerUser?.id,
@@ -388,7 +403,9 @@ class OrgStore {
         break;
       }
       case "chain_manager": {
-        const mgr = this.users.find((u) => u.role === "chain_manager");
+        const mgr = targetEntityId
+          ? this.users.find((u) => u.id === targetEntityId)
+          : this.users.find((u) => u.role === "chain_manager");
         this.session = {
           role,
           userId: mgr?.id,
@@ -399,7 +416,9 @@ class OrgStore {
         break;
       }
       case "branch_manager": {
-        const bm = this.users.find((u) => u.role === "branch_manager" && u.status === "active");
+        const bm = targetEntityId
+          ? this.users.find((u) => u.id === targetEntityId)
+          : this.users.find((u) => u.role === "branch_manager" && u.status === "active") || this.users.find((u) => u.role === "branch_manager");
         this.session = {
           role,
           userId: bm?.id,
@@ -410,7 +429,9 @@ class OrgStore {
         break;
       }
       case "trainer": {
-        const tr = this.users.find((u) => u.role === "trainer" && u.status === "active");
+        const tr = targetEntityId
+          ? this.users.find((u) => u.id === targetEntityId)
+          : this.users.find((u) => u.role === "trainer" && u.status === "active") || this.users.find((u) => u.role === "trainer");
         this.session = {
           role,
           userId: tr?.id,
@@ -422,7 +443,9 @@ class OrgStore {
         break;
       }
       case "independent_trainer": {
-        const it = this.users.find((u) => u.role === "independent_trainer");
+        const it = targetEntityId
+          ? this.users.find((u) => u.id === targetEntityId)
+          : this.users.find((u) => u.role === "independent_trainer");
         this.session = {
           role,
           userId: it?.id,
@@ -432,7 +455,9 @@ class OrgStore {
         break;
       }
       case "trainee": {
-        const tn = this.users.find((u) => u.role === "trainee" && u.status === "active");
+        const tn = targetEntityId
+          ? this.users.find((u) => u.id === targetEntityId)
+          : this.users.find((u) => u.role === "trainee" && u.status === "active") || this.users.find((u) => u.role === "trainee");
         this.session = {
           role,
           userId: tn?.id,

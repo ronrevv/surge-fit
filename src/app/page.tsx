@@ -28,6 +28,8 @@ import {
   LogOut,
 } from "lucide-react";
 
+import { PersonaPickerModal } from "@/components/navigation/PersonaPickerModal";
+
 export default function SurgeFitApp() {
   // Auth Protected State Machine
   const [appState, setAppState] = useState<"auth" | "onboarding" | "app">("auth");
@@ -37,11 +39,12 @@ export default function SurgeFitApp() {
   const [isDark, setIsDark] = useState(true);
   const [commandOpen, setCommandOpen] = useState(false);
   const [chainModalOpen, setChainModalOpen] = useState(false);
+  const [personaPickerRole, setPersonaPickerRole] = useState<RoleType | null>(null);
 
-  const handleRoleChange = (role: RoleType) => {
+  const handleRoleChange = (role: RoleType, targetEntityId?: string) => {
     setCurrentRole(role);
     // Sync the store session so every view reads live linked data
-    store.setSession(role);
+    store.setSession(role, targetEntityId);
     const firstItem = ROLE_NAVIGATION[role]?.[0]?.id || "dashboard";
     setActiveTab(firstItem);
   };
@@ -86,6 +89,7 @@ export default function SurgeFitApp() {
         isDark={isDark}
         onToggleTheme={() => setIsDark(!isDark)}
         onOpenCommand={() => setCommandOpen(true)}
+        onOpenPersonaPicker={(role) => setPersonaPickerRole(role)}
       />
 
       {/* Main Workspace Area with Full Screen Width Layout */}
@@ -109,12 +113,23 @@ export default function SurgeFitApp() {
         </div>
       </main>
 
-
       <CommandPalette
         isOpen={commandOpen}
         onClose={() => setCommandOpen(false)}
         onSelectRole={handleRoleChange}
       />
+
+      {/* Persona Picker Modal for multi-tenant entity selection */}
+      {personaPickerRole && (
+        <PersonaPickerModal
+          role={personaPickerRole}
+          onSelect={(entityId) => {
+            handleRoleChange(personaPickerRole, entityId);
+            setPersonaPickerRole(null);
+          }}
+          onClose={() => setPersonaPickerRole(null)}
+        />
+      )}
 
       {/* Gym Chain Onboarding Modal */}
       <OnboardChainModal

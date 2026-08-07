@@ -32,6 +32,7 @@ interface TopNavBarProps {
   isDark: boolean;
   onToggleTheme: () => void;
   onOpenCommand: () => void;
+  onOpenPersonaPicker?: (role: RoleType) => void;
 }
 
 const ROLES_CONFIG: Record<
@@ -53,6 +54,7 @@ export function TopNavBar({
   isDark,
   onToggleTheme,
   onOpenCommand,
+  onOpenPersonaPicker,
 }: TopNavBarProps) {
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
   const [notifDrawerOpen, setNotifDrawerOpen] = useState(false);
@@ -102,11 +104,12 @@ export function TopNavBar({
                 exit={{ opacity: 0, y: 6, scale: 0.98 }}
                 className="absolute right-0 sm:left-0 mt-2 w-64 surge-card rounded-2xl p-2 shadow-xl z-50"
               >
-                <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10 mb-1">
+                <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10 mb-1 flex items-center justify-between">
                   <p className="text-[11px] font-mono-data text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     Switch Workspace Role
                   </p>
                 </div>
+
                 {(Object.keys(ROLES_CONFIG) as RoleType[]).map((role) => {
                   const isSelected = role === currentRole;
                   return (
@@ -130,6 +133,20 @@ export function TopNavBar({
                     </button>
                   );
                 })}
+
+                {onOpenPersonaPicker && (
+                  <div className="mt-1 pt-1.5 border-t border-slate-200 dark:border-white/10">
+                    <button
+                      onClick={() => {
+                        setRoleDropdownOpen(false);
+                        onOpenPersonaPicker(currentRole);
+                      }}
+                      className="w-full text-center px-3 py-1.5 rounded-xl text-[11px] font-mono-data font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition"
+                    >
+                      ⚡ Pick Specific Entity Persona…
+                    </button>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

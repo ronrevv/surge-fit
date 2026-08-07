@@ -25,11 +25,19 @@ import {
   Award,
 } from "lucide-react";
 
+import { useStore } from "@/lib/store/useStore";
+
 interface TraineeViewProps {
   activeTab?: string;
 }
 
 export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
+  const s = useStore();
+  const session = s.getSession();
+  const traineeUser = session.userId ? s.getUserById(session.userId) : s.getUsers().find((u) => u.role === "trainee" && u.status === "active");
+  const assignedTrainer = traineeUser?.trainerId ? s.getUserById(traineeUser.trainerId) : null;
+  const assignedBranch = traineeUser?.branchId ? s.getBranchById(traineeUser.branchId) : null;
+
   // Workout State
   const [activeWorkout, setActiveWorkout] = useState(false);
   const [restSeconds, setRestSeconds] = useState(60);
@@ -42,7 +50,7 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
 
   // Chat State
   const [chatMessages, setChatMessages] = useState([
-    { sender: "coach", text: "Great work on that 140kg Squat PR today Sarah! How are your hamstrings feeling?", time: "10:30 AM" },
+    { sender: "coach", text: `Great work today ${traineeUser?.name?.split(" ")[0] || "Athlete"}! How are your hamstrings feeling?`, time: "10:30 AM" },
     { sender: "user", text: "Felt strong! Slight tightness in lower back, but foam rolled right after.", time: "10:32 AM" },
   ]);
   const [inputChat, setInputChat] = useState("");
@@ -84,11 +92,11 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
           <div className="flex items-center gap-2">
             <Flame className="w-6 h-6 text-slate-900 dark:text-white" />
             <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">
-              Trainee Athlete Pulse
+              {traineeUser?.name || "Trainee Athlete"} Pulse
             </h1>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
-            Welcome back, Athlete • <span className="font-bold font-mono-data text-slate-900 dark:text-white">🔥 14-Day Streak Active</span>
+            Goal: <span className="font-bold text-slate-900 dark:text-white">{traineeUser?.goal || "Fitness & Performance"}</span> • {assignedTrainer ? `Trainer: ${assignedTrainer.name}` : "Online Program"} • {assignedBranch ? assignedBranch.name : "Remote"}
           </p>
         </div>
 
@@ -441,11 +449,11 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
           <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold">
-                CD
+                {assignedTrainer?.name ? assignedTrainer.name.split(" ").map(n => n[0]).join("") : "TR"}
               </div>
               <div>
-                <h3 className="font-display font-bold text-sm text-slate-900 dark:text-white">Coach Dave</h3>
-                <p className="text-[11px] text-slate-500">Assigned Head Trainer • Online</p>
+                <h3 className="font-display font-bold text-sm text-slate-900 dark:text-white">{assignedTrainer?.name || "Assigned Coach"}</h3>
+                <p className="text-[11px] text-slate-500">{assignedTrainer?.specialization || "Head Trainer"} • Online</p>
               </div>
             </div>
           </div>
