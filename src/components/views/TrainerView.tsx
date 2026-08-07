@@ -18,11 +18,6 @@ interface TrainerViewProps {
   activeTab?: string;
 }
 
-// In production these come from auth session
-const MY_TRAINER_ID = "user_tr_001";
-const MY_BRANCH_ID = "branch_001";
-const MY_ORG_ID = "chain_001";
-const MY_NAME = "Coach Dave Reynolds";
 
 function OnboardTraineeModal({ trainerId, branchId, orgId, actorName, onClose }: {
   trainerId: string; branchId: string; orgId: string; actorName: string; onClose: () => void;
@@ -147,7 +142,14 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
     { sender: "trainer", text: "Boom! Exceptional execution. Let's increase target to 97.5kg next week.", time: "09:16 AM" },
   ]);
 
-  const myTrainees = s.getTraineesByTrainer(MY_TRAINER_ID);
+  // Live session
+  const session = s.getSession();
+  const myTrainerId = session.trainerId || s.getUsers().find((u) => u.role === "trainer" && u.status === "active")?.id || "";
+  const myBranchId = session.branchId || "";
+  const myOrgId = session.chainId || "";
+  const myName = session.name || "Trainer";
+
+  const myTrainees = s.getTraineesByTrainer(myTrainerId);
   const filteredTrainees = myTrainees.filter(
     (t) => t.name.toLowerCase().includes(clientSearch.toLowerCase())
   );
@@ -177,8 +179,8 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
       <AnimatePresence>
         {traineeModalOpen && (
           <OnboardTraineeModal
-            trainerId={MY_TRAINER_ID} branchId={MY_BRANCH_ID}
-            orgId={MY_ORG_ID} actorName={MY_NAME}
+            trainerId={myTrainerId} branchId={myBranchId}
+            orgId={myOrgId} actorName={myName}
             onClose={() => setTraineeModalOpen(false)}
           />
         )}
@@ -194,7 +196,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             </h1>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
-            {MY_NAME} · {myTrainees.length} trainees active
+            {myName} · {myTrainees.length} trainees active
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">

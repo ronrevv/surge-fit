@@ -16,8 +16,7 @@ interface ChainOwnerViewProps {
   activeTab?: string;
 }
 
-// Hard-coded to chain_001 for demo — in production this comes from auth session
-const MY_CHAIN_ID = "chain_001";
+
 
 function CreateBranchModal({ chainId, onClose }: { chainId: string; onClose: () => void }) {
   const s = useStore();
@@ -103,18 +102,22 @@ export function ChainOwnerView({ activeTab = "dashboard" }: ChainOwnerViewProps)
   const s = useStore();
   const [branchModalOpen, setBranchModalOpen] = useState(false);
 
-  const chain = s.getChainById(MY_CHAIN_ID);
-  const branches = s.getBranchesByChain(MY_CHAIN_ID);
-  const chainStats = s.getChainStats(MY_CHAIN_ID);
+  // Read from live session — updated whenever the role switcher fires
+  const session = s.getSession();
+  const myChainId = session.chainId || s.getChains()[0]?.id || "";
+
+  const chain = s.getChainById(myChainId);
+  const branches = s.getBranchesByChain(myChainId);
+  const chainStats = s.getChainStats(myChainId);
   const allUsers = s.getUsers();
 
-  const branchManagers = allUsers.filter((u) => u.role === "branch_manager" && u.organizationId === MY_CHAIN_ID);
-  const trainers = allUsers.filter((u) => u.role === "trainer" && u.organizationId === MY_CHAIN_ID);
+  const branchManagers = allUsers.filter((u) => u.role === "branch_manager" && u.organizationId === myChainId);
+  const trainers = allUsers.filter((u) => u.role === "trainer" && u.organizationId === myChainId);
 
   return (
     <div className="space-y-6">
       <AnimatePresence>
-        {branchModalOpen && <CreateBranchModal chainId={MY_CHAIN_ID} onClose={() => setBranchModalOpen(false)} />}
+        {branchModalOpen && <CreateBranchModal chainId={myChainId} onClose={() => setBranchModalOpen(false)} />}
       </AnimatePresence>
 
       {/* Header */}

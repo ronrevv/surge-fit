@@ -10,18 +10,19 @@ interface ChainManagerViewProps {
   activeTab?: string;
 }
 
-// Chain manager oversees multiple branches of chain_001
-const MY_CHAIN_ID = "chain_001";
 
 export function ChainManagerView({ activeTab = "dashboard" }: ChainManagerViewProps) {
   const s = useStore();
 
-  const branches = s.getBranchesByChain(MY_CHAIN_ID);
-  const chain = s.getChainById(MY_CHAIN_ID);
-  const chainStats = s.getChainStats(MY_CHAIN_ID);
+  const session = s.getSession();
+  const myChainId = session.chainId || s.getChains()[0]?.id || "";
+
+  const branches = s.getBranchesByChain(myChainId);
+  const chain = s.getChainById(myChainId);
+  const chainStats = s.getChainStats(myChainId);
   const allUsers = s.getUsers();
-  const trainers = allUsers.filter((u) => u.role === "trainer" && u.organizationId === MY_CHAIN_ID);
-  const trainees = allUsers.filter((u) => u.role === "trainee" && u.organizationId === MY_CHAIN_ID);
+  const trainers = allUsers.filter((u) => u.role === "trainer" && u.organizationId === myChainId);
+  const trainees = allUsers.filter((u) => u.role === "trainee" && u.organizationId === myChainId);
 
   return (
     <div className="space-y-6">

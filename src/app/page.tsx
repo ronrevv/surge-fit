@@ -8,6 +8,7 @@ import { SidebarNav, ROLE_NAVIGATION } from "@/components/navigation/SidebarNav"
 
 import { CommandPalette } from "@/components/navigation/CommandPalette";
 import { OnboardChainModal } from "@/components/modals/OnboardChainModal";
+import { store } from "@/lib/store/orgStore";
 
 // Workspace Views
 import { SuperAdminView } from "@/components/views/SuperAdminView";
@@ -39,6 +40,8 @@ export default function SurgeFitApp() {
 
   const handleRoleChange = (role: RoleType) => {
     setCurrentRole(role);
+    // Sync the store session so every view reads live linked data
+    store.setSession(role);
     const firstItem = ROLE_NAVIGATION[role]?.[0]?.id || "dashboard";
     setActiveTab(firstItem);
   };

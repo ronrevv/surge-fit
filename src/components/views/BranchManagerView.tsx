@@ -14,10 +14,6 @@ interface BranchManagerViewProps {
   activeTab?: string;
 }
 
-// In production, branchId & actorName come from auth session
-const MY_BRANCH_ID = "branch_001";
-const MY_ORG_ID = "chain_001";
-const MY_NAME = "James Harrington";
 
 function OnboardTrainerModal({ branchId, orgId, actorName, onClose }: {
   branchId: string; orgId: string; actorName: string; onClose: () => void;
@@ -117,10 +113,16 @@ export function BranchManagerView({ activeTab = "dashboard" }: BranchManagerView
   const [trainerModalOpen, setTrainerModalOpen] = useState(false);
   const [memberSearch, setMemberSearch] = useState("");
 
-  const branch = s.getBranchById(MY_BRANCH_ID);
-  const trainers = s.getTrainersByBranch(MY_BRANCH_ID);
-  const trainees = s.getTraineesByBranch(MY_BRANCH_ID);
-  const allMembers = s.getUsersByBranch(MY_BRANCH_ID).filter((u) => u.role !== "branch_manager");
+  // Live session — resolved from store whenever role changes
+  const session = s.getSession();
+  const myBranchId = session.branchId || s.getBranches()[0]?.id || "";
+  const myOrgId = session.chainId || "";
+  const myName = session.name || "Branch Manager";
+
+  const branch = s.getBranchById(myBranchId);
+  const trainers = s.getTrainersByBranch(myBranchId);
+  const trainees = s.getTraineesByBranch(myBranchId);
+  const allMembers = s.getUsersByBranch(myBranchId).filter((u) => u.role !== "branch_manager");
 
   const filteredMembers = allMembers.filter(
     (m) => m.name.toLowerCase().includes(memberSearch.toLowerCase()) ||
@@ -132,9 +134,9 @@ export function BranchManagerView({ activeTab = "dashboard" }: BranchManagerView
       <AnimatePresence>
         {trainerModalOpen && (
           <OnboardTrainerModal
-            branchId={MY_BRANCH_ID}
-            orgId={MY_ORG_ID}
-            actorName={MY_NAME}
+            branchId={myBranchId}
+            orgId={myOrgId}
+            actorName={myName}
             onClose={() => setTrainerModalOpen(false)}
           />
         )}

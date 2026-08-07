@@ -19,10 +19,6 @@ interface IndependentTrainerViewProps {
   activeTab?: string;
 }
 
-// In production this comes from auth session
-const MY_TRAINER_ID = "user_it_001";
-const MY_NAME = "Ryan Owens";
-
 function OnboardClientModal({ trainerId, actorName, onClose }: {
   trainerId: string; actorName: string; onClose: () => void;
 }) {
@@ -139,8 +135,13 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     { sender: "trainer", text: "Checked it — hip hinge looks pristine. Let's push to 180kg next week.", time: "11:10 AM" },
   ]);
 
-  const myProfile = s.getUserById(MY_TRAINER_ID);
-  const myClients = s.getTraineesByTrainer(MY_TRAINER_ID);
+  // Live session
+  const session = s.getSession();
+  const myTrainerId = session.trainerId || s.getUsers().find((u) => u.role === "independent_trainer")?.id || "";
+  const myName = session.name || "Independent Trainer";
+
+  const myProfile = s.getUserById(myTrainerId);
+  const myClients = s.getTraineesByTrainer(myTrainerId);
   const filteredClients = myClients.filter(
     (c) => c.name.toLowerCase().includes(clientSearch.toLowerCase())
   );
@@ -163,7 +164,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     <div className="space-y-6">
       <AnimatePresence>
         {clientModalOpen && (
-          <OnboardClientModal trainerId={MY_TRAINER_ID} actorName={MY_NAME} onClose={() => setClientModalOpen(false)} />
+          <OnboardClientModal trainerId={myTrainerId} actorName={myName} onClose={() => setClientModalOpen(false)} />
         )}
       </AnimatePresence>
 
@@ -177,7 +178,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
             </h1>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
-            {MY_NAME} · {myProfile?.specialization} · {myClients.length} online clients
+            {myName} · {myProfile?.specialization} · {myClients.length} online clients
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">

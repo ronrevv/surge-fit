@@ -74,6 +74,18 @@ export interface AuditLog {
   severity: "info" | "warn" | "critical";
 }
 
+// ─── SESSION CONTEXT ─────────────────────────────────────────────────────────
+// Simulates the JWT / auth session. Set when role changes in the UI.
+// Every view reads from this so data flows across the full hierarchy.
+export interface SessionContext {
+  role: RoleType;
+  userId?: string;      // the currently-logged-in user's ID
+  chainId?: string;     // chain they belong to (chain_owner, chain_manager, branch_manager, trainer)
+  branchId?: string;    // branch they manage / work in
+  trainerId?: string;   // trainer ID (trainer role only)
+  name?: string;        // display name
+}
+
 // ─── INITIAL SEED DATA ────────────────────────────────────────────────────────
 
 const SEED_CHAINS: GymChain[] = [
@@ -335,8 +347,103 @@ class OrgStore {
   private auditLogs: AuditLog[] = [...SEED_AUDIT];
   private listeners: Set<() => void> = new Set();
 
+  // Default session maps each role to seed data so it works out of the box
+  private session: SessionContext = {
+    role: "super_admin",
+    name: "Super Admin",
+  };
+
   private notify() {
     this.listeners.forEach((fn) => fn());
+  }
+
+  // ── SESSION ───────────────────────────────────────────────────────────────
+
+  getSession(): SessionContext {
+    return this.session;
+  }
+
+  /**
+   * Called from page.tsx whenever the role switcher changes.
+   * Auto-resolves chain/branch/trainer IDs from the store so views
+   * always show real, linked data.
+   */
+  setSession(role: RoleType) {
+    switch (role) {
+      case "super_admin":
+        this.session = { role, name: "Super Admin" };
+        break;
+      case "chain_owner": {
+        // Find the first chain where we have a chain_owner user, OR just pick first chain
+        const ownerUser = this.users.find((u) => u.role === "chain_owner");
+        const chain = ownerUser
+          ? this.chains.find((c) => c.id === ownerUser.organizationId)
+          : this.chains[0];
+        this.session = {
+          role,
+          userId: ownerUser?.id,
+          chainId: chain?.id,
+          name: chain?.ownerName || "Chain Owner",
+        };
+        break;
+      }
+      case "chain_manager": {
+        const mgr = this.users.find((u) => u.role === "chain_manager");
+        this.session = {
+          role,
+          userId: mgr?.id,
+          chainId: mgr?.organizationId,
+          branchId: mgr?.branchId,
+          name: mgr?.name || "Chain Manager",
+        };
+        break;
+      }
+      case "branch_manager": {
+        const bm = this.users.find((u) => u.role === "branch_manager" && u.status === "active");
+        this.session = {
+          role,
+          userId: bm?.id,
+          chainId: bm?.organizationId,
+          branchId: bm?.branchId,
+          name: bm?.name || "Branch Manager",
+        };
+        break;
+      }
+      case "trainer": {
+        const tr = this.users.find((u) => u.role === "trainer" && u.status === "active");
+        this.session = {
+          role,
+          userId: tr?.id,
+          trainerId: tr?.id,
+          branchId: tr?.branchId,
+          chainId: tr?.organizationId,
+          name: tr?.name || "Trainer",
+        };
+        break;
+      }
+      case "independent_trainer": {
+        const it = this.users.find((u) => u.role === "independent_trainer");
+        this.session = {
+          role,
+          userId: it?.id,
+          trainerId: it?.id,
+          name: it?.name || "Independent Trainer",
+        };
+        break;
+      }
+      case "trainee": {
+        const tn = this.users.find((u) => u.role === "trainee" && u.status === "active");
+        this.session = {
+          role,
+          userId: tn?.id,
+          trainerId: tn?.trainerId,
+          branchId: tn?.branchId,
+          name: tn?.name || "Trainee",
+        };
+        break;
+      }
+    }
+    this.notify();
   }
 
   subscribe(fn: () => void) {
@@ -372,7 +479,7 @@ class OrgStore {
     return this.chains.find((c) => c.id === id);
   }
 
-  /** Super Admin: Onboard a new gym chain */
+  /** Super Admin: Onboard a new gym chain + auto-creates chain_owner user */
   onboardGymChain(data: {
     name: string;
     ownerName: string;
@@ -381,8 +488,9 @@ class OrgStore {
     city: string;
     country: string;
   }): GymChain {
+    const chainId = this.uid("chain");
     const chain: GymChain = {
-      id: this.uid("chain"),
+      id: chainId,
       slug: data.name.toLowerCase().replace(/\s+/g, "-").slice(0, 20),
       name: data.name,
       ownerName: data.ownerName,
@@ -396,6 +504,19 @@ class OrgStore {
       country: data.country,
     };
     this.chains.unshift(chain);
+
+    // Auto-create the chain_owner user so ChainOwnerView has real linked data
+    const ownerUser: AppUser = {
+      id: this.uid("user_co"),
+      name: data.ownerName,
+      email: data.ownerEmail,
+      role: "chain_owner",
+      status: "invited",
+      organizationId: chainId,
+      joinedAt: new Date().toISOString().split("T")[0],
+    };
+    this.users.push(ownerUser);
+
     this.addAudit("Gym Chain Onboarded (Pending Approval)", "super_admin", "Super Admin", data.name, "warn");
     this.notify();
     return chain;
