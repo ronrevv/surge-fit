@@ -3,15 +3,29 @@
 import React from "react";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
-import { Building2, BarChart3, TrendingUp, Dumbbell, Users } from "lucide-react";
+import { useStore } from "@/lib/store/useStore";
+import { Building2, TrendingUp, Dumbbell, Users, BarChart3, AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface ChainManagerViewProps {
   activeTab?: string;
 }
 
+// Chain manager oversees multiple branches of chain_001
+const MY_CHAIN_ID = "chain_001";
+
 export function ChainManagerView({ activeTab = "dashboard" }: ChainManagerViewProps) {
+  const s = useStore();
+
+  const branches = s.getBranchesByChain(MY_CHAIN_ID);
+  const chain = s.getChainById(MY_CHAIN_ID);
+  const chainStats = s.getChainStats(MY_CHAIN_ID);
+  const allUsers = s.getUsers();
+  const trainers = allUsers.filter((u) => u.role === "trainer" && u.organizationId === MY_CHAIN_ID);
+  const trainees = allUsers.filter((u) => u.role === "trainee" && u.organizationId === MY_CHAIN_ID);
+
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-white/10">
         <div>
           <div className="flex items-center gap-2">
@@ -21,81 +35,165 @@ export function ChainManagerView({ activeTab = "dashboard" }: ChainManagerViewPr
             </h1>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
-            Regional operations • Active Module: <span className="font-bold uppercase font-mono-data text-slate-900 dark:text-white">{activeTab.replace("_", " ")}</span>
+            {chain?.name} · {branches.length} branches · Overseeing all branch KPIs
           </p>
         </div>
       </div>
 
+      {/* DASHBOARD */}
       {activeTab === "dashboard" && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
               title="Managed Branches"
-              value="12 Locations"
-              subtitle="3 Regional Clusters"
+              value={`${branches.length} Locations`}
+              change={`${branches.filter((b) => b.status === "active").length} active`}
+              changeType="positive"
               icon={<Building2 className="w-4 h-4 text-slate-500" />}
-              sparklineData={[10, 10, 11, 11, 12, 12, 12]}
+              sparklineData={[8, 9, 10, 10, 11, 11, branches.length]}
             />
             <StatCard
-              title="Avg Trainer Utilization"
-              value="88.4%"
-              change="+4.2% efficiency"
+              title="Total Trainers"
+              value={`${chainStats.trainers} Staff`}
+              change="Across all branches"
               changeType="positive"
               icon={<Dumbbell className="w-4 h-4 text-slate-500" />}
-              sparklineData={[80, 82, 84, 85, 86, 87.5, 88.4]}
+              sparklineData={[20, 25, 32, 38, 44, 50, chainStats.trainers]}
             />
             <StatCard
-              title="Regional Member Churn"
-              value="2.1%"
-              change="Optimal (<5% Target)"
+              title="Total Trainees"
+              value={`${chainStats.trainees} Members`}
+              change="Live count"
+              changeType="positive"
+              icon={<Users className="w-4 h-4 text-slate-500" />}
+              sparklineData={[100, 200, 300, 400, 500, 600, chainStats.trainees]}
+            />
+            <StatCard
+              title="Chain MRR"
+              value={`$${(chain?.mrr || 0).toLocaleString()}`}
+              change="Monthly recurring"
               changeType="positive"
               icon={<TrendingUp className="w-4 h-4 text-slate-500" />}
-              sparklineData={[3.5, 3.1, 2.8, 2.5, 2.3, 2.2, 2.1]}
+              sparklineData={[40, 50, 60, 65, 72, 78, (chain?.mrr || 0) / 1000]}
             />
           </div>
 
+          {/* Branch Performance Matrix */}
           <GlassCard>
-            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">Branch Operations & Performance Matrix</h3>
+            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <BarChart3 className="w-4 h-4 text-slate-500" />
+              Branch Operations & Performance Matrix
+            </h3>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                <thead className="border-b border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 font-mono-data text-[11px] uppercase">
+              <table className="w-full text-xs text-slate-700 dark:text-slate-300">
+                <thead className="border-b border-slate-200 dark:border-white/10 font-mono-data text-[10px] uppercase text-slate-500">
                   <tr>
-                    <th className="py-3 px-3">Branch Location</th>
-                    <th className="py-3 px-3">Daily Attendance</th>
-                    <th className="py-3 px-3">Trainer Staff</th>
-                    <th className="py-3 px-3">Retention Rate</th>
-                    <th className="py-3 px-3 text-right">Performance Score</th>
+                    <th className="py-3 px-3 text-left">Branch</th>
+                    <th className="py-3 px-3 text-left">City</th>
+                    <th className="py-3 px-3 text-left">Manager</th>
+                    <th className="py-3 px-3 text-left">Trainers</th>
+                    <th className="py-3 px-3 text-left">Trainees</th>
+                    <th className="py-3 px-3 text-left">Capacity</th>
+                    <th className="py-3 px-3 text-left">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-white/5">
-                  {[
-                    { name: "Downtown Flagship", attendance: "1,240 check-ins", trainers: 18, retention: "96.4%", score: "98/100" },
-                    { name: "Westside Hub", attendance: "940 check-ins", trainers: 14, retention: "94.1%", score: "92/100" },
-                    { name: "North District", attendance: "780 check-ins", trainers: 10, retention: "91.8%", score: "88/100" },
-                  ].map((row, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
-                      <td className="py-3.5 px-3 font-semibold text-slate-900 dark:text-white">{row.name}</td>
-                      <td className="py-3.5 px-3 font-mono-data text-slate-500">{row.attendance}</td>
-                      <td className="py-3.5 px-3 font-mono-data text-slate-500">{row.trainers}</td>
-                      <td className="py-3.5 px-3 font-mono-data font-bold text-slate-900 dark:text-white">{row.retention}</td>
-                      <td className="py-3.5 px-3 text-right font-mono-data font-bold text-slate-900 dark:text-white">{row.score}</td>
-                    </tr>
-                  ))}
+                  {branches.map((branch) => {
+                    const manager = branch.managerId ? s.getUserById(branch.managerId) : null;
+                    const branchTrainers = s.getTrainersByBranch(branch.id);
+                    const branchTrainees = s.getTraineesByBranch(branch.id);
+                    const utilPct = Math.round(((branchTrainees.length + branchTrainers.length) / branch.capacity) * 100);
+                    return (
+                      <tr key={branch.id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
+                        <td className="py-3.5 px-3 font-semibold text-slate-900 dark:text-white">{branch.name}</td>
+                        <td className="py-3.5 px-3 text-slate-500">{branch.city}</td>
+                        <td className="py-3.5 px-3 text-slate-500">{manager?.name || <span className="text-amber-500">Unassigned</span>}</td>
+                        <td className="py-3.5 px-3 font-mono-data font-bold text-slate-900 dark:text-white">{branchTrainers.length}</td>
+                        <td className="py-3.5 px-3 font-mono-data font-bold text-slate-900 dark:text-white">{branchTrainees.length}</td>
+                        <td className="py-3.5 px-3">
+                          <div className="flex items-center gap-2">
+                            <div className="w-20 h-1.5 rounded-full bg-slate-200 dark:bg-white/10">
+                              <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${Math.min(100, utilPct)}%` }} />
+                            </div>
+                            <span className="font-mono-data text-slate-500">{utilPct}%</span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-3">
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-mono-data ${branch.status === "active" ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/25" : "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300"}`}>
+                            {branch.status}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
+            </div>
+          </GlassCard>
+
+          {/* Cross-branch Trainer Overview */}
+          <GlassCard>
+            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">
+              Cross-Branch Trainer Performance
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+              {trainers.map((t) => {
+                const branch = t.branchId ? s.getBranchById(t.branchId) : null;
+                const myTrainees = s.getTraineesByTrainer(t.id);
+                return (
+                  <div key={t.id} className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <p className="font-bold text-slate-900 dark:text-white text-sm">{t.name}</p>
+                        <p className="text-[11px] text-slate-500 mt-0.5">{t.specialization}</p>
+                      </div>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono-data ${t.status === "active" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300" : "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300"}`}>
+                        {t.status}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-400 mb-2">{branch?.name || "No branch"}</p>
+                    <div className="flex justify-between text-center pt-2 border-t border-slate-200 dark:border-white/10">
+                      <div><p className="font-bold font-mono-data text-slate-900 dark:text-white">{myTrainees.length}</p><p className="text-[10px] text-slate-500">Trainees</p></div>
+                      <div><p className="font-bold font-mono-data text-slate-900 dark:text-white">{t.rating?.toFixed(1) || "—"} ★</p><p className="text-[10px] text-slate-500">Rating</p></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </GlassCard>
         </>
       )}
 
-      {activeTab !== "dashboard" && (
+      {/* BRANCHES TAB */}
+      {activeTab === "branches" && (
         <GlassCard>
-          <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white capitalize mb-2">
-            Chain Manager Module: {activeTab.replace("_", " ")}
-          </h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            Regional operations management for {activeTab.replace("_", " ")}. Benchmark branch KPIs, track trainer retention rates, and generate regional growth reports.
-          </p>
+          <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">Branch Network ({branches.length})</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {branches.map((branch) => {
+              const manager = branch.managerId ? s.getUserById(branch.managerId) : null;
+              const branchTrainers = s.getTrainersByBranch(branch.id);
+              const branchTrainees = s.getTraineesByBranch(branch.id);
+              return (
+                <div key={branch.id} className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                  <p className="font-bold text-slate-900 dark:text-white">{branch.name}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{branch.city}</p>
+                  <div className="grid grid-cols-3 gap-2 text-center mt-3 pt-3 border-t border-slate-200 dark:border-white/10">
+                    <div><p className="font-bold font-mono-data text-slate-900 dark:text-white">{branchTrainers.length}</p><p className="text-[10px] text-slate-500">Trainers</p></div>
+                    <div><p className="font-bold font-mono-data text-slate-900 dark:text-white">{branchTrainees.length}</p><p className="text-[10px] text-slate-500">Trainees</p></div>
+                    <div><p className="font-bold font-mono-data text-slate-900 dark:text-white">{branch.capacity}</p><p className="text-[10px] text-slate-500">Cap.</p></div>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-2">Manager: <span className="font-semibold text-slate-700 dark:text-slate-300">{manager?.name || "Unassigned"}</span></p>
+                </div>
+              );
+            })}
+          </div>
+        </GlassCard>
+      )}
+
+      {activeTab !== "dashboard" && activeTab !== "branches" && (
+        <GlassCard>
+          <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white capitalize mb-2">{activeTab.replace(/_/g, " ")}</h3>
+          <p className="text-xs text-slate-500">Chain manager module for {activeTab.replace(/_/g, " ")}.</p>
         </GlassCard>
       )}
     </div>
