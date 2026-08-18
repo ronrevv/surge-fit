@@ -1435,3 +1435,144 @@ export const DIET_TEMPLATES: MealItem[] = [
     ingredients: ["1 Scoop Casein Protein", "250ml Unsweetened Almond Milk", "1 tsp Cocoa Powder"],
   },
 ];
+
+// ─── FOOD DATABASE ───────────────────────────────────────────────────────────
+// 55 real foods with exact macros per 100g + default serving size.
+// Used by the BMI-aware Diet Planner food picker.
+
+export interface FoodItem {
+  id: string;
+  name: string;
+  emoji: string;
+  isVeg: boolean;
+  /** Primary macro this food fills */
+  macroCategory: "protein" | "carbs" | "fats" | "fiber";
+  /** Macros per 100g */
+  per100g: {
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+    fiber: number;
+  };
+  /** Default serving in grams */
+  servingGrams: number;
+  servingLabel: string;
+}
+
+export const FOOD_DATABASE: FoodItem[] = [
+  // ── PROTEIN (Non-Veg) ─────────────────────────────────────────────────────
+  { id: "f_chicken_breast", name: "Chicken Breast", emoji: "🍗", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0 }, servingGrams: 200, servingLabel: "200g fillet" },
+  { id: "f_eggs", name: "Whole Egg", emoji: "🥚", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 155, protein: 13, carbs: 1.1, fat: 11, fiber: 0 }, servingGrams: 60, servingLabel: "1 large egg" },
+  { id: "f_egg_whites", name: "Egg Whites", emoji: "🥣", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 52, protein: 11, carbs: 0.7, fat: 0.2, fiber: 0 }, servingGrams: 120, servingLabel: "4 egg whites" },
+  { id: "f_tuna", name: "Canned Tuna (in water)", emoji: "🐟", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 116, protein: 26, carbs: 0, fat: 1, fiber: 0 }, servingGrams: 185, servingLabel: "1 can" },
+  { id: "f_salmon", name: "Atlantic Salmon", emoji: "🐠", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 208, protein: 20, carbs: 0, fat: 13, fiber: 0 }, servingGrams: 220, servingLabel: "220g fillet" },
+  { id: "f_turkey", name: "Turkey Breast", emoji: "🦃", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 135, protein: 30, carbs: 0, fat: 1, fiber: 0 }, servingGrams: 150, servingLabel: "150g sliced" },
+  { id: "f_shrimp", name: "Shrimp / Prawns", emoji: "🦐", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 99, protein: 24, carbs: 0.2, fat: 0.3, fiber: 0 }, servingGrams: 150, servingLabel: "150g" },
+  { id: "f_whey", name: "Whey Protein Isolate", emoji: "🥤", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 370, protein: 80, carbs: 5, fat: 2, fiber: 0 }, servingGrams: 30, servingLabel: "1 scoop" },
+  { id: "f_casein", name: "Casein Protein", emoji: "🥛", isVeg: false, macroCategory: "protein",
+    per100g: { calories: 360, protein: 78, carbs: 8, fat: 2, fiber: 0 }, servingGrams: 30, servingLabel: "1 scoop" },
+  // ── PROTEIN (Veg) ─────────────────────────────────────────────────────────
+  { id: "f_paneer", name: "Paneer (Cottage Cheese)", emoji: "🧀", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 265, protein: 18, carbs: 3, fat: 20, fiber: 0 }, servingGrams: 100, servingLabel: "100g" },
+  { id: "f_tofu", name: "Firm Tofu", emoji: "🟨", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 76, protein: 8, carbs: 1.9, fat: 4.8, fiber: 0.3 }, servingGrams: 150, servingLabel: "150g block" },
+  { id: "f_greek_yogurt", name: "Greek Yogurt (0% fat)", emoji: "🫙", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 59, protein: 10, carbs: 3.6, fat: 0.4, fiber: 0 }, servingGrams: 250, servingLabel: "250g cup" },
+  { id: "f_dal", name: "Masoor Dal (Red Lentils)", emoji: "🍲", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 116, protein: 9, carbs: 20, fat: 0.4, fiber: 8 }, servingGrams: 150, servingLabel: "1 bowl cooked" },
+  { id: "f_chickpeas", name: "Boiled Chickpeas (Chana)", emoji: "🫘", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 164, protein: 9, carbs: 27, fat: 2.6, fiber: 7.6 }, servingGrams: 150, servingLabel: "1 cup" },
+  { id: "f_moong_dal", name: "Moong Dal (Mung Lentils)", emoji: "💚", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 105, protein: 7, carbs: 19, fat: 0.4, fiber: 5 }, servingGrams: 150, servingLabel: "1 bowl cooked" },
+  { id: "f_soy_milk", name: "Soy Milk (unsweetened)", emoji: "🥛", isVeg: true, macroCategory: "protein",
+    per100g: { calories: 33, protein: 3.3, carbs: 1.5, fat: 1.8, fiber: 0.5 }, servingGrams: 250, servingLabel: "250ml glass" },
+  // ── CARBOHYDRATES (Veg) ───────────────────────────────────────────────────
+  { id: "f_oats", name: "Rolled Oats", emoji: "🌾", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 389, protein: 17, carbs: 66, fat: 7, fiber: 10 }, servingGrams: 80, servingLabel: "80g dry" },
+  { id: "f_white_rice", name: "White Rice (cooked)", emoji: "🍚", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 130, protein: 2.7, carbs: 28, fat: 0.3, fiber: 0.4 }, servingGrams: 180, servingLabel: "1 cup cooked" },
+  { id: "f_brown_rice", name: "Brown Rice (cooked)", emoji: "🍚", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 111, protein: 2.6, carbs: 23, fat: 0.9, fiber: 1.8 }, servingGrams: 180, servingLabel: "1 cup cooked" },
+  { id: "f_roti", name: "Whole Wheat Roti / Chapati", emoji: "🫓", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 297, protein: 10, carbs: 55, fat: 3.7, fiber: 8 }, servingGrams: 40, servingLabel: "1 medium roti" },
+  { id: "f_sweet_potato", name: "Sweet Potato (baked)", emoji: "🍠", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 86, protein: 1.6, carbs: 20, fat: 0.1, fiber: 3 }, servingGrams: 200, servingLabel: "1 medium" },
+  { id: "f_banana", name: "Banana", emoji: "🍌", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6 }, servingGrams: 120, servingLabel: "1 medium" },
+  { id: "f_whole_bread", name: "Whole Wheat Bread", emoji: "🍞", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 247, protein: 13, carbs: 41, fat: 3.4, fiber: 7 }, servingGrams: 60, servingLabel: "2 slices" },
+  { id: "f_pasta", name: "Whole Wheat Pasta (cooked)", emoji: "🍝", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 124, protein: 5.3, carbs: 26, fat: 0.5, fiber: 3.9 }, servingGrams: 200, servingLabel: "1 cup cooked" },
+  { id: "f_quinoa", name: "Quinoa (cooked)", emoji: "🌿", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 120, protein: 4.4, carbs: 21, fat: 1.9, fiber: 2.8 }, servingGrams: 185, servingLabel: "1 cup cooked" },
+  { id: "f_poha", name: "Poha (Flattened Rice)", emoji: "🥣", isVeg: true, macroCategory: "carbs",
+    per100g: { calories: 347, protein: 7, carbs: 76, fat: 1, fiber: 2 }, servingGrams: 75, servingLabel: "1 medium bowl" },
+  // ── FATS (Veg) ────────────────────────────────────────────────────────────
+  { id: "f_almond_butter", name: "Almond Butter", emoji: "🥜", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 614, protein: 21, carbs: 20, fat: 56, fiber: 10 }, servingGrams: 16, servingLabel: "1 tbsp" },
+  { id: "f_avocado", name: "Avocado", emoji: "🥑", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 160, protein: 2, carbs: 9, fat: 15, fiber: 7 }, servingGrams: 150, servingLabel: "1 medium" },
+  { id: "f_olive_oil", name: "Extra Virgin Olive Oil", emoji: "🫒", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 884, protein: 0, carbs: 0, fat: 100, fiber: 0 }, servingGrams: 10, servingLabel: "1 tbsp" },
+  { id: "f_walnuts", name: "Walnuts", emoji: "🫚", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 654, protein: 15, carbs: 14, fat: 65, fiber: 6.7 }, servingGrams: 30, servingLabel: "small handful" },
+  { id: "f_almonds", name: "Almonds", emoji: "🥜", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 579, protein: 21, carbs: 22, fat: 50, fiber: 12.5 }, servingGrams: 30, servingLabel: "small handful" },
+  { id: "f_ghee", name: "Ghee (Clarified Butter)", emoji: "🧈", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 900, protein: 0, carbs: 0, fat: 100, fiber: 0 }, servingGrams: 8, servingLabel: "1 tsp" },
+  { id: "f_coconut_oil", name: "Coconut Oil", emoji: "🥥", isVeg: true, macroCategory: "fats",
+    per100g: { calories: 862, protein: 0, carbs: 0, fat: 100, fiber: 0 }, servingGrams: 10, servingLabel: "1 tbsp" },
+  // ── FATS (Non-Veg) ────────────────────────────────────────────────────────
+  { id: "f_whole_egg_fat", name: "Egg Yolk", emoji: "🟡", isVeg: false, macroCategory: "fats",
+    per100g: { calories: 322, protein: 16, carbs: 3.6, fat: 27, fiber: 0 }, servingGrams: 35, servingLabel: "2 yolks" },
+  // ── FIBER & VEGETABLES (Veg) ──────────────────────────────────────────────
+  { id: "f_broccoli", name: "Broccoli (steamed)", emoji: "🥦", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 35, protein: 2.4, carbs: 7, fat: 0.4, fiber: 2.6 }, servingGrams: 150, servingLabel: "1 cup florets" },
+  { id: "f_spinach", name: "Spinach (raw)", emoji: "🌿", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 23, protein: 2.9, carbs: 3.6, fat: 0.4, fiber: 2.2 }, servingGrams: 100, servingLabel: "2 big handfuls" },
+  { id: "f_apple", name: "Apple", emoji: "🍎", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 52, protein: 0.3, carbs: 14, fat: 0.2, fiber: 2.4 }, servingGrams: 180, servingLabel: "1 medium" },
+  { id: "f_cucumber", name: "Cucumber", emoji: "🥒", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 16, protein: 0.7, carbs: 3.6, fat: 0.1, fiber: 0.5 }, servingGrams: 200, servingLabel: "1 medium" },
+  { id: "f_carrot", name: "Carrot", emoji: "🥕", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 41, protein: 0.9, carbs: 10, fat: 0.2, fiber: 2.8 }, servingGrams: 130, servingLabel: "1 medium" },
+  { id: "f_tomato", name: "Tomato", emoji: "🍅", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 18, protein: 0.9, carbs: 3.9, fat: 0.2, fiber: 1.2 }, servingGrams: 150, servingLabel: "1 medium" },
+  { id: "f_green_beans", name: "Green Beans (French Beans)", emoji: "💚", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 31, protein: 1.8, carbs: 7, fat: 0.1, fiber: 3.4 }, servingGrams: 100, servingLabel: "1 cup" },
+  { id: "f_blueberries", name: "Blueberries", emoji: "🫐", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 57, protein: 0.7, carbs: 14, fat: 0.3, fiber: 2.4 }, servingGrams: 100, servingLabel: "small bowl" },
+  { id: "f_flaxseeds", name: "Flax Seeds (Ground)", emoji: "🌾", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 534, protein: 18, carbs: 29, fat: 42, fiber: 27 }, servingGrams: 15, servingLabel: "1 tbsp" },
+  { id: "f_chia_seeds", name: "Chia Seeds", emoji: "⚫", isVeg: true, macroCategory: "fiber",
+    per100g: { calories: 486, protein: 17, carbs: 42, fat: 31, fiber: 34 }, servingGrams: 15, servingLabel: "1 tbsp" },
+];
+
+export const EXERCISE_INSTRUCTIONS: Record<string, { steps: string[]; tips: string; secondaryMuscles: string[] }> = {
+  ex_0001: { steps: ["Stand with feet shoulder-width apart, barbell on upper traps.", "Brace core and push hips back, descending until thighs are parallel.", "Drive through heels to stand, squeezing glutes at the top.", "Keep chest tall and knees tracking over toes throughout."], tips: "Use a heel wedge if ankle mobility is limited. Film yourself from the side to check depth.", secondaryMuscles: ["Adductors", "Calves", "Core"] },
+  ex_0002: { steps: ["Set incline bench to 30–45°. Hold dumbbells at chest level.", "Press dumbbells up and slightly inward until arms are fully extended.", "Lower slowly in 3 seconds to chest level, elbows at ~75°.", "Pause briefly at bottom then explode up."], tips: "Avoid letting elbows flare wider than 90° — this protects your shoulders.", secondaryMuscles: ["Anterior Deltoid", "Serratus Anterior"] },
+  ex_0003: { steps: ["Grip bar wider than shoulder-width, palms facing away.", "Sit tall, pull shoulder blades down and back before pulling.", "Drive elbows down toward hips, squeezing lats at the bottom.", "Control the ascent over 3 seconds."], tips: "Think 'elbows to back pockets' to fully engage lats instead of biceps.", secondaryMuscles: ["Teres Major", "Rear Deltoid"] },
+  ex_0006: { steps: ["Sit tall on a bench, dumbbells at shoulder height, palms facing forward.", "Press both dumbbells overhead until arms are nearly locked out.", "Lower slowly until upper arms are parallel to the floor.", "Keep core braced — avoid arching your lower back."], tips: "Start with lighter weight to perfect the path before going heavy.", secondaryMuscles: ["Upper Traps", "Serratus"] },
+  ex_0007: { steps: ["Stand with feet hip-width, barbell over mid-foot.", "Hinge to grip bar just outside knees — double overhand or mixed grip.", "Brace core, raise chest, then drive floor away, keeping bar close to body.", "Lock hips and knees at the top. Lower in reverse under control."], tips: "Never round your lower back. Imagine 'pushing the floor away' rather than 'pulling the bar up'.", secondaryMuscles: ["Quadriceps", "Core", "Forearms"] },
+  ex_0009: { steps: ["Attach rope to high pulley. Stand close, elbows pinned to ribs.", "Push rope handles down and apart, fully extending both arms.", "Pause at lockout and squeeze triceps hard.", "Return slowly, stopping when forearms are parallel to floor."], tips: "Keep elbows glued to your sides — flaring them reduces tricep tension.", secondaryMuscles: ["Anconeus"] },
+  ex_0010: { steps: ["Stand with feet hip-width, barbell with underhand grip at arm's length.", "Keeping elbows pinned, curl bar toward chin in an arc.", "Squeeze biceps fully at the top, forearms vertical.", "Lower over 3 seconds to starting position."], tips: "Avoid swinging the torso. If you need momentum, the weight is too heavy.", secondaryMuscles: ["Brachioradialis", "Forearm Flexors"] },
+  ex_0011: { steps: ["Hang from a pull-up bar with straight arms and legs together.", "Brace core, then raise legs to 90° (or higher for advanced).", "Hold at the top for 1 second, then lower slowly.", "Avoid swinging — slow is harder and more effective."], tips: "Keep posterior pelvic tilt (tuck pelvis) to maximally engage lower abs.", secondaryMuscles: ["Iliopsoas", "Rectus Femoris"] },
+  ex_0012: { steps: ["Stand with dumbbells at sides, slight elbow bend, palms facing in.", "Raise arms out to sides to shoulder height — no higher.", "Lead with pinkies to emphasize lateral delt.", "Lower over 3 seconds. Don't drop the weight."], tips: "Go lighter than you think. Using momentum defeats the purpose.", secondaryMuscles: ["Supraspinatus", "Upper Traps"] },
+  ex_0013: { steps: ["Lie flat, feet on floor, barbell over lower chest.", "Un-rack bar, lower to chest while tucking elbows slightly.", "Touch chest lightly without bouncing.", "Press back up explosively, lock arms at top."], tips: "Squeeze the bar hard and think 'bend the bar' to activate lats for a stronger press.", secondaryMuscles: ["Anterior Deltoid", "Serratus"] },
+  ex_0014: { steps: ["Sit at cable row, feet on platform, knees slightly bent.", "Hold handles with neutral grip, arms extended, sit tall.", "Pull handles to lower ribcage, driving elbows behind you.", "Hold for 1s squeeze then return over 2–3 seconds."], tips: "Don't use momentum by swinging. Keep torso vertical throughout the set.", secondaryMuscles: ["Trapezius", "Rear Deltoid", "Core"] },
+  ex_0015: { steps: ["Stand with barbell in front, grip shoulder-width.", "Hinge at hips, pushing them back while keeping spine neutral.", "Lower bar to mid-shin following legs closely.", "Drive hips forward to return to upright."], tips: "Feel a deep hamstring stretch at the bottom. If you don't, you're squatting it.", secondaryMuscles: ["Adductors", "Spinal Erectors"] },
+  ex_0016: { steps: ["Stand with dumbbells at sides, palms facing each other.", "Curl both dumbbells simultaneously — do not rotate wrists.", "Squeeze at the top with thumbs pointing up.", "Lower slowly."], tips: "Hammer curls target the brachialis and forearms more than standard curls.", secondaryMuscles: ["Brachialis", "Brachioradialis"] },
+  ex_0017: { steps: ["Set two cable pulleys to shoulder height with D-ring handles.", "Stand in the middle, arms extended to sides with slight elbow bend.", "Bring handles together in front of chest in a hugging motion.", "Return slowly, feeling a stretch in your chest."], tips: "Keep a constant slight bend in your elbows — don't let them straighten or bend too much.", secondaryMuscles: ["Pec Minor", "Anterior Deltoid"] },
+  ex_0018: { steps: ["Start in a high plank: hands under shoulders, body in a straight line.", "Lower chest to just above floor, elbows at ~45° from body.", "Push through palms back to start position.", "Keep core braced — don't let hips sag."], tips: "Squeeze your glutes and abs the entire rep to prevent lower back pain.", secondaryMuscles: ["Core", "Anterior Deltoid", "Serratus"] },
+  ex_0019: { steps: ["Grip barbell slightly wider than shoulder-width, at chin level.", "Press bar overhead until arms are fully locked.", "Lower under control to starting position.", "Keep ribs down — avoid excessive lower back arch."], tips: "Brace your core as if someone is about to punch you. This prevents spinal compression.", secondaryMuscles: ["Triceps", "Upper Traps", "Core"] },
+  ex_0040: { steps: ["Sit on the floor, upper back on a bench, barbell across your hips.", "Plant feet flat on the floor, hip-width apart.", "Drive through heels and squeeze glutes to lift hips.", "Pause at the top — hips parallel to floor.", "Lower slowly and repeat."], tips: "Squeeze only at the top — avoid holding the contraction for too long under heavy load.", secondaryMuscles: ["Adductors", "Core", "Calves"] },
+};

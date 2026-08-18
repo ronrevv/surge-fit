@@ -367,3 +367,67 @@ Think like the product team behind Linear, Stripe and Apple Fitness.
 Every screen should make users think:
 
 "This feels like a premium product."
+
+---
+
+## Frontend Data Patterns
+
+### THE CARDINAL RULE: NEVER HARDCODE DATA
+
+Every string visible to the user MUST come from the `orgStore`. If data is hardcoded in a component, it is a bug.
+
+### The Assignment System
+
+The `AssignedPlan` type in `orgStore.ts` is the data bridge between Trainer and Trainee dashboards:
+
+```ts
+interface AssignedPlan {
+  id: string;
+  trainerId: string;
+  traineeId: string;
+  type: "workout" | "diet" | "schedule";
+  title: string;
+  summary: string;
+  assignedAt: string;
+}
+```
+
+**Trainer side (writes)**:
+```ts
+s.assignPlan({ trainerId, traineeId, type, title, summary });
+```
+
+**Trainee side (reads)**:
+```ts
+const assignments = s.getAssignmentsForTrainee(traineeUser.id);
+const workoutPlan = assignments.find(a => a.type === "workout");
+```
+
+**Trainer roster view (reads per-client)**:
+```ts
+const clientAssignments = s.getAssignmentsForTrainee(activeClient.id);
+```
+
+**Trainer overview (reads all)**:
+```ts
+const myAssignments = s.getAssignmentsByTrainer(myTrainerId);
+```
+
+### The useStore Hook
+
+All components MUST use `useStore()` for reactive data — never import `store` directly:
+
+```ts
+const s = useStore(); // ✅ Re-renders when store notifies
+import { store } from "@/lib/store/orgStore"; // ❌ Static, won't re-render
+```
+
+### Session Context
+
+Always derive trainer/trainee identity from the session, not from magic strings:
+
+```ts
+const session = s.getSession();
+const myTrainerId = session.trainerId || s.getUsers().find(u => u.role === "trainer")?.id || "";
+const traineeUser = session.userId ? s.getUserById(session.userId) : s.getUsers().find(u => u.role === "trainee");
+```

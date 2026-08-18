@@ -8,10 +8,12 @@ import { WorkoutPlannerModal, PlannedExerciseItem } from "../planner/WorkoutPlan
 import { DietPlannerModal } from "../planner/DietPlannerModal";
 import { TrainingCalendarModal } from "../planner/TrainingCalendarModal";
 import { useStore } from "@/lib/store/useStore";
+import { AppUser, AssignedPlan } from "@/lib/store/orgStore";
 import { MealItem } from "@/lib/data/exercises";
 import {
   Dumbbell, Users, Calendar, Plus, Apple, TrendingUp, Search, Send,
   X, Check, Clock, CheckCircle2, UserPlus, Mail, Phone,
+  ChevronRight, ClipboardList, Utensils, Trash2,
 } from "lucide-react";
 
 interface TrainerViewProps {
@@ -126,6 +128,111 @@ function OnboardTraineeModal({ trainerId, branchId, orgId, actorName, onClose }:
   );
 }
 
+/**
+ * AssignPlanModal — lets trainer pick a trainee from their roster,
+ * then calls store.assignPlan() to write the assignment to the store.
+ * The trainee's dashboard will reflect this immediately.
+ */
+function AssignPlanModal({
+  trainerId, trainees, plan, onClose,
+}: {
+  trainerId: string;
+  trainees: AppUser[];
+  plan: { title: string; summary: string; type: AssignedPlan["type"] };
+  onClose: () => void;
+}) {
+  const s = useStore();
+  const [selectedTraineeId, setSelectedTraineeId] = useState(trainees[0]?.id || "");
+  const [done, setDone] = useState(false);
+
+  const handleAssign = () => {
+    if (!selectedTraineeId) return;
+    s.assignPlan({ trainerId, traineeId: selectedTraineeId, ...plan });
+    setDone(true);
+    setTimeout(onClose, 1400);
+  };
+
+  return (
+    <>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose} className="fixed inset-0 bg-black/70 backdrop-blur-md z-50" />
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0, y: 16 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 16 }}
+        className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[#0c0c10] border border-white/15 rounded-3xl shadow-2xl overflow-hidden"
+      >
+        <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between bg-white/[0.025]">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-white text-slate-900 flex items-center justify-center">
+              {plan.type === "workout" ? <Dumbbell className="w-5 h-5" /> : plan.type === "diet" ? <Utensils className="w-5 h-5" /> : <Calendar className="w-5 h-5" />}
+            </div>
+            <div>
+              <p className="font-extrabold text-white text-base">Assign to Client</p>
+              <p className="text-[11px] text-slate-500 truncate max-w-[200px]">{plan.title}</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="p-2 rounded-xl text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
+        </div>
+
+        {done ? (
+          <div className="flex flex-col items-center justify-center py-14 gap-4">
+            <CheckCircle2 className="w-14 h-14 text-emerald-400" />
+            <p className="font-bold text-white text-lg">Plan Assigned!</p>
+            <p className="text-slate-400 text-sm text-center">
+              <span className="text-white font-bold">{plan.title}</span><br />
+              is now visible in {trainees.find(t => t.id === selectedTraineeId)?.name}&apos;s dashboard.
+            </p>
+          </div>
+        ) : (
+          <div className="p-6 space-y-5">
+            <div>
+              <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-2">Select Trainee</label>
+              {trainees.length === 0 ? (
+                <p className="text-slate-500 text-sm italic">No trainees on your roster yet. Add one first.</p>
+              ) : (
+                <div className="space-y-2 max-h-52 overflow-y-auto">
+                  {trainees.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setSelectedTraineeId(t.id)}
+                      className={`w-full text-left p-3 rounded-xl border transition flex items-center justify-between ${
+                        selectedTraineeId === t.id
+                          ? "bg-white text-slate-900 border-transparent"
+                          : "bg-white/5 border-white/10 text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <div>
+                        <p className="font-semibold text-sm">{t.name}</p>
+                        <p className="text-[11px] opacity-60">{t.goal}</p>
+                      </div>
+                      {selectedTraineeId === t.id && <Check className="w-4 h-4" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+              <p className="text-[10px] font-mono-data text-slate-500 uppercase mb-1">Plan Details</p>
+              <p className="font-bold text-white text-sm">{plan.title}</p>
+              <p className="text-xs text-slate-400">{plan.summary}</p>
+            </div>
+
+            <button
+              onClick={handleAssign}
+              disabled={!selectedTraineeId || trainees.length === 0}
+              className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
+            >
+              <Check className="w-4 h-4" /> Assign Plan
+            </button>
+          </div>
+        )}
+      </motion.div>
+    </>
+  );
+}
+
 export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   const s = useStore();
   const [selectedClient, setSelectedClient] = useState("");
@@ -141,6 +248,10 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
     { sender: "client", text: "Coach, completed today's Push session! Hit a 95kg Bench PR.", time: "09:14 AM" },
     { sender: "trainer", text: "Boom! Exceptional execution. Let's increase target to 97.5kg next week.", time: "09:16 AM" },
   ]);
+  // Assign modal state: when set, shows a trainee picker for that plan
+  const [assignModal, setAssignModal] = useState<{
+    title: string; summary: string; type: AssignedPlan["type"];
+  } | null>(null);
 
   // Live session
   const session = s.getSession();
@@ -158,14 +269,46 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
     ? s.getUserById(selectedClient)
     : myTrainees[0];
 
-  const handleRoutineSaved = (routine: { title: string; exercises: PlannedExerciseItem[] }) => {
+  const handleRoutineSaved = (routine: { title: string; exercises: PlannedExerciseItem[] }, assignToTraineeId?: string) => {
     setSavedRoutines((prev) => [...prev.filter((r) => r.title !== routine.title), routine]);
-    setCalendarOpen(true);
+    if (assignToTraineeId) {
+      s.assignPlan({
+        trainerId: myTrainerId,
+        traineeId: assignToTraineeId,
+        type: "workout",
+        title: routine.title,
+        summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
+      });
+    } else {
+      setCalendarOpen(true);
+    }
   };
 
-  const handleDietPlanSaved = (plan: { title: string; meals: MealItem[] }) => {
+  const handleDietPlanSaved = (plan: { title: string; meals: MealItem[] }, assignToTraineeId?: string) => {
     setSavedDietPlans((prev) => [...prev.filter((p) => p.title !== plan.title), plan]);
-    setCalendarOpen(true);
+    if (assignToTraineeId) {
+      s.assignPlan({
+        trainerId: myTrainerId,
+        traineeId: assignToTraineeId,
+        type: "diet",
+        title: plan.title,
+        summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`,
+      });
+    } else {
+      setCalendarOpen(true);
+    }
+  };
+
+  const handleScheduleSaved = (entries: any[], assignToTraineeId?: string) => {
+    if (assignToTraineeId) {
+      s.assignPlan({
+        trainerId: myTrainerId,
+        traineeId: assignToTraineeId,
+        type: "schedule",
+        title: "Training Calendar",
+        summary: `${entries.length} scheduled day${entries.length !== 1 ? "s" : ""}`,
+      });
+    }
   };
 
   const handleSendChat = () => {
@@ -182,6 +325,14 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             trainerId={myTrainerId} branchId={myBranchId}
             orgId={myOrgId} actorName={myName}
             onClose={() => setTraineeModalOpen(false)}
+          />
+        )}
+        {assignModal && (
+          <AssignPlanModal
+            trainerId={myTrainerId}
+            trainees={myTrainees}
+            plan={assignModal}
+            onClose={() => setAssignModal(null)}
           />
         )}
       </AnimatePresence>
@@ -283,15 +434,53 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                       <p className="font-display font-bold text-xl text-slate-900 dark:text-white mt-1">{activeClient.joinedAt}</p>
                     </div>
                   </div>
-                  {savedRoutines.length > 0 && (
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-3">
-                      <p className="font-bold text-xs text-slate-700 dark:text-slate-200 mb-2">Assigned Plans</p>
-                      <div className="flex flex-wrap gap-2">
-                        {savedRoutines.map((r, i) => <span key={i} className="text-[10px] px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-semibold">{r.title}</span>)}
-                        {savedDietPlans.map((p, i) => <span key={i} className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-semibold">{p.title}</span>)}
+                  {/* Live per-trainee assignments from store */}
+                  {(() => {
+                    const clientAssignments = activeClient ? s.getAssignmentsForTrainee(activeClient.id) : [];
+                    return clientAssignments.length > 0 ? (
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-3">
+                        <p className="font-bold text-xs text-slate-700 dark:text-slate-200 mb-2">Assigned Plans</p>
+                        <div className="flex flex-col gap-1.5">
+                          {clientAssignments.map((a) => (
+                            <div key={a.id} className="flex items-center justify-between gap-2">
+                              <span className={`text-[10px] px-2.5 py-1 rounded-full font-semibold ${
+                                a.type === "workout"
+                                  ? "bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300"
+                                  : a.type === "diet"
+                                  ? "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+                                  : "bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300"
+                              }`}>
+                                {a.type === "workout" ? "💪" : a.type === "diet" ? "🥗" : "📅"} {a.title}
+                              </span>
+                              <button
+                                onClick={() => s.removeAssignment(a.id)}
+                                className="text-slate-400 hover:text-red-500 transition shrink-0"
+                                title="Remove assignment"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 mb-3">
+                        <p className="text-xs text-slate-400 text-center italic">No plans assigned yet</p>
+                        <div className="flex gap-2 mt-2 justify-center">
+                          <button
+                            onClick={() => setAssignModal({ title: savedRoutines[0]?.title || "Workout", summary: `${savedRoutines[0]?.exercises?.length || 0} exercises`, type: "workout" })}
+                            disabled={savedRoutines.length === 0}
+                            className="text-[10px] px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold disabled:opacity-40"
+                          >+ Assign Workout</button>
+                          <button
+                            onClick={() => setAssignModal({ title: savedDietPlans[0]?.title || "Diet Plan", summary: `${savedDietPlans[0]?.meals?.length || 0} meals`, type: "diet" })}
+                            disabled={savedDietPlans.length === 0}
+                            className="text-[10px] px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold disabled:opacity-40"
+                          >+ Assign Diet</button>
+                        </div>
+                      </div>
+                    );
+                  })()}
                   <div className="flex items-center gap-2 text-xs text-slate-500">
                     <Mail className="w-3.5 h-3.5" />{activeClient.email}
                     {activeClient.phone && <><Phone className="w-3.5 h-3.5 ml-2" />{activeClient.phone}</>}
@@ -362,25 +551,99 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
 
       {/* WORKOUT BUILDER TAB */}
       {activeTab === "workout_builder" && (
-        <GlassCard>
-          <div className="flex flex-col items-center justify-center py-16 text-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shadow-xl">
-              <Dumbbell className="w-8 h-8" />
-            </div>
+        <div className="space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">Workout Builder</h3>
-              <p className="text-slate-500 text-sm mt-1">Build routines and schedule them in the calendar.</p>
+              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white flex items-center gap-2">
+                <Dumbbell className="w-5 h-5" /> Workout Builder
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                {savedRoutines.length} saved routine{savedRoutines.length !== 1 ? "s" : ""} ready to assign
+              </p>
             </div>
-            <div className="flex gap-3">
-              <button onClick={() => setWorkoutPlannerOpen(true)} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
-                <Plus className="w-4 h-4" />Open Workout Planner
+            <div className="flex gap-2">
+              <button onClick={() => setWorkoutPlannerOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
+                <Plus className="w-4 h-4" /> New Routine
               </button>
-              <button onClick={() => setCalendarOpen(true)} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 font-bold text-sm">
-                <Calendar className="w-4 h-4" />View Calendar
+              <button onClick={() => setCalendarOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 font-bold text-sm">
+                <Calendar className="w-4 h-4" /> Schedule
               </button>
             </div>
           </div>
-        </GlassCard>
+
+          {savedRoutines.length === 0 ? (
+            <GlassCard>
+              <div className="flex flex-col items-center py-14 text-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-white/10 flex items-center justify-center">
+                  <Dumbbell className="w-7 h-7 text-slate-400" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-700 dark:text-slate-200">No routines saved yet</p>
+                  <p className="text-xs text-slate-500 mt-1">Use the Workout Planner to build & save your first routine</p>
+                </div>
+                <button onClick={() => setWorkoutPlannerOpen(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
+                  <Plus className="w-4 h-4" /> Open Workout Planner
+                </button>
+              </div>
+            </GlassCard>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {savedRoutines.map((routine, i) => (
+                <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shrink-0">
+                      <Dumbbell className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+                      {routine.exercises.length} exercises
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display font-bold text-base text-slate-900 dark:text-white">{routine.title}</p>
+                    <div className="mt-2 space-y-1">
+                      {routine.exercises.slice(0, 3).map((ex, j) => (
+                        <p key={j} className="text-xs text-slate-500 truncate">• {ex.exercise.name} — {ex.sets}×{ex.reps}</p>
+                      ))}
+                      {routine.exercises.length > 3 && (
+                        <p className="text-xs text-slate-400">+{routine.exercises.length - 3} more exercises</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
+                    <button
+                      onClick={() => setAssignModal({
+                        title: routine.title,
+                        summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
+                        type: "workout",
+                      })}
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs"
+                    >
+                      <Users className="w-3.5 h-3.5" /> Assign to Client
+                    </button>
+                    <button
+                      onClick={() => setWorkoutPlannerOpen(true)}
+                      className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </GlassCard>
+              ))}
+              {/* Add new card */}
+              <GlassCard
+                hoverEffect
+                className="flex flex-col items-center justify-center gap-3 cursor-pointer min-h-[180px] border-dashed"
+              >
+                <button onClick={() => setWorkoutPlannerOpen(true)} className="flex flex-col items-center gap-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition">
+                  <div className="w-10 h-10 rounded-xl border-2 border-dashed border-slate-300 dark:border-white/20 flex items-center justify-center">
+                    <Plus className="w-5 h-5" />
+                  </div>
+                  <span className="text-xs font-semibold">New Routine</span>
+                </button>
+              </GlassCard>
+            </div>
+          )}
+        </div>
       )}
 
       {/* CHAT TAB */}
@@ -407,20 +670,200 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
 
       {/* CALENDAR TAB */}
       {activeTab === "calendar" && (
-        <GlassCard>
-          <div className="flex flex-col items-center justify-center py-16 text-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center">
-              <Calendar className="w-8 h-8" />
-            </div>
+        <div className="space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">Training Calendar</h3>
-              <p className="text-slate-500 text-sm mt-1">Schedule workouts and diet plans by date.</p>
+              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white flex items-center gap-2">
+                <Calendar className="w-5 h-5" /> Training Calendar
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">Weekly schedule for all client assignments</p>
             </div>
-            <button onClick={() => setCalendarOpen(true)} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
-              <Calendar className="w-4 h-4" />Open Training Calendar
+            <button onClick={() => setCalendarOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
+              <Calendar className="w-4 h-4" /> Open Full Calendar
             </button>
           </div>
-        </GlassCard>
+
+          {/* Weekly schedule grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-7 gap-2">
+            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => {
+              const hasWorkout = savedRoutines.length > 0 && [0, 2, 4].includes(i);
+              const hasDiet = savedDietPlans.length > 0;
+              const isToday = i === 0;
+              return (
+                <div
+                  key={day}
+                  className={`p-3 rounded-xl border flex flex-col gap-2 sm:min-h-[120px] ${
+                    isToday
+                      ? "bg-slate-900 dark:bg-white border-transparent"
+                      : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10"
+                  }`}
+                >
+                  <span className={`text-[11px] font-mono-data font-bold uppercase ${
+                    isToday ? "text-slate-300 dark:text-slate-600" : "text-slate-400"
+                  }`}>
+                    {day}
+                  </span>
+                  {hasWorkout && (
+                    <div className={`text-[10px] font-semibold px-1.5 py-1 rounded-lg truncate ${
+                      isToday ? "bg-white/20 text-white dark:bg-slate-900/20 dark:text-slate-900" : "bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300"
+                    }`}>
+                      💪 {savedRoutines[i % savedRoutines.length]?.title || "Workout"}
+                    </div>
+                  )}
+                  {hasDiet && (
+                    <div className={`text-[10px] font-semibold px-1.5 py-1 rounded-lg truncate ${
+                      isToday ? "bg-white/20 text-white dark:bg-slate-900/20 dark:text-slate-900" : "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+                    }`}>
+                      🥗 {savedDietPlans[0]?.title || "Diet Plan"}
+                    </div>
+                  )}
+                  {!hasWorkout && !hasDiet && (
+                    <span className={`text-[10px] ${
+                      isToday ? "text-slate-400 dark:text-slate-600" : "text-slate-400"
+                    }`}>
+                      Rest Day
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Assignment summary */}
+          <GlassCard>
+            <h4 className="font-display font-bold text-sm text-slate-900 dark:text-white mb-3">Client Assignment Summary</h4>
+            {myTrainees.length === 0 ? (
+              <p className="text-sm text-slate-500 text-center py-6">No trainees yet — add trainees and assign plans to see the schedule here.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-slate-700 dark:text-slate-300 min-w-[400px]">
+                  <thead className="border-b border-slate-200 dark:border-white/10 font-mono-data text-[10px] uppercase text-slate-500">
+                    <tr>
+                      <th className="py-2 px-3 text-left">Client</th>
+                      <th className="py-2 px-3 text-left">Workout Plan</th>
+                      <th className="py-2 px-3 text-left">Diet Plan</th>
+                      <th className="py-2 px-3 text-left">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                    {myTrainees.map((t) => (
+                      <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
+                        <td className="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">{t.name}</td>
+                        <td className="py-2.5 px-3">
+                          {savedRoutines.length > 0 ? (
+                            <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-semibold text-[10px]">
+                              {savedRoutines[0].title}
+                            </span>
+                          ) : <span className="text-slate-400">—</span>}
+                        </td>
+                        <td className="py-2.5 px-3">
+                          {savedDietPlans.length > 0 ? (
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-semibold text-[10px]">
+                              {savedDietPlans[0].title}
+                            </span>
+                          ) : <span className="text-slate-400">—</span>}
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/25 font-mono-data text-[10px]">
+                            {t.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </GlassCard>
+        </div>
+      )}
+
+      {/* NUTRITION TAB */}
+      {activeTab === "nutrition" && (
+        <div className="space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white flex items-center gap-2">
+                <Utensils className="w-5 h-5" /> Nutrition Plans
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                {savedDietPlans.length} diet plan{savedDietPlans.length !== 1 ? "s" : ""} saved
+              </p>
+            </div>
+            <button onClick={() => setDietPlannerOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
+              <Plus className="w-4 h-4" /> New Diet Plan
+            </button>
+          </div>
+
+          {savedDietPlans.length === 0 ? (
+            <GlassCard>
+              <div className="flex flex-col items-center py-14 text-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-white/10 flex items-center justify-center">
+                  <Utensils className="w-7 h-7 text-slate-400" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-700 dark:text-slate-200">No diet plans saved yet</p>
+                  <p className="text-xs text-slate-500 mt-1">Use the Diet Planner to build and assign nutrition plans to your clients</p>
+                </div>
+                <button onClick={() => setDietPlannerOpen(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm">
+                  <Plus className="w-4 h-4" /> Open Diet Planner
+                </button>
+              </div>
+            </GlassCard>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {savedDietPlans.map((plan, i) => (
+                <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                      <Utensils className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
+                      {plan.meals.length} meals
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display font-bold text-base text-slate-900 dark:text-white">{plan.title}</p>
+                    <div className="mt-2 space-y-1">
+                      {plan.meals.slice(0, 3).map((meal, j) => (
+                        <p key={j} className="text-xs text-slate-500 truncate">• {meal.name} — {meal.calories} kcal</p>
+                      ))}
+                      {plan.meals.length > 3 && (
+                        <p className="text-xs text-slate-400">+{plan.meals.length - 3} more meals</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
+                    <button
+                      onClick={() => setAssignModal({
+                        title: plan.title,
+                        summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""} · ${plan.meals.reduce((a, m) => a + m.calories, 0).toLocaleString()} kcal`,
+                        type: "diet",
+                      })}
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
+                    >
+                      <Users className="w-3.5 h-3.5" /> Assign to Client
+                    </button>
+                    <button
+                      onClick={() => setDietPlannerOpen(true)}
+                      className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </GlassCard>
+              ))}
+              <GlassCard hoverEffect className="flex flex-col items-center justify-center gap-3 cursor-pointer min-h-[180px] border-dashed">
+                <button onClick={() => setDietPlannerOpen(true)} className="flex flex-col items-center gap-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition">
+                  <div className="w-10 h-10 rounded-xl border-2 border-dashed border-slate-300 dark:border-white/20 flex items-center justify-center">
+                    <Plus className="w-5 h-5" />
+                  </div>
+                  <span className="text-xs font-semibold">New Diet Plan</span>
+                </button>
+              </GlassCard>
+            </div>
+          )}
+        </div>
       )}
 
       {activeTab !== "dashboard" && activeTab !== "clients" && activeTab !== "workout_builder" && activeTab !== "chat" && activeTab !== "calendar" && activeTab !== "nutrition" && activeTab !== "progress" && (
@@ -430,13 +873,14 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
         </GlassCard>
       )}
 
-      {/* GLOBAL MODALS */}
-      <WorkoutPlannerModal isOpen={workoutPlannerOpen} onClose={() => setWorkoutPlannerOpen(false)} onRoutineSaved={handleRoutineSaved} />
-      <DietPlannerModal isOpen={dietPlannerOpen} onClose={() => setDietPlannerOpen(false)} onPlanSaved={handleDietPlanSaved} />
-      <TrainingCalendarModal isOpen={calendarOpen} onClose={() => setCalendarOpen(false)}
+      {/* Planner Modals */}
+      <WorkoutPlannerModal trainees={myTrainees} isOpen={workoutPlannerOpen} onClose={() => setWorkoutPlannerOpen(false)} onRoutineSaved={handleRoutineSaved} />
+      <DietPlannerModal trainees={myTrainees} isOpen={dietPlannerOpen} onClose={() => setDietPlannerOpen(false)} onPlanSaved={handleDietPlanSaved} />
+      <TrainingCalendarModal trainees={myTrainees} isOpen={calendarOpen} onClose={() => setCalendarOpen(false)}
         onOpenWorkoutPlanner={() => { setCalendarOpen(false); setWorkoutPlannerOpen(true); }}
         onOpenDietPlanner={() => { setCalendarOpen(false); setDietPlannerOpen(true); }}
         savedRoutines={savedRoutines} savedDietPlans={savedDietPlans}
+        onScheduleSaved={handleScheduleSaved}
       />
     </div>
   );

@@ -90,10 +90,11 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "dashboard", label: "CRM Dashboard", icon: <LayoutDashboard className="w-4 h-4" /> },
     { id: "clients", label: "Client Database", icon: <Users className="w-4 h-4" /> },
     { id: "programs", label: "Online Programs", icon: <Dumbbell className="w-4 h-4" /> },
+    { id: "workout_builder", label: "Workout Builder", icon: <PlusCircle className="w-4 h-4" /> },
+    { id: "nutrition", label: "Nutrition Plans", icon: <Apple className="w-4 h-4" /> },
     { id: "payments", label: "Stripe Billing", icon: <CreditCard className="w-4 h-4" />, badge: "$14.8k MRR" },
     { id: "calendar", label: "Session Calendar", icon: <Calendar className="w-4 h-4" /> },
     { id: "chat", label: "Messaging", icon: <MessageSquare className="w-4 h-4" /> },
-
   ],
   trainee: [
     { id: "dashboard", label: "Daily Pulse", icon: <Flame className="w-4 h-4 text-slate-700 dark:text-slate-200" /> },
@@ -103,7 +104,7 @@ export const ROLE_NAVIGATION: Record<RoleType, NavItem[]> = {
     { id: "biometrics", label: "Body Measurements", icon: <Heart className="w-4 h-4" /> },
     { id: "challenges", label: "Leaderboards", icon: <Trophy className="w-4 h-4" /> },
     { id: "trainer_chat", label: "Trainer Chat", icon: <MessageSquare className="w-4 h-4" /> },
-
+    { id: "ai_coach", label: "AI Coach", icon: <Zap className="w-4 h-4" /> },
   ],
 };
 

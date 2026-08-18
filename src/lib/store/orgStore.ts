@@ -74,6 +74,21 @@ export interface AuditLog {
   severity: "info" | "warn" | "critical";
 }
 
+/**
+ * AssignedPlan — links a trainer's saved workout/diet/schedule
+ * to a specific trainee. Written by trainer, read by trainee.
+ * This is the core data bridge between the two dashboards.
+ */
+export interface AssignedPlan {
+  id: string;
+  trainerId: string;
+  traineeId: string;
+  type: "workout" | "diet" | "schedule";
+  title: string;      // routine.title or diet plan title
+  summary: string;    // e.g. "4 exercises" or "3 meals · 2,500 kcal"
+  assignedAt: string; // ISO date string
+}
+
 // ─── SESSION CONTEXT ─────────────────────────────────────────────────────────
 // Simulates the JWT / auth session. Set when role changes in the UI.
 // Every view reads from this so data flows across the full hierarchy.
@@ -345,6 +360,72 @@ class OrgStore {
   private branches: Branch[] = [...SEED_BRANCHES];
   private users: AppUser[] = [...SEED_USERS];
   private auditLogs: AuditLog[] = [...SEED_AUDIT];
+  // Assignments: trainer → trainee plan assignments, seeded with real data
+  private assignments: AssignedPlan[] = [
+    {
+      id: "assign_001",
+      trainerId: "user_tr_001",
+      traineeId: "user_tn_001",
+      type: "workout",
+      title: "Powerlifting Peak — Week 8",
+      summary: "5 exercises · Squat, Bench, Deadlift focus",
+      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_002",
+      trainerId: "user_tr_001",
+      traineeId: "user_tn_001",
+      type: "diet",
+      title: "High-Protein Recomp Diet",
+      summary: "4 meals · 2,500 kcal · 180g protein",
+      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_003",
+      trainerId: "user_tr_001",
+      traineeId: "user_tn_001",
+      type: "schedule",
+      title: "Mon / Wed / Fri Training Schedule",
+      summary: "3 sessions per week",
+      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_004",
+      trainerId: "user_tr_001",
+      traineeId: "user_tn_002",
+      type: "workout",
+      title: "Fat Loss HIIT Circuit",
+      summary: "6 exercises · Full-body conditioning",
+      assignedAt: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_005",
+      trainerId: "user_tr_001",
+      traineeId: "user_tn_002",
+      type: "diet",
+      title: "Calorie Deficit Lean Diet",
+      summary: "4 meals · 1,800 kcal · 150g protein",
+      assignedAt: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_006",
+      trainerId: "user_it_001",
+      traineeId: "user_it_002",
+      type: "workout",
+      title: "Lean Muscle Builder — Phase 1",
+      summary: "4 exercises · Upper/Lower split",
+      assignedAt: new Date(Date.now() - 3 * 24 * 3600000).toISOString(),
+    },
+    {
+      id: "assign_007",
+      trainerId: "user_it_001",
+      traineeId: "user_it_002",
+      type: "diet",
+      title: "Flexible Macros Nutrition Plan",
+      summary: "4 meals · 2,100 kcal · 160g protein",
+      assignedAt: new Date(Date.now() - 3 * 24 * 3600000).toISOString(),
+    },
+  ];
   private listeners: Set<() => void> = new Set();
 
   // Default session maps each role to seed data so it works out of the box
@@ -771,6 +852,57 @@ class OrgStore {
     const trainees = this.users.filter((u) => u.role === "trainee" && branchIds.includes(u.branchId || "")).length;
     const chain = this.getChainById(chainId);
     return { branches: branches.length, trainers, trainees, mrr: chain?.mrr || 0 };
+  }
+
+  // ── ASSIGNMENTS ───────────────────────────────────────────────────────────
+  // Trainer → Trainee plan assignments. The core data bridge.
+
+  /**
+   * Assign a workout, diet, or schedule plan to a specific trainee.
+   * Called from TrainerView / IndependentTrainerView when trainer hits "Assign".
+   */
+  assignPlan(data: {
+    trainerId: string;
+    traineeId: string;
+    type: AssignedPlan["type"];
+    title: string;
+    summary: string;
+  }): AssignedPlan {
+    // Remove any existing assignment of the same type for this trainee from this trainer
+    // (only one workout plan, one diet plan, one schedule per trainee-trainer pair)
+    this.assignments = this.assignments.filter(
+      (a) => !(a.trainerId === data.trainerId && a.traineeId === data.traineeId && a.type === data.type)
+    );
+    const assignment: AssignedPlan = {
+      id: this.uid("assign"),
+      ...data,
+      assignedAt: new Date().toISOString(),
+    };
+    this.assignments.unshift(assignment);
+    this.addAudit(
+      `${data.type.charAt(0).toUpperCase() + data.type.slice(1)} Plan Assigned`,
+      "trainer",
+      this.getUserById(data.trainerId)?.name || "Trainer",
+      this.getUserById(data.traineeId)?.name || "Trainee"
+    );
+    this.notify();
+    return assignment;
+  }
+
+  /** All plans assigned to a specific trainee (read by TraineeView) */
+  getAssignmentsForTrainee(traineeId: string): AssignedPlan[] {
+    return this.assignments.filter((a) => a.traineeId === traineeId);
+  }
+
+  /** All assignments made by a specific trainer (read by TrainerView calendar/roster) */
+  getAssignmentsByTrainer(trainerId: string): AssignedPlan[] {
+    return this.assignments.filter((a) => a.trainerId === trainerId);
+  }
+
+  /** Remove a specific assignment */
+  removeAssignment(assignmentId: string) {
+    this.assignments = this.assignments.filter((a) => a.id !== assignmentId);
+    this.notify();
   }
 }
 
