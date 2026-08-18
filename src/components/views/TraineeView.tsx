@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 
 import { useStore } from "@/lib/store/useStore";
+import { useAssignedPlans } from "@/lib/hooks/usePlans";
 
 interface TraineeViewProps {
   activeTab?: string;
@@ -58,18 +59,7 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
   const [waterMl, setWaterMl] = useState(2250);
 
   // Chat State
-  const [chatMessages, setChatMessages] = useState([
-    {
-      sender: "coach",
-      text: `Great work today ${traineeUser?.name?.split(" ")[0] || "Athlete"}! How are your hamstrings feeling?`,
-      time: "10:30 AM",
-    },
-    {
-      sender: "user",
-      text: "Felt strong! Slight tightness in lower back, but foam rolled right after.",
-      time: "10:32 AM",
-    },
-  ]);
+  const [chatMessages, setChatMessages] = useState<any[]>([]);
   const [inputChat, setInputChat] = useState("");
 
   useEffect(() => {
@@ -106,9 +96,9 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
   };
 
   // Live assignments from store — written by trainer, read here
-  const myAssignments = traineeUser ? s.getAssignmentsForTrainee(traineeUser.id) : [];
-  const assignedWorkout  = myAssignments.find((a) => a.type === "workout");
-  const assignedDiet     = myAssignments.find((a) => a.type === "diet");
+  const { data: myAssignments = [], isLoading: isLoadingAssignments } = useAssignedPlans(traineeUser?.id || "");
+  const assignedWorkout = myAssignments.find((a: any) => a.type === "workout");
+  const assignedDiet = myAssignments.find((a: any) => a.type === "diet");
   const assignedSchedule = myAssignments.find((a) => a.type === "schedule");
 
   return (
@@ -247,41 +237,41 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
           {/* Progress Rings Grid */}
           <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-3 gap-4">
             <GlassCard hoverEffect className="flex items-center gap-4">
-              <ProgressRing progress={80} radius={42} stroke={7} color="var(--accent-primary)">
+              <ProgressRing progress={0} radius={42} stroke={7} color="var(--accent-primary)">
                 <Flame className="w-5 h-5 text-slate-700 dark:text-slate-200" />
               </ProgressRing>
               <div className="min-w-0">
                 <span className="text-xs font-mono-data text-slate-500 dark:text-slate-400 uppercase">Active Move</span>
                 <p className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white mt-0.5">
-                  680 <span className="text-xs font-mono-data text-slate-400">/ 850 kcal</span>
+                  0 <span className="text-xs font-mono-data text-slate-400">/ 0 kcal</span>
                 </p>
-                <span className="text-[11px] font-mono-data text-slate-500">80% Target Met</span>
+                <span className="text-[11px] font-mono-data text-slate-500">No Target Set</span>
               </div>
             </GlassCard>
 
             <GlassCard hoverEffect className="flex items-center gap-4">
-              <ProgressRing progress={92} radius={42} stroke={7} color="var(--accent-primary)">
+              <ProgressRing progress={0} radius={42} stroke={7} color="var(--accent-primary)">
                 <Dumbbell className="w-5 h-5 text-slate-700 dark:text-slate-200" />
               </ProgressRing>
               <div className="min-w-0">
                 <span className="text-xs font-mono-data text-slate-500 dark:text-slate-400 uppercase">Volume Lifted</span>
                 <p className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white mt-0.5">
-                  12,450 <span className="text-xs font-mono-data text-slate-400">kg</span>
+                  0 <span className="text-xs font-mono-data text-slate-400">kg</span>
                 </p>
-                <span className="text-[11px] font-mono-data text-slate-500">92% Target Met</span>
+                <span className="text-[11px] font-mono-data text-slate-500">No Sessions Logged</span>
               </div>
             </GlassCard>
 
             <GlassCard hoverEffect className="flex items-center gap-4">
-              <ProgressRing progress={95} radius={42} stroke={7} color="var(--accent-primary)">
+              <ProgressRing progress={0} radius={42} stroke={7} color="var(--accent-primary)">
                 <Heart className="w-5 h-5 text-slate-700 dark:text-slate-200" />
               </ProgressRing>
               <div className="min-w-0">
                 <span className="text-xs font-mono-data text-slate-500 dark:text-slate-400 uppercase">WHOOP Recovery</span>
                 <p className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white mt-0.5">
-                  95% <span className="text-xs font-mono-data text-slate-400">Score</span>
+                  -- <span className="text-xs font-mono-data text-slate-400">Score</span>
                 </p>
-                <span className="text-[11px] font-mono-data text-slate-500">Optimal Recovery</span>
+                <span className="text-[11px] font-mono-data text-slate-500">Connect Device</span>
               </div>
             </GlassCard>
           </div>
@@ -295,52 +285,44 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
                     LIVE WORKOUT ENGINE
                   </span>
                   <h2 className="font-display font-extrabold text-lg sm:text-2xl text-slate-900 dark:text-white mt-1">
-                    Exercise 1: Barbell Back Squat
+                    {assignedWorkout ? assignedWorkout.title : "No Workout Assigned"}
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Target: 4 Sets × 6 Reps • Target Weight: 120kg (RPE 8)
+                    {assignedWorkout ? assignedWorkout.summary : "Ask your trainer to assign a workout."}
                   </p>
-                </div>
-
-                {/* Rest Timer */}
-                <div className="p-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-center min-w-[130px] sm:min-w-[140px] shrink-0">
-                  <span className="text-[10px] font-mono-data text-slate-500 uppercase block">Rest Countdown</span>
-                  <span className="font-mono-data font-extrabold text-2xl text-slate-900 dark:text-white">
-                    {Math.floor(restSeconds / 60)}:{(restSeconds % 60).toString().padStart(2, "0")}
-                  </span>
                 </div>
               </div>
 
-              {/* Set Logger */}
-              <div className="mt-4 space-y-2">
-                {[1, 2, 3, 4].map((setNum, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => toggleSet(idx)}
-                    className={`p-3 sm:p-3.5 rounded-xl border transition flex items-center justify-between cursor-pointer ${
-                      completedSets[idx]
-                        ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold"
-                        : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="w-6 h-6 rounded-lg bg-slate-200 dark:bg-white/10 flex items-center justify-center font-mono-data font-bold text-xs shrink-0">
-                        {setNum}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-semibold text-xs sm:text-sm truncate">{setWeights[idx]} kg × 6 Reps</p>
-                        <p className="text-[11px] opacity-75">Target RPE 8 • Rest 90s</p>
+              {/* Dynamic Workout Content */}
+              <div className="mt-4 space-y-4">
+                {assignedWorkout?.content && Array.isArray(assignedWorkout.content) ? (
+                  assignedWorkout.content.map((item: any, idx: number) => (
+                    <div key={idx} className="p-3 sm:p-4 rounded-xl border bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-mono-data font-bold text-sm shrink-0">
+                          {idx + 1}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-slate-900 dark:text-white truncate">{item.exercise?.name || "Unknown Exercise"}</p>
+                          <p className="text-xs text-slate-500">{item.sets} Sets × {item.reps} Reps</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        {Array.from({ length: item.sets || 1 }).map((_, setIdx) => (
+                          <div key={setIdx} className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-black/20 border border-slate-100 dark:border-white/5">
+                            <span className="text-xs font-mono-data text-slate-500">Set {setIdx + 1}</span>
+                            <span className="text-xs font-semibold">{item.reps} Reps</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-xs font-mono-data opacity-75 hidden sm:inline">
-                        {completedSets[idx] ? "Completed" : "Tap to Log"}
-                      </span>
-                      <CheckCircle2 className="w-5 h-5" />
-                    </div>
+                  ))
+                ) : (
+                  <div className="py-8 text-center text-slate-400 text-sm italic">
+                    {assignedWorkout ? "This workout has no exercises." : "Nothing to show right now."}
                   </div>
-                ))}
+                )}
               </div>
             </GlassCard>
           )}
@@ -349,10 +331,10 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
           {activeTab === "dashboard" && !activeWorkout && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { label: "Streak", value: "14 days", icon: <Flame className="w-4 h-4 text-orange-500" /> },
-                { label: "PRs This Month", value: "3 PRs", icon: <Trophy className="w-4 h-4 text-yellow-500" /> },
-                { label: "Avg Session", value: "51 min", icon: <Activity className="w-4 h-4 text-blue-500" /> },
-                { label: "Weight Trend", value: "−1.2 kg", icon: <TrendingUp className="w-4 h-4 text-emerald-500" /> },
+                { label: "Streak", value: "0 days", icon: <Flame className="w-4 h-4 text-orange-500" /> },
+                { label: "PRs This Month", value: "0 PRs", icon: <Trophy className="w-4 h-4 text-yellow-500" /> },
+                { label: "Avg Session", value: "0 min", icon: <Activity className="w-4 h-4 text-blue-500" /> },
+                { label: "Weight Trend", value: "0 kg", icon: <TrendingUp className="w-4 h-4 text-emerald-500" /> },
               ].map((stat) => (
                 <GlassCard key={stat.label} hoverEffect className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
@@ -376,7 +358,7 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
               <History className="w-5 h-5 text-slate-500" />
               Completed Workout History
             </h3>
-            <span className="text-xs font-mono-data text-slate-500">28 Sessions Completed</span>
+            <span className="text-xs font-mono-data text-slate-500">0 Sessions Completed</span>
           </div>
 
           <div className="overflow-x-auto -mx-2 sm:mx-0">
@@ -391,20 +373,11 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5">
-                {[
-                  { date: "Yesterday", name: "Heavy Leg & Core Peak", duration: "54 min", volume: "14,200 kg", pr: "🏆 140kg Squat" },
-                  { date: "3 Days ago", name: "Push Hypertrophy", duration: "48 min", volume: "11,800 kg", pr: "🏆 95kg Bench" },
-                  { date: "5 Days ago", name: "Pull & Lat Focus", duration: "52 min", volume: "12,600 kg", pr: "—" },
-                  { date: "1 Week ago", name: "Full Body Conditioning", duration: "45 min", volume: "9,800 kg", pr: "—" },
-                ].map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
-                    <td className="py-3 px-3 font-mono-data text-slate-500">{row.date}</td>
-                    <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">{row.name}</td>
-                    <td className="py-3 px-3 font-mono-data text-slate-600 dark:text-slate-300">{row.duration}</td>
-                    <td className="py-3 px-3 font-mono-data font-bold text-slate-900 dark:text-white">{row.volume}</td>
-                    <td className="py-3 px-3 text-right font-mono-data font-bold text-slate-900 dark:text-white">{row.pr}</td>
-                  </tr>
-                ))}
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-slate-400 text-sm italic">
+                    No workouts logged yet.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -420,7 +393,11 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
                 <Apple className="w-5 h-5 text-slate-500" />
                 Daily Macro Targets & Meal Logs
               </h3>
-              <span className="text-xs font-mono-data font-bold text-slate-900 dark:text-white">1,940 / 2,500 kcal</span>
+              {assignedDiet?.content && Array.isArray(assignedDiet.content) && (
+                <span className="text-xs font-mono-data font-bold text-slate-900 dark:text-white">
+                  {assignedDiet.content.reduce((sum: number, m: any) => sum + m.calories, 0).toLocaleString()} kcal Total
+                </span>
+              )}
             </div>
 
             {/* Assigned diet plan badge */}
@@ -428,51 +405,44 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
             <div className="flex items-center gap-2 mb-4 p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20">
               <ClipboardList className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <p className="text-xs text-emerald-700 dark:text-emerald-300 font-semibold">
-                Plan: <span className="font-extrabold">{assignedDiet.title}</span> — assigned by {assignedTrainer?.name || "your trainer"}
+                Plan: <span className="font-extrabold">{assignedDiet.title}</span> — {assignedDiet.summary}
               </p>
             </div>
             )}
 
-            <div className="space-y-4">
-              {[
-                { label: "Protein Target (180g)", logged: "145g Logged (80%)", pct: 80, color: "bg-slate-900 dark:bg-white" },
-                { label: "Carbohydrates Target (250g)", logged: "190g Logged (76%)", pct: 76, color: "bg-slate-700 dark:bg-slate-300" },
-                { label: "Fats Target (70g)", logged: "52g Logged (74%)", pct: 74, color: "bg-slate-500" },
-              ].map((m) => (
-                <div key={m.label}>
-                  <div className="flex justify-between text-xs font-mono-data mb-1.5 text-slate-700 dark:text-slate-300">
-                    <span>{m.label}</span>
-                    <span className="font-bold">{m.logged}</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden">
-                    <div className={`h-full ${m.color} rounded-full transition-all`} style={{ width: `${m.pct}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* Meal Log List */}
-            <div className="mt-5 pt-4 border-t border-slate-200 dark:border-white/10 space-y-2">
-              <span className="text-xs font-mono-data text-slate-500 uppercase block mb-2">Today's Meals</span>
-              {[
-                { meal: "Breakfast", items: "Oatmeal, 4 Egg Whites, Whey Protein", kcal: "580 kcal", protein: "45g P" },
-                { meal: "Lunch", items: "Grilled Chicken, Jasmine Rice, Broccoli", kcal: "620 kcal", protein: "52g P" },
-                { meal: "Post-Workout", items: "Greek Yogurt, Honey & Berries", kcal: "340 kcal", protein: "28g P" },
-              ].map((m, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between gap-2 text-xs"
-                >
-                  <div className="min-w-0">
-                    <p className="font-semibold text-slate-900 dark:text-white">{m.meal}</p>
-                    <p className="text-slate-500 text-[11px] mt-0.5 truncate">{m.items}</p>
+            <div className="mt-2 space-y-2">
+              <span className="text-xs font-mono-data text-slate-500 uppercase block mb-2">Planned Meals</span>
+              {assignedDiet?.content && Array.isArray(assignedDiet.content) ? (
+                assignedDiet.content.map((m: any, idx: number) => (
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-between gap-2 text-xs"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-semibold text-slate-900 dark:text-white">{m.name}</p>
+                    </div>
+                    <div className="text-right font-mono-data shrink-0 flex gap-4">
+                      <div className="text-left">
+                        <span className="font-bold text-emerald-600 block">{m.calories} kcal</span>
+                      </div>
+                      <div className="text-left">
+                        <span className="text-slate-500 text-[11px] block">P: {m.macros.protein}g</span>
+                      </div>
+                      <div className="text-left">
+                        <span className="text-slate-500 text-[11px] block">C: {m.macros.carbs}g</span>
+                      </div>
+                      <div className="text-left">
+                        <span className="text-slate-500 text-[11px] block">F: {m.macros.fats}g</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-right font-mono-data shrink-0">
-                    <span className="font-bold text-slate-900 dark:text-white block">{m.kcal}</span>
-                    <span className="text-[11px] text-slate-500">{m.protein}</span>
-                  </div>
+                ))
+              ) : (
+                <div className="py-8 text-center text-slate-400 text-sm italic">
+                  {assignedDiet ? "This diet has no meals." : "No diet plan assigned."}
                 </div>
-              ))}
+              )}
             </div>
           </GlassCard>
 

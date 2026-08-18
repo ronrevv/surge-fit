@@ -87,6 +87,21 @@ export interface AssignedPlan {
   title: string;      // routine.title or diet plan title
   summary: string;    // e.g. "4 exercises" or "3 meals · 2,500 kcal"
   assignedAt: string; // ISO date string
+  content?: any;      // Raw JSON (exercises, meals, etc.)
+}
+
+/**
+ * TrainerSavedPlan — A plan saved by a trainer to their personal library.
+ * Can be assigned later.
+ */
+export interface TrainerSavedPlan {
+  id: string;
+  trainerId: string;
+  type: "workout" | "diet" | "schedule";
+  title: string;
+  summary: string;
+  content: any; // Raw JSON (exercises, meals, etc.)
+  createdAt: string;
 }
 
 // ─── SESSION CONTEXT ─────────────────────────────────────────────────────────
@@ -103,255 +118,13 @@ export interface SessionContext {
 
 // ─── INITIAL SEED DATA ────────────────────────────────────────────────────────
 
-const SEED_CHAINS: GymChain[] = [
-  {
-    id: "chain_001",
-    name: "MetroFit Fitness Labs",
-    slug: "metrofit",
-    ownerEmail: "owner@metrofit.com",
-    ownerName: "Alex Vance",
-    tier: "enterprise",
-    status: "active",
-    mrr: 84200,
-    branches: ["branch_001", "branch_002"],
-    createdAt: "2024-01-15",
-    city: "New York",
-    country: "USA",
-  },
-  {
-    id: "chain_002",
-    name: "Apex Athletics Group",
-    slug: "apex",
-    ownerEmail: "owner@apex.com",
-    ownerName: "Marcus Thorne",
-    tier: "professional",
-    status: "pending",
-    mrr: 52100,
-    branches: ["branch_003"],
-    createdAt: "2024-06-20",
-    city: "Los Angeles",
-    country: "USA",
-  },
-  {
-    id: "chain_003",
-    name: "Iron Vault Performance",
-    slug: "ironvault",
-    ownerEmail: "owner@ironvault.com",
-    ownerName: "Elena Rostova",
-    tier: "professional",
-    status: "active",
-    mrr: 38900,
-    branches: [],
-    createdAt: "2024-09-01",
-    city: "Chicago",
-    country: "USA",
-  },
-];
+const SEED_CHAINS: GymChain[] = [];
 
-const SEED_BRANCHES: Branch[] = [
-  {
-    id: "branch_001",
-    chainId: "chain_001",
-    name: "Downtown Flagship",
-    address: "100 Main Street",
-    city: "Manhattan, NY",
-    capacity: 500,
-    status: "active",
-    managerId: "user_bm_001",
-    trainers: ["user_tr_001", "user_tr_002"],
-    createdAt: "2024-01-20",
-  },
-  {
-    id: "branch_002",
-    chainId: "chain_001",
-    name: "Westside High-Performance Center",
-    address: "450 West Ave",
-    city: "Brooklyn, NY",
-    capacity: 350,
-    status: "active",
-    managerId: "user_bm_002",
-    trainers: ["user_tr_003"],
-    createdAt: "2024-03-10",
-  },
-  {
-    id: "branch_003",
-    chainId: "chain_002",
-    name: "Apex Sunset District",
-    address: "7800 Sunset Blvd",
-    city: "Los Angeles, CA",
-    capacity: 400,
-    status: "active",
-    trainers: [],
-    createdAt: "2024-06-25",
-  },
-];
+const SEED_BRANCHES: Branch[] = [];
 
-const SEED_USERS: AppUser[] = [
-  // Branch Managers
-  {
-    id: "user_bm_001",
-    name: "James Harrington",
-    email: "james@metrofit.com",
-    role: "branch_manager",
-    status: "active",
-    organizationId: "chain_001",
-    branchId: "branch_001",
-    phone: "+1-212-555-0101",
-    joinedAt: "2024-01-20",
-  },
-  {
-    id: "user_bm_002",
-    name: "Priya Sharma",
-    email: "priya@metrofit.com",
-    role: "branch_manager",
-    status: "active",
-    organizationId: "chain_001",
-    branchId: "branch_002",
-    phone: "+1-718-555-0202",
-    joinedAt: "2024-03-10",
-  },
-  // Trainers
-  {
-    id: "user_tr_001",
-    name: "Coach Dave Reynolds",
-    email: "dave@metrofit.com",
-    role: "trainer",
-    status: "active",
-    organizationId: "chain_001",
-    branchId: "branch_001",
-    specialization: "Powerlifting & Strength",
-    rating: 4.9,
-    joinedAt: "2024-02-01",
-  },
-  {
-    id: "user_tr_002",
-    name: "Coach Sarah Kim",
-    email: "sarah@metrofit.com",
-    role: "trainer",
-    status: "active",
-    organizationId: "chain_001",
-    branchId: "branch_001",
-    specialization: "HIIT & Conditioning",
-    rating: 4.8,
-    joinedAt: "2024-02-15",
-  },
-  {
-    id: "user_tr_003",
-    name: "Coach Marcus West",
-    email: "marcus@metrofit.com",
-    role: "trainer",
-    status: "active",
-    organizationId: "chain_001",
-    branchId: "branch_002",
-    specialization: "Hypertrophy & Nutrition",
-    rating: 5.0,
-    joinedAt: "2024-04-01",
-  },
-  // Trainees
-  {
-    id: "user_tn_001",
-    name: "Sarah Jenkins",
-    email: "sarah.j@gmail.com",
-    role: "trainee",
-    status: "active",
-    branchId: "branch_001",
-    trainerId: "user_tr_001",
-    goal: "Hypertrophy & Strength",
-    weightKg: 68,
-    heightCm: 165,
-    joinedAt: "2024-03-01",
-  },
-  {
-    id: "user_tn_002",
-    name: "Marcus Brody",
-    email: "marcus.b@gmail.com",
-    role: "trainee",
-    status: "active",
-    branchId: "branch_001",
-    trainerId: "user_tr_001",
-    goal: "Fat Loss & Conditioning",
-    weightKg: 95,
-    heightCm: 182,
-    joinedAt: "2024-03-15",
-  },
-  {
-    id: "user_tn_003",
-    name: "Elena Rostova",
-    email: "elena@gmail.com",
-    role: "trainee",
-    status: "active",
-    branchId: "branch_001",
-    trainerId: "user_tr_002",
-    goal: "Powerlifting",
-    weightKg: 72,
-    heightCm: 170,
-    joinedAt: "2024-04-10",
-  },
-  // Independent Trainer
-  {
-    id: "user_it_001",
-    name: "Ryan Owens",
-    email: "ryan@independentfit.com",
-    role: "independent_trainer",
-    status: "active",
-    specialization: "Online Coaching & Nutrition",
-    rating: 4.7,
-    monthlyRevenue: 14800,
-    totalClients: 34,
-    joinedAt: "2024-05-01",
-  },
-  {
-    id: "user_it_002",
-    name: "Ava Chen",
-    email: "ava@fitpro.com",
-    role: "trainee",
-    status: "active",
-    trainerId: "user_it_001",
-    goal: "Lean Muscle & Mobility",
-    weightKg: 55,
-    heightCm: 160,
-    joinedAt: "2024-05-10",
-  },
-];
+const SEED_USERS: AppUser[] = [];
 
-const SEED_AUDIT: AuditLog[] = [
-  {
-    id: "audit_001",
-    action: "Gym Chain Onboarded",
-    actorRole: "super_admin",
-    actorName: "Super Admin",
-    targetName: "MetroFit Fitness Labs",
-    timestamp: new Date(Date.now() - 120000).toISOString(),
-    severity: "info",
-  },
-  {
-    id: "audit_002",
-    action: "Branch Created",
-    actorRole: "chain_owner",
-    actorName: "Alex Vance",
-    targetName: "Downtown Flagship",
-    timestamp: new Date(Date.now() - 7200000).toISOString(),
-    severity: "info",
-  },
-  {
-    id: "audit_003",
-    action: "Trainer Onboarded",
-    actorRole: "branch_manager",
-    actorName: "James Harrington",
-    targetName: "Coach Dave Reynolds",
-    timestamp: new Date(Date.now() - 86400000).toISOString(),
-    severity: "info",
-  },
-  {
-    id: "audit_004",
-    action: "Pending Chain Approval Needed",
-    actorRole: "super_admin",
-    actorName: "System",
-    targetName: "Apex Athletics Group",
-    timestamp: new Date(Date.now() - 3600000).toISOString(),
-    severity: "warn",
-  },
-];
+const SEED_AUDIT: AuditLog[] = [];
 
 // ─── STORE (Singleton reactive state) ────────────────────────────────────────
 
@@ -360,72 +133,8 @@ class OrgStore {
   private branches: Branch[] = [...SEED_BRANCHES];
   private users: AppUser[] = [...SEED_USERS];
   private auditLogs: AuditLog[] = [...SEED_AUDIT];
-  // Assignments: trainer → trainee plan assignments, seeded with real data
-  private assignments: AssignedPlan[] = [
-    {
-      id: "assign_001",
-      trainerId: "user_tr_001",
-      traineeId: "user_tn_001",
-      type: "workout",
-      title: "Powerlifting Peak — Week 8",
-      summary: "5 exercises · Squat, Bench, Deadlift focus",
-      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_002",
-      trainerId: "user_tr_001",
-      traineeId: "user_tn_001",
-      type: "diet",
-      title: "High-Protein Recomp Diet",
-      summary: "4 meals · 2,500 kcal · 180g protein",
-      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_003",
-      trainerId: "user_tr_001",
-      traineeId: "user_tn_001",
-      type: "schedule",
-      title: "Mon / Wed / Fri Training Schedule",
-      summary: "3 sessions per week",
-      assignedAt: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_004",
-      trainerId: "user_tr_001",
-      traineeId: "user_tn_002",
-      type: "workout",
-      title: "Fat Loss HIIT Circuit",
-      summary: "6 exercises · Full-body conditioning",
-      assignedAt: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_005",
-      trainerId: "user_tr_001",
-      traineeId: "user_tn_002",
-      type: "diet",
-      title: "Calorie Deficit Lean Diet",
-      summary: "4 meals · 1,800 kcal · 150g protein",
-      assignedAt: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_006",
-      trainerId: "user_it_001",
-      traineeId: "user_it_002",
-      type: "workout",
-      title: "Lean Muscle Builder — Phase 1",
-      summary: "4 exercises · Upper/Lower split",
-      assignedAt: new Date(Date.now() - 3 * 24 * 3600000).toISOString(),
-    },
-    {
-      id: "assign_007",
-      trainerId: "user_it_001",
-      traineeId: "user_it_002",
-      type: "diet",
-      title: "Flexible Macros Nutrition Plan",
-      summary: "4 meals · 2,100 kcal · 160g protein",
-      assignedAt: new Date(Date.now() - 3 * 24 * 3600000).toISOString(),
-    },
-  ];
+  private assignments: AssignedPlan[] = [];
+  private trainerSavedPlans: TrainerSavedPlan[] = [];
   private listeners: Set<() => void> = new Set();
 
   // Default session maps each role to seed data so it works out of the box
@@ -867,6 +576,7 @@ class OrgStore {
     type: AssignedPlan["type"];
     title: string;
     summary: string;
+    content?: any;
   }): AssignedPlan {
     // Remove any existing assignment of the same type for this trainee from this trainer
     // (only one workout plan, one diet plan, one schedule per trainee-trainer pair)
@@ -902,6 +612,28 @@ class OrgStore {
   /** Remove a specific assignment */
   removeAssignment(assignmentId: string) {
     this.assignments = this.assignments.filter((a) => a.id !== assignmentId);
+    this.notify();
+  }
+
+  // ─── TRAINER SAVED PLANS (LIBRARY) ────────────────────────────────────────────────
+
+  getTrainerSavedPlans(trainerId: string) {
+    return this.trainerSavedPlans.filter((p) => p.trainerId === trainerId);
+  }
+
+  saveTrainerPlan(plan: Omit<TrainerSavedPlan, "id" | "createdAt">) {
+    const newPlan: TrainerSavedPlan = {
+      ...plan,
+      id: `saved_${Math.random().toString(36).substring(2, 9)}`,
+      createdAt: new Date().toISOString(),
+    };
+    this.trainerSavedPlans.push(newPlan);
+    this.notify();
+    return newPlan;
+  }
+
+  removeTrainerSavedPlan(planId: string) {
+    this.trainerSavedPlans = this.trainerSavedPlans.filter((p) => p.id !== planId);
     this.notify();
   }
 }

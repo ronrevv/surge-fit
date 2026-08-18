@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   description: "AI-powered fitness ecosystem connecting Trainees, Trainers, Gym Branches, Gym Chains, and Fitness Businesses.",
 };
 
+import { Providers } from "./providers";
+
 export default function RootLayout({
   children,
 }: {
@@ -36,7 +38,9 @@ export default function RootLayout({
       className={`${manrope.variable} ${inter.variable} ${jetBrainsMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans selection:bg-rose-500 selection:text-white">
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

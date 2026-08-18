@@ -8,6 +8,7 @@ import { WorkoutPlannerModal, PlannedExerciseItem } from "../planner/WorkoutPlan
 import { DietPlannerModal } from "../planner/DietPlannerModal";
 import { TrainingCalendarModal } from "../planner/TrainingCalendarModal";
 import { useStore } from "@/lib/store/useStore";
+import { useAssignPlanMutation } from "@/lib/hooks/usePlans";
 import { AppUser, AssignedPlan } from "@/lib/store/orgStore";
 import { MealItem } from "@/lib/data/exercises";
 import {
@@ -138,18 +139,32 @@ function AssignPlanModal({
 }: {
   trainerId: string;
   trainees: AppUser[];
-  plan: { title: string; summary: string; type: AssignedPlan["type"] };
+  plan: { title: string; summary: string; type: AssignedPlan["type"]; content?: any };
   onClose: () => void;
 }) {
   const s = useStore();
+  const assignPlanMutation = useAssignPlanMutation();
   const [selectedTraineeId, setSelectedTraineeId] = useState(trainees[0]?.id || "");
   const [done, setDone] = useState(false);
 
-  const handleAssign = () => {
+  const handleAssign = async () => {
     if (!selectedTraineeId) return;
-    s.assignPlan({ trainerId, traineeId: selectedTraineeId, ...plan });
-    setDone(true);
-    setTimeout(onClose, 1400);
+    try {
+      await assignPlanMutation.mutateAsync({ 
+        trainer_id: trainerId, 
+        trainee_id: selectedTraineeId, 
+        type: plan.type as any,
+        title: plan.title,
+        summary: plan.summary,
+        content: plan.content 
+      });
+      // Fallback local store update for instant UI response before DB settles
+      s.assignPlan({ trainerId, traineeId: selectedTraineeId, ...plan });
+      setDone(true);
+      setTimeout(onClose, 1400);
+    } catch (error) {
+      console.error("Failed to assign plan", error);
+    }
   };
 
   return (
@@ -241,16 +256,11 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   const [dietPlannerOpen, setDietPlannerOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [traineeModalOpen, setTraineeModalOpen] = useState(false);
-  const [savedRoutines, setSavedRoutines] = useState<{ title: string; exercises: PlannedExerciseItem[] }[]>([]);
-  const [savedDietPlans, setSavedDietPlans] = useState<{ title: string; meals: MealItem[] }[]>([]);
   const [trainerChatInput, setTrainerChatInput] = useState("");
-  const [trainerChatMessages, setTrainerChatMessages] = useState([
-    { sender: "client", text: "Coach, completed today's Push session! Hit a 95kg Bench PR.", time: "09:14 AM" },
-    { sender: "trainer", text: "Boom! Exceptional execution. Let's increase target to 97.5kg next week.", time: "09:16 AM" },
-  ]);
+  const [trainerChatMessages, setTrainerChatMessages] = useState<any[]>([]);
   // Assign modal state: when set, shows a trainee picker for that plan
   const [assignModal, setAssignModal] = useState<{
-    title: string; summary: string; type: AssignedPlan["type"];
+    title: string; summary: string; type: AssignedPlan["type"]; content?: any;
   } | null>(null);
 
   // Live session
@@ -269,8 +279,18 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
     ? s.getUserById(selectedClient)
     : myTrainees[0];
 
+  const savedPlans = s.getTrainerSavedPlans(myTrainerId);
+  const savedRoutines = savedPlans.filter(p => p.type === "workout").map(p => ({ title: p.title, exercises: p.content as PlannedExerciseItem[] }));
+  const savedDietPlans = savedPlans.filter(p => p.type === "diet").map(p => ({ title: p.title, meals: p.content as MealItem[] }));
+
   const handleRoutineSaved = (routine: { title: string; exercises: PlannedExerciseItem[] }, assignToTraineeId?: string) => {
-    setSavedRoutines((prev) => [...prev.filter((r) => r.title !== routine.title), routine]);
+    s.saveTrainerPlan({
+      trainerId: myTrainerId,
+      type: "workout",
+      title: routine.title,
+      summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
+      content: routine.exercises
+    });
     if (assignToTraineeId) {
       s.assignPlan({
         trainerId: myTrainerId,
@@ -278,6 +298,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
         type: "workout",
         title: routine.title,
         summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
+        content: routine.exercises,
       });
     } else {
       setCalendarOpen(true);
@@ -285,7 +306,13 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   };
 
   const handleDietPlanSaved = (plan: { title: string; meals: MealItem[] }, assignToTraineeId?: string) => {
-    setSavedDietPlans((prev) => [...prev.filter((p) => p.title !== plan.title), plan]);
+    s.saveTrainerPlan({
+      trainerId: myTrainerId,
+      type: "diet",
+      title: plan.title,
+      summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`,
+      content: plan.meals
+    });
     if (assignToTraineeId) {
       s.assignPlan({
         trainerId: myTrainerId,
@@ -293,6 +320,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
         type: "diet",
         title: plan.title,
         summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`,
+        content: plan.meals,
       });
     } else {
       setCalendarOpen(true);
@@ -307,6 +335,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
         type: "schedule",
         title: "Training Calendar",
         summary: `${entries.length} scheduled day${entries.length !== 1 ? "s" : ""}`,
+        content: entries,
       });
     }
   };
@@ -468,12 +497,12 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                         <p className="text-xs text-slate-400 text-center italic">No plans assigned yet</p>
                         <div className="flex gap-2 mt-2 justify-center">
                           <button
-                            onClick={() => setAssignModal({ title: savedRoutines[0]?.title || "Workout", summary: `${savedRoutines[0]?.exercises?.length || 0} exercises`, type: "workout" })}
+                            onClick={() => setAssignModal({ title: savedRoutines[0]?.title || "Workout", summary: `${savedRoutines[0]?.exercises?.length || 0} exercises`, type: "workout", content: savedRoutines[0]?.exercises })}
                             disabled={savedRoutines.length === 0}
                             className="text-[10px] px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold disabled:opacity-40"
                           >+ Assign Workout</button>
                           <button
-                            onClick={() => setAssignModal({ title: savedDietPlans[0]?.title || "Diet Plan", summary: `${savedDietPlans[0]?.meals?.length || 0} meals`, type: "diet" })}
+                            onClick={() => setAssignModal({ title: savedDietPlans[0]?.title || "Diet Plan", summary: `${savedDietPlans[0]?.meals?.length || 0} meals`, type: "diet", content: savedDietPlans[0]?.meals })}
                             disabled={savedDietPlans.length === 0}
                             className="text-[10px] px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold disabled:opacity-40"
                           >+ Assign Diet</button>
@@ -615,6 +644,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                         title: routine.title,
                         summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
                         type: "workout",
+                        content: routine.exercises,
                       })}
                       className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs"
                     >
@@ -839,6 +869,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                         title: plan.title,
                         summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""} · ${plan.meals.reduce((a, m) => a + m.calories, 0).toLocaleString()} kcal`,
                         type: "diet",
+                        content: plan.meals,
                       })}
                       className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
                     >

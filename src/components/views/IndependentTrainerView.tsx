@@ -7,6 +7,7 @@ import { StatCard } from "../ui/StatCard";
 import { WorkoutPlannerModal, PlannedExerciseItem } from "../planner/WorkoutPlannerModal";
 import { DietPlannerModal } from "../planner/DietPlannerModal";
 import { TrainingCalendarModal } from "../planner/TrainingCalendarModal";
+import { useAssignPlanMutation } from "@/lib/hooks/usePlans";
 import { useStore } from "@/lib/store/useStore";
 import { AppUser, AssignedPlan } from "@/lib/store/orgStore";
 import { MealItem } from "@/lib/data/exercises";
@@ -127,18 +128,31 @@ function AssignPlanModal({
 }: {
   trainerId: string;
   clients: AppUser[];
-  plan: { title: string; summary: string; type: AssignedPlan["type"] };
+  plan: { title: string; summary: string; type: AssignedPlan["type"]; content?: any };
   onClose: () => void;
 }) {
   const s = useStore();
+  const assignPlanMutation = useAssignPlanMutation();
   const [selectedClientId, setSelectedClientId] = useState(clients[0]?.id || "");
   const [done, setDone] = useState(false);
 
-  const handleAssign = () => {
+  const handleAssign = async () => {
     if (!selectedClientId) return;
-    s.assignPlan({ trainerId, traineeId: selectedClientId, ...plan });
-    setDone(true);
-    setTimeout(onClose, 1400);
+    try {
+      await assignPlanMutation.mutateAsync({ 
+        trainer_id: trainerId, 
+        trainee_id: selectedClientId, 
+        type: plan.type as any,
+        title: plan.title,
+        summary: plan.summary,
+        content: plan.content 
+      });
+      s.assignPlan({ trainerId, traineeId: selectedClientId, ...plan });
+      setDone(true);
+      setTimeout(onClose, 1400);
+    } catch (error) {
+      console.error("Failed to assign plan", error);
+    }
   };
 
   return (
@@ -226,15 +240,10 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
   const [workoutPlannerOpen, setWorkoutPlannerOpen] = useState(false);
   const [dietPlannerOpen, setDietPlannerOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [savedRoutines, setSavedRoutines] = useState<{ title: string; exercises: PlannedExerciseItem[] }[]>([]);
-  const [savedDietPlans, setSavedDietPlans] = useState<{ title: string; meals: MealItem[] }[]>([]);
-  const [chatInput, setChatInput] = useState("");
-  const [messages, setMessages] = useState([
-    { sender: "client", text: "Hey Coach! Submitted my weekly check-in video for deadlifts.", time: "11:05 AM" },
-    { sender: "trainer", text: "Checked it — hip hinge looks pristine. Let's push to 180kg next week.", time: "11:10 AM" },
-  ]);
+  const [trainerChatInput, setTrainerChatInput] = useState("");
+  const [trainerChatMessages, setTrainerChatMessages] = useState<any[]>([]);
   const [assignModal, setAssignModal] = useState<{
-    title: string; summary: string; type: AssignedPlan["type"];
+    title: string; summary: string; type: AssignedPlan["type"]; content?: any;
   } | null>(null);
 
   // Live session
@@ -248,8 +257,18 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     (c) => c.name.toLowerCase().includes(clientSearch.toLowerCase())
   );
 
+  const savedPlans = s.getTrainerSavedPlans(myTrainerId);
+  const savedRoutines = savedPlans.filter(p => p.type === "workout").map(p => ({ title: p.title, exercises: p.content as PlannedExerciseItem[] }));
+  const savedDietPlans = savedPlans.filter(p => p.type === "diet").map(p => ({ title: p.title, meals: p.content as MealItem[] }));
+
   const handleRoutineSaved = (r: { title: string; exercises: PlannedExerciseItem[] }, assignToTraineeId?: string) => {
-    setSavedRoutines((prev) => [...prev.filter((x) => x.title !== r.title), r]);
+    s.saveTrainerPlan({
+      trainerId: myTrainerId,
+      type: "workout",
+      title: r.title,
+      summary: `${r.exercises.length} exercise${r.exercises.length !== 1 ? "s" : ""}`,
+      content: r.exercises
+    });
     if (assignToTraineeId) {
       s.assignPlan({
         trainerId: myTrainerId,
@@ -257,13 +276,20 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
         type: "workout",
         title: r.title,
         summary: `${r.exercises.length} exercise${r.exercises.length !== 1 ? "s" : ""}`,
+        content: r.exercises,
       });
     } else {
       setCalendarOpen(true);
     }
   };
   const handleDietPlanSaved = (p: { title: string; meals: MealItem[] }, assignToTraineeId?: string) => {
-    setSavedDietPlans((prev) => [...prev.filter((x) => x.title !== p.title), p]);
+    s.saveTrainerPlan({
+      trainerId: myTrainerId,
+      type: "diet",
+      title: p.title,
+      summary: `${p.meals.length} meal${p.meals.length !== 1 ? "s" : ""}`,
+      content: p.meals
+    });
     if (assignToTraineeId) {
       s.assignPlan({
         trainerId: myTrainerId,
@@ -271,6 +297,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
         type: "diet",
         title: p.title,
         summary: `${p.meals.length} meal${p.meals.length !== 1 ? "s" : ""}`,
+        content: p.meals
       });
     } else {
       setCalendarOpen(true);
@@ -284,13 +311,14 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
         type: "schedule",
         title: "Training Calendar",
         summary: `${entries.length} scheduled day${entries.length !== 1 ? "s" : ""}`,
+        content: entries,
       });
     }
   };
   const handleSendChat = () => {
-    if (!chatInput.trim()) return;
-    setMessages((prev) => [...prev, { sender: "trainer", text: chatInput, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
-    setChatInput("");
+    if (!trainerChatInput.trim()) return;
+    setTrainerChatMessages((prev) => [...prev, { sender: "trainer", text: trainerChatInput, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }]);
+    setTrainerChatInput("");
   };
 
   return (
@@ -474,7 +502,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
         <GlassCard>
           <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">Client Messenger</h3>
           <div className="space-y-3 max-h-80 overflow-y-auto mb-4">
-            {messages.map((msg, idx) => (
+            {trainerChatMessages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.sender === "trainer" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm ${msg.sender === "trainer" ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white"}`}>
                   <p>{msg.text}</p>
@@ -484,7 +512,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
             ))}
           </div>
           <div className="flex gap-2">
-            <input value={chatInput} onChange={(e) => setChatInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSendChat()} placeholder="Message your client…"
+            <input value={trainerChatInput} onChange={(e) => setTrainerChatInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSendChat()} placeholder="Message your client…"
               className="flex-1 px-4 py-2.5 text-sm rounded-xl surge-card text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none" />
             <button onClick={handleSendChat} className="px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900"><Send className="w-4 h-4" /></button>
           </div>
@@ -563,6 +591,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
                             title: routine.title,
                             summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
                             type: "workout",
+                            content: routine.exercises,
                           })} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs">
                             <Users className="w-3.5 h-3.5" /> Assign
                           </button>
@@ -612,6 +641,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
                             title: plan.title,
                             summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""} · ${plan.meals.reduce((a: number, m: { calories: number }) => a + m.calories, 0).toLocaleString()} kcal`,
                             type: "diet",
+                            content: plan.meals,
                           })} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
                             <Users className="w-3.5 h-3.5" /> Assign
                           </button>
@@ -679,6 +709,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
                       title: routine.title,
                       summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
                       type: "workout",
+                      content: routine.exercises,
                     })} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs">
                       <Users className="w-3.5 h-3.5" /> Assign to Client
                     </button>
@@ -732,6 +763,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
                       title: plan.title,
                       summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""} · ${plan.meals.reduce((a: number, m: { calories: number }) => a + m.calories, 0).toLocaleString()} kcal`,
                       type: "diet",
+                      content: plan.meals,
                     })} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
                       <Users className="w-3.5 h-3.5" /> Assign to Client
                     </button>
