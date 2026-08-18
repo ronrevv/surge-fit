@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SurgeFit
+
+**SurgeFit** is an AI-powered fitness ecosystem built with Next.js, Supabase, and Tailwind CSS. It is the operating system for the fitness industry, connecting Trainees, Trainers, Gym Branches, Gym Chains, and Fitness Businesses together in a single, cohesive, premium experience.
+
+## Features
+
+*   **Multi-Role Dashboards:** Distinct and tailored experiences for Trainees, Independent Trainers, and Gym Managers.
+*   **Dynamic Plans:** Real-time assignment and tracking of Workouts, Diets, and Schedules using a reactive state and Supabase backend.
+*   **Premium Design System:** A meticulously crafted interface using a dark mode first approach, glassmorphism, floating cards, and beautiful typography (Manrope & Inter).
+*   **TanStack Query Integration:** Seamless asynchronous data fetching and cache invalidation.
+*   **Supabase Backend:** Scalable PostgreSQL database with Row Level Security (RLS) to ensure data privacy between different roles.
+
+## Tech Stack
+
+*   **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+*   **State & Data Fetching:** [TanStack Query](https://tanstack.com/query/latest)
+*   **Backend & Database:** [Supabase](https://supabase.com/) (PostgreSQL)
 
 ## Getting Started
 
@@ -16,21 +34,17 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Setup (Supabase)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Create a new project in Supabase.
+2. Run the SQL migration file located at `supabase/migrations/00001_initial_schema.sql` in your Supabase SQL Editor.
+3. Update your local `.env.local` file with your Supabase URL and Anon Key:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
