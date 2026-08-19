@@ -146,24 +146,24 @@ export default function SurgeFitApp() {
     const metaRole = (user.user_metadata?.role ?? "trainee") as RoleType;
     const metaName = user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "User";
 
-    // Upsert profile so FK constraints on trainer_plans / assigned_plans never fail
-    await supabase.from("profiles").upsert(
-      {
-        id: user.id,
-        email: user.email,
-        full_name: metaName,
-        role: metaRole,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "id" }
-    );
-
-    // Re-fetch profile (in case it existed with different values)
-    const { data: profile } = await supabase
+    // Fetch profile
+    const { data: existingProfile } = await supabase
       .from("profiles")
       .select("role, full_name")
       .eq("id", user.id)
       .single();
+
+    // Insert profile if it doesn't exist so FK constraints never fail
+    if (!existingProfile) {
+      await supabase.from("profiles").insert({
+        id: user.id,
+        email: user.email,
+        full_name: metaName,
+        role: metaRole,
+      });
+    }
+
+    const profile = existingProfile || { role: metaRole, full_name: metaName };
 
     const role = (profile?.role ?? metaRole) as RoleType;
     const name = profile?.full_name ?? metaName;
