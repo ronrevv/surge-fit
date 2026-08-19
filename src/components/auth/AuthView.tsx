@@ -124,6 +124,11 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
       const { data, error } = await supabase.auth.signUp({
         email: emailInput,
         password: passwordInput,
+        options: {
+          data: {
+            role: selectedRole,
+          }
+        }
       });
 
       if (error) {
