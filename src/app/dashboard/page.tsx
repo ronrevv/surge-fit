@@ -303,6 +303,7 @@ export default function SurgeFitApp() {
 
       <TopNavBar
         currentRole={currentRole}
+        availableRoles={roleAssignments ? Array.from(new Set(roleAssignments.map(a => a.role))) : [currentRole]}
         onRoleChange={handleRoleChange}
         isDark={isDark}
         onToggleTheme={() => setIsDark(!isDark)}

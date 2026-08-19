@@ -374,6 +374,44 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
               ))}
             </div>
           )}
+
+          {/* Today's Workout Preview (when not started) */}
+          {activeTab === "dashboard" && !activeWorkout && assignedWorkout && (
+            <GlassCard className="mt-4 border-slate-300 dark:border-white/20">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                  <Dumbbell className="w-5 h-5 text-blue-500" />
+                  Today's Exercises Preview
+                </h3>
+                <span className="text-xs font-mono-data bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full">
+                  {assignedWorkout.title}
+                </span>
+              </div>
+              <div className="space-y-3">
+                {assignedWorkout.content && Array.isArray(assignedWorkout.content) ? (
+                  assignedWorkout.content.map((item: any, idx: number) => (
+                    <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                      {item.exercise?.gifUrl ? (
+                        <div className="w-12 h-12 rounded-lg bg-black/50 overflow-hidden shrink-0 border border-slate-200 dark:border-white/10">
+                          <img src={item.exercise.gifUrl} alt={item.exercise.name} className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <span className="w-10 h-10 rounded-lg bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-slate-300 flex items-center justify-center font-mono-data font-bold text-xs shrink-0">
+                          {idx + 1}
+                        </span>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="font-bold text-slate-900 dark:text-white text-sm truncate">{item.exercise?.name || "Unknown Exercise"}</p>
+                        <p className="text-xs text-slate-500">{item.sets} Sets × {item.reps} Reps</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 italic">No exercises found.</p>
+                )}
+              </div>
+            </GlassCard>
+          )}
         </>
       )}
 
@@ -451,16 +489,16 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
                     </div>
                     <div className="text-right font-mono-data shrink-0 flex gap-4">
                       <div className="text-left">
-                        <span className="font-bold text-emerald-600 block">{m.calories} kcal</span>
+                        <span className="font-bold text-emerald-600 block">{m.calories || 0} kcal</span>
                       </div>
                       <div className="text-left">
-                        <span className="text-slate-500 text-[11px] block">P: {m.macros.protein}g</span>
+                        <span className="text-slate-500 text-[11px] block">P: {m.macros?.protein || 0}g</span>
                       </div>
                       <div className="text-left">
-                        <span className="text-slate-500 text-[11px] block">C: {m.macros.carbs}g</span>
+                        <span className="text-slate-500 text-[11px] block">C: {m.macros?.carbs || 0}g</span>
                       </div>
                       <div className="text-left">
-                        <span className="text-slate-500 text-[11px] block">F: {m.macros.fats}g</span>
+                        <span className="text-slate-500 text-[11px] block">F: {m.macros?.fats || 0}g</span>
                       </div>
                     </div>
                   </div>

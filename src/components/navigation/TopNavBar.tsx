@@ -28,6 +28,7 @@ export type RoleType =
 
 interface TopNavBarProps {
   currentRole: RoleType;
+  availableRoles?: RoleType[];
   onRoleChange: (role: RoleType) => void;
   isDark: boolean;
   onToggleTheme: () => void;
@@ -50,6 +51,7 @@ const ROLES_CONFIG: Record<
 
 export function TopNavBar({
   currentRole,
+  availableRoles,
   onRoleChange,
   isDark,
   onToggleTheme,
@@ -85,15 +87,21 @@ export function TopNavBar({
         {/* Role & Workspace Switcher */}
         <div className="relative">
           <button
-            onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl surge-card hover:border-slate-400 dark:hover:border-white/30 transition-all text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200"
+            onClick={() => {
+              if (!availableRoles || availableRoles.length > 1) {
+                setRoleDropdownOpen(!roleDropdownOpen);
+              }
+            }}
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl surge-card transition-all text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 ${(!availableRoles || availableRoles.length > 1) ? 'hover:border-slate-400 dark:hover:border-white/30 cursor-pointer' : 'cursor-default'}`}
           >
             {ROLES_CONFIG[currentRole].icon}
             <span className="font-semibold text-slate-500 dark:text-slate-400 hidden sm:inline">Role:</span>
             <span className="font-bold text-slate-900 dark:text-white">
               {ROLES_CONFIG[currentRole].label}
             </span>
-            <ChevronDown className="w-4 h-4 text-slate-400 ml-1" />
+            {(!availableRoles || availableRoles.length > 1) && (
+              <ChevronDown className="w-4 h-4 text-slate-400 ml-1" />
+            )}
           </button>
 
           <AnimatePresence>
@@ -110,7 +118,7 @@ export function TopNavBar({
                   </p>
                 </div>
 
-                {(Object.keys(ROLES_CONFIG) as RoleType[]).map((role) => {
+                {(availableRoles || Object.keys(ROLES_CONFIG) as RoleType[]).map((role: RoleType) => {
                   const isSelected = role === currentRole;
                   return (
                     <button
