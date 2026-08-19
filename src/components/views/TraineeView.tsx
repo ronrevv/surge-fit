@@ -29,6 +29,7 @@ import {
 
 import { useStore } from "@/lib/store/useStore";
 import { useAssignedPlans } from "@/lib/hooks/usePlans";
+import { supabase } from "@/lib/supabase/client";
 
 interface TraineeViewProps {
   activeTab?: string;
@@ -47,6 +48,14 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
   const assignedBranch = traineeUser?.branchId
     ? s.getBranchById(traineeUser.branchId)
     : null;
+
+  // Real Supabase auth user ID (avoids fake mock UUIDs from orgStore)
+  const [realUserId, setRealUserId] = useState<string>("");
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user?.id) setRealUserId(data.user.id);
+    });
+  }, []);
 
   // Workout State
   const [activeWorkout, setActiveWorkout] = useState(false);
@@ -96,10 +105,22 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
   };
 
   // Live assignments from store — written by trainer, read here
-  const { data: myAssignments = [], isLoading: isLoadingAssignments } = useAssignedPlans(traineeUser?.id || "");
-  const assignedWorkout = myAssignments.find((a: any) => a.type === "workout");
-  const assignedDiet = myAssignments.find((a: any) => a.type === "diet");
-  const assignedSchedule = myAssignments.find((a) => a.type === "schedule");
+  // Use real Supabase UUID — not the mock store ID which breaks the UUID column
+  const { data: myAssignments = [], isLoading: isLoadingAssignments } = useAssignedPlans(realUserId);
+  // Get today's date in YYYY-MM-DD for scheduling
+  const todayDate = new Date();
+  const todayKey = `${todayDate.getFullYear()}-${String(todayDate.getMonth() + 1).padStart(2, "0")}-${String(todayDate.getDate()).padStart(2, "0")}`;
+
+  // Find scheduled workout for today, or fallback to the most recent active assigned workout
+  const assignedWorkout = myAssignments.find((a: any) => a.type === "workout" && a.scheduled_date === todayKey) 
+    || myAssignments.find((a: any) => a.type === "workout" && !a.scheduled_date);
+
+  // Find scheduled diet for today, or fallback to the most recent active assigned diet
+  const assignedDiet = myAssignments.find((a: any) => a.type === "diet" && a.scheduled_date === todayKey)
+    || myAssignments.find((a: any) => a.type === "diet" && !a.scheduled_date);
+
+  // For the schedule badge, check if there's anything scheduled today
+  const assignedSchedule = myAssignments.find((a: any) => a.scheduled_date === todayKey);
 
   return (
     <div className="space-y-5">
@@ -299,10 +320,16 @@ export function TraineeView({ activeTab = "dashboard" }: TraineeViewProps) {
                   assignedWorkout.content.map((item: any, idx: number) => (
                     <div key={idx} className="p-3 sm:p-4 rounded-xl border bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-mono-data font-bold text-sm shrink-0">
-                          {idx + 1}
-                        </span>
-                        <div className="min-w-0">
+                        {item.exercise?.gifUrl ? (
+                          <div className="w-16 h-16 rounded-xl bg-black/50 overflow-hidden shrink-0 border border-slate-200 dark:border-white/10">
+                            <img src={item.exercise.gifUrl} alt={item.exercise.name} className="w-full h-full object-cover" />
+                          </div>
+                        ) : (
+                          <span className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-mono-data font-bold text-sm shrink-0">
+                            {idx + 1}
+                          </span>
+                        )}
+                        <div className="min-w-0 flex-1">
                           <p className="font-bold text-slate-900 dark:text-white truncate">{item.exercise?.name || "Unknown Exercise"}</p>
                           <p className="text-xs text-slate-500">{item.sets} Sets × {item.reps} Reps</p>
                         </div>

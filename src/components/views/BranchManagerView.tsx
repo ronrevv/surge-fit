@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
 import { useStore } from "@/lib/store/useStore";
+import { supabase } from "@/lib/supabase/client";
 import {
   Building2, Users, Activity, Wrench, Plus, X, Check, Clock,
-  CheckCircle2, Dumbbell, UserPlus, Search, Phone, Mail,
+  CheckCircle2, Dumbbell, UserPlus, Search, Phone, Mail, AlertCircle,
 } from "lucide-react";
 
 interface BranchManagerViewProps {
@@ -22,6 +23,19 @@ function OnboardTrainerModal({ branchId, orgId, actorName, onClose }: {
   const [form, setForm] = useState({ name: "", email: "", phone: "", specialization: "" });
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [mySupabaseId, setMySupabaseId] = useState<string>("");
+  const [branchName, setBranchName] = useState<string>("");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user?.id) setMySupabaseId(data.user.id);
+    });
+    if (branchId) {
+      supabase.from("branches").select("name").eq("id", branchId).single()
+        .then(({ data }) => { if (data?.name) setBranchName(data.name); });
+    }
+  }, [branchId]);
 
   const SPECIALIZATIONS = [
     "Powerlifting & Strength", "HIIT & Conditioning", "Hypertrophy & Nutrition",
@@ -32,11 +46,52 @@ function OnboardTrainerModal({ branchId, orgId, actorName, onClose }: {
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.specialization) return;
     setSaving(true);
-    await new Promise((r) => setTimeout(r, 600));
-    s.onboardTrainer({ branchId, organizationId: orgId, actorName, ...form });
-    setSaving(false);
-    setDone(true);
-    setTimeout(onClose, 1200);
+    setError(null);
+
+    try {
+      // 1. Sign up trainer in Supabase Auth
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: form.email,
+        password: `SurgeTrainer_${Date.now()}!`,
+        options: { data: { full_name: form.name, role: "trainer" } },
+      });
+      if (signUpError && !signUpError.message.includes("already registered")) {
+        throw signUpError;
+      }
+      const trainerId = signUpData?.user?.id;
+
+      // 2. Upsert profile row
+      if (trainerId) {
+        await supabase.from("profiles").upsert(
+          { id: trainerId, email: form.email, full_name: form.name, role: "trainer", updated_at: new Date().toISOString() },
+          { onConflict: "id" }
+        );
+        // 3. Insert role_assignment with branch manager as assigner
+        await supabase.from("role_assignments").upsert(
+          {
+            user_id: trainerId,
+            role: "trainer",
+            org_id: orgId || null,
+            branch_id: branchId || null,
+            assigned_by: mySupabaseId || null,
+            assigned_by_role: "branch_manager",
+            assigned_by_name: actorName,
+            branch_name: branchName || null,
+            status: "active",
+          },
+          { onConflict: "user_id,role,org_id,branch_id", ignoreDuplicates: true }
+        );
+      }
+
+      // 4. In-memory store for immediate UI
+      s.onboardTrainer({ branchId, organizationId: orgId, actorName, ...form });
+      setSaving(false);
+      setDone(true);
+      setTimeout(onClose, 1400);
+    } catch (err: any) {
+      setError(err.message ?? "Something went wrong.");
+      setSaving(false);
+    }
   };
 
   return (
@@ -94,12 +149,18 @@ function OnboardTrainerModal({ branchId, orgId, actorName, onClose }: {
                 </select>
               </div>
             </div>
+            {error && (
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20">
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                <p className="text-xs text-rose-300">{error}</p>
+              </div>
+            )}
             <button
               onClick={handleSubmit}
               disabled={saving || !form.name || !form.email || !form.specialization}
               className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
             >
-              {saving ? <><Clock className="w-4 h-4 animate-spin" /> Sending invite…</> : <><Check className="w-4 h-4" /> Onboard & Send Invite</>}
+              {saving ? <><Clock className="w-4 h-4 animate-spin" /> Creating in Supabase…</> : <><Check className="w-4 h-4" /> Onboard & Send Invite</>}
             </button>
           </div>
         )}

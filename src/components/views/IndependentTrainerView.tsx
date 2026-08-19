@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
 import { WorkoutPlannerModal, PlannedExerciseItem } from "../planner/WorkoutPlannerModal";
 import { DietPlannerModal } from "../planner/DietPlannerModal";
 import { TrainingCalendarModal } from "../planner/TrainingCalendarModal";
-import { useAssignPlanMutation } from "@/lib/hooks/usePlans";
+import { useAssignPlanMutation, useAssignScheduleMutation } from "@/lib/hooks/usePlans";
 import { useStore } from "@/lib/store/useStore";
+import { supabase } from "@/lib/supabase/client";
 import { AppUser, AssignedPlan } from "@/lib/store/orgStore";
 import { MealItem } from "@/lib/data/exercises";
 import {
@@ -128,26 +129,34 @@ function AssignPlanModal({
 }: {
   trainerId: string;
   clients: AppUser[];
-  plan: { title: string; summary: string; type: AssignedPlan["type"]; content?: any };
+  plan: { title: string; summary: string; type: AssignedPlan["type"] | "schedule"; content?: any };
   onClose: () => void;
 }) {
   const s = useStore();
   const assignPlanMutation = useAssignPlanMutation();
+  const assignScheduleMutation = useAssignScheduleMutation();
   const [selectedClientId, setSelectedClientId] = useState(clients[0]?.id || "");
   const [done, setDone] = useState(false);
 
   const handleAssign = async () => {
     if (!selectedClientId) return;
     try {
-      await assignPlanMutation.mutateAsync({ 
-        trainer_id: trainerId, 
-        trainee_id: selectedClientId, 
-        type: plan.type as any,
-        title: plan.title,
-        summary: plan.summary,
-        content: plan.content 
-      });
-      s.assignPlan({ trainerId, traineeId: selectedClientId, ...plan });
+      if (plan.type === "schedule") {
+        await assignScheduleMutation.mutateAsync({
+          trainer_id: trainerId,
+          trainee_id: selectedClientId,
+          entries: plan.content,
+        });
+      } else {
+        await assignPlanMutation.mutateAsync({ 
+          trainer_id: trainerId, 
+          trainee_id: selectedClientId, 
+          type: plan.type as any,
+          title: plan.title,
+          summary: plan.summary,
+          content: plan.content 
+        });
+      }
       setDone(true);
       setTimeout(onClose, 1400);
     } catch (error) {
@@ -251,6 +260,14 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
   const myTrainerId = session.trainerId || s.getUsers().find((u) => u.role === "independent_trainer")?.id || "";
   const myName = session.name || "Independent Trainer";
 
+  // Real Supabase UUID for DB writes
+  const [realTrainerId, setRealTrainerId] = useState<string>("");
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user?.id) setRealTrainerId(data.user.id);
+    });
+  }, []);
+
   const myProfile = s.getUserById(myTrainerId);
   const myClients = s.getTraineesByTrainer(myTrainerId);
   const filteredClients = myClients.filter(
@@ -262,8 +279,9 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
   const savedDietPlans = savedPlans.filter(p => p.type === "diet").map(p => ({ title: p.title, meals: p.content as MealItem[] }));
 
   const handleRoutineSaved = (r: { title: string; exercises: PlannedExerciseItem[] }, assignToTraineeId?: string) => {
+    const effectiveId = realTrainerId || myTrainerId;
     s.saveTrainerPlan({
-      trainerId: myTrainerId,
+      trainerId: effectiveId,
       type: "workout",
       title: r.title,
       summary: `${r.exercises.length} exercise${r.exercises.length !== 1 ? "s" : ""}`,
@@ -271,7 +289,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     });
     if (assignToTraineeId) {
       s.assignPlan({
-        trainerId: myTrainerId,
+        trainerId: effectiveId,
         traineeId: assignToTraineeId,
         type: "workout",
         title: r.title,
@@ -283,8 +301,9 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     }
   };
   const handleDietPlanSaved = (p: { title: string; meals: MealItem[] }, assignToTraineeId?: string) => {
+    const effectiveId = realTrainerId || myTrainerId;
     s.saveTrainerPlan({
-      trainerId: myTrainerId,
+      trainerId: effectiveId,
       type: "diet",
       title: p.title,
       summary: `${p.meals.length} meal${p.meals.length !== 1 ? "s" : ""}`,
@@ -292,7 +311,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     });
     if (assignToTraineeId) {
       s.assignPlan({
-        trainerId: myTrainerId,
+        trainerId: effectiveId,
         traineeId: assignToTraineeId,
         type: "diet",
         title: p.title,
@@ -304,9 +323,10 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
     }
   };
   const handleScheduleSaved = (entries: any[], assignToTraineeId?: string) => {
+    const effectiveId = realTrainerId || myTrainerId;
     if (assignToTraineeId) {
       s.assignPlan({
-        trainerId: myTrainerId,
+        trainerId: effectiveId,
         traineeId: assignToTraineeId,
         type: "schedule",
         title: "Training Calendar",
@@ -329,7 +349,7 @@ export function IndependentTrainerView({ activeTab = "dashboard" }: IndependentT
         )}
         {assignModal && (
           <AssignPlanModal
-            trainerId={myTrainerId}
+            trainerId={realTrainerId || myTrainerId}
             clients={myClients}
             plan={assignModal}
             onClose={() => setAssignModal(null)}

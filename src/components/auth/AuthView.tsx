@@ -13,11 +13,15 @@ import {
   Mail,
   Zap,
   UserCheck,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { RoleType } from "../navigation/TopNavBar";
+import { supabase } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface AuthViewProps {
-  onLoginSuccess: (role: RoleType, email: string) => void;
+  onLoginSuccess?: (role: RoleType, email: string) => void;
 }
 
 export const DEMO_ACCOUNTS: { role: RoleType; email: string; pass: string; title: string; desc: string; icon: any }[] = [
@@ -72,25 +76,101 @@ export const DEMO_ACCOUNTS: { role: RoleType; email: string; pass: string; title
 ];
 
 export function AuthView({ onLoginSuccess }: AuthViewProps) {
+  const router = useRouter();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [selectedRole, setSelectedRole] = useState<RoleType>("trainee");
   const [emailInput, setEmailInput] = useState("athlete@surgefit.com");
   const [passwordInput, setPasswordInput] = useState("SurgeAthlete2026!");
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isSeedingAccounts, setIsSeedingAccounts] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [seedSuccess, setSeedSuccess] = useState(false);
 
   const selectDemoAccount = (demo: typeof DEMO_ACCOUNTS[0]) => {
     setSelectedRole(demo.role);
     setEmailInput(demo.email);
     setPasswordInput(demo.pass);
+    setError(null);
   };
 
-  const handleAuthSubmit = (e: React.FormEvent) => {
+  const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsAuthenticating(true);
-    setTimeout(() => {
+    setError(null);
+
+    if (isLoginMode) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailInput,
+        password: passwordInput,
+      });
+
+      if (error) {
+        setError(error.message === "Invalid login credentials"
+          ? "Account not found. Click \"Seed Demo Accounts\" below to create all demo users first."
+          : error.message
+        );
+        setIsAuthenticating(false);
+        return;
+      }
+
+      // Redirect to dashboard; middleware will handle session
+      if (onLoginSuccess) {
+        onLoginSuccess(selectedRole, emailInput);
+      } else {
+        router.push("/dashboard");
+      }
+    } else {
+      // Sign up
+      const { data, error } = await supabase.auth.signUp({
+        email: emailInput,
+        password: passwordInput,
+      });
+
+      if (error) {
+        setError(error.message);
+        setIsAuthenticating(false);
+        return;
+      }
+
+      setError(null);
       setIsAuthenticating(false);
-      onLoginSuccess(selectedRole, emailInput);
-    }, 600);
+      // Show confirmation message
+      alert("Check your email to confirm your account, then sign in.");
+    }
+
+    setIsAuthenticating(false);
+  };
+
+  const seedDemoAccounts = async () => {
+    setIsSeedingAccounts(true);
+    setError(null);
+
+    try {
+      const results = await Promise.allSettled(
+        DEMO_ACCOUNTS.map(async (demo) => {
+          // Try to sign up each demo account
+          const { error } = await supabase.auth.signUp({
+            email: demo.email,
+            password: demo.pass,
+            options: {
+              data: { full_name: demo.title, role: demo.role },
+            },
+          });
+          // Ignore "already registered" errors
+          if (error && !error.message.includes("already registered")) {
+            throw error;
+          }
+          return demo;
+        })
+      );
+
+      setSeedSuccess(true);
+      setError(null);
+    } catch (err: any) {
+      setError("Some accounts may need email confirmation. Check your Supabase auth settings (disable email confirmation for dev).");
+    } finally {
+      setIsSeedingAccounts(false);
+    }
   };
 
   return (
@@ -125,7 +205,7 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
           <div className="space-y-2">
             <p className="text-[11px] font-mono-data text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
               <UserCheck className="w-3.5 h-3.5 text-white" />
-              <span>Click Any Valid Role Account to Test:</span>
+              <span>Click Any Role to Auto-Fill Login:</span>
             </p>
             <div className="grid grid-cols-2 gap-2">
               {DEMO_ACCOUNTS.map((demo, idx) => {
@@ -153,6 +233,26 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
                 );
               })}
             </div>
+
+            {/* Seed button */}
+            <button
+              type="button"
+              onClick={seedDemoAccounts}
+              disabled={isSeedingAccounts || seedSuccess}
+              className={`w-full mt-1 py-2 rounded-xl border text-xs font-semibold transition flex items-center justify-center gap-2 ${
+                seedSuccess
+                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 cursor-default"
+                  : "bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {isSeedingAccounts ? (
+                <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Creating demo accounts...</>
+              ) : seedSuccess ? (
+                <><span>✓</span> Demo accounts created — sign in now!</>
+              ) : (
+                "⚡ First time? Click to create all demo accounts"
+              )}
+            </button>
           </div>
         </div>
 
@@ -183,6 +283,14 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
               </button>
             </div>
           </div>
+
+          {/* Error message */}
+          {error && (
+            <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              <p className="text-xs text-rose-300">{error}</p>
+            </div>
+          )}
 
           <form onSubmit={handleAuthSubmit} className="space-y-4">
             <div>
@@ -217,7 +325,7 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
 
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
               <span className="text-[10px] font-mono-data text-slate-400 uppercase block">Selected Role Authorization</span>
-              <span className="font-bold text-white uppercase font-mono-data mt-0.5 block">{selectedRole.replace("_", " ")}</span>
+              <span className="font-bold text-white uppercase font-mono-data mt-0.5 block">{selectedRole.replace(/_/g, " ")}</span>
             </div>
 
             <button
@@ -226,10 +334,10 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
               className="w-full py-3 rounded-xl bg-white hover:bg-slate-200 text-slate-900 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg disabled:opacity-50 mt-2"
             >
               {isAuthenticating ? (
-                <span>Authenticating User Session...</span>
+                <><Loader2 className="w-4 h-4 animate-spin" /> Authenticating...</>
               ) : (
                 <>
-                  <span>Enter {selectedRole.replace("_", " ")} Workspace</span>
+                  <span>Enter {selectedRole.replace(/_/g, " ")} Workspace</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

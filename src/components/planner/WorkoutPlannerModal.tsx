@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { EXERCISE_DATABASE, ExerciseItem, EXERCISE_COUNT, EXERCISE_INSTRUCTIONS } from "@/lib/data/exercises";
-import { WorkoutEngineService } from "@/lib/backend/services";
+
 import {
   X,
   Dumbbell,
@@ -142,19 +142,11 @@ export function WorkoutPlannerModal({ isOpen, onClose, onRoutineSaved, trainees 
   );
 
   const handleSave = async () => {
+    if (plannedExercises.length === 0) return;
     setIsSaving(true);
-    for (const item of plannedExercises) {
-      await WorkoutEngineService.logWorkoutSet({
-        userId: "trainer_01",
-        exerciseName: item.exercise.name,
-        setNumber: item.sets,
-        weightKg: item.targetWeightKg,
-        reps: 10,
-        rpe: 8,
-      });
-    }
-    setIsSaving(false);
+    // Single operation — pass the full plan to the parent which writes ONE row to assigned_plans
     if (onRoutineSaved) onRoutineSaved({ title: routineTitle, exercises: plannedExercises }, assignToId);
+    setIsSaving(false);
     onClose();
   };
 

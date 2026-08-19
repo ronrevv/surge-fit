@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
@@ -8,7 +8,10 @@ import { WorkoutPlannerModal, PlannedExerciseItem } from "../planner/WorkoutPlan
 import { DietPlannerModal } from "../planner/DietPlannerModal";
 import { TrainingCalendarModal } from "../planner/TrainingCalendarModal";
 import { useStore } from "@/lib/store/useStore";
-import { useAssignPlanMutation } from "@/lib/hooks/usePlans";
+import { useAssignPlanMutation, useAssignScheduleMutation, useSaveTrainerPlanMutation, useTrainerSavedPlans, useTrainerAssignments } from "@/lib/hooks/usePlans";
+import { useMyClients, useAddClientMutation, useLookupByEmail, useInviteTraineeMutation, ClientProfile } from "@/lib/hooks/useClients";
+import { useAssignRoleMutation } from "@/lib/hooks/useRoleAssignments";
+import { supabase } from "@/lib/supabase/client";
 import { AppUser, AssignedPlan } from "@/lib/store/orgStore";
 import { MealItem } from "@/lib/data/exercises";
 import {
@@ -22,51 +25,105 @@ interface TrainerViewProps {
 }
 
 
-function OnboardTraineeModal({ trainerId, branchId, orgId, actorName, onClose }: {
-  trainerId: string; branchId: string; orgId: string; actorName: string; onClose: () => void;
+/**
+ * AddClientModal — looks up a SurgeFit user by email and adds them
+ * to the trainer's roster in trainer_clients (Supabase). 
+ * Shows a warning if no client yet when opening planners.
+ */
+function AddClientModal({
+  trainerId, trainerName, onClose, onAdded,
+}: {
+  trainerId: string; trainerName: string; onClose: () => void; onAdded: () => void;
 }) {
-  const s = useStore();
-  const [form, setForm] = useState({
-    name: "", email: "", phone: "", goal: "", weightKg: "70", heightCm: "170",
-  });
-  const [saving, setSaving] = useState(false);
+  const lookupMutation = useLookupByEmail();
+  const addClientMutation = useAddClientMutation();
+  const inviteMutation = useInviteTraineeMutation();
+  const assignRoleMutation = useAssignRoleMutation();
+  const [emailInput, setEmailInput] = useState("");
+  const [goal, setGoal] = useState("");
+  const [found, setFound] = useState<{ id: string; full_name: string; email: string; role: string } | null>(null);
+  const [notFound, setNotFound] = useState(false);
   const [done, setDone] = useState(false);
+  const [inviteSent, setInviteSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const GOALS = [
     "Hypertrophy & Muscle Gain", "Fat Loss & Body Recomposition", "Powerlifting (1RM Peak)",
-    "Athletic Performance", "Mobility & Flexibility", "General Fitness", "Weight Management",
-    "Endurance & Cardio", "Post-Rehab Training",
+    "Athletic Performance", "Mobility & Flexibility", "General Fitness",
+    "Weight Management", "Endurance & Cardio", "Post-Rehab Training",
   ];
 
-  const handleSubmit = async () => {
-    if (!form.name || !form.email || !form.goal) return;
-    setSaving(true);
-    await new Promise((r) => setTimeout(r, 600));
-    s.onboardTrainee({
-      trainerId, branchId, organizationId: orgId, actorName,
-      name: form.name, email: form.email, phone: form.phone,
-      goal: form.goal, weightKg: Number(form.weightKg), heightCm: Number(form.heightCm),
-    });
-    setSaving(false);
-    setDone(true);
-    setTimeout(onClose, 1200);
+  const handleSearch = async () => {
+    if (!emailInput.trim()) return;
+    setNotFound(false);
+    setFound(null);
+    setError(null);
+    const result = await lookupMutation.mutateAsync(emailInput);
+    if (!result) {
+      setNotFound(true);
+    } else if (result.role !== "trainee") {
+      setError(`This user is a "${result.role}" — only trainees can be added to your roster.`);
+    } else {
+      setFound(result);
+    }
+  };
+
+  const handleAdd = async () => {
+    if (!found || !trainerId) return;
+    try {
+      await addClientMutation.mutateAsync({
+        trainer_id: trainerId,
+        client_id: found.id,
+        client_name: found.full_name,
+        client_email: found.email,
+        goal: goal || undefined,
+      });
+      // Write role_assignment so trainee login shows "Assigned by [Trainer]"
+      await assignRoleMutation.mutateAsync({
+        user_id: found.id,
+        role: "trainee",
+        assigned_by: trainerId,
+        assigned_by_role: "trainer",
+        assigned_by_name: trainerName,
+      });
+      setDone(true);
+      setTimeout(() => { onAdded(); onClose(); }, 1400);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  const handleInvite = async () => {
+    if (!emailInput.trim() || !trainerId) return;
+    try {
+      setError(null);
+      await inviteMutation.mutateAsync({
+        email: emailInput,
+        inviterId: trainerId,
+      });
+      setInviteSent(true);
+      setTimeout(() => { onClose(); }, 2000);
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
     <>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 bg-black/70 backdrop-blur-md z-50" />
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose} className="fixed inset-0 bg-black/70 backdrop-blur-md z-50" />
       <motion.div
         initial={{ scale: 0.95, opacity: 0, y: 16 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 16 }}
-        className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-[#0c0c10] border border-white/15 rounded-3xl shadow-2xl overflow-hidden"
+        className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[#0c0c10] border border-white/15 rounded-3xl shadow-2xl overflow-hidden"
       >
         <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between bg-white/[0.025]">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-white text-slate-900 flex items-center justify-center"><UserPlus className="w-5 h-5" /></div>
             <div>
-              <p className="font-extrabold text-white text-base">Onboard New Trainee</p>
-              <p className="text-[11px] text-slate-500">Adds trainee to your client roster</p>
+              <p className="font-extrabold text-white text-base">Add Client to Roster</p>
+              <p className="text-[11px] text-slate-500">Search by their SurgeFit email</p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 rounded-xl text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
@@ -75,53 +132,95 @@ function OnboardTraineeModal({ trainerId, branchId, orgId, actorName, onClose }:
         {done ? (
           <div className="flex flex-col items-center justify-center py-16 gap-4">
             <CheckCircle2 className="w-14 h-14 text-emerald-400" />
-            <p className="font-bold text-white text-lg">Trainee Added!</p>
-            <p className="text-slate-500 text-sm text-center">{form.name} is now on your roster.<br />Assign a workout plan from the Workout Planner.</p>
+            <p className="font-bold text-white text-lg">{found?.full_name} Added!</p>
+            <p className="text-slate-500 text-sm text-center">They're now on your roster.<br />You can assign plans to them.</p>
           </div>
         ) : (
           <div className="p-6 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="sm:col-span-2">
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Full Name *</label>
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Alex Johnson"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-white/25" />
-              </div>
-              <div>
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Email *</label>
-                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="client@email.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-white/25" />
-              </div>
-              <div>
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Phone</label>
-                <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+1 555 000 0000"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none" />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Primary Goal *</label>
-                <select value={form.goal} onChange={(e) => setForm({ ...form, goal: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none appearance-none">
-                  <option value="">Select goal…</option>
-                  {GOALS.map((g) => <option key={g} value={g}>{g}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Body Weight (kg)</label>
-                <input type="number" value={form.weightKg} onChange={(e) => setForm({ ...form, weightKg: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none" />
-              </div>
-              <div>
-                <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Height (cm)</label>
-                <input type="number" value={form.heightCm} onChange={(e) => setForm({ ...form, heightCm: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none" />
+            {/* Email search */}
+            <div>
+              <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Trainee's SurgeFit Email *</label>
+              <div className="flex gap-2">
+                <input
+                  type="email" value={emailInput}
+                  onChange={(e) => { setEmailInput(e.target.value); setFound(null); setNotFound(false); setError(null); }}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  placeholder="athlete@surgefit.com"
+                  className="flex-1 bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-white/30"
+                />
+                <button
+                  onClick={handleSearch}
+                  disabled={lookupMutation.isPending}
+                  className="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-sm hover:bg-slate-100 transition disabled:opacity-50"
+                >
+                  {lookupMutation.isPending ? <Clock className="w-4 h-4 animate-spin" /> : "Search"}
+                </button>
               </div>
             </div>
-            <button
-              onClick={handleSubmit}
-              disabled={saving || !form.name || !form.email || !form.goal}
-              className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
-            >
-              {saving ? <><Clock className="w-4 h-4 animate-spin" /> Adding trainee…</> : <><Check className="w-4 h-4" /> Add to My Roster</>}
-            </button>
+
+            {/* Error / not found */}
+            {notFound && !inviteSent && (
+              <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <p className="text-sm font-semibold text-amber-400 mb-2">User not found</p>
+                <p className="text-xs text-amber-300/80 mb-3">
+                  This user doesn't have a SurgeFit account yet. You can invite them via email to sign up and join your roster.
+                </p>
+                <button
+                  onClick={handleInvite}
+                  disabled={inviteMutation.isPending}
+                  className="w-full py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 font-bold text-sm transition disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {inviteMutation.isPending ? (
+                    <><Clock className="w-4 h-4 animate-spin" /> Sending Invite…</>
+                  ) : (
+                    <><Mail className="w-4 h-4" /> Send Invite</>
+                  )}
+                </button>
+              </div>
+            )}
+            {inviteSent && (
+              <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+                <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-emerald-400">Invite Sent!</p>
+                <p className="text-xs text-emerald-300/80 mt-1">An invitation email has been sent to {emailInput}.</p>
+              </div>
+            )}
+            {error && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">{error}</div>
+            )}
+
+            {/* Found profile */}
+            {found && (
+              <>
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-sm">
+                    {found.full_name?.[0] ?? "?"}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-sm">{found.full_name}</p>
+                    <p className="text-[11px] text-slate-400">{found.email}</p>
+                  </div>
+                  <span className="ml-auto text-[10px] uppercase font-mono-data text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-lg">trainee</span>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-1">Primary Goal (optional)</label>
+                  <select value={goal} onChange={(e) => setGoal(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none appearance-none">
+                    <option value="">Select goal…</option>
+                    {GOALS.map((g) => <option key={g} value={g}>{g}</option>)}
+                  </select>
+                </div>
+
+                <button
+                  onClick={handleAdd}
+                  disabled={addClientMutation.isPending}
+                  className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
+                >
+                  {addClientMutation.isPending ? <><Clock className="w-4 h-4 animate-spin" /> Adding…</> : <><Check className="w-4 h-4" /> Add to My Roster</>}
+                </button>
+              </>
+            )}
           </div>
         )}
       </motion.div>
@@ -130,40 +229,50 @@ function OnboardTraineeModal({ trainerId, branchId, orgId, actorName, onClose }:
 }
 
 /**
- * AssignPlanModal — lets trainer pick a trainee from their roster,
- * then calls store.assignPlan() to write the assignment to the store.
- * The trainee's dashboard will reflect this immediately.
+ * AssignPlanModal — trainer picks a trainee from their REAL DB roster,
+ * then writes ONE row to assigned_plans via useAssignPlanMutation.
  */
 function AssignPlanModal({
-  trainerId, trainees, plan, onClose,
+  trainerId, clients, plan, onClose, onNeedClient,
 }: {
   trainerId: string;
-  trainees: AppUser[];
-  plan: { title: string; summary: string; type: AssignedPlan["type"]; content?: any };
+  clients: ClientProfile[];
+  plan: { title: string; summary: string; type: "workout" | "diet" | "schedule"; content?: any };
   onClose: () => void;
+  onNeedClient: () => void;
 }) {
-  const s = useStore();
-  const assignPlanMutation = useAssignPlanMutation();
-  const [selectedTraineeId, setSelectedTraineeId] = useState(trainees[0]?.id || "");
+  const assignMutation = useAssignPlanMutation();
+  const assignScheduleMutation = useAssignScheduleMutation();
+  const [selectedClientId, setSelectedClientId] = useState(clients[0]?.client_id || "");
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const selectedClient = clients.find(c => c.client_id === selectedClientId);
 
   const handleAssign = async () => {
-    if (!selectedTraineeId) return;
+    if (!selectedClientId || !trainerId) return;
+    setError(null);
     try {
-      await assignPlanMutation.mutateAsync({ 
-        trainer_id: trainerId, 
-        trainee_id: selectedTraineeId, 
-        type: plan.type as any,
-        title: plan.title,
-        summary: plan.summary,
-        content: plan.content 
-      });
-      // Fallback local store update for instant UI response before DB settles
-      s.assignPlan({ trainerId, traineeId: selectedTraineeId, ...plan });
+      if (plan.type === "schedule") {
+        await assignScheduleMutation.mutateAsync({
+          trainer_id: trainerId,
+          trainee_id: selectedClientId,
+          entries: plan.content,
+        });
+      } else {
+        await assignMutation.mutateAsync({
+          trainer_id: trainerId,
+          trainee_id: selectedClientId,
+          type: plan.type,
+          title: plan.title,
+          summary: plan.summary,
+          content: plan.content ?? {},
+        });
+      }
       setDone(true);
-      setTimeout(onClose, 1400);
-    } catch (error) {
-      console.error("Failed to assign plan", error);
+      setTimeout(onClose, 1500);
+    } catch (err: any) {
+      setError(err.message || "Failed to assign plan.");
     }
   };
 
@@ -196,51 +305,70 @@ function AssignPlanModal({
             <p className="font-bold text-white text-lg">Plan Assigned!</p>
             <p className="text-slate-400 text-sm text-center">
               <span className="text-white font-bold">{plan.title}</span><br />
-              is now visible in {trainees.find(t => t.id === selectedTraineeId)?.name}&apos;s dashboard.
+              is now visible in {selectedClient?.client_name}&apos;s dashboard.
             </p>
           </div>
         ) : (
           <div className="p-6 space-y-5">
-            <div>
-              <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-2">Select Trainee</label>
-              {trainees.length === 0 ? (
-                <p className="text-slate-500 text-sm italic">No trainees on your roster yet. Add one first.</p>
-              ) : (
-                <div className="space-y-2 max-h-52 overflow-y-auto">
-                  {trainees.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => setSelectedTraineeId(t.id)}
-                      className={`w-full text-left p-3 rounded-xl border transition flex items-center justify-between ${
-                        selectedTraineeId === t.id
-                          ? "bg-white text-slate-900 border-transparent"
-                          : "bg-white/5 border-white/10 text-white hover:bg-white/10"
-                      }`}
-                    >
-                      <div>
-                        <p className="font-semibold text-sm">{t.name}</p>
-                        <p className="text-[11px] opacity-60">{t.goal}</p>
-                      </div>
-                      {selectedTraineeId === t.id && <Check className="w-4 h-4" />}
-                    </button>
-                  ))}
+            {/* No clients guard */}
+            {clients.length === 0 ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center mx-auto">
+                  <UserPlus className="w-6 h-6 text-amber-400" />
                 </div>
-              )}
-            </div>
+                <p className="text-white font-semibold">No clients on your roster yet</p>
+                <p className="text-slate-500 text-sm">Add a client first before assigning plans.</p>
+                <button
+                  onClick={() => { onClose(); onNeedClient(); }}
+                  className="px-4 py-2 rounded-xl bg-white text-slate-900 font-bold text-sm hover:bg-slate-100 transition"
+                >
+                  + Add Client Now
+                </button>
+              </div>
+            ) : (
+              <>
+                <div>
+                  <label className="text-[10px] font-mono-data text-slate-500 uppercase block mb-2">Select Client</label>
+                  <div className="space-y-2 max-h-52 overflow-y-auto pr-1">
+                    {clients.map((c) => (
+                      <button
+                        key={c.client_id}
+                        onClick={() => setSelectedClientId(c.client_id)}
+                        className={`w-full text-left p-3 rounded-xl border transition flex items-center justify-between ${
+                          selectedClientId === c.client_id
+                            ? "bg-white text-slate-900 border-transparent"
+                            : "bg-white/5 border-white/10 text-white hover:bg-white/10"
+                        }`}
+                      >
+                        <div>
+                          <p className="font-semibold text-sm">{c.client_name}</p>
+                          <p className="text-[11px] opacity-60">{c.goal || c.client_email}</p>
+                        </div>
+                        {selectedClientId === c.client_id && <Check className="w-4 h-4 shrink-0" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-[10px] font-mono-data text-slate-500 uppercase mb-1">Plan Details</p>
-              <p className="font-bold text-white text-sm">{plan.title}</p>
-              <p className="text-xs text-slate-400">{plan.summary}</p>
-            </div>
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                  <p className="text-[10px] font-mono-data text-slate-500 uppercase mb-1">Plan Details</p>
+                  <p className="font-bold text-white text-sm">{plan.title}</p>
+                  <p className="text-xs text-slate-400">{plan.summary}</p>
+                </div>
 
-            <button
-              onClick={handleAssign}
-              disabled={!selectedTraineeId || trainees.length === 0}
-              className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
-            >
-              <Check className="w-4 h-4" /> Assign Plan
-            </button>
+                {error && <p className="text-rose-400 text-xs">{error}</p>}
+
+                <button
+                  onClick={handleAssign}
+                  disabled={!selectedClientId || assignMutation.isPending}
+                  className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
+                >
+                  {assignMutation.isPending
+                    ? <><Clock className="w-4 h-4 animate-spin" /> Assigning…</>
+                    : <><Check className="w-4 h-4" /> Assign Plan</>}
+                </button>
+              </>
+            )}
           </div>
         )}
       </motion.div>
@@ -250,94 +378,87 @@ function AssignPlanModal({
 
 export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   const s = useStore();
-  const [selectedClient, setSelectedClient] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState("");
   const [clientSearch, setClientSearch] = useState("");
   const [workoutPlannerOpen, setWorkoutPlannerOpen] = useState(false);
   const [dietPlannerOpen, setDietPlannerOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [traineeModalOpen, setTraineeModalOpen] = useState(false);
+  const [addClientModalOpen, setAddClientModalOpen] = useState(false);
   const [trainerChatInput, setTrainerChatInput] = useState("");
   const [trainerChatMessages, setTrainerChatMessages] = useState<any[]>([]);
-  // Assign modal state: when set, shows a trainee picker for that plan
   const [assignModal, setAssignModal] = useState<{
-    title: string; summary: string; type: AssignedPlan["type"]; content?: any;
+    title: string; summary: string; type: "workout" | "diet" | "schedule"; content?: any;
   } | null>(null);
 
-  // Live session
+  // Live session (orgStore — for display names)
   const session = s.getSession();
-  const myTrainerId = session.trainerId || s.getUsers().find((u) => u.role === "trainer" && u.status === "active")?.id || "";
   const myBranchId = session.branchId || "";
   const myOrgId = session.chainId || "";
   const myName = session.name || "Trainer";
 
-  const myTrainees = s.getTraineesByTrainer(myTrainerId);
-  const filteredTrainees = myTrainees.filter(
-    (t) => t.name.toLowerCase().includes(clientSearch.toLowerCase())
+  // Real Supabase UUID — required for valid trainer_id in assigned_plans
+  const [realTrainerId, setRealTrainerId] = useState<string>("");
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user?.id) setRealTrainerId(data.user.id);
+    });
+  }, []);
+
+  // Real DB client list from trainer_clients table
+  const { data: myClients = [], refetch: refetchClients } = useMyClients(realTrainerId);
+  const filteredClients = myClients.filter(
+    (c) => c.client_name.toLowerCase().includes(clientSearch.toLowerCase()) ||
+           c.client_email.toLowerCase().includes(clientSearch.toLowerCase())
   );
+  const activeClient = selectedClientId
+    ? myClients.find(c => c.client_id === selectedClientId)
+    : myClients[0];
 
-  const activeClient = selectedClient
-    ? s.getUserById(selectedClient)
-    : myTrainees[0];
+  // Real DB trainer plan templates
+  const savePlanMutation = useSaveTrainerPlanMutation();
+  const { data: dbSavedPlans = [] } = useTrainerSavedPlans(realTrainerId);
+  const savedRoutines = dbSavedPlans.filter(p => p.type === "workout");
+  const savedDietPlans = dbSavedPlans.filter(p => p.type === "diet");
 
-  const savedPlans = s.getTrainerSavedPlans(myTrainerId);
-  const savedRoutines = savedPlans.filter(p => p.type === "workout").map(p => ({ title: p.title, exercises: p.content as PlannedExerciseItem[] }));
-  const savedDietPlans = savedPlans.filter(p => p.type === "diet").map(p => ({ title: p.title, meals: p.content as MealItem[] }));
-
-  const handleRoutineSaved = (routine: { title: string; exercises: PlannedExerciseItem[] }, assignToTraineeId?: string) => {
-    s.saveTrainerPlan({
-      trainerId: myTrainerId,
+  const handleRoutineSaved = async (routine: { title: string; exercises: PlannedExerciseItem[] }, assignToClientId?: string) => {
+    const effectiveId = realTrainerId;
+    if (!effectiveId) return;
+    const summary = `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`;
+    // Save as template to DB
+    await savePlanMutation.mutateAsync({
+      trainer_id: effectiveId,
       type: "workout",
       title: routine.title,
-      summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
-      content: routine.exercises
+      summary,
+      content: routine.exercises,
     });
-    if (assignToTraineeId) {
-      s.assignPlan({
-        trainerId: myTrainerId,
-        traineeId: assignToTraineeId,
-        type: "workout",
-        title: routine.title,
-        summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
-        content: routine.exercises,
-      });
+    // If a client was selected in the planner, immediately assign
+    if (assignToClientId) {
+      setAssignModal({ title: routine.title, summary, type: "workout", content: routine.exercises });
     } else {
-      setCalendarOpen(true);
+      setAssignModal({ title: routine.title, summary, type: "workout", content: routine.exercises });
     }
   };
 
-  const handleDietPlanSaved = (plan: { title: string; meals: MealItem[] }, assignToTraineeId?: string) => {
-    s.saveTrainerPlan({
-      trainerId: myTrainerId,
+  const handleDietPlanSaved = async (plan: { title: string; meals: MealItem[] }, assignToClientId?: string) => {
+    const effectiveId = realTrainerId;
+    if (!effectiveId) return;
+    const summary = `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`;
+    await savePlanMutation.mutateAsync({
+      trainer_id: effectiveId,
       type: "diet",
       title: plan.title,
-      summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`,
-      content: plan.meals
+      summary,
+      content: plan.meals,
     });
-    if (assignToTraineeId) {
-      s.assignPlan({
-        trainerId: myTrainerId,
-        traineeId: assignToTraineeId,
-        type: "diet",
-        title: plan.title,
-        summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""}`,
-        content: plan.meals,
-      });
-    } else {
-      setCalendarOpen(true);
-    }
+    setAssignModal({ title: plan.title, summary, type: "diet", content: plan.meals });
   };
 
-  const handleScheduleSaved = (entries: any[], assignToTraineeId?: string) => {
-    if (assignToTraineeId) {
-      s.assignPlan({
-        trainerId: myTrainerId,
-        traineeId: assignToTraineeId,
-        type: "schedule",
-        title: "Training Calendar",
-        summary: `${entries.length} scheduled day${entries.length !== 1 ? "s" : ""}`,
-        content: entries,
-      });
-    }
+  const handleScheduleSaved = (entries: any[], assignToClientId?: string) => {
+    const effectiveId = realTrainerId;
+    if (!effectiveId) return;
+    const summary = `${entries.length} scheduled day${entries.length !== 1 ? "s" : ""}`;
+    setAssignModal({ title: "Training Calendar", summary, type: "schedule", content: entries });
   };
 
   const handleSendChat = () => {
@@ -349,19 +470,21 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
   return (
     <div className="space-y-6">
       <AnimatePresence>
-        {traineeModalOpen && (
-          <OnboardTraineeModal
-            trainerId={myTrainerId} branchId={myBranchId}
-            orgId={myOrgId} actorName={myName}
-            onClose={() => setTraineeModalOpen(false)}
+        {addClientModalOpen && (
+          <AddClientModal
+            trainerId={realTrainerId}
+            trainerName={myName}
+            onClose={() => setAddClientModalOpen(false)}
+            onAdded={() => refetchClients()}
           />
         )}
         {assignModal && (
           <AssignPlanModal
-            trainerId={myTrainerId}
-            trainees={myTrainees}
+            trainerId={realTrainerId}
+            clients={myClients}
             plan={assignModal}
             onClose={() => setAssignModal(null)}
+            onNeedClient={() => setAddClientModalOpen(true)}
           />
         )}
       </AnimatePresence>
@@ -376,12 +499,12 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             </h1>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
-            {myName} · {myTrainees.length} trainees active
+            {myName} · {myClients.length} clients active
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">
-          <button onClick={() => setTraineeModalOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs sm:text-sm transition">
-            <UserPlus className="w-4 h-4" /><span>Add Trainee</span>
+          <button onClick={() => setAddClientModalOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold text-xs sm:text-sm transition">
+            <UserPlus className="w-4 h-4" /><span>Add Client</span>
           </button>
           <button onClick={() => setWorkoutPlannerOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-xl surge-card text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition">
             <Dumbbell className="w-4 h-4" /><span>Workout Planner</span>
@@ -399,8 +522,8 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
       {activeTab === "dashboard" && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <StatCard title="My Client Roster" value={`${myTrainees.length} Trainees`} change="Live count" changeType="positive" icon={<Users className="w-4 h-4 text-slate-500" />} sparklineData={[1, 1, 2, 2, 3, 3, myTrainees.length]} />
-            <StatCard title="Saved Routines" value={`${savedRoutines.length} Routines`} change={`${savedDietPlans.length} diet plans`} changeType="neutral" icon={<Dumbbell className="w-4 h-4 text-slate-500" />} sparklineData={[0, 0, 1, 1, 2, 2, savedRoutines.length]} />
+            <StatCard title="My Client Roster" value={`${myClients.length} Clients`} change="Live count" changeType="positive" icon={<Users className="w-4 h-4 text-slate-500" />} sparklineData={[1, 1, 2, 2, 3, 3, myClients.length]} />
+            <StatCard title="Saved Templates" value={`${savedRoutines.length} Routines`} change={`${savedDietPlans.length} diet plans`} changeType="neutral" icon={<Dumbbell className="w-4 h-4 text-slate-500" />} sparklineData={[0, 0, 1, 1, 2, 2, savedRoutines.length]} />
             <StatCard title="Client PRs This Week" value="3 PRs" change="+1 new this session" changeType="positive" icon={<TrendingUp className="w-4 h-4 text-slate-500" />} sparklineData={[0, 1, 1, 2, 2, 3, 3]} />
           </div>
 
@@ -408,32 +531,30 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             {/* Trainee Roster */}
             <GlassCard className="lg:col-span-1">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">My Trainees</h3>
-                <button onClick={() => setTraineeModalOpen(true)} className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 hover:underline">
+                <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">My Clients</h3>
+                <button onClick={() => setAddClientModalOpen(true)} className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1 hover:underline">
                   <Plus className="w-3.5 h-3.5" /> Add
                 </button>
               </div>
-              {myTrainees.length === 0 ? (
+              {myClients.length === 0 ? (
                 <div className="flex flex-col items-center py-10 text-center">
                   <Users className="w-8 h-8 text-slate-300 dark:text-slate-700 mb-2" />
-                  <p className="text-sm text-slate-500 font-semibold">No trainees yet</p>
-                  <p className="text-xs text-slate-400 mt-1">Click "Add Trainee" to get started</p>
+                  <p className="text-sm text-slate-500 font-semibold">No clients yet</p>
+                  <p className="text-xs text-slate-400 mt-1">Click "Add Client" to get started</p>
                 </div>
               ) : (
                 <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
-                  {myTrainees.map((t) => (
+                  {myClients.map((c) => (
                     <div
-                      key={t.id}
-                      onClick={() => setSelectedClient(t.id)}
-                      className={`p-3 rounded-xl border transition cursor-pointer ${selectedClient === t.id || (!selectedClient && myTrainees[0]?.id === t.id) ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-transparent" : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10"}`}
+                      key={c.client_id}
+                      onClick={() => setSelectedClientId(c.client_id)}
+                      className={`p-3 rounded-xl border transition cursor-pointer ${selectedClientId === c.client_id || (!selectedClientId && myClients[0]?.client_id === c.client_id) ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-transparent" : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10"}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-sm">{t.name}</span>
-                        <span className={`text-[10px] font-mono-data px-2 py-0.5 rounded-full ${t.status === "active" ? "bg-emerald-500/20 text-emerald-400" : "bg-amber-500/20 text-amber-400"}`}>
-                          {t.status}
-                        </span>
+                        <span className="font-semibold text-sm">{c.client_name}</span>
+                        <span className="text-[10px] font-mono-data px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">active</span>
                       </div>
-                      <p className="text-xs opacity-70 mt-0.5">{t.goal}</p>
+                      <p className="text-xs opacity-70 mt-0.5">{c.goal || c.client_email}</p>
                     </div>
                   ))}
                 </div>
@@ -446,73 +567,51 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                 <>
                   <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10 mb-4">
                     <div>
-                      <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">{activeClient.name}</h3>
-                      <p className="text-xs text-slate-500">Goal: {activeClient.goal} · Weight: {activeClient.weightKg}kg · Height: {activeClient.heightCm}cm</p>
+                      <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">{activeClient.client_name}</h3>
+                      <p className="text-xs text-slate-500">{activeClient.goal && `Goal: ${activeClient.goal} · `}Email: {activeClient.client_email}</p>
                     </div>
                     <span className="text-xs font-mono-data px-3 py-1 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white font-bold border border-slate-200 dark:border-white/10">
                       {activeClient.goal?.split(" ")[0] || "Custom"} Plan
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-4">
+                    {activeClient.weight_kg && (
+                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
+                        <span className="text-slate-500 uppercase font-mono-data text-[10px]">Body Weight</span>
+                        <p className="font-display font-bold text-xl text-slate-900 dark:text-white mt-1">{activeClient.weight_kg} kg</p>
+                      </div>
+                    )}
                     <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
-                      <span className="text-slate-500 uppercase font-mono-data text-[10px]">Body Weight</span>
-                      <p className="font-display font-bold text-xl text-slate-900 dark:text-white mt-1">{activeClient.weightKg} kg</p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
-                      <span className="text-slate-500 uppercase font-mono-data text-[10px]">Joined</span>
-                      <p className="font-display font-bold text-xl text-slate-900 dark:text-white mt-1">{activeClient.joinedAt}</p>
+                      <span className="text-slate-500 uppercase font-mono-data text-[10px]">Added On</span>
+                      <p className="font-display font-bold text-xl text-slate-900 dark:text-white mt-1">{new Date(activeClient.created_at).toLocaleDateString()}</p>
                     </div>
                   </div>
-                  {/* Live per-trainee assignments from store */}
-                  {(() => {
-                    const clientAssignments = activeClient ? s.getAssignmentsForTrainee(activeClient.id) : [];
-                    return clientAssignments.length > 0 ? (
-                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 mb-3">
-                        <p className="font-bold text-xs text-slate-700 dark:text-slate-200 mb-2">Assigned Plans</p>
-                        <div className="flex flex-col gap-1.5">
-                          {clientAssignments.map((a) => (
-                            <div key={a.id} className="flex items-center justify-between gap-2">
-                              <span className={`text-[10px] px-2.5 py-1 rounded-full font-semibold ${
-                                a.type === "workout"
-                                  ? "bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300"
-                                  : a.type === "diet"
-                                  ? "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
-                                  : "bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300"
-                              }`}>
-                                {a.type === "workout" ? "💪" : a.type === "diet" ? "🥗" : "📅"} {a.title}
-                              </span>
-                              <button
-                                onClick={() => s.removeAssignment(a.id)}
-                                className="text-slate-400 hover:text-red-500 transition shrink-0"
-                                title="Remove assignment"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 mb-3">
-                        <p className="text-xs text-slate-400 text-center italic">No plans assigned yet</p>
-                        <div className="flex gap-2 mt-2 justify-center">
-                          <button
-                            onClick={() => setAssignModal({ title: savedRoutines[0]?.title || "Workout", summary: `${savedRoutines[0]?.exercises?.length || 0} exercises`, type: "workout", content: savedRoutines[0]?.exercises })}
-                            disabled={savedRoutines.length === 0}
-                            className="text-[10px] px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold disabled:opacity-40"
-                          >+ Assign Workout</button>
-                          <button
-                            onClick={() => setAssignModal({ title: savedDietPlans[0]?.title || "Diet Plan", summary: `${savedDietPlans[0]?.meals?.length || 0} meals`, type: "diet", content: savedDietPlans[0]?.meals })}
-                            disabled={savedDietPlans.length === 0}
-                            className="text-[10px] px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold disabled:opacity-40"
-                          >+ Assign Diet</button>
-                        </div>
-                      </div>
-                    );
-                  })()}
+                  {/* Quick-assign shortcuts */}
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-dashed border-slate-300 dark:border-white/10 mb-3">
+                    <p className="text-xs text-slate-500 mb-2 font-semibold">Quick Assign Plans</p>
+                    <div className="flex gap-2 flex-wrap">
+                      <button
+                        onClick={() => setWorkoutPlannerOpen(true)}
+                        className="text-[10px] px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold flex items-center gap-1"
+                      >
+                        <Dumbbell className="w-3 h-3" /> Workout Plan
+                      </button>
+                      <button
+                        onClick={() => setDietPlannerOpen(true)}
+                        className="text-[10px] px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold flex items-center gap-1"
+                      >
+                        <Apple className="w-3 h-3" /> Diet Plan
+                      </button>
+                      <button
+                        onClick={() => setCalendarOpen(true)}
+                        className="text-[10px] px-3 py-1.5 rounded-lg bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300 font-bold flex items-center gap-1"
+                      >
+                        <Calendar className="w-3 h-3" /> Schedule
+                      </button>
+                    </div>
+                  </div>
                   <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <Mail className="w-3.5 h-3.5" />{activeClient.email}
-                    {activeClient.phone && <><Phone className="w-3.5 h-3.5 ml-2" />{activeClient.phone}</>}
+                    <Mail className="w-3.5 h-3.5" />{activeClient.client_email}
                   </div>
                 </>
               ) : (
@@ -530,14 +629,14 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
       {activeTab === "clients" && (
         <GlassCard>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">Client Roster ({myTrainees.length})</h3>
+            <h3 className="font-display font-bold text-base text-slate-900 dark:text-white">Client Roster ({myClients.length})</h3>
             <div className="flex gap-2">
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                 <input value={clientSearch} onChange={(e) => setClientSearch(e.target.value)} placeholder="Search clients…"
                   className="pl-9 pr-3 py-1.5 text-xs rounded-xl surge-card text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none" />
               </div>
-              <button onClick={() => setTraineeModalOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs">
+              <button onClick={() => setAddClientModalOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs">
                 <UserPlus className="w-3.5 h-3.5" /> Add
               </button>
             </div>
@@ -554,23 +653,23 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                   <th className="py-3 px-3 text-left">Joined</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-white/5">
-                {filteredTrainees.map((t) => (
-                  <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
-                    <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">{t.name}</td>
-                    <td className="py-3 px-3 text-slate-500">{t.goal}</td>
-                    <td className="py-3 px-3 font-mono-data text-slate-900 dark:text-white">{t.weightKg} kg</td>
-                    <td className="py-3 px-3 text-slate-500 font-mono-data">{t.email}</td>
+            <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                {filteredClients.map((c) => (
+                  <tr key={c.client_id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
+                    <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">{c.client_name}</td>
+                    <td className="py-3 px-3 text-slate-500">{c.goal || "—"}</td>
+                    <td className="py-3 px-3 font-mono-data text-slate-900 dark:text-white">{c.weight_kg ? `${c.weight_kg} kg` : "—"}</td>
+                    <td className="py-3 px-3 text-slate-500 font-mono-data">{c.client_email}</td>
                     <td className="py-3 px-3">
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono-data border ${t.status === "active" ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/25" : "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/15 dark:text-amber-300"}`}>
-                        {t.status}
+                      <span className="text-[10px] px-2 py-0.5 rounded-full font-mono-data border bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/25">
+                        active
                       </span>
                     </td>
-                    <td className="py-3 px-3 font-mono-data text-slate-500">{t.joinedAt}</td>
+                    <td className="py-3 px-3 font-mono-data text-slate-500">{new Date(c.created_at).toLocaleDateString()}</td>
                   </tr>
                 ))}
-                {filteredTrainees.length === 0 && (
-                  <tr><td colSpan={6} className="py-12 text-center text-slate-500 text-sm">No trainees found</td></tr>
+                {filteredClients.length === 0 && (
+                  <tr><td colSpan={6} className="py-12 text-center text-slate-500 text-sm">No clients found</td></tr>
                 )}
               </tbody>
             </table>
@@ -617,48 +716,51 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             </GlassCard>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {savedRoutines.map((routine, i) => (
-                <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shrink-0">
-                      <Dumbbell className="w-5 h-5" />
+              {savedRoutines.map((routine, i) => {
+                const exercises = (routine.content as any[]) || [];
+                return (
+                  <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center shrink-0">
+                        <Dumbbell className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+                        {exercises.length} exercises
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
-                      {routine.exercises.length} exercises
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display font-bold text-base text-slate-900 dark:text-white">{routine.title}</p>
-                    <div className="mt-2 space-y-1">
-                      {routine.exercises.slice(0, 3).map((ex, j) => (
-                        <p key={j} className="text-xs text-slate-500 truncate">• {ex.exercise.name} — {ex.sets}×{ex.reps}</p>
-                      ))}
-                      {routine.exercises.length > 3 && (
-                        <p className="text-xs text-slate-400">+{routine.exercises.length - 3} more exercises</p>
-                      )}
+                    <div className="flex-1 min-w-0">
+                      <p className="font-display font-bold text-base text-slate-900 dark:text-white">{routine.title}</p>
+                      <div className="mt-2 space-y-1">
+                        {exercises.slice(0, 3).map((ex: any, j: number) => (
+                          <p key={j} className="text-xs text-slate-500 truncate">• {ex.exercise?.name ?? ex.name} — {ex.sets}×{ex.reps}</p>
+                        ))}
+                        {exercises.length > 3 && (
+                          <p className="text-xs text-slate-400">+{exercises.length - 3} more exercises</p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
-                    <button
-                      onClick={() => setAssignModal({
-                        title: routine.title,
-                        summary: `${routine.exercises.length} exercise${routine.exercises.length !== 1 ? "s" : ""}`,
-                        type: "workout",
-                        content: routine.exercises,
-                      })}
-                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs"
-                    >
-                      <Users className="w-3.5 h-3.5" /> Assign to Client
-                    </button>
-                    <button
-                      onClick={() => setWorkoutPlannerOpen(true)}
-                      className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </GlassCard>
-              ))}
+                    <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
+                      <button
+                        onClick={() => setAssignModal({
+                          title: routine.title,
+                          summary: `${exercises.length} exercise${exercises.length !== 1 ? "s" : ""}`,
+                          type: "workout",
+                          content: exercises,
+                        })}
+                        className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-xs"
+                      >
+                        <Users className="w-3.5 h-3.5" /> Assign to Client
+                      </button>
+                      <button
+                        onClick={() => setWorkoutPlannerOpen(true)}
+                        className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </GlassCard>
+                );
+              })}
               {/* Add new card */}
               <GlassCard
                 hoverEffect
@@ -679,7 +781,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
       {/* CHAT TAB */}
       {activeTab === "chat" && (
         <GlassCard>
-          <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">Client Messenger — {activeClient?.name || "Select a client"}</h3>
+          <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-4">Client Messenger — {activeClient?.client_name || "Select a client"}</h3>
           <div className="space-y-3 max-h-80 overflow-y-auto mb-4">
             {trainerChatMessages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.sender === "trainer" ? "justify-end" : "justify-start"}`}>
@@ -691,7 +793,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             ))}
           </div>
           <div className="flex gap-2">
-            <input value={trainerChatInput} onChange={(e) => setTrainerChatInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSendChat()} placeholder={`Message ${activeClient?.name || "client"}...`}
+            <input value={trainerChatInput} onChange={(e) => setTrainerChatInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSendChat()} placeholder={`Message ${activeClient?.client_name || "client"}...`}
               className="flex-1 px-4 py-2.5 text-sm rounded-xl surge-card text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none" />
             <button onClick={handleSendChat} className="px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm"><Send className="w-4 h-4" /></button>
           </div>
@@ -762,8 +864,8 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
           {/* Assignment summary */}
           <GlassCard>
             <h4 className="font-display font-bold text-sm text-slate-900 dark:text-white mb-3">Client Assignment Summary</h4>
-            {myTrainees.length === 0 ? (
-              <p className="text-sm text-slate-500 text-center py-6">No trainees yet — add trainees and assign plans to see the schedule here.</p>
+            {myClients.length === 0 ? (
+              <p className="text-sm text-slate-500 text-center py-6">No clients yet — add clients and assign plans to see the schedule here.</p>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-xs text-slate-700 dark:text-slate-300 min-w-[400px]">
@@ -776,9 +878,9 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 dark:divide-white/5">
-                    {myTrainees.map((t) => (
-                      <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
-                        <td className="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">{t.name}</td>
+                    {myClients.map((c) => (
+                      <tr key={c.client_id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition">
+                        <td className="py-2.5 px-3 font-semibold text-slate-900 dark:text-white">{c.client_name}</td>
                         <td className="py-2.5 px-3">
                           {savedRoutines.length > 0 ? (
                             <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 font-semibold text-[10px]">
@@ -794,9 +896,7 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
                           ) : <span className="text-slate-400">—</span>}
                         </td>
                         <td className="py-2.5 px-3">
-                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/25 font-mono-data text-[10px]">
-                            {t.status}
-                          </span>
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/25 font-mono-data text-[10px]">active</span>
                         </td>
                       </tr>
                     ))}
@@ -842,48 +942,52 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
             </GlassCard>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {savedDietPlans.map((plan, i) => (
-                <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
-                      <Utensils className="w-5 h-5" />
+              {savedDietPlans.map((plan, i) => {
+                const meals = (plan.content as any[]) || [];
+                const totalKcal = meals.reduce((a: number, m: any) => a + (m.calories ?? 0), 0);
+                return (
+                  <GlassCard key={i} hoverEffect className="flex flex-col gap-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                        <Utensils className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
+                        {meals.length} meals
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono-data px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
-                      {plan.meals.length} meals
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display font-bold text-base text-slate-900 dark:text-white">{plan.title}</p>
-                    <div className="mt-2 space-y-1">
-                      {plan.meals.slice(0, 3).map((meal, j) => (
-                        <p key={j} className="text-xs text-slate-500 truncate">• {meal.name} — {meal.calories} kcal</p>
-                      ))}
-                      {plan.meals.length > 3 && (
-                        <p className="text-xs text-slate-400">+{plan.meals.length - 3} more meals</p>
-                      )}
+                    <div className="flex-1 min-w-0">
+                      <p className="font-display font-bold text-base text-slate-900 dark:text-white">{plan.title}</p>
+                      <div className="mt-2 space-y-1">
+                        {meals.slice(0, 3).map((meal: any, j: number) => (
+                          <p key={j} className="text-xs text-slate-500 truncate">• {meal.name} — {meal.calories} kcal</p>
+                        ))}
+                        {meals.length > 3 && (
+                          <p className="text-xs text-slate-400">+{meals.length - 3} more meals</p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
-                    <button
-                      onClick={() => setAssignModal({
-                        title: plan.title,
-                        summary: `${plan.meals.length} meal${plan.meals.length !== 1 ? "s" : ""} · ${plan.meals.reduce((a, m) => a + m.calories, 0).toLocaleString()} kcal`,
-                        type: "diet",
-                        content: plan.meals,
-                      })}
-                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
-                    >
-                      <Users className="w-3.5 h-3.5" /> Assign to Client
-                    </button>
-                    <button
-                      onClick={() => setDietPlannerOpen(true)}
-                      className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </GlassCard>
-              ))}
+                    <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-white/10">
+                      <button
+                        onClick={() => setAssignModal({
+                          title: plan.title,
+                          summary: `${meals.length} meal${meals.length !== 1 ? "s" : ""} · ${totalKcal.toLocaleString()} kcal`,
+                          type: "diet",
+                          content: meals,
+                        })}
+                        className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
+                      >
+                        <Users className="w-3.5 h-3.5" /> Assign to Client
+                      </button>
+                      <button
+                        onClick={() => setDietPlannerOpen(true)}
+                        className="flex items-center justify-center p-2 rounded-xl surge-card text-slate-600 dark:text-slate-300"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </GlassCard>
+                );
+              })}
               <GlassCard hoverEffect className="flex flex-col items-center justify-center gap-3 cursor-pointer min-h-[180px] border-dashed">
                 <button onClick={() => setDietPlannerOpen(true)} className="flex flex-col items-center gap-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition">
                   <div className="w-10 h-10 rounded-xl border-2 border-dashed border-slate-300 dark:border-white/20 flex items-center justify-center">
@@ -905,12 +1009,13 @@ export function TrainerView({ activeTab = "dashboard" }: TrainerViewProps) {
       )}
 
       {/* Planner Modals */}
-      <WorkoutPlannerModal trainees={myTrainees} isOpen={workoutPlannerOpen} onClose={() => setWorkoutPlannerOpen(false)} onRoutineSaved={handleRoutineSaved} />
-      <DietPlannerModal trainees={myTrainees} isOpen={dietPlannerOpen} onClose={() => setDietPlannerOpen(false)} onPlanSaved={handleDietPlanSaved} />
-      <TrainingCalendarModal trainees={myTrainees} isOpen={calendarOpen} onClose={() => setCalendarOpen(false)}
+      <WorkoutPlannerModal trainees={[]} isOpen={workoutPlannerOpen} onClose={() => setWorkoutPlannerOpen(false)} onRoutineSaved={handleRoutineSaved} />
+      <DietPlannerModal trainees={[]} isOpen={dietPlannerOpen} onClose={() => setDietPlannerOpen(false)} onPlanSaved={handleDietPlanSaved} />
+      <TrainingCalendarModal trainees={[]} isOpen={calendarOpen} onClose={() => setCalendarOpen(false)}
         onOpenWorkoutPlanner={() => { setCalendarOpen(false); setWorkoutPlannerOpen(true); }}
         onOpenDietPlanner={() => { setCalendarOpen(false); setDietPlannerOpen(true); }}
-        savedRoutines={savedRoutines} savedDietPlans={savedDietPlans}
+        savedRoutines={savedRoutines.map(r => ({ title: r.title, exercises: (r.content as any[]) || [] }))}
+        savedDietPlans={savedDietPlans.map(p => ({ title: p.title, meals: (p.content as any[]) || [] }))}
         onScheduleSaved={handleScheduleSaved}
       />
     </div>

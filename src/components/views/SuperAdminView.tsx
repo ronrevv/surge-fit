@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "../ui/GlassCard";
 import { StatCard } from "../ui/StatCard";
 import { useStore } from "@/lib/store/useStore";
+import { supabase } from "@/lib/supabase/client";
 import { GymChain, OrgStatus } from "@/lib/store/orgStore";
 import {
   ShieldCheck,
@@ -36,15 +37,74 @@ function OnboardChainModal({ onClose }: { onClose: () => void }) {
   });
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [mySupabaseId, setMySupabaseId] = useState<string>("");
+  const [myName, setMyName] = useState<string>("Super Admin");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user?.id) setMySupabaseId(data.user.id);
+      if (data?.user?.user_metadata?.full_name) setMyName(data.user.user_metadata.full_name);
+    });
+  }, []);
 
   const handleSubmit = async () => {
     if (!form.name || !form.ownerName || !form.ownerEmail || !form.city) return;
     setSaving(true);
-    await new Promise((r) => setTimeout(r, 600));
-    s.onboardGymChain(form);
-    setSaving(false);
-    setDone(true);
-    setTimeout(onClose, 1200);
+    setError(null);
+
+    try {
+      // 1. Create organization in Supabase
+      const { data: org, error: orgError } = await supabase
+        .from("organizations")
+        .insert([{ name: form.name, type: "chain" }])
+        .select()
+        .single();
+      if (orgError) throw orgError;
+
+      // 2. Sign up the chain owner in Supabase Auth
+      const { data: ownerAuth, error: ownerAuthErr } = await supabase.auth.signUp({
+        email: form.ownerEmail,
+        password: `SurgeOwner_${Date.now()}!`,
+        options: { data: { full_name: form.ownerName, role: "chain_owner" } },
+      });
+      if (ownerAuthErr && !ownerAuthErr.message.includes("already registered")) {
+        throw ownerAuthErr;
+      }
+      const ownerId = ownerAuth?.user?.id;
+
+      // 3. Upsert profile for the chain owner
+      if (ownerId) {
+        await supabase.from("profiles").upsert(
+          { id: ownerId, email: form.ownerEmail, full_name: form.ownerName, role: "chain_owner", updated_at: new Date().toISOString() },
+          { onConflict: "id" }
+        );
+
+        // 4. Insert role_assignment — super admin assigned this chain owner
+        await supabase.from("role_assignments").upsert(
+          {
+            user_id: ownerId,
+            role: "chain_owner",
+            org_id: org?.id ?? null,
+            assigned_by: mySupabaseId || null,
+            assigned_by_role: "super_admin",
+            assigned_by_name: myName,
+            org_name: form.name,
+            status: "active",
+          },
+          { onConflict: "user_id,role,org_id,branch_id", ignoreDuplicates: true }
+        );
+      }
+
+      // 5. In-memory store for immediate UI reactivity
+      s.onboardGymChain(form);
+      setSaving(false);
+      setDone(true);
+      setTimeout(onClose, 1400);
+    } catch (err: any) {
+      setError(err.message ?? "Something went wrong.");
+      setSaving(false);
+    }
   };
 
   return (
@@ -134,13 +194,20 @@ function OnboardChainModal({ onClose }: { onClose: () => void }) {
               </div>
             </div>
 
+            {error && (
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20">
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                <p className="text-xs text-rose-300">{error}</p>
+              </div>
+            )}
+
             <button
               onClick={handleSubmit}
               disabled={saving || !form.name || !form.ownerName || !form.ownerEmail || !form.city}
               className="w-full py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm transition disabled:opacity-40 flex items-center justify-center gap-2"
             >
               {saving ? (
-                <><Clock className="w-4 h-4 animate-spin" /> Provisioning tenant…</>
+                <><Clock className="w-4 h-4 animate-spin" /> Creating in Supabase…</>
               ) : (
                 <><Check className="w-4 h-4" /> Onboard & Send Invite</>
               )}

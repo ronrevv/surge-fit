@@ -98,4 +98,4 @@ CREATE POLICY "Trainers can insert assigned plans" ON public.assigned_plans FOR 
 CREATE POLICY "Trainers can update plans they assigned" ON public.assigned_plans FOR UPDATE USING (auth.uid() = trainer_id);
 
 -- Trainer Plans Policies
-CREATE POLICY "Trainers can manage their own templates" ON public.trainer_plans ALL USING (auth.uid() = trainer_id);
+CREATE POLICY "Trainers can manage their own templates" ON public.trainer_plans FOR ALL USING (auth.uid() = trainer_id);
