@@ -328,10 +328,24 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-              <span className="text-[10px] font-mono-data text-slate-400 uppercase block">Selected Role Authorization</span>
-              <span className="font-bold text-white uppercase font-mono-data mt-0.5 block">{selectedRole.replace(/_/g, " ")}</span>
-            </div>
+            {!isLoginMode && (
+              <div>
+                <label className="text-[11px] font-mono-data text-slate-400 uppercase block mb-1">Select Your Role</label>
+                <select
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value as RoleType)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-xs sm:text-sm text-white focus:outline-none focus:border-white transition appearance-none"
+                >
+                  <option value="super_admin" className="text-black">Super Admin</option>
+                  <option value="chain_owner" className="text-black">Chain Owner</option>
+                  <option value="chain_manager" className="text-black">Chain Manager</option>
+                  <option value="branch_manager" className="text-black">Branch Manager</option>
+                  <option value="trainer" className="text-black">Trainer</option>
+                  <option value="independent_trainer" className="text-black">Independent Trainer</option>
+                  <option value="trainee" className="text-black">Trainee</option>
+                </select>
+              </div>
+            )}
 
             <button
               type="submit"
@@ -342,7 +356,7 @@ export function AuthView({ onLoginSuccess }: AuthViewProps) {
                 <><Loader2 className="w-4 h-4 animate-spin" /> Authenticating...</>
               ) : (
                 <>
-                  <span>Enter {selectedRole.replace(/_/g, " ")} Workspace</span>
+                  <span>{isLoginMode ? "Sign In to Workspace" : `Create ${selectedRole.replace(/_/g, " ")} Account`}</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
