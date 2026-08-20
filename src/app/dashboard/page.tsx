@@ -182,10 +182,20 @@ export default function SurgeFitApp() {
       .eq("status", "active")
       .order("assigned_at", { ascending: true });
 
-    const activeAssignments = (assignments || []) as RoleAssignment[];
+    // Deduplicate assignments by role + org_id + branch_id
+    const rawAssignments = (assignments || []) as RoleAssignment[];
+    const activeAssignments: RoleAssignment[] = [];
+    const seen = new Set<string>();
+    for (const a of rawAssignments) {
+      const key = `${a.role}-${a.org_id || ""}-${a.branch_id || ""}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        activeAssignments.push(a);
+      }
+    }
 
     if (activeAssignments.length === 0) {
-      // No role_assignments yet (table might not exist, or seed not run) — use profile role
+      // No role_assignments yet — use profile role
       setCurrentRole(role);
       store.setSession(role);
       const firstItem = ROLE_NAVIGATION[role]?.[0]?.id || "dashboard";
@@ -201,9 +211,15 @@ export default function SurgeFitApp() {
       setActiveTab(firstItem);
       setAppState("app");
     } else {
-      // Multiple roles — show picker
+      // Multiple roles — default to profile role if present, else first assignment, and show picker
+      const matchingAssignment = activeAssignments.find((a) => a.role === role) || activeAssignments[0];
+      setCurrentRole(matchingAssignment.role);
+      setActiveAssignment(matchingAssignment);
+      store.setSession(matchingAssignment.role);
+      const firstItem = ROLE_NAVIGATION[matchingAssignment.role]?.[0]?.id || "dashboard";
+      setActiveTab(firstItem);
       setPendingAssignments(activeAssignments);
-      setAppState("app"); // show app shell so picker renders
+      setAppState("app");
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -303,7 +319,13 @@ export default function SurgeFitApp() {
 
       <TopNavBar
         currentRole={currentRole}
-        availableRoles={roleAssignments ? Array.from(new Set(roleAssignments.map(a => a.role))) : [currentRole]}
+        availableRoles={
+          currentRole === "super_admin" || (roleAssignments && roleAssignments.some((a) => a.role === "super_admin"))
+            ? (Object.keys(ROLE_NAVIGATION) as RoleType[])
+            : (roleAssignments && roleAssignments.length > 0
+                ? Array.from(new Set(roleAssignments.map((a) => a.role)))
+                : [currentRole])
+        }
         onRoleChange={handleRoleChange}
         isDark={isDark}
         onToggleTheme={() => setIsDark(!isDark)}

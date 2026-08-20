@@ -42,7 +42,19 @@ export function useMyRoleAssignments(userId: string) {
         if (error.code === "42P01") return []; // table not yet migrated — degrade gracefully
         throw new Error(error.message);
       }
-      return (data || []) as RoleAssignment[];
+      
+      // Deduplicate assignments by role + org_id + branch_id
+      const raw = (data || []) as RoleAssignment[];
+      const unique: RoleAssignment[] = [];
+      const seen = new Set<string>();
+      for (const a of raw) {
+        const key = `${a.role}-${a.org_id || ""}-${a.branch_id || ""}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          unique.push(a);
+        }
+      }
+      return unique;
     },
     enabled: !!userId,
     staleTime: 30_000,
@@ -61,29 +73,38 @@ export function useUpsertSelfRoleAssignment() {
       org_name?: string | null;
       branch_name?: string | null;
     }) => {
+      // Check if user already has an active assignment for this role
+      const { data: existing } = await supabase
+        .from("role_assignments")
+        .select("*")
+        .eq("user_id", payload.user_id)
+        .eq("role", payload.role)
+        .eq("status", "active")
+        .limit(1);
+
+      if (existing && existing.length > 0) {
+        return existing[0];
+      }
+
       const { data, error } = await supabase
         .from("role_assignments")
-        .upsert(
-          {
-            user_id: payload.user_id,
-            role: payload.role,
-            org_id: payload.org_id ?? null,
-            branch_id: payload.branch_id ?? null,
-            assigned_by: null,
-            assigned_by_role: null,
-            assigned_by_name: null,
-            org_name: payload.org_name ?? null,
-            branch_name: payload.branch_name ?? null,
-            status: "active",
-          },
-          { onConflict: "user_id,role,org_id,branch_id", ignoreDuplicates: true }
-        )
+        .insert({
+          user_id: payload.user_id,
+          role: payload.role,
+          org_id: payload.org_id ?? null,
+          branch_id: payload.branch_id ?? null,
+          assigned_by: null,
+          assigned_by_role: null,
+          assigned_by_name: null,
+          org_name: payload.org_name ?? null,
+          branch_name: payload.branch_name ?? null,
+          status: "active",
+        })
         .select()
         .maybeSingle();
 
       if (error && error.code !== "42P01") {
-        // Silently degrade if table doesn't exist yet
-        console.warn("role_assignments upsert:", error.message);
+        console.warn("role_assignments insert:", error.message);
       }
       return data;
     },
